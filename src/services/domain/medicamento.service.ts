@@ -27,6 +27,16 @@ export class MedicamentoService {
     let pacienteId = this.storage.getPacienteId()
     return this.http.get(`${API_CONFIG.baseUrl}/medicamentos/inativos?idPaciente=${pacienteId}`);
   }
+  insert(medicamento) {
+    return this.http.post(
+      `${API_CONFIG.baseUrl}/medicamentos`,
+      medicamento,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
+  }
 }
 
 
