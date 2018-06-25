@@ -1,22 +1,29 @@
-<ion-split-pane>
-    <ion-menu [content]="content">
+<ion-menu [content]="content " class="sidebar">
+    <ion-content class="content">
+        <div class="container-perfil padding">
+            <div class="img-perfil">
+                <img menuToggle src="assets/imgs/kelvi.jpg" style="--webkit-transform: none" />
+            </div>
+            <h3>Kelvi Ribeiro</h3>
+        </div>
+        <ion-list class="options">
 
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Pages</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <ion-content>
-        <ion-list>
-          <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-            <ion-icon item-start [name]="p.icon" [color]="isActive(p)"></ion-icon>
-            {{p.title}}
-          </button>
+            <a menuToggle (click)="openPageInicio()" class="first-option">
+                <ion-icon name="home"> </ion-icon>Início</a>
+            <a menuToggle (click)="openPage('MedicamentosPage')">
+                <ion-icon name="md-flask">
+                </ion-icon>Medicamentos</a>
+                <a menuToggle (click)="openPage('HistoricoMedicamentosPage')">
+                        <ion-icon name="book"> </ion-icon>Meu histórico</a>
+            <a menuToggle (click)="openPage('ExamesPage')">
+                <ion-icon name="md-medkit">
+                </ion-icon>Meus Exames</a>
+            <!-- <a menuToggle (click)="openPage('SuportePage')">
+                <ion-icon name="help-circle">
+                </ion-icon>Suporte</a> -->
+            <a menuToggle (click)="alertCertezaSair()">
+                <ion-icon name="exit"></ion-icon>Sair</a>
         </ion-list>
-      </ion-content>
-
-    </ion-menu>
-
-    <ion-nav [root]="rootPage" main #content swipeBackEnabled="false"></ion-nav>
-    </ion-split-pane>
+    </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #content></ion-nav>

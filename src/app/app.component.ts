@@ -26,13 +26,9 @@ export interface PageInterface {
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
-  pages: PageInterface[] = [
-    { title: 'Meus Medicamentos', name: 'MedicamentosPage', component: 'MedicamentosPage', tabComponent: 'MedicamentosPage', index: 0, icon: 'home' },
-    { title: 'Meu Histórico', name: 'HistoricoMedicamentosPage', component: 'HistoricoMedicamentosPage', tabComponent: 'HistoricoMedicamentosPage', index: 0, icon: 'contacts' },
-    { title: 'Logout', name: '', component: '', tabComponent: '', index: 0, icon: 'md-log-out' }
-  ];
-  @ViewChild(Nav) nav: Nav;
+  rootPage:any;
+
+  @ViewChild(Nav) navCtrl: Nav;
   constructor(
              public platform: Platform,
              public statusBar: StatusBar,
@@ -56,45 +52,16 @@ export class MyApp {
       this.rootPage = LoginPage;
     }
   }
-  openPage(page: PageInterface) {
-    if(page.title==='Logout'){
-      this.alertCertezaSair();
-    }
-    let params = {};
-
-    // The index is equal to the order of our tabs inside tabs.ts
-    if (page.index) {
-      params = { tabIndex: page.index };
-    }
-
-    // If tabs page is already active just change the tab index
-    if (this.nav.getActiveChildNavs().length && page.index != undefined) {
-      this.nav.getActiveChildNavs()[0].select(page.index);
-    } else {
-      // Tabs are not active, so reset the root page
-      // In this case: moving to or from SpecialPage
-      console.log('chegou aqui ',this.nav.getActiveChildNavs().length && page.index != undefined)
-      this.nav.setRoot(page.component, params);
-    }
+  openPage(page) {
+    this.navCtrl.setRoot(TabsPage, { pagina: page });
   }
 
-  isActive(page: PageInterface) {
-    // Again the Tabs Navigation
-    let childNav = this.nav.getActiveChildNavs()[0];
-
-    if (childNav) {
-      if (childNav.getSelected() && childNav.getSelected().root === page.tabComponent) {
-        return 'primary';
-      }
-      return;
-    }
-
-    // Fallback needed when there is no active childnav (tabs not active)
-    if (this.nav.getActive() && this.nav.getActive().name === page.name) {
-      return 'primary';
-    }
-    return;
+  openPageInicio() {
+    TabsPage.index = 0;
+    this.navCtrl.setRoot(TabsPage);
   }
+
+
   alertCertezaSair() {
     let alert = this.alertCtrl.create({
       title: "Logout!",
@@ -105,7 +72,7 @@ export class MyApp {
           text: "Sim",
           handler: () => {
             this.authService.logout();
-            this.nav.setRoot(LoginPage);
+            this.navCtrl.setRoot(LoginPage);
           }
         },
         {

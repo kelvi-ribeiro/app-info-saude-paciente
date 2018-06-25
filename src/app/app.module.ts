@@ -6,7 +6,7 @@ import { MyApp } from './app.component';
 
 
 
-import { HomePage } from '../pages/home/home';
+
 import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -22,7 +22,6 @@ import { ImageUtilService } from '../services/image-util.service';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     TabsPage,
     LoginPage
   ],
@@ -34,7 +33,6 @@ import { ImageUtilService } from '../services/image-util.service';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     TabsPage,
     LoginPage
   ],
