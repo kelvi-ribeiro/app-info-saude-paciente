@@ -1,3 +1,4 @@
+import { UsuarioService } from './domain/usuario.service';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../config/api.config";
@@ -13,7 +14,8 @@ export class AuthService {
     jwtHelper: JwtHelper = new JwtHelper();
 
     constructor(public http: HttpClient,
-                public storage: StorageService
+                public storage: StorageService,
+                public usuarioService:UsuarioService
 
                 ) {
     }
@@ -45,7 +47,15 @@ export class AuthService {
             email: this.jwtHelper.decodeToken(tok).sub
         };
         this.storage.setLocalUser(user);
+        this.salvarInformacoesPaciente()
 
+    }
+
+    salvarInformacoesPaciente(){
+      this.usuarioService.findPacienteByPessoaEmail(this.storage.getLocalUser().email)
+      .subscribe(res=>{
+        this.storage.setPacienteId(res['id']);
+      })
     }
 
     logout() {
@@ -54,6 +64,7 @@ export class AuthService {
         this.storage.setUserName(null);
         this.storage.setUserFunction(null);
         this.storage.setUserUrlFoto(null);
+        this.storage.setPacienteId(null);
 
     }
 }

@@ -1,3 +1,4 @@
+import { MedicamentoService } from './../../services/domain/medicamento.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -15,11 +16,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class MedicamentosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public medicamentoService:MedicamentoService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MedicamentosPage');
+    this.obterMedicamentos()
+  }
+  obterMedicamentos(){
+    this.medicamentoService.findMedicamentosByPacienteId()
+    .subscribe(res=>{
+      console.log(res)
+    })
   }
 
 }

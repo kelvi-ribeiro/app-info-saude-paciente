@@ -19,8 +19,9 @@ export class StorageService {
     }else{
       localStorage.setItem(STORAGE_KEYS.localUser,JSON.stringify(usr))
     }
-
   }
+
+
 
   getUserPerfil() {
     let perfil = localStorage.getItem(STORAGE_KEYS.perfil);
@@ -52,6 +53,23 @@ export class StorageService {
       localStorage.removeItem(STORAGE_KEYS.nome);
     }else{
       localStorage.setItem(STORAGE_KEYS.nome,JSON.stringify(nome))
+    }
+  }
+
+  getPacienteId() {
+    let pacienteId = localStorage.getItem(STORAGE_KEYS.pacienteId);
+    if (pacienteId == null) {
+      return null;
+    } else {
+      return JSON.parse(pacienteId);
+    }
+  }
+
+  setPacienteId(pacienteId) {
+    if(pacienteId == null){
+      localStorage.removeItem(STORAGE_KEYS.pacienteId);
+    }else{
+      localStorage.setItem(STORAGE_KEYS.pacienteId,JSON.stringify(pacienteId))
     }
   }
 
