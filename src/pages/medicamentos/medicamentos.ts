@@ -23,10 +23,10 @@ export class MedicamentosPage {
   }
 
   ionViewDidLoad() {
-    this.obterMedicamentos()
+    this.obterMedicamentosAtivos()
   }
-  obterMedicamentos(){
-    this.medicamentoService.findMedicamentosByPacienteId()
+  obterMedicamentosAtivos(){
+    this.medicamentoService.findMedicamentosAtivosByPacienteId()
     .subscribe(res=>{
       console.log(res)
     })

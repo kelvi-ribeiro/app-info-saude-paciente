@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { MedicamentoService } from '../../services/domain/medicamento.service';
 
 /**
  * Generated class for the HistoricoMedicamentosPage page.
@@ -15,11 +16,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class HistoricoMedicamentosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+              public navCtrl: NavController, 
+              public navParams: NavParams,
+              public medicamentoService:MedicamentoService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HistoricoMedicamentosPage');
+    this.obterMedicamentosInativos()
+  }
+  obterMedicamentosInativos(){
+    this.medicamentoService.findMedicamentosInativosByPacienteId()
+    .subscribe(res=>{
+      console.log(res)
+    })
   }
 
 }
