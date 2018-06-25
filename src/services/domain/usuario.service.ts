@@ -19,8 +19,8 @@ export class UsuarioService {
     ) {
   }
 
-  findById(id: string) {
-    return this.http.get(`${API_CONFIG.baseUrl}/usuarios/${id}`);
+  findPacienteByPessoaEmail(email: string) {
+    return this.http.get(`${API_CONFIG.baseUrl}/pacientes/pessoaEmail?email=${email}`);
   }
 
   findAll() {
