@@ -1,4 +1,3 @@
-import { MedicamentoService } from './../../services/domain/medicamento.service';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { MedicamentosPage } from './medicamentos';
@@ -10,8 +9,6 @@ import { MedicamentosPage } from './medicamentos';
   imports: [
     IonicPageModule.forChild(MedicamentosPage),
   ],
-  providers: [
-    MedicamentoService
-  ]
+  
 })
 export class MedicamentosPageModule {}

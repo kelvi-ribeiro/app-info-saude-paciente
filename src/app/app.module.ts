@@ -18,6 +18,7 @@ import { ErrorInterceptorProvider } from '../interceptors/error-interceptor';
 import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { HttpClientModule } from '@angular/common/http';
 import { ImageUtilService } from '../services/image-util.service';
+import { MedicamentoService } from '../services/domain/medicamento.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ImageUtilService } from '../services/image-util.service';
     AuthService,
     StorageService,
     UsuarioService,
-    ImageUtilService
+    ImageUtilService,
+    MedicamentoService
 
   ]
 })
