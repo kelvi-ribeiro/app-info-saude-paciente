@@ -1,29 +1,66 @@
-<ion-menu [content]="content " class="sidebar">
-    <ion-content class="content">
-        <div class="container-perfil padding">
-            <div class="img-perfil">
-                <img menuToggle src="assets/imgs/kelvi.jpg" style="--webkit-transform: none" />
-            </div>
-            <h3>Kelvi Ribeiro</h3>
-        </div>
-        <ion-list class="options">
+<ion-menu side="left" id="authenticated" [content]="content">
+    <ion-header>
+        <ion-toolbar class="user-profile">
 
-            <a menuToggle (click)="openPageInicio()" class="first-option">
-                <ion-icon name="home"> </ion-icon>Início</a>
-            <a menuToggle (click)="openPage('MedicamentosPage')">
-                <ion-icon name="md-flask">
-                </ion-icon>Medicamentos</a>
-                <a menuToggle (click)="openPage('HistoricoMedicamentosPage')">
-                        <ion-icon name="book"> </ion-icon>Meu histórico</a>
-            <a menuToggle (click)="openPage('ExamesPage')">
-                <ion-icon name="md-medkit">
-                </ion-icon>Meus Exames</a>
-            <!-- <a menuToggle (click)="openPage('SuportePage')">
-                <ion-icon name="help-circle">
-                </ion-icon>Suporte</a> -->
-            <a menuToggle (click)="alertCertezaSair()">
-                <ion-icon name="exit"></ion-icon>Sair</a>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-4>
+                        <div class="user-avatar">
+                            <img src="../assets/imgs/kelvi.jpg">
+                        </div>
+                    </ion-col>
+                    <ion-col padding-top col-8>
+                        <h2 ion-text class="no-margin bold text-white">
+                            Kelvi Martins
+                        </h2>
+                        <!-- <span ion-text color="light">Customer</span> -->
+                    </ion-col>
+                </ion-row>
+
+                <ion-row no-padding class="other-data">
+                    <ion-col no-padding class="column">
+                        <button ion-button icon-left small full color="light" menuClose >
+                            <ion-icon name="contact"></ion-icon>
+                            Meu Perfil
+                        </button>
+                    </ion-col>
+                    <ion-col no-padding class="column">
+                        <button ion-button icon-left small full color="light" menuClose (click)="alertCertezaSair()">
+                            <ion-icon name="log-out"></ion-icon>
+                            Log Out
+                        </button>
+                    </ion-col>
+                </ion-row>
+
+            </ion-grid>
+
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content color="primary">
+        <ion-list class="user-list">
+            <button ion-item menuClose class="text-1x"  (click)="openPageInicio()">
+                <ion-icon item-left name="home" color="primary"></ion-icon>
+                <span ion-text color="primary">Início</span>
+            </button>
+
+            <button ion-item menuClose class="text-1x"  (click)="openPage('MedicamentosPage')">
+                <ion-icon item-left name="md-flask" color="primary"></ion-icon>
+                <span ion-text color="primary">Medicamentos</span>
+            </button>
+
+            <button ion-item menuClose class="text-1x"  (click)="openPage('HistoricoMedicamentosPage')">
+                <ion-icon item-left name="book" color="primary"></ion-icon>
+                <span ion-text color="primary">Histórico</span>
+            </button>
+
+            <button ion-item menuClose class="text-1x"  (click)="openPage('ExamesPage')">
+                <ion-icon item-left name="md-medkit" color="primary"></ion-icon>
+                <span ion-text color="primary">Exames</span>
+            </button>
         </ion-list>
     </ion-content>
+
 </ion-menu>
-<ion-nav [root]="rootPage" #content></ion-nav>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

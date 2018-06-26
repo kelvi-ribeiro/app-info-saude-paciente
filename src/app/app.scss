@@ -196,4 +196,67 @@ map {
     span {
         font-size: 1.8rem !important;
     }
+    
 }
+
+// Menu user profile
+.user-profile {
+    .user-avatar {
+      width: 68px;
+      height: 68px;
+      display: inline-block;
+      border-radius: 50%;
+      box-shadow: inset 0 0 10rem rgba(0,0,0,.25), 0 0 4rem rgba(255,255,255,.45);
+      img {
+        border-radius: 50%;
+      }
+    }
+    .toolbar-background {
+      background-image: linear-gradient(135deg, color($colors, dark), color($colors, primary));
+    }
+  
+    .other-data {
+      .column {
+        &:first-child {
+          border-right: 1px solid rgba(36, 50, 157, .25);
+        }
+      }
+    }
+  }
+
+  .no-margin {
+    margin: 0;
+  }
+
+  .bold {
+    font-weight: bold !important;
+  }
+
+  .text-white {
+    color: #fff;
+  }
+
+  .other-data {
+    .column {
+      &:first-child {
+        border-right: 1px solid rgba(36, 50, 157, .25);
+      }
+    }
+  }
+
+  .user-list {
+    .item {
+      &:last-child {
+        border-bottom: 0;
+      }
+      .item-inner {
+        border-color: rgba(86, 61, 124, .1);
+      }
+    }
+  }
+  
+
+  
+
+
+
