@@ -1,3 +1,4 @@
+import { LocalExameService } from './../services/domain/localExame.service';
 import { LoginPage } from './../pages/login/login';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -47,7 +48,8 @@ import { MedicamentoService } from '../services/domain/medicamento.service';
     StorageService,
     UsuarioService,
     ImageUtilService,
-    MedicamentoService
+    MedicamentoService,
+    LocalExameService
 
   ]
 })
