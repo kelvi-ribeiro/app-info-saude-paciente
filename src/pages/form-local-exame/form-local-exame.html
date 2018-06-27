@@ -23,7 +23,7 @@
 
         <ion-item>
             <ion-label  floating>CEP do local</ion-label>
-            <ion-input (ionBlur)="buscarViaCep()" type="text" formControlName="enderecoCep"></ion-input>
+            <ion-input (click)="obterCidades()" (ionBlur)="buscarViaCep()" type="text" formControlName="enderecoCep"></ion-input>
           </ion-item>
 
         <ion-item>
@@ -33,13 +33,13 @@
 
         <ion-item>
             <ion-label floating>Logradouro do Local</ion-label>
-            <ion-input type="text" formControlName="enderecoLogradouro"></ion-input>
+            <ion-input type="text" disabled formControlName="enderecoLogradouro"></ion-input>
           </ion-item>
 
 
         <ion-item>
           <ion-label floating>Bairro do Local</ion-label>
-          <ion-input type="text" formControlName="enderecoBairro"></ion-input>
+          <ion-input type="text" disabled formControlName="enderecoBairro"></ion-input>
         </ion-item>
 
           <ion-item *ngIf="!cidadeEncontrada">

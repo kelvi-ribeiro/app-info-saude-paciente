@@ -57,6 +57,7 @@ export class FormLocalExamePage {
     this.cidadeService.findAll()
     .subscribe(res=>{
       this.cidades = res;
+      this.cidadeEncontrada = null;
     })
   }
   adicionarLocal(){
