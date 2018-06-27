@@ -196,7 +196,7 @@ map {
     span {
         font-size: 1.8rem !important;
     }
-    
+
 }
 
 // Menu user profile
@@ -214,7 +214,7 @@ map {
     .toolbar-background {
       background-image: linear-gradient(135deg, color($colors, dark), color($colors, primary));
     }
-  
+
     .other-data {
       .column {
         &:first-child {
@@ -254,9 +254,27 @@ map {
       }
     }
   }
-  
 
-  
+  //TOATS
+
+.toast-md .toast-wrapper,
+.toast-ios .toast-wrapper {
+  background-color: rgb(19, 172, 19);
+  font-weight: bold;
+  color:black;
+  text-align: center;
+}
+
+ion-toast.toast-ios.toast-error div,
+ion-toast.toast-md.toast-error div {
+  background-color: #f53d3d;
+
+  }
+
+
+
+
+
 
 
 
