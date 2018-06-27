@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { LocaisExamePage } from './locais-exame';
-import { LocalExameService } from '../../services/domain/localExame.service';
+
 
 @NgModule({
   declarations: [
@@ -11,7 +11,7 @@ import { LocalExameService } from '../../services/domain/localExame.service';
     IonicPageModule.forChild(LocaisExamePage),
   ],
   providers:[
-    LocalExameService
+
   ]
 })
 export class LocaisExamePageModule {}
