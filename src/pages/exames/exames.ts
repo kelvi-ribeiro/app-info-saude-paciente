@@ -1,3 +1,4 @@
+import { ExameService } from './../../services/domain/exame.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -15,11 +16,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ExamesPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public exameService:ExameService) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ExamesPage');
+    this.obterExames()
   }
-
+  obterExames(){
+    this.exameService.findExamesByPacienteId()
+    .subscribe(res=>{
+      console.log(res)
+    })
+  }
 }
