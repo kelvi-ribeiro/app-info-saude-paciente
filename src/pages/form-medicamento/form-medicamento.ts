@@ -46,7 +46,7 @@ export class FormMedicamentoPage {
   }
 
   adicionarMedicamento(){    
-    if(this.medicamento){
+    if(!this.medicamento){
       this.salvarMedicamento();
     }else{
       this.atualizarMedicamento();

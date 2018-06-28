@@ -20,13 +20,12 @@ import { LocalExameService } from '../../services/domain/localExame.service';
   templateUrl: 'form-local-exame.html',
 })
 export class FormLocalExamePage {
-     pacienteId: any;
-     localExame;
-     cidadeEncontrada;
-     cidades = [];
-     updateLocalExame = false;
+    pacienteId: any;
+    localExame;
+    cidadeEncontrada;
+    cidades = [];    
     formGroup:FormGroup;
-  constructor(
+    constructor(
               public navCtrl: NavController,
               public navParams: NavParams,
               public cidadeService:CidadeService,
@@ -64,7 +63,7 @@ export class FormLocalExamePage {
     })
   }
   adicionarLocal(){
-    if(!this.updateLocalExame){
+    if(!this.localExame){
       this.salvarLocalExame()
     }else{
       this.atualizarLocalExame()
@@ -120,8 +119,7 @@ export class FormLocalExamePage {
       this.formGroup.controls.enderecoBairro.setValue(this.localExame.enderecoBairro);
       this.formGroup.controls.cidadeId.setValue(this.localExame.cidadeId);
       this.formGroup.controls.pacienteId.setValue(this.localExame.pacienteId);
-      this.formGroup.controls.enderecoId.setValue(this.localExame.enderecoId);
-      this.updateLocalExame = true;
+      this.formGroup.controls.enderecoId.setValue(this.localExame.enderecoId);      
       this.cidadeEncontrada = this.cidades.find(el=>el.id === this.localExame.cidadeId);
 
       this.formGroup.controls.cidadeId.setValue(this.cidadeEncontrada.id);
