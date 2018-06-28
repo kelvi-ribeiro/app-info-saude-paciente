@@ -20,6 +20,7 @@ import { AuthInterceptorProvider } from '../interceptors/auth-interceptor';
 import { HttpClientModule } from '@angular/common/http';
 import { ImageUtilService } from '../services/image-util.service';
 import { MedicamentoService } from '../services/domain/medicamento.service';
+import { ExameService } from '../services/domain/exame.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { MedicamentoService } from '../services/domain/medicamento.service';
     UsuarioService,
     ImageUtilService,
     MedicamentoService,
-    LocalExameService
+    LocalExameService,
+    ExameService
 
   ]
 })
