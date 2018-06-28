@@ -15,6 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'exames.html',
 })
 export class ExamesPage {
+  exames;
 
   constructor(
               public navCtrl: NavController,
@@ -28,7 +29,10 @@ export class ExamesPage {
   obterExames(){
     this.exameService.findExamesByPacienteId()
     .subscribe(res=>{
-      console.log(res)
+      this.exames = res;
     })
+  }
+  atualizar(exame){
+    this.navCtrl.push('FormExamePage',{exame:exame})
   }
 }

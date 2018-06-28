@@ -14,5 +14,8 @@
 
 
 <ion-content padding>
+   <ion-list (click)="atualizar(exame)" *ngFor="let exame of exames;">
+    <ion-item>{{exame?.nome}}</ion-item>
+  </ion-list>
     <button [navPush]="'FormExamePage'" ion-button icon-only><ion-icon name="add"></ion-icon></button>
 </ion-content>
