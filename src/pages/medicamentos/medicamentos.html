@@ -11,5 +11,8 @@
 
 
 <ion-content padding>
+    <ion-list (click)="atualizar(medicamento)" *ngFor="let medicamento of medicamentos;">
+        <ion-item>{{medicamento?.nome}}</ion-item>
+      </ion-list>
 <button [navPush]="'FormMedicamentoPage'" ion-button icon-only><ion-icon name="add"></ion-icon></button>
 </ion-content>

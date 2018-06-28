@@ -15,7 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'medicamentos.html',
 })
 export class MedicamentosPage {
-
+  medicamentos;
   constructor(
               public navCtrl: NavController,
               public navParams: NavParams,
@@ -28,8 +28,11 @@ export class MedicamentosPage {
   obterMedicamentosAtivos(){
     this.medicamentoService.findMedicamentosAtivosByPacienteId()
     .subscribe(res=>{
-      console.log(res)
+      this.medicamentos = res;
     })
+  }
+  atualizar(medicamento){
+    this.navCtrl.push('FormMedicamentoPage',{medicamento:medicamento})
   }
 
 }
