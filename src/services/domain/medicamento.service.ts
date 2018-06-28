@@ -35,6 +35,16 @@ export class MedicamentoService {
       }
     );
   }
+  update(medicamento,id) {
+    return this.http.put(
+      `${API_CONFIG.baseUrl}/medicamentos/${id}`,
+      medicamento,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
+  }
 }
 
 

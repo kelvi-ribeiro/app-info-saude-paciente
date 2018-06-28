@@ -19,6 +19,7 @@ import { MedicamentoService } from '../../services/domain/medicamento.service';
 export class FormMedicamentoPage {
   pacienteId;
   formGroup: FormGroup;
+  medicamento;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -27,8 +28,8 @@ export class FormMedicamentoPage {
     public medicamentoService:MedicamentoService,
     public alertCtrl:AlertController) {
 
-    this.pacienteId = this.storageService.getPacienteId();
-    console.log('this.pacienteId',this.pacienteId)
+    this.medicamento =  this.navParams.get('medicamento');
+    this.pacienteId = this.storageService.getPacienteId();    
     this.formGroup = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
       descricao: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
@@ -41,19 +42,30 @@ export class FormMedicamentoPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad FormMedicamentoPage');
+    this.verificaUpdate();
   }
 
-  adicionarMedicamento(){
-    console.log('this.formGroup.value',this.formGroup.value)
+  adicionarMedicamento(){    
+    if(this.medicamento){
+      this.salvarMedicamento();
+    }else{
+      this.atualizarMedicamento();
+    }
+  }
+  salvarMedicamento(){
     this.medicamentoService.insert(this.formGroup.value).subscribe(res=>{
-      this.showInsertOk();      
+      this.showAlertSucesso('Medicamento Adicionado a Lista');      
     })
   }
-  showInsertOk(){
+  atualizarMedicamento(){
+    this.medicamentoService.update(this.formGroup.value,this.medicamento.id).subscribe(res=>{
+      this.showAlertSucesso('Medicamento atualizado');
+    })
+  }
+  showAlertSucesso(message){
     let alert = this.alertCtrl.create({
       title:'Sucesso!',
-      message:'Medicamento adicionado a lista',
+      message:message,
       enableBackdropDismiss:false,
       buttons:[
         {
@@ -66,7 +78,14 @@ export class FormMedicamentoPage {
     });
     alert.present();
   }
-
-
-
+  verificaUpdate(){
+    if(this.medicamento){
+      this.formGroup.controls.nome.setValue(this.medicamento.nome);
+      this.formGroup.controls.descricao.setValue(this.medicamento.descricao);
+      this.formGroup.controls.intervaloTempo.setValue(this.medicamento.intervaloTempo);
+      this.formGroup.controls.dataInicio.setValue(this.medicamento.dataInicio);
+      this.formGroup.controls.dataFim.setValue(this.medicamento.dataFim);                
+      this.formGroup.controls.horaInicial.setValue(this.medicamento.horaInicial);                
+    }
+  }
 }

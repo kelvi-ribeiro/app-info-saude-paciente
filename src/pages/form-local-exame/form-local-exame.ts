@@ -125,10 +125,7 @@ export class FormLocalExamePage {
       this.cidadeEncontrada = this.cidades.find(el=>el.id === this.localExame.cidadeId);
 
       this.formGroup.controls.cidadeId.setValue(this.cidadeEncontrada.id);
-      console.log('verificaUpdate()',this.formGroup.value)
-
-
-    }
+     }
   }
   exibirToastCepInvalido() {
     let toast = this.toastCtrl.create({
