@@ -33,4 +33,14 @@ export class LocalExameService {
       }
     );
   }
+  update(localExame,id) {
+    return this.http.put(
+      `${API_CONFIG.baseUrl}/locaisExame/${id}`,
+      localExame,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
+  }
 }

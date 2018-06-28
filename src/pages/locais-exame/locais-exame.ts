@@ -17,16 +17,22 @@ import { LocalExameService } from '../../services/domain/localExame.service';
 export class LocaisExamePage {
   locaisExame;
   constructor(
-              public navCtrl: NavController, 
+              public navCtrl: NavController,
               public navParams: NavParams,
               public localExameService:LocalExameService) {
   }
 
   ionViewDidLoad() {
+  this.obterLocaisExame()
+  }
+  obterLocaisExame(){
     this.localExameService.findAllLocaisExameByPacienteId()
     .subscribe(res=>{
-      console.log('locais de exame',res);
+      this.locaisExame = res
     })
+  }
+  atualizar(localExame){
+    this.navCtrl.push('FormLocalExamePage',{localExame:localExame})
   }
 
 }

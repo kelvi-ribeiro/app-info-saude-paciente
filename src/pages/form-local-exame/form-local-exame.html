@@ -54,7 +54,7 @@
                 <ion-input type="text" disabled [value]="cidadeEncontrada.nome" ></ion-input>
               </ion-item>
 
-        <button ion-button block color="primary" type="submit" [disabled]="formGroup.invalid">Adicionar Local de Exame</button>
+        <button ion-button block color="primary" type="submit" [disabled]="formGroup.invalid">{{updateLocalExame ? 'atualizar Local de Exame':'Adicionar Local de Exame'}}</button>
       </form>
 
 </ion-content>

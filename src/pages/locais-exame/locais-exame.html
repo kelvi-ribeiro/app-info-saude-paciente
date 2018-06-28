@@ -14,5 +14,8 @@
 
 
 <ion-content padding>
+  <ion-list (click)="atualizar(localExame)" *ngFor="let localExame of locaisExame;">
+    <ion-item>{{localExame?.nome}}</ion-item>
+  </ion-list>
   <button [navPush]="'FormLocalExamePage'" ion-button icon-only><ion-icon name="add"></ion-icon></button>
 </ion-content>

@@ -21,8 +21,10 @@ import { LocalExameService } from '../../services/domain/localExame.service';
 })
 export class FormLocalExamePage {
      pacienteId: any;
+     localExame;
      cidadeEncontrada;
-     cidades = []
+     cidades = [];
+     updateLocalExame = false;
     formGroup:FormGroup;
   constructor(
               public navCtrl: NavController,
@@ -34,7 +36,7 @@ export class FormLocalExamePage {
               public alertCtrl:AlertController,
               public toastCtrl:ToastController,
               public viaCepService:ViaCepService) {
-
+        this.localExame = this.navParams.get('localExame')
         this.pacienteId = this.storageService.getPacienteId();
         this.formGroup = this.formBuilder.group({
           nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
@@ -43,8 +45,7 @@ export class FormLocalExamePage {
           enderecoBairro: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
           enderecoCep: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
           cidadeId: [null, [Validators.required]],
-          dataFim: ['', [Validators.required]],
-          horaInicial: ['', [Validators.required]],
+          enderecoId: [null],
           pacienteId: [this.pacienteId]
         });
       }
@@ -52,24 +53,27 @@ export class FormLocalExamePage {
 
   ionViewDidLoad() {
     this.obterCidades();
+
   }
   obterCidades(){
     this.cidadeService.findAll()
     .subscribe(res=>{
       this.cidades = res;
       this.cidadeEncontrada = null;
+      this.verificaUpdate();
     })
   }
   adicionarLocal(){
-    console.log('this.formGroup.value',this.formGroup.value)
-    this.localExameService.insert(this.formGroup.value).subscribe(res=>{
-      this.showInsertOk();
-    })
+    if(!this.updateLocalExame){
+      this.salvarLocalExame()
+    }else{
+      this.atualizarLocalExame()
+    }
   }
-  showInsertOk(){
+  showAlertSucesso(message){
     let alert = this.alertCtrl.create({
       title:'Sucesso!',
-      message:'Local de Exame adicionado',
+      message:message,
       enableBackdropDismiss:false,
       buttons:[
         {
@@ -81,6 +85,17 @@ export class FormLocalExamePage {
       ]
     });
     alert.present();
+  }
+  salvarLocalExame(){
+    this.formGroup.removeControl('enderecoId')
+    this.localExameService.insert(this.formGroup.value).subscribe(res=>{
+      this.showAlertSucesso('Local de Exame adicionado');
+    })
+  }
+  atualizarLocalExame(){
+    this.localExameService.update(this.formGroup.value,this.localExame.id).subscribe(res=>{
+      this.showAlertSucesso('Local de Exame atualizado');
+    })
   }
   buscarViaCep() {
 
@@ -95,6 +110,25 @@ export class FormLocalExamePage {
      }
     },error=>this.exibirToastCepInvalido());
 
+  }
+  verificaUpdate(){
+    if(this.localExame){
+      this.formGroup.controls.nome.setValue(this.localExame.nome);
+      this.formGroup.controls.enderecoNumero.setValue(this.localExame.enderecoNumero);
+      this.formGroup.controls.enderecoLogradouro.setValue(this.localExame.enderecoLogradouro);
+      this.formGroup.controls.enderecoCep.setValue(this.localExame.enderecoCep);
+      this.formGroup.controls.enderecoBairro.setValue(this.localExame.enderecoBairro);
+      this.formGroup.controls.cidadeId.setValue(this.localExame.cidadeId);
+      this.formGroup.controls.pacienteId.setValue(this.localExame.pacienteId);
+      this.formGroup.controls.enderecoId.setValue(this.localExame.enderecoId);
+      this.updateLocalExame = true;
+      this.cidadeEncontrada = this.cidades.find(el=>el.id === this.localExame.cidadeId);
+
+      this.formGroup.controls.cidadeId.setValue(this.cidadeEncontrada.id);
+      console.log('verificaUpdate()',this.formGroup.value)
+
+
+    }
   }
   exibirToastCepInvalido() {
     let toast = this.toastCtrl.create({
