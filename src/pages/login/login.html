@@ -1,40 +1,35 @@
-<div padding class="conteudo content-login">
-  <div class="list-form">
-      <ion-grid class="grid-img">
-          <ion-row>
-            <ion-col width-100 no-padding>
-              <img src="assets/imgs/logo-fiocruz.jpg" class="icon-webescola" alt="Logo da Fiocruz">
+<div class="conteudo content-login">
 
-            </ion-col>
-          </ion-row>
+  <img id="logoApp" src="../assets/imgs/logoApp.png">
 
-        </ion-grid>
+  <div class="list-form">    
 
-    <form  #loginForm="ngForm" (ngSubmit)="login()" class="form-login">
+    <img id="capa" src="../assets/imgs/capa.jpg" alt="Capa">    
 
+    <form #loginForm="ngForm" (ngSubmit)="login()" class="form-login">
 
-            <ion-item class="input-login">
-                <ion-label>
-                  <ion-icon name="person" class="icone-form"></ion-icon>
-                </ion-label>
-                <ion-input name="email" type="text" placeholder="Email" required [(ngModel)]="creds.email" ></ion-input>
-              </ion-item>
-              <ion-item class="input-login">
-                <ion-label>
-                  <ion-icon name="key" class="icone-form"></ion-icon>
-                </ion-label>
-                <ion-input name="senha" type="password" placeholder="Senha" required [(ngModel)]="creds.senha" ></ion-input>
-              </ion-item>
+      <ion-item class="input-login">
+        <ion-label>
+          <ion-icon name="person" class="icone-form"></ion-icon>
+        </ion-label>
+        <ion-input round block name="email" type="text" placeholder="CPF" required [(ngModel)]="creds.email"></ion-input>
+      </ion-item>
+      <ion-item class="input-login">
+        <ion-label>
+          <ion-icon name="key" class="icone-form"></ion-icon>
+        </ion-label>
+        <ion-input round block name="senha" type="password" placeholder="Senha" required [(ngModel)]="creds.senha"></ion-input>
+      </ion-item>
 
-    <ion-grid>
+      <ion-grid>
         <ion-row class="btn-row">
           <ion-col>
-            <button ion-button round small [disabled]="!loginForm.form.valid" type="submit" class="btn-login"  >Entrar</button>
+            <button ion-button round block [disabled]="!loginForm.form.valid" type="submit" class="btn-login">Entrar</button>
           </ion-col>
         </ion-row>
       </ion-grid>
+      <p>Esqueci minha senha</p>
     </form>
+    
   </div>
 </div>
-
-
