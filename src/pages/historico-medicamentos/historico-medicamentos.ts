@@ -63,9 +63,8 @@ export class HistoricoMedicamentosPage {
   }
   setAtivo(medicamento){
     this.medicamentoService.setAtivo(medicamento.id)
-    .subscribe(res => {
+    .subscribe(res=>{
       this.obterMedicamentosInativos();
     })
-  }
 
 }
