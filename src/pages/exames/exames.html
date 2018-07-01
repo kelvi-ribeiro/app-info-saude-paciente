@@ -8,14 +8,59 @@
 
   <ion-navbar>
     <ion-title>Exames</ion-title>
+    <ion-buttons end>
+      <button [navPush]="'FormExamePage'" ion-button icon-only>
+        <ion-icon color="secondary" name="add"></ion-icon>
+        <ion-icon color="secondary" name="medkit"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-   <ion-list (click)="atualizar(exame)" *ngFor="let exame of exames;">
-    <ion-item>{{exame?.nome}}</ion-item>
-  </ion-list>
-    <button [navPush]="'FormExamePage'" ion-button icon-only><ion-icon name="add"></ion-icon></button>
+  <ion-card *ngFor="let exame of exames" class="card-white">
+    <ion-card-content>
+      <ion-row class="row-buttons">
+        <button (click)="atualizar(exame)" ion-button>Editar</button>
+        <button (click)="alertApagarLocalExame(localExame)" class="btn-end" color="danger" ion-button>Apagar</button>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Nome: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{exame?.nome}}</p>
+        </ion-col>
+      </ion-row>
+      <hr>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Data: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{exame?.data}}</p>
+        </ion-col>
+      </ion-row>
+      <hr>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Descrição: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{exame?.descricao}}</p>
+        </ion-col>
+      </ion-row>
+      <hr>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Local de Exame: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{exame?.nome}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

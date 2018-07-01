@@ -1,18 +1,76 @@
 <ion-header>
 
   <ion-navbar>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
     <ion-title>Medicamentos</ion-title>
+    <ion-buttons end>
+      <button [navPush]="'FormMedicamentoPage'" ion-button icon-only>
+        <ion-icon color="secondary" name="add"></ion-icon> <ion-icon color="secondary" name="md-flask"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-list (click)="atualizar(medicamento)" *ngFor="let medicamento of medicamentos;">
-        <ion-item>{{medicamento?.nome}}</ion-item>
-      </ion-list>
-<button [navPush]="'FormMedicamentoPage'" ion-button icon-only><ion-icon name="add"></ion-icon></button>
+
+  <ion-card *ngFor="let medicamento of medicamentos" class="card-white">
+    <ion-card-content>
+      <ion-row class="row-buttons">
+        <button (click)="atualizar(medicamento)" ion-button >Editar</button>
+          <button (click)="alertApagarMedicamento(medicamento)" class="btn-end" color="secondary" ion-button>Feito</button>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Nome: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{medicamento?.nome}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Data de Início: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{medicamento?.dataInicio}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Hora Inicial: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{medicamento?.horaInicial}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Intervalo de Tempo: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{medicamento?.intervaloTempo}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Data final: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{medicamento?.dataFim}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-4>
+          <h4 class="text-bolder">Descrição: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-8>
+          <p>{{medicamento?.descricao}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

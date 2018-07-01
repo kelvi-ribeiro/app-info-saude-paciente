@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { API_CONFIG } from "../../config/api.config";
 import { StorageService } from "../storage.service";
 import { ImageUtilService } from "../image-util.service";
+import { Observable } from "rxjs/Observable";
 
 
 
@@ -32,6 +33,9 @@ export class LocalExameService {
         responseType: 'text'
       }
     );
+  }
+  delete(id):Observable<any>{
+    return this.http.delete(`${API_CONFIG.baseUrl}/locaisExame/${id}`)
   }
   update(localExame,id) {
     return this.http.put(

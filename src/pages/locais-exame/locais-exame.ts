@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { LocalExameService } from '../../services/domain/localExame.service';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
 /**
  * Generated class for the LocaisExamePage page.
@@ -19,7 +20,8 @@ export class LocaisExamePage {
   constructor(
               public navCtrl: NavController,
               public navParams: NavParams,
-              public localExameService:LocalExameService) {
+              public localExameService:LocalExameService,
+              public alertCtrl:AlertController) {
   }
 
   ionViewDidLoad() {
@@ -34,5 +36,32 @@ export class LocaisExamePage {
   atualizar(localExame){
     this.navCtrl.push('FormLocalExamePage',{localExame:localExame})
   }
+
+  alertApagarLocalExame(localExame) {
+    let alert = this.alertCtrl.create({
+      title: "Atenção!",
+      message: "Esta ação irá apagar este local de exame e todos exames nele associados, tem certeza disso  ?",
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: "Sim",
+          handler: () => {
+            this.apagarLocalExame(localExame)
+          }
+        },
+        {
+          text: "Não"
+        }
+      ]
+    });
+    alert.present();
+  }
+  apagarLocalExame(localExame){
+    this.localExameService.delete(localExame.id)
+    .subscribe(res => {
+      this.obterLocaisExame();
+    })
+  }
+
 
 }

@@ -52,14 +52,14 @@ export class LoginPage {
   }
 
 
-  ionViewDidEnter() {
-    this.auth.refreshToken()
-      .subscribe(response => {
-        this.auth.successfulLogin(response.headers.get('Authorization'));
-        this.navCtrl.setRoot(TabsPage);
-      },
-      error => {});
-  }
+  // ionViewDidEnter() {
+  //   this.auth.refreshToken()
+  //     .subscribe(response => {
+  //       this.auth.successfulLogin(response.headers.get('Authorization'));
+  //       this.navCtrl.setRoot(TabsPage);
+  //     },
+  //     error => {});
+  // }
 
   login() {
     const loading = this.presentLoadingDefault()

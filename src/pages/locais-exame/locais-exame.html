@@ -8,14 +8,79 @@
 
   <ion-navbar>
     <ion-title>Locais de Exame</ion-title>
+    <ion-buttons end>
+      <button [navPush]="'FormLocalExamePage'" ion-button icon-only>
+        <ion-icon color="secondary" name="add"></ion-icon>
+        <ion-icon color="secondary" name="pin"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list (click)="atualizar(localExame)" *ngFor="let localExame of locaisExame;">
-    <ion-item>{{localExame?.nome}}</ion-item>
-  </ion-list>
-  <button [navPush]="'FormLocalExamePage'" ion-button icon-only><ion-icon name="add"></ion-icon></button>
+  <ion-card *ngFor="let localExame of locaisExame" class="card-white">
+    <ion-card-content>
+      <ion-row class="row-buttons">
+        <button (click)="atualizar(localExame)" ion-button>Editar</button>
+        <button (click)="alertApagarLocalExame(localExame)" class="btn-end" color="danger" ion-button>Apagar</button>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Nome: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{localExame?.nome}}</p>
+        </ion-col>
+      </ion-row>
+      <hr>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Número: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{localExame?.enderecoNumero}}</p>
+        </ion-col>
+      </ion-row>
+      <hr>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Logradouro: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{localExame?.enderecoLogradouro}}</p>
+        </ion-col>
+      </ion-row>
+      <hr>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Bairro: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{localExame?.enderecoBairro}}</p>
+        </ion-col>
+      </ion-row>
+      <hr>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">CEP: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{localExame?.enderecoCep}}</p>
+        </ion-col>
+      </ion-row>
+      <hr>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Cidade: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{localExame?.cidadeNome}}</p>
+        </ion-col>
+      </ion-row>
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>

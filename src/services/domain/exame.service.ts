@@ -30,6 +30,9 @@ export class ExameService {
       }
     );
   }
+  delete(id){
+    return this.http.delete(`${API_CONFIG.baseUrl}/exames/${id}`)
+  }
 }
 
 

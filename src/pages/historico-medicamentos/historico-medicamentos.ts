@@ -1,3 +1,4 @@
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MedicamentoService } from '../../services/domain/medicamento.service';
@@ -15,11 +16,12 @@ import { MedicamentoService } from '../../services/domain/medicamento.service';
   templateUrl: 'historico-medicamentos.html',
 })
 export class HistoricoMedicamentosPage {
-
+  medicamentos;
   constructor(
-              public navCtrl: NavController, 
+              public navCtrl: NavController,
               public navParams: NavParams,
-              public medicamentoService:MedicamentoService) {
+              public medicamentoService:MedicamentoService,
+              public alertCtrl:AlertController) {
   }
 
   ionViewDidLoad() {
@@ -28,7 +30,41 @@ export class HistoricoMedicamentosPage {
   obterMedicamentosInativos(){
     this.medicamentoService.findMedicamentosInativosByPacienteId()
     .subscribe(res=>{
-      console.log(res)
+      this.medicamentos = res;
+    })
+  }
+
+  alertApagarMedicamento(medicamento) {
+    let alert = this.alertCtrl.create({
+      title: "Atenção!",
+      message: "Esta ação irá apagar o medicamento, tem certeza disso ?",
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: "Sim",
+          handler: () => {
+            this.apagarMedicamento(medicamento)
+          }
+        },
+        {
+          text: "Não"
+        }
+      ]
+    });
+    alert.present();
+  }
+  apagarMedicamento(medicamento){
+    this.medicamentoService.delete(medicamento.id)
+    .subscribe(res =>{
+      this.obterMedicamentosInativos()
+    })
+
+
+  }
+  setAtivo(medicamento){
+    this.medicamentoService.setAtivo(medicamento.id)
+    .subscribe(res => {
+      this.obterMedicamentosInativos();
     })
   }
 
