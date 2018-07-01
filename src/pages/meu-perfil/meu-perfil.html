@@ -1,20 +1,53 @@
 <ion-header>
   <ion-navbar>
-      <button ion-button menuToggle>
-          <ion-icon name="menu"></ion-icon>
-        </button>
-    <ion-title>Meu Perfil</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Perfil</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <div>
+    <img class="img-salva" src="../assets/imgs/kelvi.jpg">
+
+
+
+  </div>
+
+
+  <h2 text-center>{{perfil?.pessoa?.nome}}</h2>
+  <h2 text-center>{{perfil?.pessoa?.email}}</h2>
+
+  <ion-card class="card-black">
+    <ion-card-header>
+      <h1 text-center class="text-bolder">Dados Médicos</h1>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Naturalidade: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{perfil?.pessoa?.naturalidade?.naturalidade}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Sexo: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{perfil?.pessoa?.sexo}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6>
+          <h4 class="text-bolder">Raça: </h4>
+        </ion-col>
+        <ion-col class="padding-zero-col" col-6>
+          <p>{{perfil?.pessoa?.raca}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -17,6 +17,7 @@ import { UsuarioService } from '../../services/domain/usuario.service';
 })
 export class MeuPerfilPage {
   emailPessoa:string;
+  perfil;
   constructor(
             public navCtrl: NavController,
             public usuarioService:UsuarioService,
@@ -29,6 +30,7 @@ export class MeuPerfilPage {
 
   obterDadosPerfil(){
     this.usuarioService.findPacienteByPessoaEmail(this.emailPessoa).subscribe(res=>{
+      this.perfil = res;
       console.log(res)
     })
   }
