@@ -86,9 +86,9 @@ export class FormMedicamentoPage {
       this.formGroup.controls.descricao.setValue(this.medicamento.descricao);
       this.formGroup.controls.intervaloTempo.setValue(this.medicamento.intervaloTempo);
       this.formGroup.controls.dataInicio
-      .setValue(this.utilsService.transformaDataPadraoAmericano(this.medicamento.dataInicio));
+      .setValue(this.utilsService.brazilianTimeToDate(this.medicamento.dataInicio));
       this.formGroup.controls.dataFim
-      .setValue(this.utilsService.transformaDataPadraoAmericano(this.medicamento.dataFim));
+      .setValue(this.utilsService.brazilianTimeToDate(this.medicamento.dataFim));
       this.formGroup.controls.horaInicial.setValue(this.medicamento.horaInicial);
     }
   }
