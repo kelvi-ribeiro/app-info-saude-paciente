@@ -30,21 +30,23 @@
       <ion-input type="number" formControlName="intervaloTempo"></ion-input>
     </ion-item>
 
-    <ion-item>      
+    <ion-item>
         <ion-label stacked>Data de Início para o Medicamento</ion-label>
       <ion-input type="date" formControlName="dataInicio"></ion-input>
     </ion-item>
 
     <ion-item>
-        <ion-label stacked>Data final para o Medicamento</ion-label>      
+        <ion-label stacked>Data final para o Medicamento</ion-label>
       <ion-input type="date" formControlName="dataFim"></ion-input>
     </ion-item>
 
     <ion-item>
-        <ion-label stacked>Hora inicial para o Medicamento</ion-label>            
+        <ion-label stacked>Hora inicial para o Medicamento</ion-label>
       <ion-input type="time" formControlName="horaInicial"></ion-input>
     </ion-item>
-    <button ion-button block color="primary" type="submit" [disabled]="formGroup.invalid">{{medicamento ? 'Atualizar Medicamento': 'Adicionar Medicamento'}}</button>
+    <ion-item>
+      <button ion-button round full color="secondary" type="submit" [disabled]="formGroup.invalid">{{medicamento ? 'Atualizar Medicamento': 'Adicionar Medicamento'}}</button>
+    </ion-item>
   </form>
 
 </ion-content>

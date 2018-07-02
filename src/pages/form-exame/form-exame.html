@@ -41,9 +41,12 @@
                 <ion-option *ngFor="let localExame of locaisExame;"   [value]="localExame.id">{{localExame.nome}}</ion-option>
               </ion-select>
             </ion-item>
+            <ion-item>
+              <button ion-button round full color="secondary" type="submit" [disabled]="formGroup.invalid">Adicionar Exame</button>
+            </ion-item>
 
 
-        <button ion-button block color="primary" type="submit" [disabled]="formGroup.invalid">Adicionar Exame</button>
+
       </form>
 
 </ion-content>
