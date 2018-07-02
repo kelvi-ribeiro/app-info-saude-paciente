@@ -22,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ImageUtilService } from '../services/image-util.service';
 import { MedicamentoService } from '../services/domain/medicamento.service';
 import { ExameService } from '../services/domain/exame.service';
+import { UtilsService } from '../services/domain/utils.service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ExameService } from '../services/domain/exame.service';
     MedicamentoService,
     LocalExameService,
     ExameService,
-    NotificacoesService
+    NotificacoesService,
+    UtilsService
 
   ]
 })
