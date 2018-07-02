@@ -264,6 +264,22 @@ map {
   color:black;
   text-align: center;
 }
+ion-content {
+  background-image: url('../../assets/imgs/capa.jpg');
+  -webkit-background-image: url('../../assets/imgs/capa.jpg');
+
+}
+
+#capa{
+  margin-top: auto;
+  position: absolute;
+  height: 100%;
+  overflow: auto;
+  display: table;
+  width: 100%;
+  opacity: 0.1;
+}
+
 
 ion-toast.toast-ios.toast-error div,
 ion-toast.toast-md.toast-error div {
