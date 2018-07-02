@@ -11,9 +11,9 @@
                     </ion-col>
                     <ion-col padding-top col-8>
                         <h2 ion-text class="no-margin bold text-white">
-                            {{storageService.getUserName()}}
+                            {{storageService?.getUserName()}}
                         </h2>
-                        <span ion-text color="light">{{storageService.getLocalUser().email}}</span>
+                        <span ion-text color="light">{{storageService.getLocalUser()?.email}}</span>
                     </ion-col>
                 </ion-row>
 
