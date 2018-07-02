@@ -2,6 +2,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { MedicamentoService } from './../../services/domain/medicamento.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Alert } from 'ionic-angular';
+import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
 /**
  * Generated class for the MedicamentosPage page.
@@ -21,7 +22,8 @@ export class MedicamentosPage {
               public navCtrl: NavController,
               public navParams: NavParams,
               public medicamentoService:MedicamentoService,
-              public alertCtrl:AlertController) {
+              public alertCtrl:AlertController,
+              public notificaoesService:NotificacoesService) {
   }
 
   ionViewDidLoad() {
@@ -60,6 +62,9 @@ export class MedicamentosPage {
     this.medicamentoService.setInativo(medicamento.id)
     .subscribe(res=>{
       this.obterMedicamentosAtivos();
+      this.notificaoesService.presentToast('Medicamento mandado para a lista de histórico','default',4000,'middle')
+
+
     })
   }
 
