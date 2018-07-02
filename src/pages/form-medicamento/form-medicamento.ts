@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import { StorageService } from '../../services/storage.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MedicamentoService } from '../../services/domain/medicamento.service';
+import { UtilsService } from '../../services/domain/utils.service';
 
 /**
  * Generated class for the FormMedicamentoPage page.
@@ -26,10 +27,11 @@ export class FormMedicamentoPage {
     public storageService: StorageService,
     public formBuilder: FormBuilder,
     public medicamentoService:MedicamentoService,
-    public alertCtrl:AlertController) {
+    public alertCtrl:AlertController,
+    public utilsService:UtilsService) {
 
     this.medicamento =  this.navParams.get('medicamento');
-    this.pacienteId = this.storageService.getPacienteId();    
+    this.pacienteId = this.storageService.getPacienteId();
     this.formGroup = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
       descricao: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],
@@ -45,7 +47,7 @@ export class FormMedicamentoPage {
     this.verificaUpdate();
   }
 
-  adicionarMedicamento(){    
+  adicionarMedicamento(){
     if(!this.medicamento){
       this.salvarMedicamento();
     }else{
@@ -54,7 +56,7 @@ export class FormMedicamentoPage {
   }
   salvarMedicamento(){
     this.medicamentoService.insert(this.formGroup.value).subscribe(res=>{
-      this.showAlertSucesso('Medicamento Adicionado a Lista');      
+      this.showAlertSucesso('Medicamento Adicionado a Lista');
     })
   }
   atualizarMedicamento(){
@@ -83,9 +85,11 @@ export class FormMedicamentoPage {
       this.formGroup.controls.nome.setValue(this.medicamento.nome);
       this.formGroup.controls.descricao.setValue(this.medicamento.descricao);
       this.formGroup.controls.intervaloTempo.setValue(this.medicamento.intervaloTempo);
-      this.formGroup.controls.dataInicio.setValue(this.medicamento.dataInicio);
-      this.formGroup.controls.dataFim.setValue(this.medicamento.dataFim);                
-      this.formGroup.controls.horaInicial.setValue(this.medicamento.horaInicial);                
+      this.formGroup.controls.dataInicio
+      .setValue(this.utilsService.transformaDataPadraoAmericano(this.medicamento.dataInicio));
+      this.formGroup.controls.dataFim
+      .setValue(this.utilsService.transformaDataPadraoAmericano(this.medicamento.dataFim));
+      this.formGroup.controls.horaInicial.setValue(this.medicamento.horaInicial);
     }
   }
 }
