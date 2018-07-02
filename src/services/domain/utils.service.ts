@@ -11,7 +11,7 @@ import { ToastController,NavController } from "ionic-angular";
 
 @Injectable()
 export class UtilsService {
-  transformaDataPadraoAmericano(data:string){
+  brazilianTimeToDate(data:string){
     // Pega Mês
     // data.substr(data.indexOf('/')+1,data.lastIndexOf('/')-3)
     // Pega dia
@@ -23,6 +23,10 @@ export class UtilsService {
     parseInt(data.substr(0,data.indexOf('/')))
     );
       return dataFormatada.toISOString().substr(0, 10).split('/').reverse().join('-');
+  }
+
+  dateTimeToTime(data:string){
+    return data.substr(data.indexOf(':')-2,data.length-1)
   }
 
 
