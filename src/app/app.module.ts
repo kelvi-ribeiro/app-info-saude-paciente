@@ -1,3 +1,4 @@
+import { NotificacoesService } from './../services/domain/notificacoes.service';
 import { LocalExameService } from './../services/domain/localExame.service';
 import { LoginPage } from './../pages/login/login';
 import { NgModule, ErrorHandler } from '@angular/core';
@@ -51,7 +52,8 @@ import { ExameService } from '../services/domain/exame.service';
     ImageUtilService,
     MedicamentoService,
     LocalExameService,
-    ExameService
+    ExameService,
+    NotificacoesService
 
   ]
 })
