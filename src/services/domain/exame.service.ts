@@ -30,6 +30,16 @@ export class ExameService {
       }
     );
   }
+  update(exame,id) {
+    return this.http.put(
+      `${API_CONFIG.baseUrl}/exames/${id}`,
+      exame,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
+  }
   delete(id){
     return this.http.delete(`${API_CONFIG.baseUrl}/exames/${id}`)
   }
