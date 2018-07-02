@@ -1,3 +1,4 @@
+import { UtilsService } from './../../services/domain/utils.service';
 import { NotificacoesService } from './../../services/domain/notificacoes.service';
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
@@ -30,7 +31,8 @@ export class FormExamePage {
               public formBuilder:FormBuilder,
               public notificacoesService:NotificacoesService,
               public exameService:ExameService,
-              public localExameService:LocalExameService
+              public localExameService:LocalExameService,
+              public utilsService:UtilsService
               ) {
         this.exame = this.navParams.get('exame');
         this.pacienteId = this.storageService.getPacienteId();
@@ -88,8 +90,10 @@ export class FormExamePage {
     if(this.exame){
       this.formGroup.controls.nome.setValue(this.exame.nome);
       this.formGroup.controls.descricao.setValue(this.exame.descricao);
-      this.formGroup.controls.exameDia.setValue(this.exame.exameDia);
-      this.formGroup.controls.exameHora.setValue(this.exame.exameHora);
+      this.formGroup.controls.exameDia
+      .setValue(this.utilsService.brazilianTimeToDate(this.exame.data));
+      this.formGroup.controls.exameHora
+      .setValue(this.utilsService.dateTimeToTime(this.exame.data));
       this.formGroup.controls.localExameId.setValue(this.exame.localExameId);
 
      }
