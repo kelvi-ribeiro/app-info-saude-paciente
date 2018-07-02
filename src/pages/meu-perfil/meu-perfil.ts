@@ -32,6 +32,7 @@ export class MeuPerfilPage {
     this.usuarioService.findPacienteByPessoaEmail(this.emailPessoa).subscribe(res=>{
       this.perfil = res;
       console.log(res)
+      this.storageService.setUserName(res['pessoa'].nome)
     })
   }
 
