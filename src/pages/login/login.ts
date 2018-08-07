@@ -22,7 +22,7 @@ export class LoginPage {
   email;
   perfis = [];
   creds : CreadenciaisDTO = {
-    email: "",
+    cpf: "",
     senha: ""
   };
 
@@ -35,7 +35,7 @@ export class LoginPage {
     public alertCtrl:AlertController,
     public loadingCtrl:LoadingController) {
 
-      this.creds.email = storageService.getEmail()
+      this.creds.cpf = storageService.getEmail()
 
   }
 
@@ -67,7 +67,7 @@ export class LoginPage {
       .subscribe(response => {
         loading.dismiss()
         this.auth.successfulLogin(response.headers.get('Authorization'));
-        this.alertSalvarLogin(this.creds.email)
+        this.alertSalvarLogin(this.creds.cpf)
         this.navCtrl.setRoot(TabsPage);
       },
       error => {
@@ -94,15 +94,14 @@ export class LoginPage {
     alert.present();
   }
 
-  salvarLogin(email){
-    this.storageService.setEmail(email)
+  salvarLogin(cpf){
+    this.storageService.setEmail(cpf)
   }
 
   alertSalvarLogin(email){
     let alert = this.alertCtrl.create({
       title:'Salvar Login!',
-      message:'Deseja Salvar o Login ?',
-      enableBackdropDismiss:false,
+      message:'Deseja Salvar o Seu CPF ?',
       buttons:[
         {
           text:'Sim',

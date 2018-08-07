@@ -16,20 +16,20 @@ import { UsuarioService } from '../../services/domain/usuario.service';
   templateUrl: 'meu-perfil.html',
 })
 export class MeuPerfilPage {
-  emailPessoa:string;
+  cpfPessoa:string;
   perfil;
   constructor(
             public navCtrl: NavController,
             public usuarioService:UsuarioService,
             public storageService:StorageService) {
-    this.emailPessoa = this.storageService.getLocalUser().email
+    this.cpfPessoa = this.storageService.getLocalUser().cpf
   }
   ionViewDidLoad(){
     this.obterDadosPerfil()
   }
 
   obterDadosPerfil(){
-    this.usuarioService.findPacienteByPessoaEmail(this.emailPessoa).subscribe(res=>{
+    this.usuarioService.findPacienteByPessoaCpf(this.cpfPessoa).subscribe(res=>{
       this.perfil = res;
       console.log(res)
       this.storageService.setUserName(res['pessoa'].nome)

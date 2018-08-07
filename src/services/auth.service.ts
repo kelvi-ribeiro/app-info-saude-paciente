@@ -44,7 +44,7 @@ export class AuthService {
         let tok = authorizationValue.substring(7);
         let user : LocalUser = {
             token: tok,
-            email: this.jwtHelper.decodeToken(tok).sub
+            cpf: this.jwtHelper.decodeToken(tok).sub
         };
         this.storage.setLocalUser(user);
         this.salvarInformacoesPaciente()
@@ -52,7 +52,7 @@ export class AuthService {
     }
 
     salvarInformacoesPaciente(){
-      this.usuarioService.findPacienteByPessoaEmail(this.storage.getLocalUser().email)
+      this.usuarioService.findPacienteByPessoaCpf(this.storage.getLocalUser().cpf)
       .subscribe(res=>{
         this.storage.setPacienteId(res['id']);
       })

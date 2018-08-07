@@ -23,6 +23,10 @@ export class UsuarioService {
     return this.http.get(`${API_CONFIG.baseUrl}/pacientes/pessoaEmail?email=${email}`);
   }
 
+  findPacienteByPessoaCpf(cpf: string) {
+    return this.http.get(`${API_CONFIG.baseUrl}/pacientes/pessoaCpf?cpf=${cpf}`);
+  }
+
   findAll() {
     return this.http.get(`${API_CONFIG.baseUrl}/usuarios`);
   }

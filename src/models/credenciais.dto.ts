@@ -1,4 +1,4 @@
 export interface CreadenciaisDTO{
-  email:string,
+  cpf:string,
   senha:string
 }

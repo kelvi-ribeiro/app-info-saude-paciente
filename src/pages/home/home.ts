@@ -8,19 +8,19 @@ import { StorageService } from '../../services/storage.service';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  emailPessoa:string;
+  cpfPessoa:string;
   constructor(
             public navCtrl: NavController,
             public usuarioService:UsuarioService,
             public storageService:StorageService) {
-    this.emailPessoa = this.storageService.getEmail()
+    this.cpfPessoa = this.storageService.getCpf()
   }
   ionViewDidLoad(){
     this.obterDadosPerfil()
   }
 
   obterDadosPerfil(){
-    this.usuarioService.findPacienteByPessoaEmail(this.emailPessoa).subscribe(res=>{
+    this.usuarioService.findPacienteByPessoaCpf(this.cpfPessoa).subscribe(res=>{
       console.log(res)
     })
   }

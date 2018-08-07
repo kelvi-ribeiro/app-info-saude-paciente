@@ -126,4 +126,22 @@ export class StorageService {
       return JSON.parse(email);
     }
   }
+
+  setCpf(cpf) {
+    if(cpf == null){
+      localStorage.removeItem(STORAGE_KEYS.cpf);
+    }else{
+      localStorage.setItem(STORAGE_KEYS.cpf,JSON.stringify(cpf))
+    }
+
+  }
+
+  getCpf() {
+    let cpf = localStorage.getItem(STORAGE_KEYS.cpf);
+    if (cpf == null) {
+      return "";
+    } else {
+      return JSON.parse(cpf);
+    }
+  }
 }
