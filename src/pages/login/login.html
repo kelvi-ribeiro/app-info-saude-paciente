@@ -12,7 +12,7 @@
         <ion-label>
           <ion-icon name="person" class="icone-form"></ion-icon>
         </ion-label>
-        <ion-input round block name="cpf" type="text" placeholder="CPF" required [(ngModel)]="creds.cpf"></ion-input>
+        <ion-input (change)="mascaraCpf(creds.cpf)" round block name="cpf" type="text" placeholder="CPF" required [(ngModel)]="creds.cpf"></ion-input>
       </ion-item>
       <ion-item class="input-login">
         <ion-label>

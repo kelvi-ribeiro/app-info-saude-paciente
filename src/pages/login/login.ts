@@ -35,7 +35,8 @@ export class LoginPage {
     public alertCtrl:AlertController,
     public loadingCtrl:LoadingController) {
 
-      this.creds.cpf = storageService.getEmail()
+      this.creds.cpf = this.mascaraCpf(storageService.getCpf())
+
 
   }
 
@@ -63,6 +64,7 @@ export class LoginPage {
 
   login() {
     const loading = this.presentLoadingDefault()
+    this.creds.cpf = this.retirarFormatacao(this.creds.cpf)
     this.auth.authenticate(this.creds)
       .subscribe(response => {
         loading.dismiss()
@@ -95,10 +97,10 @@ export class LoginPage {
   }
 
   salvarLogin(cpf){
-    this.storageService.setEmail(cpf)
+    this.storageService.setCpf(cpf)
   }
 
-  alertSalvarLogin(email){
+  alertSalvarLogin(cpf){
     let alert = this.alertCtrl.create({
       title:'Salvar Login!',
       message:'Deseja Salvar o Seu CPF ?',
@@ -106,7 +108,7 @@ export class LoginPage {
         {
           text:'Sim',
           handler:() =>{
-            this.salvarLogin(email)
+            this.salvarLogin(cpf)
           }
 
         },
@@ -129,5 +131,14 @@ export class LoginPage {
     loading.present();
     return loading;
   }
+
+  retirarFormatacao(campoTexto) {
+    return campoTexto.replace(/(\.|\/|\-)/g,"");
+}
+
+  mascaraCpf(cpf?) {
+    this.creds.cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4")
+     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4")
+}
 
 }

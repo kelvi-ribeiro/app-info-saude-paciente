@@ -22,7 +22,7 @@ export class MeuPerfilPage {
             public navCtrl: NavController,
             public usuarioService:UsuarioService,
             public storageService:StorageService) {
-    this.cpfPessoa = this.storageService.getLocalUser().cpf
+    this.cpfPessoa = this.storageService.getLocalUser() ? this.storageService.getLocalUser().cpf:''
   }
   ionViewDidLoad(){
     this.obterDadosPerfil()
