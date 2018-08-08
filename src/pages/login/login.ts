@@ -26,6 +26,18 @@ export class LoginPage {
     senha: ""
   };
 
+
+  DECIMAL_SEPARATOR=".";
+  GROUP_SEPARATOR=",";
+  pureResult: any;
+  maskedId: any;
+  val: any;
+  v: any;
+
+
+
+
+
   constructor(
     public navCtrl: NavController,
     public menu: MenuController,
@@ -35,7 +47,8 @@ export class LoginPage {
     public alertCtrl:AlertController,
     public loadingCtrl:LoadingController) {
 
-      this.creds.cpf = this.mascaraCpf(storageService.getCpf())
+      this.creds.cpf = storageService.getCpf();
+      this.creds.cpf = this.format(this.creds.cpf)
 
 
   }
@@ -64,7 +77,7 @@ export class LoginPage {
 
   login() {
     const loading = this.presentLoadingDefault()
-    this.creds.cpf = this.retirarFormatacao(this.creds.cpf)
+    this.retirarFormatacao()
     this.auth.authenticate(this.creds)
       .subscribe(response => {
         loading.dismiss()
@@ -73,7 +86,7 @@ export class LoginPage {
         this.navCtrl.setRoot(TabsPage);
       },
       error => {
-        //this.showAlert();
+        this.creds.cpf = this.format(this.creds.cpf)
         loading.dismiss()
       });
   }
@@ -132,13 +145,44 @@ export class LoginPage {
     return loading;
   }
 
-  retirarFormatacao(campoTexto) {
-    return campoTexto.replace(/(\.|\/|\-)/g,"");
+  retirarFormatacao() {
+     this.creds.cpf = this.creds.cpf.replace(/(\.|\/|\-)/g,"");
 }
 
-  mascaraCpf(cpf?) {
-    this.creds.cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4")
-     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g,"\$1.\$2.\$3\-\$4")
+format(valString) {
+
+  if (!valString) {
+      return '';
+  }
+  let val = valString.toString();
+  const parts = this.unFormat(val).split(this.DECIMAL_SEPARATOR);
+  this.pureResult = parts;
+  if(parts[0].length <= 11){
+    this.maskedId = this.cpf_mask(parts[0]);
+    return this.maskedId;
+  }
+};
+cpf_mask(v) {
+  v = v.replace(/\D/g, ''); //Remove tudo o que não é dígito
+  v = v.replace(/(\d{3})(\d)/, '$1.$2'); //Coloca um ponto entre o terceiro e o quarto dígitos
+  v = v.replace(/(\d{3})(\d)/, '$1.$2'); //Coloca um ponto entre o terceiro e o quarto dígitos
+  //de novo (para o segundo bloco de números)
+  v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); //Coloca um hífen entre o terceiro e o quarto dígitos
+  return v;
+  }
+
+  unFormat(val) {
+    if (!val) {
+        return '';
+    }
+    val = val.replace(/\D/g, '');
+
+    if (this.GROUP_SEPARATOR === ',') {
+        return val.replace(/,/g, '');
+    } else {
+        return val.replace(/\./g, '');
+    }
 }
+
 
 }
