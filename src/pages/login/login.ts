@@ -33,6 +33,7 @@ export class LoginPage {
   maskedId: any;
   val: any;
   v: any;
+  cpfValido;
 
 
 
@@ -150,7 +151,6 @@ export class LoginPage {
 }
 
 format(valString) {
-
   if (!valString) {
       return '';
   }
@@ -159,7 +159,10 @@ format(valString) {
   this.pureResult = parts;
   if(parts[0].length <= 11){
     this.maskedId = this.cpf_mask(parts[0]);
+    this.cpfValido = this.pureResult;
     return this.maskedId;
+  }else{
+    return this.cpfValido;
   }
 };
 cpf_mask(v) {
