@@ -13,7 +13,7 @@
                         <h2 ion-text class="no-margin bold text-white">
                             {{storageService?.getUserName()}}
                         </h2>
-                        <span ion-text color="light">{{storageService.getLocalUser()?.email}}</span>
+                        <span ion-text color="light">{{storageService.getEmail()}}</span>
                     </ion-col>
                 </ion-row>
 
@@ -63,6 +63,11 @@
                 <ion-icon item-left name="md-medkit" color="primary"></ion-icon>
                 <span ion-text color="primary">Exames</span>
             </button>
+
+            <button ion-item menuClose class="text-1x"  >
+              <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="primary"></ion-icon>
+              <span ion-text color="primary">Adicionar Biometeria</span>
+          </button>
         </ion-list>
     </ion-content>
 
