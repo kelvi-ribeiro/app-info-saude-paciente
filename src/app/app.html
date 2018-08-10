@@ -64,7 +64,7 @@
                 <span ion-text color="primary">Exames</span>
             </button>
 
-            <button ion-item menuClose class="text-1x"  >
+            <button *ngIf="temRecursoBiometria" ion-item menuClose class="text-1x"  >
               <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="primary"></ion-icon>
               <span ion-text color="primary">Adicionar Biometeria</span>
           </button>

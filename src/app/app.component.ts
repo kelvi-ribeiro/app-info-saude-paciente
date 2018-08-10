@@ -1,6 +1,6 @@
 import { AuthService } from './../services/auth.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-import { HomePage } from './../pages/home/home';
+import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
 import { StorageService } from './../services/storage.service';
 import { Component, ViewChild } from '@angular/core';
 
@@ -29,13 +29,15 @@ export class MyApp {
   rootPage:any;
 
   @ViewChild(Nav) navCtrl: Nav;
+  temRecursoBiometria: boolean = false;
   constructor(
              public platform: Platform,
              public statusBar: StatusBar,
              public splashScreen: SplashScreen,
              public storageService:StorageService,
              public alertCtrl:AlertController,
-             public authService:AuthService
+             public authService:AuthService,
+             public keychainService:KeychainTouchId
               ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -85,4 +87,18 @@ export class MyApp {
     });
     alert.present();
   }
+  verificaRecursoBiometria(){
+   this.keychainService.isAvailable()
+  .then(()=>{
+    this.temRecursoBiometria = true;
+  })
+  .catch((error: any) => console.error(error));
+  }
+  salvaBiometria(){
+    this.keychainService.save(this.storageService.getCpf(),"teste")
+    .then((res)=>{
+      console.log(res)
+    })
+    .catch((error: any) => console.error(error));
+    }
 }

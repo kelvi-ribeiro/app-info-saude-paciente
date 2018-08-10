@@ -23,6 +23,7 @@ import { ImageUtilService } from '../services/image-util.service';
 import { MedicamentoService } from '../services/domain/medicamento.service';
 import { ExameService } from '../services/domain/exame.service';
 import { UtilsService } from '../services/domain/utils.service';
+import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { UtilsService } from '../services/domain/utils.service';
     LocalExameService,
     ExameService,
     NotificacoesService,
-    UtilsService
+    UtilsService,
+    KeychainTouchId
 
   ]
 })
