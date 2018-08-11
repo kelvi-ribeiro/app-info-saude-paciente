@@ -70,6 +70,7 @@ export class AuthService {
       let user;
       user = {
         id:res['id'],
+        hasFinger:false,
           pessoa:{
             nome:pessoa.nome,
             cpf:pessoa.cpf,

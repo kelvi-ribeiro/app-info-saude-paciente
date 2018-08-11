@@ -30,7 +30,7 @@ export interface PageInterface {
 })
 export class MyApp {
   rootPage:any;
-  hasFinger: boolean
+  user;
 
   @ViewChild(Nav) navCtrl: Nav;
   temRecursoBiometria: boolean = false;
@@ -48,11 +48,12 @@ export class MyApp {
              private events: Events
               ) {
     platform.ready().then(() => {
-      this.events.subscribe('user:logado', (hasFinger) => this.hasFinger = hasFinger);
+      //this.events.subscribe('user:logado', (hasFinger) => this.hasFinger = hasFinger);
       statusBar.styleDefault();
       splashScreen.hide();
       this.verificaUsuarioLogado();
       this.verificaRecursoBiometria();
+      this.user = this.storageService.getUser()
     });
   }
   verificaUsuarioLogado() {
@@ -70,7 +71,6 @@ export class MyApp {
     TabsPage.index = 0;
     this.navCtrl.setRoot(TabsPage);
   }
-
 
   alertCertezaSair() {
     let alert = this.alertCtrl.create({
@@ -109,16 +109,24 @@ export class MyApp {
         .then((password)=>{
           this.keychainService.save(String(this.storageService.getCpf()),String(password))
           .then((res)=>{
-            this.hasFinger = true;
+            this.user = this.storageService.getUser()
+            this.user.hasFinger = true
+            this.storageService.setLocalUser(this.user);
           })
-          .catch((error: any) => (this.hasFinger = false));
+          .catch(error=>{
+            this.user = this.storageService.getUser()
+            this.user.hasFinger = false
+            this.storageService.setLocalUser(this.user);
+          });
         });
       });
     }
     removerBiometria(){
     return this.keychainService.delete(String(this.storageService.getCpf()))
     .then(() => {
-      this.hasFinger = false;
+      this.user = this.storageService.getUser()
+      this.user.hasFinger = false
+      this.storageService.setLocalUser(this.user);
     }, err => err);
   }
   alertRemoverBiometria(){
