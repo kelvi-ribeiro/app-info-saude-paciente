@@ -4,7 +4,7 @@ import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
 import { StorageService } from './../services/storage.service';
 import { Component, ViewChild } from '@angular/core';
 
-import { Platform, Nav } from 'ionic-angular';
+import { Platform, Nav, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -30,9 +30,11 @@ export interface PageInterface {
 })
 export class MyApp {
   rootPage:any;
+  hasFinger: boolean
 
   @ViewChild(Nav) navCtrl: Nav;
   temRecursoBiometria: boolean = false;
+
   constructor(
              public platform: Platform,
              public statusBar: StatusBar,
@@ -42,11 +44,11 @@ export class MyApp {
              public authService:AuthService,
              public keychainService:KeychainTouchId,
              public secureStorageService:SecureStorageService,
-             public secureStorage:SecureStorage
+             public secureStorage:SecureStorage,
+             private events: Events
               ) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
+      this.events.subscribe('user:logado', (hasFinger) => this.hasFinger = hasFinger);
       statusBar.styleDefault();
       splashScreen.hide();
       this.verificaUsuarioLogado();
@@ -105,14 +107,36 @@ export class MyApp {
       .then((storage:SecureStorageObject)=>{
         storage.get(STORAGE_KEYS.password)
         .then((password)=>{
-          console.log('SENHA',String(password))
-          console.log('USUARIO',String(this.storageService.getCpf()))
           this.keychainService.save(String(this.storageService.getCpf()),String(password))
           .then((res)=>{
-            console.log(res)
+            this.hasFinger = true;
           })
-          .catch((error: any) => console.error(error));
+          .catch((error: any) => (this.hasFinger = false));
         });
       });
     }
+    removerBiometria(){
+    return this.keychainService.delete(String(this.storageService.getCpf()))
+    .then(() => {
+      this.hasFinger = false;
+    }, err => err);
+  }
+  alertRemoverBiometria(){
+    let alert = this.alertCtrl.create({
+      title: 'Atenção!',
+      message: 'Deseja mesmo remover a biometria ?',
+      buttons: [
+        {
+          text:"Sim",
+          handler: () => {
+            this.removerBiometria()
+          }
+        },
+        {
+          text: 'Não'
+        }
+      ]
+    });
+    alert.present();
+  }
  }

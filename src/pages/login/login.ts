@@ -213,7 +213,9 @@ cpf_mask(v) {
             this.creds.senha = password_user;
             this.login()
           })
+          .catch(error=>error)
 
-         })
+      })
   }
+
 }
