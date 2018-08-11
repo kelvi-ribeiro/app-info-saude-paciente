@@ -36,6 +36,7 @@ export class LoginPage {
   val: any;
   v: any;
   cpfValido;
+  hasFingerprint;
 
   constructor(
     public navCtrl: NavController,
@@ -65,8 +66,9 @@ export class LoginPage {
     this.keychainService.isAvailable()
       .then((res: any) => {
         this.keychainService.setLocale('pt');
+        this.hasFingerprint = true
       })
-      .catch(err => err);
+      .catch(err => this.hasFingerprint = false);
 
   }
 
@@ -203,19 +205,15 @@ cpf_mask(v) {
   //     }
 
      focusPasswordInput() {
-     console.log('deu focus')
-         this.keychainService.isAvailable()
-         .then(res=>{
-           const cpfUsuario = String(this.retirarFormatacao(this.creds.cpf))
-           console.log(cpfUsuario)
-          this.keychainService.verify(cpfUsuario,"Coloque o Dedo no leitor")
-          .then(password_user=>{
-            this.creds.senha = password_user;
-            this.login()
-          })
-          .catch(error=>error)
-
+    if(this.hasFingerprint){
+      const cpfUsuario = String(this.retirarFormatacao(this.creds.cpf))
+      this.keychainService.verify(cpfUsuario,"Coloque o Dedo no leitor")
+      .then(password_user=>{
+      this.creds.senha = password_user;
+        this.login()
       })
+      .catch(error=>error)
+    }
   }
 
 }
