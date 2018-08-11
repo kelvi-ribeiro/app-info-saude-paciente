@@ -8,6 +8,7 @@ import { JwtHelper } from 'angular2-jwt';
 import { CreadenciaisDTO } from "../models/credenciais.dto";
 
 
+
 @Injectable()
 export class AuthService {
 
@@ -46,16 +47,7 @@ export class AuthService {
             token: tok,
             cpf: this.jwtHelper.decodeToken(tok).sub
         };
-        this.storage.setLocalUser(user);
-        this.salvarInformacoesPaciente()
-
-    }
-
-    salvarInformacoesPaciente(){
-      this.usuarioService.findPacienteByPessoaCpf(this.storage.getLocalUser().cpf)
-      .subscribe(res=>{
-        this.storage.setPacienteId(res['id']);
-      })
+        this.obterDadosPerfil(user);
     }
 
     logout() {
@@ -67,4 +59,42 @@ export class AuthService {
         this.storage.setPacienteId(null);
 
     }
+    obterDadosPerfil(user){
+      this.usuarioService.findPacienteByPessoaCpf(user.cpf).subscribe(res=>{
+        this.setUser(res);
+      })
+    }
+    setUser(res){
+      let pessoa = res['pessoa']
+      console.log(pessoa.endereco)
+      let user;
+      user = {
+        id:res['id'],
+          pessoa:{
+            nome:pessoa.nome,
+            cpf:pessoa.cpf,
+            dataInclusao:pessoa.dataInclusao,
+            email:pessoa.email,
+            raca:pessoa.raca,
+            rg:pessoa.rg,
+            sexo:pessoa.sexo,
+            endereco:{
+              id:pessoa.endereco.id,
+              numero:pessoa.endereco.numero,
+              logradouro:pessoa.endereco.logradouro,
+              bairro:pessoa.endereco.bairro,
+              cep:pessoa.endereco.cep,
+              cidade:{id:pessoa.endereco.cidadeid,nome:pessoa.endereco.cidade.nome}
+            },
+
+            naturalidade:{
+              id:pessoa.naturalidade.id,
+              naturalidade:pessoa.naturalidade.naturalidade
+            }
+          }
+        }
+      console.log('chegou aqui',user)
+      this.storage.setUser(user);
+    }
+
 }

@@ -20,7 +20,7 @@ export class LocalExameService {
   }
 
   findAllLocaisExameByPacienteId() {
-    let pacienteId = this.storage.getPacienteId()
+    let pacienteId = this.storage.getUser().id
     return this.http.get(`${API_CONFIG.baseUrl}/locaisExame?idPaciente=${pacienteId}`);
   }
 

@@ -18,6 +18,7 @@ import { UsuarioService } from '../../services/domain/usuario.service';
 export class MeuPerfilPage {
   cpfPessoa:string;
   perfil;
+  user;
   constructor(
             public navCtrl: NavController,
             public usuarioService:UsuarioService,
@@ -25,15 +26,6 @@ export class MeuPerfilPage {
     this.cpfPessoa = this.storageService.getLocalUser() ? this.storageService.getLocalUser().cpf:''
   }
   ionViewDidLoad(){
-    this.obterDadosPerfil()
+    console.log(this.storageService.getUser())
   }
-
-  obterDadosPerfil(){
-    this.usuarioService.findPacienteByPessoaCpf(this.cpfPessoa).subscribe(res=>{
-      this.perfil = res;
-      console.log(res)
-      this.storageService.setUserName(res['pessoa'].nome)
-    })
-  }
-
 }

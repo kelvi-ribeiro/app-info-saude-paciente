@@ -18,12 +18,12 @@ export class MedicamentoService {
   }
 
   findMedicamentosAtivosByPacienteId() {
-    let pacienteId = this.storage.getPacienteId()
+    let pacienteId = this.storage.getUser().id
     return this.http.get(`${API_CONFIG.baseUrl}/medicamentos/ativos?idPaciente=${pacienteId}`);
   }
 
   findMedicamentosInativosByPacienteId() {
-    let pacienteId = this.storage.getPacienteId()
+    let pacienteId = this.storage.getUser().id
     return this.http.get(`${API_CONFIG.baseUrl}/medicamentos/inativos?idPaciente=${pacienteId}`);
   }
   insert(medicamento) {

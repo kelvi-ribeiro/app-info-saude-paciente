@@ -4,6 +4,22 @@ import { STORAGE_KEYS } from '../config/storage_keys.config';
 @Injectable()
 export class StorageService {
 
+  setUser(user){
+    if(user == null){
+      localStorage.removeItem(STORAGE_KEYS.localUser);
+    }else{
+      localStorage.setItem(STORAGE_KEYS.localUser,JSON.stringify(user))
+    }
+  }
+  getUser(){
+    let localUser = localStorage.getItem(STORAGE_KEYS.localUser);
+    if (localUser == null) {
+      return null;
+    } else {
+      return JSON.parse(localUser);
+    }
+  }
+
   getLocalUser(): LocalUser {
     let usr = localStorage.getItem(STORAGE_KEYS.localUser);
     if (usr == null) {

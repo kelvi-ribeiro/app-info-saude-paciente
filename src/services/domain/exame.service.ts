@@ -17,7 +17,7 @@ export class ExameService {
   }
 
   findExamesByPacienteId() {
-    let pacienteId = this.storage.getPacienteId()
+    let pacienteId = this.storage.getUser().id;
     return this.http.get(`${API_CONFIG.baseUrl}/exames?idPaciente=${pacienteId}`);
   }
   insert(exame) {
