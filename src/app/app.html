@@ -64,12 +64,12 @@
                 <span ion-text color="primary">Exames</span>
             </button>
 
-            <button *ngIf="temRecursoBiometria && !user.hasFinger" (click)="salvaBiometria()" ion-item menuClose class="text-1x"  >
+            <button *ngIf="temRecursoBiometria && !user?.hasFinger" (click)="salvaBiometria()" ion-item menuClose class="text-1x"  >
               <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="primary"></ion-icon>
               <span ion-text color="primary">Adicionar Biometeria</span>
           </button>
 
-          <button *ngIf="temRecursoBiometria && user.hasFinger" (click)="alertRemoverBiometria()" ion-item menuClose class="text-1x"  >
+          <button *ngIf="temRecursoBiometria && user?.hasFinger" (click)="alertRemoverBiometria()" ion-item menuClose class="text-1x"  >
             <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="primary"></ion-icon>
             <span ion-text color="primary">Remover Biometria</span>
         </button>

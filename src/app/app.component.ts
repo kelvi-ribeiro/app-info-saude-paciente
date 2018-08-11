@@ -103,11 +103,12 @@ export class MyApp {
   .catch((error: any) => console.error(error));
   }
   salvaBiometria(){
-      this.secureStorage.create('password_user')
-      .then((storage:SecureStorageObject)=>{
-        storage.get(STORAGE_KEYS.password)
-        .then((password)=>{
-          this.keychainService.save(String(this.storageService.getCpf()),String(password))
+    const userCpf = (String(this.storageService.getUser().pessoa.cpf))
+      this.secureStorageService.getSenha()
+      .then((password)=>{
+        console.log(password)
+
+          this.keychainService.save(userCpf,String(password))
           .then((res)=>{
             this.user = this.storageService.getUser()
             this.user.hasFinger = true
@@ -119,10 +120,11 @@ export class MyApp {
             this.storageService.setLocalUser(this.user);
           });
         });
-      });
+
     }
     removerBiometria(){
-    return this.keychainService.delete(String(this.storageService.getCpf()))
+      const userCpf = (String(this.storageService.getUser().pessoa.cpf))
+    return this.keychainService.delete(userCpf)
     .then(() => {
       this.user = this.storageService.getUser()
       this.user.hasFinger = false
