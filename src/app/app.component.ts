@@ -10,6 +10,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { STORAGE_KEYS } from '../config/storage_keys.config';
+import { SecureStorageService } from '../services/secure-storage.service.';
+import { SecureStorage, SecureStorageObject } from '../../node_modules/@ionic-native/secure-storage';
 
 
 export interface PageInterface {
@@ -37,14 +40,17 @@ export class MyApp {
              public storageService:StorageService,
              public alertCtrl:AlertController,
              public authService:AuthService,
-             public keychainService:KeychainTouchId
+             public keychainService:KeychainTouchId,
+             public secureStorageService:SecureStorageService,
+             public secureStorage:SecureStorage
               ) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      this.verificaUsuarioLogado()
+      this.verificaUsuarioLogado();
+      this.verificaRecursoBiometria();
     });
   }
   verificaUsuarioLogado() {
@@ -95,10 +101,18 @@ export class MyApp {
   .catch((error: any) => console.error(error));
   }
   salvaBiometria(){
-    this.keychainService.save(this.storageService.getCpf(),"teste")
-    .then((res)=>{
-      console.log(res)
-    })
-    .catch((error: any) => console.error(error));
+      this.secureStorage.create('password_user')
+      .then((storage:SecureStorageObject)=>{
+        storage.get(STORAGE_KEYS.password)
+        .then((password)=>{
+          console.log('SENHA',String(password))
+          console.log('USUARIO',String(this.storageService.getCpf()))
+          this.keychainService.save(String(this.storageService.getCpf()),String(password))
+          .then((res)=>{
+            console.log(res)
+          })
+          .catch((error: any) => console.error(error));
+        });
+      });
     }
-}
+ }

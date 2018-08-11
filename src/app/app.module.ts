@@ -24,6 +24,8 @@ import { MedicamentoService } from '../services/domain/medicamento.service';
 import { ExameService } from '../services/domain/exame.service';
 import { UtilsService } from '../services/domain/utils.service';
 import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
+import { SecureStorageService } from '../services/secure-storage.service.';
+import { SecureStorage } from '@ionic-native/secure-storage';
 
 @NgModule({
   declarations: [
@@ -57,7 +59,9 @@ import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
     ExameService,
     NotificacoesService,
     UtilsService,
-    KeychainTouchId
+    KeychainTouchId,
+    SecureStorageService,
+    SecureStorage
 
   ]
 })

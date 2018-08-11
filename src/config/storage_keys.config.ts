@@ -6,6 +6,7 @@ export const STORAGE_KEYS = {
   funcao:"funcao",
   urlFoto:"urlFoto",
   pacienteId:"pacienteId",
+  password:"password",
   cpf:"cpf"
 
 }

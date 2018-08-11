@@ -5,6 +5,9 @@ import { AuthService } from '../../services/auth.service';
 import { CreadenciaisDTO } from '../../models/credenciais.dto';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { StorageService } from '../../services/storage.service';
+import { SecureStorageService } from '../../services/secure-storage.service.';
+import { KeychainTouchId } from '../../../node_modules/@ionic-native/keychain-touch-id';
+import { STORAGE_KEYS } from '../../config/storage_keys.config';
 
 /**
  * Generated class for the LoginPage page.
@@ -26,7 +29,6 @@ export class LoginPage {
     senha: ""
   };
 
-
   DECIMAL_SEPARATOR=".";
   GROUP_SEPARATOR=",";
   pureResult: any;
@@ -35,10 +37,6 @@ export class LoginPage {
   v: any;
   cpfValido;
 
-
-
-
-
   constructor(
     public navCtrl: NavController,
     public menu: MenuController,
@@ -46,7 +44,9 @@ export class LoginPage {
     public usuarioService:UsuarioService,
     public storageService:StorageService,
     public alertCtrl:AlertController,
-    public loadingCtrl:LoadingController) {
+    public loadingCtrl:LoadingController,
+    public secureStorageService:SecureStorageService,
+    public keychainService:KeychainTouchId,) {
 
       this.creds.cpf = storageService.getCpf();
       this.creds.cpf = this.format(this.creds.cpf)
@@ -61,10 +61,15 @@ export class LoginPage {
   ionViewDidLeave() {
     this.menu.swipeEnable(true);
   }
-
-  ionViewWillLeave(){
+  ionViewDidLoad() {
+    this.keychainService.isAvailable()
+      .then((res: any) => {
+        this.keychainService.setLocale('pt');
+      })
+      .catch(err => err);
 
   }
+
 
 
   // ionViewDidEnter() {
@@ -78,11 +83,12 @@ export class LoginPage {
 
   login() {
     const loading = this.presentLoadingDefault()
-    this.retirarFormatacao()
+    this.creds.cpf = this.retirarFormatacao(this.creds.cpf)
     this.auth.authenticate(this.creds)
       .subscribe(response => {
         loading.dismiss()
         this.auth.successfulLogin(response.headers.get('Authorization'));
+        this.secureStorageService.setSenha(this.creds.senha)
         this.alertSalvarLogin(this.creds.cpf)
         this.navCtrl.setRoot(TabsPage);
       },
@@ -146,8 +152,8 @@ export class LoginPage {
     return loading;
   }
 
-  retirarFormatacao() {
-     this.creds.cpf = this.creds.cpf.replace(/(\.|\/|\-)/g,"");
+  retirarFormatacao(cpfFormatado) {
+     return  cpfFormatado.replace(/(\.|\/|\-)/g,"");
 }
 
 format(valString) {
@@ -185,7 +191,29 @@ cpf_mask(v) {
     } else {
         return val.replace(/\./g, '');
     }
-}
+  }
+  // focusPasswordInput() {
+  //   console.log('deu focus')
+  //       this.keychainService.has(this.creds.cpf)
+  //         .then(() => {
+  //           this.keychainService.verify(this.creds.cpf, "Coloque o dedo no leitor.")
+  //             .then(senha => {
+  //             })
+  //         });
+  //     }
 
+     focusPasswordInput() {
+     console.log('deu focus')
+         this.keychainService.isAvailable()
+         .then(res=>{
+           const cpfUsuario = String(this.retirarFormatacao(this.creds.cpf))
+           console.log(cpfUsuario)
+          this.keychainService.verify(cpfUsuario,"Coloque o Dedo no leitor")
+          .then(password_user=>{
+            this.creds.senha = password_user;
+            this.login()
+          })
 
+         })
+  }
 }

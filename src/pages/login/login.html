@@ -18,7 +18,7 @@
         <ion-label>
           <ion-icon name="key" class="icone-form"></ion-icon>
         </ion-label>
-        <ion-input round block name="senha" type="password" placeholder="Senha" required [(ngModel)]="creds.senha"></ion-input>
+        <ion-input round block (ionFocus)="focusPasswordInput()" name="senha" type="password" placeholder="Senha" required [(ngModel)]="creds.senha"></ion-input>
       </ion-item>
 
       <ion-grid>
