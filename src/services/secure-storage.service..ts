@@ -14,7 +14,6 @@ export class SecureStorageService {
     return this.platform.ready().then(() => {
       return this.secureStorage.create('password_user')
         .then((storage: SecureStorageObject) => {
-          console.log(password)
           return storage.set(STORAGE_KEYS.password, password).catch(err => err);
         }, err => err)
     })

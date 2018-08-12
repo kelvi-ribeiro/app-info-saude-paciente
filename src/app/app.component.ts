@@ -57,7 +57,7 @@ export class MyApp {
     });
   }
   verificaUsuarioLogado() {
-    if (this.storageService.getLocalUser()) {
+    if (this.storageService.getUser()) {
         this.rootPage = TabsPage;
     } else {
       this.rootPage = LoginPage;
@@ -106,18 +106,16 @@ export class MyApp {
     const userCpf = (String(this.storageService.getUser().pessoa.cpf))
       this.secureStorageService.getSenha()
       .then((password)=>{
-        console.log(password)
-
           this.keychainService.save(userCpf,String(password))
           .then((res)=>{
             this.user = this.storageService.getUser()
             this.user.hasFinger = true
-            this.storageService.setLocalUser(this.user);
+            this.storageService.setUser(this.user);
           })
           .catch(error=>{
             this.user = this.storageService.getUser()
             this.user.hasFinger = false
-            this.storageService.setLocalUser(this.user);
+            this.storageService.setUser(this.user);
           });
         });
 
@@ -128,7 +126,7 @@ export class MyApp {
     .then(() => {
       this.user = this.storageService.getUser()
       this.user.hasFinger = false
-      this.storageService.setLocalUser(this.user);
+      this.storageService.setUser(this.user);
     }, err => err);
   }
   alertRemoverBiometria(){
