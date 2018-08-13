@@ -34,6 +34,7 @@ export class MyApp {
 
   @ViewChild(Nav) navCtrl: Nav;
   temRecursoBiometria: boolean = false;
+  hasFinger: boolean = false;
 
   constructor(
              public platform: Platform,
@@ -99,6 +100,16 @@ export class MyApp {
    this.keychainService.isAvailable()
   .then(()=>{
     this.temRecursoBiometria = true;
+    const userCpf = (String(this.storageService.getUser().pessoa.cpf))
+    this.keychainService.has(userCpf)
+    .then(res=>{
+      this.hasFinger = true
+      console.log('this.hasFinger = false')
+    })
+    .catch(error=>{
+      this.hasFinger = false;
+    })
+
   })
   .catch((error: any) => console.error(error));
   }
@@ -106,17 +117,20 @@ export class MyApp {
     const userCpf = (String(this.storageService.getUser().pessoa.cpf))
       this.secureStorageService.getSenha()
       .then((password)=>{
-          this.keychainService.save(userCpf,String(password))
-          .then((res)=>{
-            this.user = this.storageService.getUser()
-            this.user.hasFinger = true
-            this.storageService.setUser(this.user);
+            this.keychainService.has(userCpf)
+            .catch(res=>{
+            this.keychainService.save(userCpf,String(password))
+            .then((res)=>{
+              this.hasFinger = true
+            })
+            .catch(error=>{
+              this.hasFinger = false
+              this.storageService.setUser(this.user);
+            });
           })
-          .catch(error=>{
-            this.user = this.storageService.getUser()
-            this.user.hasFinger = false
-            this.storageService.setUser(this.user);
-          });
+          .catch(res=>console.log(res))
+
+
         });
 
     }
@@ -124,9 +138,7 @@ export class MyApp {
       const userCpf = (String(this.storageService.getUser().pessoa.cpf))
     return this.keychainService.delete(userCpf)
     .then(() => {
-      this.user = this.storageService.getUser()
-      this.user.hasFinger = false
-      this.storageService.setUser(this.user);
+      this.hasFinger = false
     }, err => err);
   }
   alertRemoverBiometria(){

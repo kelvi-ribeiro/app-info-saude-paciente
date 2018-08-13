@@ -51,7 +51,7 @@ export class AuthService {
     }
 
     logout() {
-
+        this.storage.setUser(null);
         this.storage.setUserPerfil(null);
         this.storage.setUserName(null);
         this.storage.setUserFunction(null);
@@ -70,7 +70,6 @@ export class AuthService {
       let user;
       user = {
         id:res['id'],
-        hasFinger:this.storage.getUser().hasFinger,
           pessoa:{
             nome:pessoa.nome,
             cpf:pessoa.cpf,
