@@ -26,7 +26,7 @@ import { UtilsService } from '../services/domain/utils.service';
 import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
 import { SecureStorageService } from '../services/secure-storage.service.';
 import { SecureStorage } from '@ionic-native/secure-storage';
-import { HandlerResponseProvider } from '../services/handler-response/handler-response';
+// import { HandlerResponseProvider } from '../services/handler-response/handler-response';
 
 @NgModule({
   declarations: [
@@ -63,7 +63,7 @@ import { HandlerResponseProvider } from '../services/handler-response/handler-re
     KeychainTouchId,
     SecureStorageService,
     SecureStorage,
-    HandlerResponseProvider
+    // HandlerResponseProvider
 
   ]
 })
