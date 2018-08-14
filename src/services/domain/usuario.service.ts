@@ -1,3 +1,4 @@
+import { HandlerResponseProvider } from './../handler-response/handler-response';
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Rx";
@@ -16,15 +17,17 @@ export class UsuarioService {
     public storage: StorageService,
     public imageUtilService: ImageUtilService,
     public storageService: StorageService,
+    public handlerResponseService:HandlerResponseProvider
     ) {
   }
 
   findPacienteByPessoaEmail(email: string) {
-    return this.http.get(`${API_CONFIG.baseUrl}/pacientes/pessoaEmail?email=${email}`);
+    return this.handlerResponseService.handlerResponse("get",`${API_CONFIG.baseUrl}/pacientes/pessoaEmail${email}`)
+
   }
 
   findPacienteByPessoaCpf(cpf: string) {
-    return this.http.get(`${API_CONFIG.baseUrl}/pacientes/pessoaCpf?cpf=${cpf}`);
+    return this.handlerResponseService.handlerResponse("get",`${API_CONFIG.baseUrl}//pacientes/pessoaCpf?cpf=${cpf}`)
   }
 
   findAll() {

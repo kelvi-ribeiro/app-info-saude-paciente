@@ -60,7 +60,7 @@ export class AuthService {
 
     }
     obterDadosPerfil(user){
-      this.usuarioService.findPacienteByPessoaCpf(user.cpf).subscribe(res=>{
+      this.usuarioService.findPacienteByPessoaCpf(user.cpf).then(res=>{
         this.setUser(res);
       })
     }
