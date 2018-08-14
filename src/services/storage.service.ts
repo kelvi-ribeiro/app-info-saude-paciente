@@ -1,8 +1,11 @@
+import { Platform } from 'ionic-angular';
 import { LocalUser } from './../models/local_user';
 import { Injectable } from '@angular/core';
 import { STORAGE_KEYS } from '../config/storage_keys.config';
 @Injectable()
 export class StorageService {
+
+  constructor(private platform:Platform){}
 
   setUser(user){
     if(user == null){
@@ -29,15 +32,11 @@ export class StorageService {
     }
   }
 
-  setLocalUser(usr: LocalUser) {
-    if(usr == null){
-      localStorage.removeItem(STORAGE_KEYS.localUser);
-    }else{
-      localStorage.setItem(STORAGE_KEYS.localUser,JSON.stringify(usr))
-    }
+  setLocalUser(usr:LocalUser) {
+    return this.platform.ready().then(() => {
+      return localStorage.setItem(STORAGE_KEYS.localUser,JSON.stringify(usr))
+    })
   }
-
-
 
   getUserPerfil() {
     let perfil = localStorage.getItem(STORAGE_KEYS.perfil);
