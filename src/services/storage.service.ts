@@ -23,6 +23,7 @@ export class StorageService {
       return null;
     } else {
       return JSON.parse(user);
+
     }
   }
 
@@ -159,5 +160,10 @@ export class StorageService {
     } else {
       return JSON.parse(cpf);
     }
+  }
+  limparStorage(){
+    const cpf = this.getCpf()
+    localStorage.clear();
+    this.setCpf(cpf)
   }
 }

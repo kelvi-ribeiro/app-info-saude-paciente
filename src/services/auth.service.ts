@@ -52,13 +52,7 @@ export class AuthService {
     }
 
     logout() {
-        this.storage.setUser(null);
-        this.storage.setUserCredentials(null);
-        this.storage.setUserPerfil(null);
-        this.storage.setUserName(null);
-        this.storage.setUserFunction(null);
-        this.storage.setUserUrlFoto(null);
-        this.storage.setPacienteId(null);
+        this.storage.limparStorage();
 
     }
     obterDadosPerfil(){
