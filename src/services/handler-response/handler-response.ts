@@ -45,6 +45,7 @@ export class HandlerResponseProvider {
     return res;
   }
   handlerError(err, method, url, payload?, headers?) {
+
     if (err.json) {
       const erro = err.json();
 
@@ -60,7 +61,6 @@ export class HandlerResponseProvider {
           newHeaders.append('Authorization',`Bearer ${token}`)
 
         })
-
 
           return this.http.post(`${API_CONFIG.baseUrl}/auth/refresh_token`, null, { headers: newHeaders })
             .map(token => newToken = token.json())
@@ -88,14 +88,13 @@ export class HandlerResponseProvider {
                 }, err => err)
             }, err => err)
 
-      } else if (erro.error === 'unauthorized'){
-        return erro.error_description;
+      } else if (erro.status === 401){
+        return erro;
       }
     } else {
       if(err instanceof TimeoutError){
         return 'Tempo de resposta excedido, tente novamente.';
       }
-
       return err
     }
   }

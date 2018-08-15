@@ -8,6 +8,7 @@ import { StorageService } from '../../services/storage.service';
 import { SecureStorageService } from '../../services/secure-storage.service.';
 import { KeychainTouchId } from '../../../node_modules/@ionic-native/keychain-touch-id';
 import { STORAGE_KEYS } from '../../config/storage_keys.config';
+import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
 /**
  * Generated class for the LoginPage page.
@@ -48,7 +49,8 @@ export class LoginPage {
     public loadingCtrl:LoadingController,
     public events: Events,
     public secureStorageService:SecureStorageService,
-    public keychainService:KeychainTouchId,) {
+    public keychainService:KeychainTouchId,
+    public notificacoesService:NotificacoesService) {
 
       this.creds.cpf = storageService.getCpf();
       this.creds.cpf = this.format(this.creds.cpf)
@@ -98,6 +100,12 @@ export class LoginPage {
       error => {
         this.creds.cpf = this.format(this.creds.cpf)
         loading.dismiss()
+        if(error.status==401){
+        this.notificacoesService.presentAlertDefault('Login ou senha incorreto','Favor, Verifique suas credenciais')
+        }else{
+        this.notificacoesService.presentAlertDefault('Falha na conexão com o sistema','Favor, Verifique sua conexão com a internet')
+        }
+
       });
   }
 
