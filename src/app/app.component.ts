@@ -24,7 +24,7 @@ export interface PageInterface {
   tabName?: string;
   tabComponent?: any;
 }
-
+declare var window;
 @Component({
   templateUrl: 'app.html'
 })
@@ -49,7 +49,10 @@ export class MyApp {
              private events: Events
               ) {
     platform.ready().then(() => {
-      //this.events.subscribe('user:logado', (hasFinger) => this.hasFinger = hasFinger);
+      this.events.subscribe('assinatura:adicionada', () => {
+        this.hasFinger = true;
+      })
+
       statusBar.styleDefault();
       splashScreen.hide();
       this.verificaUsuarioLogado();

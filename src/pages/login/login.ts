@@ -1,6 +1,6 @@
 import { TabsPage } from './../tabs/tabs';
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, MenuController, AlertController, LoadingController, Events } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { CreadenciaisDTO } from '../../models/credenciais.dto';
 import { UsuarioService } from '../../services/domain/usuario.service';
@@ -46,6 +46,7 @@ export class LoginPage {
     public storageService:StorageService,
     public alertCtrl:AlertController,
     public loadingCtrl:LoadingController,
+    public events: Events,
     public secureStorageService:SecureStorageService,
     public keychainService:KeychainTouchId,) {
 
@@ -210,7 +211,8 @@ cpf_mask(v) {
       this.keychainService.verify(cpfUsuario,"Coloque o Dedo no leitor")
       .then(password_user=>{
       this.creds.senha = password_user;
-        this.login()
+      this.login();
+      this.events.publish('assinatura:adicionada')
       })
       .catch(error=>error)
     }
