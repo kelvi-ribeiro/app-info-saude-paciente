@@ -42,7 +42,7 @@
               </ion-select>
             </ion-item>
             <ion-item>
-              <button ion-button round full color="secondary" type="submit" [disabled]="formGroup.invalid">Adicionar Exame</button>
+              <button ion-button round full color="secondary" type="submit" [disabled]="formGroup.invalid">{{exame ? 'Atualizar': 'Adicionar'}}</button>
             </ion-item>
 
 

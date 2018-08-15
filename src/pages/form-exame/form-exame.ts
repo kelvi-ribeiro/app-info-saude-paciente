@@ -35,6 +35,7 @@ export class FormExamePage {
               public utilsService:UtilsService
               ) {
         this.exame = this.navParams.get('exame');
+        console.log(this.exame)
         this.pacienteId = this.storageService.getPacienteId();
         this.formGroup = this.formBuilder.group({
           nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
@@ -53,7 +54,7 @@ export class FormExamePage {
   }
   obterLocaisExame(){
     this.localExameService.findAllLocaisExameByPacienteId()
-    .subscribe(res=>{
+    .then(res=>{
       this.locaisExame = res;
       this.verificaUpdate();
     })
@@ -71,7 +72,7 @@ export class FormExamePage {
     .setValue(this.formGroup.value.data.concat(this.formGroup.value.exameDia,' ',this.formGroup.value.exameHora));
     this.formGroup.removeControl('exameDia');
     this.formGroup.removeControl('exameHora');
-    this.exameService.insert(this.formGroup.value).subscribe(res=>{
+    this.exameService.insert(this.formGroup.value).then(res=>{
       this.notificacoesService.presentAlertDefault('Sucesso!','Exame Adicionado','ExamesPage',this.navCtrl)
     })
   }
@@ -80,7 +81,7 @@ export class FormExamePage {
     .setValue(this.formGroup.value.data.concat(this.formGroup.value.exameDia,' ',this.formGroup.value.exameHora));
     this.formGroup.removeControl('exameDia');
     this.formGroup.removeControl('exameHora');
-    this.exameService.update(this.formGroup.value,this.exame.id).subscribe(res=>{
+    this.exameService.update(this.formGroup.value,this.exame.id).then(res=>{
       this.notificacoesService.presentAlertDefault('Sucesso!','Exame Atualizado','ExamesPage',this.navCtrl)
     })
 
@@ -95,6 +96,7 @@ export class FormExamePage {
       this.formGroup.controls.exameHora
       .setValue(this.utilsService.dateTimeToTime(this.exame.data));
       this.formGroup.controls.localExameId.setValue(this.exame.localExameId);
+      this.formGroup.controls.pacienteId.setValue(this.exame.pacienteId);
 
      }
   }

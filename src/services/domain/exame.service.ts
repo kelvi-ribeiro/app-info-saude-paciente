@@ -58,7 +58,7 @@ export class ExameService {
       }
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
-        "post",
+        "put",
         `${API_CONFIG.baseUrl}/exames/${id}`,
         exame,
         headers
