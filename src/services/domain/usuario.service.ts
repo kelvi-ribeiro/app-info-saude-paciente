@@ -39,7 +39,6 @@ export class UsuarioService {
     return this.storage.getUserCredentials()
     .then(userCredentials=>{
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
-      console.log(headers.get('Authorization'))
       return this.handlerResponseService.handlerResponse(
         "get",
         `${API_CONFIG.baseUrl}/pacientes/pessoaCpf?cpf=${cpf}`,
@@ -50,11 +49,31 @@ export class UsuarioService {
   }
 
   findAll() {
-    return this.http.get(`${API_CONFIG.baseUrl}/usuarios`);
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "get",
+        `${API_CONFIG.baseUrl}/usuarios`,
+        null,
+        headers
+      );
+    });
   }
 
   findByEmail(email: string) {
-    return this.http.get(`${API_CONFIG.baseUrl}/usuarios/email?value=${email}`);
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "get",
+        `${API_CONFIG.baseUrl}/usuarios/email?value=${email}`,
+        null,
+        headers
+      );
+    });
   }
 
   // getImageFromBucket(): Observable<any> {
