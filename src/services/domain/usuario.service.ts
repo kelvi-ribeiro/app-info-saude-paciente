@@ -31,7 +31,7 @@ export class UsuarioService {
 //     );
 // }
 
-  findPacienteByPessoaCpf(cpf: string) {
+  findPacienteByPessoaCpf() {
     let headers = new Headers();
     return this.storage.getUserCredentials()
     .then(userCredentials=>{
@@ -41,7 +41,7 @@ export class UsuarioService {
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
         "get",
-        `${API_CONFIG.baseUrl}/pacientes/pessoaCpf?cpf=${cpf}`,
+        `${API_CONFIG.baseUrl}/pacientes/pessoaCpf?cpf=${userCredentials.cpf}`,
         null,
         headers
       );

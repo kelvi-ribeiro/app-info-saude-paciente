@@ -18,11 +18,11 @@ export class StorageService {
     }
   }
   getUser(){
-    let userCredentials = localStorage.getItem(STORAGE_KEYS.user);
-    if (userCredentials == null) {
+    let user = localStorage.getItem(STORAGE_KEYS.user);
+    if (user == null) {
       return null;
     } else {
-      return JSON.parse(userCredentials);
+      return JSON.parse(user);
     }
   }
 

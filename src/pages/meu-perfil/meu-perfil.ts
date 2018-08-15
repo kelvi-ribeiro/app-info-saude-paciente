@@ -16,9 +16,8 @@ import { UsuarioService } from '../../services/domain/usuario.service';
   templateUrl: 'meu-perfil.html',
 })
 export class MeuPerfilPage {
-  cpfPessoa:string;
   perfil;
-  user;
+  paciente;
   constructor(
             public navCtrl: NavController,
             public usuarioService:UsuarioService,
@@ -26,6 +25,10 @@ export class MeuPerfilPage {
 
   }
   ionViewDidLoad(){
-
+    console.log(this.storageService.getUser())
+    this.usuarioService.findPacienteByPessoaCpf()
+    .then(paciente=>{
+      this.paciente = paciente
+    })
   }
 }
