@@ -54,7 +54,6 @@ export class MyApp {
       splashScreen.hide();
       this.verificaUsuarioLogado();
       this.verificaRecursoBiometria();
-      this.user = this.storageService.getUser()
     });
   }
   verificaUsuarioLogado() {
