@@ -30,7 +30,7 @@ export class ExamesPage {
   }
   obterExames(){
     this.exameService.findExamesByPacienteId()
-    .subscribe(res=>{
+    .then(res=>{
       this.exames = res;
     })
   }
@@ -58,7 +58,7 @@ export class ExamesPage {
   }
   apagarExame(exame){
     this.exameService.delete(exame.id)
-    .subscribe(res =>{
+    .then(res =>{
       this.obterExames()
     })
   }

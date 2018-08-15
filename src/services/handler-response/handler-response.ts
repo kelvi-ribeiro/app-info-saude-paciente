@@ -22,7 +22,7 @@ export class HandlerResponseProvider {
   }
   handlerResponse(method, url, payload?, headers?):Promise<any> {
     let response;
-    if (method === 'get') {
+    if (method === 'get' || method === 'delete') {
       response = this.http[method](url, {headers:headers})
     } else {
       response = this.http[method](url, payload, { headers: headers })

@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { API_CONFIG } from "../../config/api.config";
 import { StorageService } from "../storage.service";
 import { ImageUtilService } from "../image-util.service";
-import { UsuarioDTO } from "../../models/usuario.dto";
 import { Http, Headers } from '@angular/http';
 
 
@@ -36,6 +35,9 @@ export class UsuarioService {
     let headers = new Headers();
     return this.storage.getUserCredentials()
     .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
         "get",
@@ -50,6 +52,9 @@ export class UsuarioService {
     let headers = new Headers();
     return this.storage.getUserCredentials()
     .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
         "get",
@@ -64,6 +69,9 @@ export class UsuarioService {
     let headers = new Headers();
     return this.storage.getUserCredentials()
     .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
         "get",

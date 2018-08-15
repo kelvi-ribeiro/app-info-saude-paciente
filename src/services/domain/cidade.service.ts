@@ -21,6 +21,9 @@ export class CidadeService{
     let headers = new Headers();
     return this.storage.getUserCredentials()
     .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
         "get",

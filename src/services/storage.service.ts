@@ -18,7 +18,7 @@ export class StorageService {
     }
   }
   getUser(){
-    let userCredentials = localStorage.getItem(STORAGE_KEYS.userCredentials);
+    let userCredentials = localStorage.getItem(STORAGE_KEYS.user);
     if (userCredentials == null) {
       return null;
     } else {
