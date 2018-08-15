@@ -29,7 +29,7 @@ export class HistoricoMedicamentosPage {
   }
   obterMedicamentosInativos(){
     this.medicamentoService.findMedicamentosInativosByPacienteId()
-    .subscribe(res=>{
+    .then(res=>{
       this.medicamentos = res;
     })
   }
@@ -55,7 +55,7 @@ export class HistoricoMedicamentosPage {
   }
   apagarMedicamento(medicamento){
     this.medicamentoService.delete(medicamento.id)
-    .subscribe(res =>{
+    .then(res =>{
       this.obterMedicamentosInativos()
     })
 
@@ -63,7 +63,7 @@ export class HistoricoMedicamentosPage {
   }
   setAtivo(medicamento){
     this.medicamentoService.setAtivo(medicamento.id)
-    .subscribe(res=>{
+    .then(res=>{
       this.obterMedicamentosInativos();
     })
 

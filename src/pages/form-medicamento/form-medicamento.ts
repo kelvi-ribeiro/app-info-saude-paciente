@@ -55,12 +55,12 @@ export class FormMedicamentoPage {
     }
   }
   salvarMedicamento(){
-    this.medicamentoService.insert(this.formGroup.value).subscribe(res=>{
+    this.medicamentoService.insert(this.formGroup.value).then(res=>{
       this.showAlertSucesso('Medicamento Adicionado a Lista');
     })
   }
   atualizarMedicamento(){
-    this.medicamentoService.update(this.formGroup.value,this.medicamento.id).subscribe(res=>{
+    this.medicamentoService.update(this.formGroup.value,this.medicamento.id).then(res=>{
       this.showAlertSucesso('Medicamento atualizado');
     })
   }
@@ -90,6 +90,7 @@ export class FormMedicamentoPage {
       this.formGroup.controls.dataFim
       .setValue(this.utilsService.brazilianTimeToDate(this.medicamento.dataFim));
       this.formGroup.controls.horaInicial.setValue(this.medicamento.horaInicial);
+      this.formGroup.controls.pacienteId.setValue(this.medicamento.pacienteId);
     }
   }
 }

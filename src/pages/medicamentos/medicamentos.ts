@@ -31,7 +31,7 @@ export class MedicamentosPage {
   }
   obterMedicamentosAtivos(){
     this.medicamentoService.findMedicamentosAtivosByPacienteId()
-    .subscribe(res=>{
+    .then(res=>{
       this.medicamentos = res;
       console.log(res)
     })
@@ -60,11 +60,9 @@ export class MedicamentosPage {
   }
   setInativo(medicamento){
     this.medicamentoService.setInativo(medicamento.id)
-    .subscribe(res=>{
+    .then(res=>{
       this.obterMedicamentosAtivos();
       this.notificaoesService.presentToast('Medicamento mandado para a lista de histórico','default',4000,'middle')
-
-
     })
   }
 
