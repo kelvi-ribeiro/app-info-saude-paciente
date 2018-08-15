@@ -31,7 +31,7 @@ export class FormMedicamentoPage {
     public utilsService:UtilsService) {
 
     this.medicamento =  this.navParams.get('medicamento');
-    this.pacienteId = this.storageService.getPacienteId();
+    this.pacienteId = this.storageService.getUser().id;
     this.formGroup = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
       descricao: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(200)]],

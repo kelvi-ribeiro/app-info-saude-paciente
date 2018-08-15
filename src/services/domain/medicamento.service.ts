@@ -63,7 +63,7 @@ export class MedicamentoService {
       }
       headers.append('Authorization', `Bearer ${userCredentials['token']}`)
       return this.handlerResponseService.handlerResponse(
-        "get",
+        "post",
         `${API_CONFIG.baseUrl}/medicamentos`,
         medicamento,
         headers
