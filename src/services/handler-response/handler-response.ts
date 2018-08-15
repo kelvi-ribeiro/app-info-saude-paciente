@@ -42,7 +42,6 @@ export class HandlerResponseProvider {
   handlerSuccess(response, res) {
     return res;
   }
-
   handlerError(err, method, url, payload?, headers?) {
     if (err.json) {
       const erro = err.json();
@@ -51,10 +50,13 @@ export class HandlerResponseProvider {
         const newHeaders: Headers = new Headers();
         const reqHeaders: Headers = new Headers();
         let newToken: Token = new Token();
-        const token =  this.storage.getLocalUser().token
+        const token =  this.storage.getUserCredentials()
+        .then(token=>{
           if(!token){
             return;
           }
+
+        })
 
 
           // return this.http.post(`${API_CONFIG.baseUrl}/oauth/token?grant_type=refresh_token&refresh_token=${token.refresh_token}`, null, { headers: newHeaders })

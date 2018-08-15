@@ -47,6 +47,7 @@ export class AuthService {
             token: tok,
             cpf: this.jwtHelper.decodeToken(tok).sub
         };
+        this.storage.setUserCredentials(user)
         this.obterDadosPerfil(user);
     }
 

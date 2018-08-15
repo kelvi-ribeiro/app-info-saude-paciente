@@ -20,7 +20,7 @@ export class HomePage {
   }
 
   obterDadosPerfil(){
-    this.usuarioService.findPacienteByPessoaCpf(this.cpfPessoa).subscribe(res=>{
+    this.usuarioService.findPacienteByPessoaCpf(this.cpfPessoa).then(res=>{
       console.log(res)
     })
   }

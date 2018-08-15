@@ -1,5 +1,5 @@
 export const STORAGE_KEYS = {
-  localUser:"localUser",
+  userCredentials:"userCredentials",
   perfil:"perfil",
   email:"email",
   nome:"nome",
@@ -7,6 +7,7 @@ export const STORAGE_KEYS = {
   urlFoto:"urlFoto",
   pacienteId:"pacienteId",
   password:"password",
-  cpf:"cpf"
+  cpf:"cpf",
+  user:"user"
 
 }

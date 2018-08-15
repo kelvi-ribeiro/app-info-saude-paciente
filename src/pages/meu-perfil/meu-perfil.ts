@@ -23,9 +23,9 @@ export class MeuPerfilPage {
             public navCtrl: NavController,
             public usuarioService:UsuarioService,
             public storageService:StorageService) {
-    this.cpfPessoa = this.storageService.getLocalUser() ? this.storageService.getLocalUser().cpf:''
+
   }
   ionViewDidLoad(){
-    console.log(this.storageService.getUser())
+
   }
 }

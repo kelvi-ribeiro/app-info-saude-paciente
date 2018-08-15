@@ -2,39 +2,40 @@ import { Platform } from 'ionic-angular';
 import { LocalUser } from './../models/local_user';
 import { Injectable } from '@angular/core';
 import { STORAGE_KEYS } from '../config/storage_keys.config';
+
 @Injectable()
 export class StorageService {
 
-  constructor(private platform:Platform){}
+  constructor(
+    private platform:Platform
+  ){}
 
   setUser(user){
     if(user == null){
-      localStorage.removeItem(STORAGE_KEYS.localUser);
+      localStorage.removeItem(STORAGE_KEYS.user);
     }else{
-      localStorage.setItem(STORAGE_KEYS.localUser,JSON.stringify(user))
+      localStorage.setItem(STORAGE_KEYS.user,JSON.stringify(user))
     }
   }
   getUser(){
-    let localUser = localStorage.getItem(STORAGE_KEYS.localUser);
-    if (localUser == null) {
+    let userCredentials = localStorage.getItem(STORAGE_KEYS.userCredentials);
+    if (userCredentials == null) {
       return null;
     } else {
-      return JSON.parse(localUser);
+      return JSON.parse(userCredentials);
     }
   }
 
-  getLocalUser(): LocalUser {
-    let usr = localStorage.getItem(STORAGE_KEYS.localUser);
-    if (usr == null) {
-      return null;
-    } else {
-      return JSON.parse(usr);
-    }
+  getUserCredentials() {
+    return this.platform.ready()
+    .then(()=>{
+      return JSON.parse(localStorage.getItem(STORAGE_KEYS.userCredentials))
+    })
   }
 
-  setLocalUser(usr:LocalUser) {
+  setUserCredentials(usr:LocalUser) {
     return this.platform.ready().then(() => {
-      return localStorage.setItem(STORAGE_KEYS.localUser,JSON.stringify(usr))
+      return localStorage.setItem(STORAGE_KEYS.userCredentials,JSON.stringify(usr))
     })
   }
 
