@@ -29,7 +29,7 @@ export class LocaisExamePage {
   }
   obterLocaisExame(){
     this.localExameService.findAllLocaisExameByPacienteId()
-    .subscribe(res=>{
+    .then(res=>{
       this.locaisExame = res
     })
   }
@@ -58,7 +58,7 @@ export class LocaisExamePage {
   }
   apagarLocalExame(localExame){
     this.localExameService.delete(localExame.id)
-    .subscribe(res => {
+    .then(res => {
       this.obterLocaisExame();
     })
   }

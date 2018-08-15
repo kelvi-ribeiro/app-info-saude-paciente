@@ -23,7 +23,7 @@ export class FormLocalExamePage {
     pacienteId: any;
     localExame;
     cidadeEncontrada;
-    cidades = [];    
+    cidades = [];
     formGroup:FormGroup;
     constructor(
               public navCtrl: NavController,
@@ -36,7 +36,7 @@ export class FormLocalExamePage {
               public toastCtrl:ToastController,
               public viaCepService:ViaCepService) {
         this.localExame = this.navParams.get('localExame')
-        this.pacienteId = this.storageService.getPacienteId();
+        this.pacienteId = this.storageService.getUser().id;
         this.formGroup = this.formBuilder.group({
           nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
           enderecoNumero: ['', [Validators.required]],
@@ -56,7 +56,7 @@ export class FormLocalExamePage {
   }
   obterCidades(){
     this.cidadeService.findAll()
-    .subscribe(res=>{
+    .then(res=>{
       this.cidades = res;
       this.cidadeEncontrada = null;
       this.verificaUpdate();
@@ -87,12 +87,12 @@ export class FormLocalExamePage {
   }
   salvarLocalExame(){
     this.formGroup.removeControl('enderecoId')
-    this.localExameService.insert(this.formGroup.value).subscribe(res=>{
+    this.localExameService.insert(this.formGroup.value).then(res=>{
       this.showAlertSucesso('Local de Exame adicionado');
     })
   }
   atualizarLocalExame(){
-    this.localExameService.update(this.formGroup.value,this.localExame.id).subscribe(res=>{
+    this.localExameService.update(this.formGroup.value,this.localExame.id).then(res=>{
       this.showAlertSucesso('Local de Exame atualizado');
     })
   }
@@ -119,7 +119,7 @@ export class FormLocalExamePage {
       this.formGroup.controls.enderecoBairro.setValue(this.localExame.enderecoBairro);
       this.formGroup.controls.cidadeId.setValue(this.localExame.cidadeId);
       this.formGroup.controls.pacienteId.setValue(this.localExame.pacienteId);
-      this.formGroup.controls.enderecoId.setValue(this.localExame.enderecoId);      
+      this.formGroup.controls.enderecoId.setValue(this.localExame.enderecoId);
       this.cidadeEncontrada = this.cidades.find(el=>el.id === this.localExame.cidadeId);
 
       this.formGroup.controls.cidadeId.setValue(this.cidadeEncontrada.id);
