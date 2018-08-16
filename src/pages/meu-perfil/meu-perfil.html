@@ -10,6 +10,33 @@
 <ion-content padding>
   <ion-card class="card-white">
     <img class="img-salva" [src]="profileImage">
+    <button  (click)="getGalleryPicture()" ion-button icon-only>
+      <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+
+    </button>
+
+    <div *ngIf="picture && !mandandoFoto">
+      <ion-avatar>
+        <img class="img-salva" [src]="picture">
+      </ion-avatar>
+      <ion-row class="row-camera">
+        <ion-col col-4>
+          <img class="icon-img" src="assets/imgs/check-img.png" (click)="sendPicture()"  />
+
+        </ion-col>
+
+        <ion-col col-4>
+        </ion-col>
+
+        <ion-col col-4>
+          <img class="icon-img" src="assets/imgs/close-img.png"  (click)="cancel()" />
+
+
+        </ion-col>
+
+      </ion-row>
+    </div>
+
     <!-- <h2 text-center>{{perfil?.pessoa?.nome}}</h2>
     <h2 text-center>{{perfil?.pessoa?.email}}</h2> -->
     <ion-card-header>

@@ -122,9 +122,9 @@ export class MeuPerfilPage {
     this.mandandoFoto = true;
     this.apertouOpcaoFoto = false;
     this.usuarioService.uploadPicture(this.picture)
-      .subscribe(response => {
-          this.navCtrl.setRoot('HomePage')
-          this.navCtrl.setRoot('ProfilePage')
+      .then(response => {
+          //this.navCtrl.setRoot('HomePage')
+          //this.navCtrl.setRoot('ProfilePage')
           this.notificacoesService.presentToast('Foto Alterada 😀',null,3,'middle')
       },
       error => {

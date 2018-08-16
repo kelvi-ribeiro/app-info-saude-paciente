@@ -92,17 +92,23 @@ export class UsuarioService {
   }
 
   uploadPicture(picture) {
+    return this.storage.getUserCredentials()
+    .then(userCredentials =>{
+      if(!userCredentials){
+        return;
+      }
+    let headers = new Headers();
+    headers.append('Authorization', `Bearer ${userCredentials['token']}`)
     let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
     let formData: FormData = new FormData();
     formData.set('file', pictureBlob, 'file.png');
-    return this.http.post(
+    return this.handlerResponseService.handlerResponse(
+      "post",
       `${API_CONFIG.baseUrl}/pessoas/picture`,
       formData,
-      {
-        observe: 'response',
-        responseType: 'text'
-      }
+      headers
     );
+    });
   }
 
 
