@@ -36,7 +36,7 @@ export class FormExamePage {
               ) {
         this.exame = this.navParams.get('exame');
         console.log(this.exame)
-        this.pacienteId = this.storageService.getPacienteId();
+        this.pacienteId = this.storageService.getUser().id;
         this.formGroup = this.formBuilder.group({
           nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
           descricao: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(140)]],
