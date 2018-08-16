@@ -26,6 +26,7 @@ import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
 import { SecureStorageService } from '../services/secure-storage.service.';
 import { SecureStorage } from '@ionic-native/secure-storage';
  import { HandlerResponseProvider } from '../services/handler-response/handler-response';
+import { Camera } from '@ionic-native/camera';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { SecureStorage } from '@ionic-native/secure-storage';
     SecureStorageService,
     SecureStorage,
     HandlerResponseProvider,
+    Camera
 
 
 

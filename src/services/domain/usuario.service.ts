@@ -4,6 +4,7 @@ import { API_CONFIG } from "../../config/api.config";
 import { StorageService } from "../storage.service";
 import { ImageUtilService } from "../image-util.service";
 import { Http, Headers } from '@angular/http';
+import { HttpClient } from '../../../node_modules/@angular/common/http';
 
 
 
@@ -12,7 +13,7 @@ export class UsuarioService {
   perfis;
   email;
   constructor(
-    public http: Http,
+    public http: HttpClient,
     public storage: StorageService,
     public imageUtilService: ImageUtilService,
     public storageService: StorageService,
@@ -81,6 +82,29 @@ export class UsuarioService {
       );
     });
   }
+  getImageFromBucket() {
+    let url = `${API_CONFIG.bucketBaseUrl}/${this.storageService.getUser().pessoa.urlFoto}`
+    return this.http.get(url, { responseType: 'blob' });
+  }
+  getImageFromBucketFromUsers(urlFoto) {
+    let url = `${API_CONFIG.bucketBaseUrl}/${urlFoto}`
+    return this.http.get(url, { responseType: 'blob' });
+  }
+
+  uploadPicture(picture) {
+    let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
+    let formData: FormData = new FormData();
+    formData.set('file', pictureBlob, 'file.png');
+    return this.http.post(
+      `${API_CONFIG.baseUrl}/pessoas/picture`,
+      formData,
+      {
+        observe: 'response',
+        responseType: 'text'
+      }
+    );
+  }
+
 
   // getImageFromBucket(): Observable<any> {
   //   let url = `${API_CONFIG.bucketBaseUrl}/${this.storageService.getUserUrlFoto()}`

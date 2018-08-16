@@ -35,6 +35,7 @@ export class MyApp {
   @ViewChild(Nav) navCtrl: Nav;
   temRecursoBiometria: boolean = false;
   hasFinger: boolean = false;
+  profileImage;
 
   constructor(
              public platform: Platform,
@@ -51,6 +52,9 @@ export class MyApp {
     platform.ready().then(() => {
       this.events.subscribe('assinatura:adicionada', () => {
         this.hasFinger = true;
+      });
+      this.events.subscribe('foto:atualizada', (profileImage) => {
+        this.profileImage = profileImage;
       })
 
       statusBar.styleDefault();

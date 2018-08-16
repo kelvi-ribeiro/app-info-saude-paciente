@@ -74,6 +74,7 @@ export class AuthService {
             raca:pessoa.raca,
             rg:pessoa.rg,
             sexo:pessoa.sexo,
+            urlFoto:pessoa.urlFoto,
             endereco:{
               id:pessoa.endereco.id,
               numero:pessoa.endereco.numero,
