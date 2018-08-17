@@ -1,3 +1,4 @@
+import { API_CONFIG } from './../../config/api.config';
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, PopoverController, Platform } from 'ionic-angular';
@@ -6,6 +7,7 @@ import { CameraOptions, Camera } from '@ionic-native/camera';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { PopoverPage } from '../../popover/popover';
+import { PhotoViewer, PhotoViewerOptions } from '../../../node_modules/@ionic-native/photo-viewer';
 
 
 
@@ -36,7 +38,10 @@ export class MeuPerfilPage {
             public events: Events,
             public notificacoesService:NotificacoesService,
             public popoverCtrl: PopoverController,
-            public platform: Platform) {
+            public platform: Platform,
+            public photoViewer: PhotoViewer
+          )
+             {
 
 
   }
@@ -93,6 +98,13 @@ export class MeuPerfilPage {
     popover.present({
       ev: myEvent
     });
+  }
+  viewFoto(){
+    let options:PhotoViewerOptions = {
+      share: true, // default is false
+
+  };
+    this.photoViewer.show(`${API_CONFIG.bucketBaseUrl}/${this.storageService.getUser().pessoa.urlFoto}`,'Minha Foto de Perfil', options);
   }
 
 }
