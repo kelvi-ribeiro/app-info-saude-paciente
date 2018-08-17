@@ -1,6 +1,6 @@
 import { API_CONFIG } from "./../../config/api.config";
 import { StorageService } from "./../../services/storage.service";
-import { Component } from "@angular/core";
+import { Component, NgZone } from "@angular/core";
 import {
   IonicPage,
   NavController,
@@ -47,11 +47,11 @@ export class MeuPerfilPage {
     public notificacoesService: NotificacoesService,
     public popoverCtrl: PopoverController,
     public platform: Platform,
-    public photoViewer: PhotoViewer
+    private zone: NgZone
   ) {
     platform.ready().then(() => {
       this.events.subscribe("foto:enviada", () => {
-        this.getImageIfExists()
+        this.getImageIfExists();
       });
     });
   }
@@ -117,15 +117,18 @@ export class MeuPerfilPage {
     });
   }
   viewFoto() {
-    let options: PhotoViewerOptions = {
-      share: true // default is false
-    };
-    this.photoViewer.show(
-      `${API_CONFIG.bucketBaseUrl}/${
-        this.storageService.getUser().pessoa.urlFoto
-      }`,
-      "Minha Foto de Perfil",
-      options
-    );
+    this.zone.run(() => {
+      const photoViewer = new PhotoViewer();
+      let options: PhotoViewerOptions = {
+        share: true // default is false
+      };
+      photoViewer.show(
+        `${API_CONFIG.bucketBaseUrl}/${
+          this.storageService.getUser().pessoa.urlFoto
+        }`,
+        "Minha Foto de Perfil",
+        options
+      );
+    });
   }
 }
