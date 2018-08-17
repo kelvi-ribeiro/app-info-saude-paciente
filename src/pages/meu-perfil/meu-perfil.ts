@@ -39,7 +39,6 @@ export class MeuPerfilPage {
 
   }
   ionViewDidLoad(){
-    console.log(this.storageService.getUser())
     this.usuarioService.findPacienteByPessoaCpf()
     .then(paciente=>{
       this.paciente = paciente
