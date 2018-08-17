@@ -119,13 +119,13 @@ export class MeuPerfilPage {
     });
   }
   sendPicture() {
-    this.notificacoesService.presentToast('Fazendo upload, sua foto será alterada dentro de alguns segundos...','toast-attention',3,'middle');
+    this.notificacoesService.presentToast('Fazendo upload, sua foto será alterada dentro de alguns segundos...','toast-attention',3000,'middle');
     this.mandandoFoto = true;
     this.apertouOpcaoFoto = false;
     this.usuarioService.uploadPicture(this.picture)
       .then(response => {
           this.getImageIfExists()
-          this.notificacoesService.presentToast('Foto Alterada 😀',null,3,'middle')
+          this.notificacoesService.presentToast('Foto Alterada 😀',null,3000,'middle')
       },
       error => {
       this.notificacoesService
