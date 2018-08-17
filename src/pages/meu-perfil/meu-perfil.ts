@@ -43,6 +43,8 @@ export class MeuPerfilPage {
       this.paciente = paciente
       this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(this.storageService.getUser().imageDataUrl)
       this.getImageIfExists();
+    }).catch(() => {
+      this.carregou = false;
     })
   }
   getImageIfExists() {
