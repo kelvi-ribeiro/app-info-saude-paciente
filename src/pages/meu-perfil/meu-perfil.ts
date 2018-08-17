@@ -44,7 +44,7 @@ export class MeuPerfilPage {
       this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(this.storageService.getUser().imageDataUrl)
       this.getImageIfExists();
     }).catch(() => {
-      this.carregou = false;
+      this.carregou = true;
     })
   }
   getImageIfExists() {
@@ -61,7 +61,8 @@ export class MeuPerfilPage {
     },
     error => {
       this.carregou = true;
-      this.events.publish('foto:atualizada',this.paciente.profileImage)
+
+      this.events.publish('foto:atualizada',this.paciente.profileImage.changingThisBreaksApplicationSecurity?this.paciente.profileImage:'assets/imgs/avatar-blank.png')
     });
   }
 
