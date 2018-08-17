@@ -20,14 +20,11 @@ import { DomSanitizer } from '@angular/platform-browser';
   templateUrl: 'meu-perfil.html',
 })
 export class MeuPerfilPage {
-  perfil;
   paciente;
   picture: string;
-  cameraOn: boolean = false;
-  profileImage;
   apertouOpcaoFoto = false;
-  mandandoFoto = false;
   tocouFoto = false;
+  carregou;
   constructor(
             public navCtrl: NavController,
             public usuarioService:UsuarioService,
@@ -37,26 +34,32 @@ export class MeuPerfilPage {
             public events: Events,
             public notificacoesService:NotificacoesService) {
 
+
   }
   ionViewDidLoad(){
+
     this.usuarioService.findPacienteByPessoaCpf()
     .then(paciente=>{
       this.paciente = paciente
+      this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(this.storageService.getUser().imageDataUrl)
       this.getImageIfExists();
     })
   }
   getImageIfExists() {
     this.usuarioService.getImageFromBucket()
     .subscribe(response => {
-      this.paciente.imageUrl = `${API_CONFIG.bucketBaseUrl}/${this.storageService.getUser().pessoa.urlFoto}`;
       this.blobToDataURL(response).then(dataUrl => {
         let str:string = dataUrl as string;
-        this.profileImage = this.sanitazer.bypassSecurityTrustUrl(str);
-        this.events.publish('foto:atualizada',this.profileImage)
+        this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(str);
+        this.paciente.imageDataUrl = str;
+        this.storageService.setUser(this.paciente)
+        this.events.publish('foto:atualizada',this.paciente.profileImage)
+        this.carregou = true;
       })
     },
     error => {
-      this.profileImage = 'assets/imgs/avatar-blank.png';
+      this.carregou = true;
+      this.events.publish('foto:atualizada',this.paciente.profileImage)
     });
   }
 
@@ -72,7 +75,6 @@ export class MeuPerfilPage {
 
   getCameraPicture() {
     this.apertouOpcaoFoto = true;
-    this.cameraOn = true;
     const options: CameraOptions = {
       quality: 65,
       targetWidth: 720,
@@ -86,15 +88,13 @@ export class MeuPerfilPage {
 
     this.camera.getPicture(options).then((imageData) => {
      this.picture = 'data:image/png;base64,' + imageData;
-     this.cameraOn = false;
      this.sendPicture()
     }, (err) => {
-     this.cameraOn = false;
+
     });
   }
 
   getGalleryPicture() {
-    this.cameraOn = true;
     this.apertouOpcaoFoto = true; // Também servindo para foto
     const options: CameraOptions = {
       quality: 65,
@@ -111,15 +111,12 @@ export class MeuPerfilPage {
     this.camera.getPicture(options).then((imageData) => {
 
      this.picture = 'data:image/png;base64,' + imageData;
-     this.cameraOn = false;
      this.sendPicture()
     }, (err) => {
-     this.cameraOn = false;
     });
   }
   sendPicture() {
     this.notificacoesService.presentToast('Fazendo upload, sua foto será alterada dentro de alguns segundos...','toast-attention',3000,'middle');
-    this.mandandoFoto = true;
     this.apertouOpcaoFoto = false;
     this.usuarioService.uploadPicture(this.picture)
       .then(response => {
@@ -134,9 +131,10 @@ export class MeuPerfilPage {
 
   tocarFoto(){
     this.tocouFoto = true;
+    const time = 2000;
     setTimeout(() => {
       this.tocouFoto = false;
-    }, 2000);
+    }, time);
 
   }
 

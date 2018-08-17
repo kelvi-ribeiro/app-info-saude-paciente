@@ -8,8 +8,11 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-card class="card-white">
-    <img class="img-salva" (click)="tocarFoto()" [src]="profileImage">
+    <div text-center>
+      <ion-spinner *ngIf="!carregou" name="bubbles"></ion-spinner>
+    </div>
+  <ion-card *ngIf="carregou" class="card-white">
+    <img class="img-salva"  (click)="tocarFoto()" [src]="paciente?.profileImage.changingThisBreaksApplicationSecurity ? paciente.profileImage: 'assets/imgs/avatar-blank.png'">
     <div text-center>
       <button *ngIf="tocouFoto" class="btn-inside-image" item-center (click)="getGalleryPicture()" ion-button icon-only>
         <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
