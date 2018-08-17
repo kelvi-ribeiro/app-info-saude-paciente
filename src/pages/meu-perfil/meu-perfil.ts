@@ -1,15 +1,23 @@
-import { API_CONFIG } from './../../config/api.config';
-import { StorageService } from './../../services/storage.service';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events, PopoverController, Platform } from 'ionic-angular';
-import { UsuarioService } from '../../services/domain/usuario.service';
-import { CameraOptions, Camera } from '@ionic-native/camera';
-import { NotificacoesService } from '../../services/domain/notificacoes.service';
-import { DomSanitizer } from '@angular/platform-browser';
-import { PopoverPage } from '../../popover/popover';
-import { PhotoViewer, PhotoViewerOptions } from '../../../node_modules/@ionic-native/photo-viewer';
-
-
+import { API_CONFIG } from "./../../config/api.config";
+import { StorageService } from "./../../services/storage.service";
+import { Component } from "@angular/core";
+import {
+  IonicPage,
+  NavController,
+  NavParams,
+  Events,
+  PopoverController,
+  Platform
+} from "ionic-angular";
+import { UsuarioService } from "../../services/domain/usuario.service";
+import { CameraOptions, Camera } from "@ionic-native/camera";
+import { NotificacoesService } from "../../services/domain/notificacoes.service";
+import { DomSanitizer } from "@angular/platform-browser";
+import { PopoverPage } from "../../popover/popover";
+import {
+  PhotoViewer,
+  PhotoViewerOptions
+} from "../../../node_modules/@ionic-native/photo-viewer";
 
 /**
  * Generated class for the MeuPerfilPage page.
@@ -20,77 +28,86 @@ import { PhotoViewer, PhotoViewerOptions } from '../../../node_modules/@ionic-na
 
 @IonicPage()
 @Component({
-  selector: 'page-meu-perfil',
-  templateUrl: 'meu-perfil.html',
+  selector: "page-meu-perfil",
+  templateUrl: "meu-perfil.html"
 })
 export class MeuPerfilPage {
   paciente;
   picture: string;
   apertouOpcaoFoto = false;
   tocouFoto = false;
-  carregou;
+  carregou = false;
   constructor(
-            public navCtrl: NavController,
-            public usuarioService:UsuarioService,
-            public storageService:StorageService,
-            public camera: Camera,
-            public sanitazer:DomSanitizer,
-            public events: Events,
-            public notificacoesService:NotificacoesService,
-            public popoverCtrl: PopoverController,
-            public platform: Platform,
-            public photoViewer: PhotoViewer
-          )
-             {
-
-
-  }
-  ionViewDidLoad(){
-    this.platform.ready().then(() => {
-      this.events.subscribe('foto:atualizada', () => {
-      this.getImageIfExists();
+    public navCtrl: NavController,
+    public usuarioService: UsuarioService,
+    public storageService: StorageService,
+    public camera: Camera,
+    public sanitazer: DomSanitizer,
+    public events: Events,
+    public notificacoesService: NotificacoesService,
+    public popoverCtrl: PopoverController,
+    public platform: Platform,
+    public photoViewer: PhotoViewer
+  ) {
+    platform.ready().then(() => {
+      this.events.subscribe("foto:enviada", () => {
+        this.getImageIfExists()
       });
-
-    this.usuarioService.findPacienteByPessoaCpf()
-    .then(paciente=>{
-      this.paciente = paciente
-      this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(this.storageService.getUser().imageDataUrl)
-      this.getImageIfExists();
-    }).catch(() => {
-      this.carregou = true;
-      })
     });
   }
-
-
+  ionViewDidLoad() {
+    this.findPessoaByPessoaCpf();
+  }
+  findPessoaByPessoaCpf() {
+    this.usuarioService
+      .findPacienteByPessoaCpf()
+      .then(paciente => {
+        this.paciente = paciente;
+        this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(
+          this.storageService.getUser().imageDataUrl
+        );
+        this.carregou = true;
+        this.getImageIfExists();
+      })
+      .catch(() => {
+        this.carregou = true;
+      });
+  }
 
   getImageIfExists() {
-    this.usuarioService.getImageFromBucket()
-    .subscribe(response => {
-      this.blobToDataURL(response).then(dataUrl => {
-        let str:string = dataUrl as string;
-        this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(str);
-        this.paciente.imageDataUrl = str;
-        this.storageService.setUser(this.paciente)
-        this.events.publish('foto:atualizada',this.paciente.profileImage)
+    this.usuarioService.getImageFromBucket().subscribe(
+      response => {
+        this.blobToDataURL(response).then(dataUrl => {
+          let str: string = dataUrl as string;
+          this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(
+            str
+          );
+          this.paciente.imageDataUrl = str;
+          this.storageService.setUser(this.paciente);
+          this.events.publish("foto:atualizada", this.paciente.profileImage);
+          this.carregou = true;
+        });
+      },
+      error => {
         this.carregou = true;
-      })
-    },
-    error => {
-      this.carregou = true;
-
-      this.events.publish('foto:atualizada',this.paciente.profileImage.changingThisBreaksApplicationSecurity?this.paciente.profileImage:'assets/imgs/avatar-blank.png')
-    });
+        this.events.publish(
+          "foto:atualizada",
+          this.paciente.profileImage.changingThisBreaksApplicationSecurity
+            ? this.paciente.profileImage
+            : "assets/imgs/avatar-blank.png"
+        );
+      }
+    );
   }
 
   // https://gist.github.com/frumbert/3bf7a68ffa2ba59061bdcfc016add9ee
   blobToDataURL(blob) {
     return new Promise((fulfill, reject) => {
-        let reader = new FileReader();
-        reader.onerror = reject;
-        reader.onload = (e) => fulfill(reader.result);
-        reader.readAsDataURL(blob);
-    })
+      let reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = e => fulfill(reader.result);
+      reader.readAsDataURL(blob);
+    });
   }
 
   presentPopover(myEvent) {
@@ -99,12 +116,16 @@ export class MeuPerfilPage {
       ev: myEvent
     });
   }
-  viewFoto(){
-    let options:PhotoViewerOptions = {
-      share: true, // default is false
-
-  };
-    this.photoViewer.show(`${API_CONFIG.bucketBaseUrl}/${this.storageService.getUser().pessoa.urlFoto}`,'Minha Foto de Perfil', options);
+  viewFoto() {
+    let options: PhotoViewerOptions = {
+      share: true // default is false
+    };
+    this.photoViewer.show(
+      `${API_CONFIG.bucketBaseUrl}/${
+        this.storageService.getUser().pessoa.urlFoto
+      }`,
+      "Minha Foto de Perfil",
+      options
+    );
   }
-
 }
