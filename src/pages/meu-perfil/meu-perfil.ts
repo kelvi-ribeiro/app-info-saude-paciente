@@ -27,6 +27,7 @@ export class MeuPerfilPage {
   profileImage;
   apertouOpcaoFoto = false;
   mandandoFoto = false;
+  tocouFoto = false;
   constructor(
             public navCtrl: NavController,
             public usuarioService:UsuarioService,
@@ -87,6 +88,7 @@ export class MeuPerfilPage {
     this.camera.getPicture(options).then((imageData) => {
      this.picture = 'data:image/png;base64,' + imageData;
      this.cameraOn = false;
+     this.sendPicture()
     }, (err) => {
      this.cameraOn = false;
     });
@@ -111,30 +113,32 @@ export class MeuPerfilPage {
 
      this.picture = 'data:image/png;base64,' + imageData;
      this.cameraOn = false;
+     this.sendPicture()
     }, (err) => {
      this.cameraOn = false;
     });
   }
-
-
   sendPicture() {
     this.notificacoesService.presentToast('Fazendo upload, sua foto será alterada dentro de alguns segundos...','toast-attention',3,'middle');
     this.mandandoFoto = true;
     this.apertouOpcaoFoto = false;
     this.usuarioService.uploadPicture(this.picture)
       .then(response => {
-          //this.navCtrl.setRoot('HomePage')
-          //this.navCtrl.setRoot('ProfilePage')
+          this.getImageIfExists()
           this.notificacoesService.presentToast('Foto Alterada 😀',null,3,'middle')
       },
       error => {
-
-        this.notificacoesService.presentToast('Ocorreu Algum erro na tentiva de envio da foto, Desculpe, tente novamente','toast-error',3,'middle');      });
-
+      this.notificacoesService
+      .presentToast('Ocorreu Algum erro na tentiva de envio da foto, Desculpe, tente novamente','toast-error',3,'middle');
+     });
   }
-  cancel() {
-    this.picture = null;
-    this.apertouOpcaoFoto = false;
+
+  tocarFoto(){
+    this.tocouFoto = true;
+    setTimeout(() => {
+      this.tocouFoto = false;
+    }, 2000);
+
   }
 
 }

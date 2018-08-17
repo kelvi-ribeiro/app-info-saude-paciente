@@ -36,7 +36,24 @@ export class HandlerResponseProvider {
         else
           return this.handlerSuccess(null, res.json());
       })
-      .timeout(16000)
+      .timeout(20000)
+      .toPromise()
+      .catch(err => {throw this.handlerError(err, method, url, payload, headers)})
+  }
+  handlerResponseFoto(method, url, payload?, headers?):Promise<any> {
+    let response;
+    if (method === 'get' || method === 'delete') {
+      response = this.http[method](url, {headers:headers})
+    } else {
+      response = this.http[method](url, payload, { headers: headers })
+    }
+    return response
+      .map(res => {
+        if(res && res._body === "")
+          return new Observable();
+        else
+          return this.handlerSuccess(null, res.json());
+      })
       .toPromise()
       .catch(err => {throw this.handlerError(err, method, url, payload, headers)})
   }

@@ -102,7 +102,7 @@ export class UsuarioService {
     let pictureBlob = this.imageUtilService.dataUriToBlob(picture);
     let formData: FormData = new FormData();
     formData.set('file', pictureBlob, 'file.png');
-    return this.handlerResponseService.handlerResponse(
+    return this.handlerResponseService.handlerResponseFoto(
       "post",
       `${API_CONFIG.baseUrl}/pessoas/picture`,
       formData,
