@@ -1,3 +1,4 @@
+import { PopoverPage } from './../popover/popover';
 import { NotificacoesService } from './../services/domain/notificacoes.service';
 import { LocalExameService } from './../services/domain/localExame.service';
 import { LoginPage } from './../pages/login/login';
@@ -29,11 +30,14 @@ import { SecureStorage } from '@ionic-native/secure-storage';
 import { Camera } from '@ionic-native/camera';
 
 
+
+
 @NgModule({
   declarations: [
     MyApp,
     TabsPage,
-    LoginPage
+    LoginPage,
+    PopoverPage
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,10 @@ import { Camera } from '@ionic-native/camera';
   entryComponents: [
     MyApp,
     TabsPage,
-    LoginPage
+    LoginPage,
+    PopoverPage
+
+
   ],
   providers: [
     StatusBar,

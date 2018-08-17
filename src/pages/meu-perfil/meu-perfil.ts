@@ -1,11 +1,13 @@
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events, PopoverController, Platform } from 'ionic-angular';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { CameraOptions, Camera } from '@ionic-native/camera';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
-import { API_CONFIG } from '../../config/api.config';
 import { DomSanitizer } from '@angular/platform-browser';
+import { PopoverPage } from '../../popover/popover';
+
+
 
 /**
  * Generated class for the MeuPerfilPage page.
@@ -32,11 +34,17 @@ export class MeuPerfilPage {
             public camera: Camera,
             public sanitazer:DomSanitizer,
             public events: Events,
-            public notificacoesService:NotificacoesService) {
+            public notificacoesService:NotificacoesService,
+            public popoverCtrl: PopoverController,
+            public platform: Platform) {
 
 
   }
   ionViewDidLoad(){
+    this.platform.ready().then(() => {
+      this.events.subscribe('foto:atualizada', () => {
+      this.getImageIfExists();
+      });
 
     this.usuarioService.findPacienteByPessoaCpf()
     .then(paciente=>{
@@ -45,8 +53,12 @@ export class MeuPerfilPage {
       this.getImageIfExists();
     }).catch(() => {
       this.carregou = true;
-    })
+      })
+    });
   }
+
+
+
   getImageIfExists() {
     this.usuarioService.getImageFromBucket()
     .subscribe(response => {
@@ -76,69 +88,11 @@ export class MeuPerfilPage {
     })
   }
 
-  getCameraPicture() {
-    this.apertouOpcaoFoto = true;
-    const options: CameraOptions = {
-      quality: 65,
-      targetWidth: 720,
-      targetHeight: 720,
-      correctOrientation:true,
-      allowEdit: true,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-     this.picture = 'data:image/png;base64,' + imageData;
-     this.sendPicture()
-    }, (err) => {
-
+  presentPopover(myEvent) {
+    let popover = this.popoverCtrl.create(PopoverPage);
+    popover.present({
+      ev: myEvent
     });
-  }
-
-  getGalleryPicture() {
-    this.apertouOpcaoFoto = true; // Também servindo para foto
-    const options: CameraOptions = {
-      quality: 65,
-      targetWidth: 720,
-      targetHeight: 720,
-      allowEdit: true,
-      correctOrientation:true,
-      sourceType:this.camera.PictureSourceType.PHOTOLIBRARY,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-
-    this.camera.getPicture(options).then((imageData) => {
-
-     this.picture = 'data:image/png;base64,' + imageData;
-     this.sendPicture()
-    }, (err) => {
-    });
-  }
-  sendPicture() {
-    this.notificacoesService.presentToast('Fazendo upload, sua foto será alterada dentro de alguns segundos...','toast-attention',3000,'middle');
-    this.apertouOpcaoFoto = false;
-    this.usuarioService.uploadPicture(this.picture)
-      .then(response => {
-          this.getImageIfExists()
-          this.notificacoesService.presentToast('Foto Alterada 😀',null,3000,'middle')
-      },
-      error => {
-      this.notificacoesService
-      .presentToast('Ocorreu Algum erro na tentiva de envio da foto, Desculpe, tente novamente','toast-error',3,'middle');
-     });
-  }
-
-  tocarFoto(){
-    this.tocouFoto = true;
-    const time = 2000;
-    setTimeout(() => {
-      this.tocouFoto = false;
-    }, time);
-
   }
 
 }
