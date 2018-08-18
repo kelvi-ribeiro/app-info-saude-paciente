@@ -110,6 +110,23 @@ export class UsuarioService {
     );
     });
   }
+  alterarSenha(objNovaSenha) {
+    console.log(objNovaSenha)
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "put",
+        `${API_CONFIG.baseUrl}/pessoas/alterarSenha`,
+        objNovaSenha,
+        headers
+      );
+    });
+  }
 
 
   // getImageFromBucket(): Observable<any> {

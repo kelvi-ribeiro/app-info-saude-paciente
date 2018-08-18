@@ -5,7 +5,7 @@ import { Component } from "@angular/core";
 import { UsuarioService } from "../services/domain/usuario.service";
 import { StorageService } from "../services/storage.service";
 import { NotificacoesService } from '../services/domain/notificacoes.service';
-import {Events} from 'ionic-angular';
+import {Events, NavController} from 'ionic-angular';
 
 
 @Component({
@@ -14,6 +14,7 @@ import {Events} from 'ionic-angular';
 export class PopoverPage {
   picture;
   constructor(
+    public navCtrl:NavController,
     public viewCtrl:ViewController,
     public usuarioService:UsuarioService,
     public storageService:StorageService,
@@ -82,5 +83,9 @@ export class PopoverPage {
       this.notificacoesService
       .presentToast('Ocorreu Algum erro na tentiva de envio da foto, Desculpe, tente novamente','toast-error',3,'middle');
      });
+  }
+  alterarSenha(){
+    this.close()
+    this.navCtrl.push('FormAlterarSenhaPage')
   }
 }
