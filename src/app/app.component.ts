@@ -10,7 +10,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
-import { STORAGE_KEYS } from '../config/storage_keys.config';
+
 import { SecureStorageService } from '../services/secure-storage.service.';
 import { SecureStorage, SecureStorageObject } from '../../node_modules/@ionic-native/secure-storage';
 
