@@ -28,7 +28,7 @@ import { SecureStorageService } from '../services/secure-storage.service.';
 import { SecureStorage } from '@ionic-native/secure-storage';
  import { HandlerResponseProvider } from '../services/handler-response/handler-response';
 import { Camera } from '@ionic-native/camera';
-import { PhotoViewer } from '@ionic-native/photo-viewer';
+
 
 
 
@@ -73,8 +73,8 @@ import { PhotoViewer } from '@ionic-native/photo-viewer';
     SecureStorageService,
     SecureStorage,
     HandlerResponseProvider,
-    Camera,
-    PhotoViewer
+    Camera
+
 
 
 
