@@ -12,24 +12,13 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 
 import { SecureStorageService } from '../services/secure-storage.service.';
-import { SecureStorage, SecureStorageObject } from '../../node_modules/@ionic-native/secure-storage';
+import { SecureStorage } from '../../node_modules/@ionic-native/secure-storage';
 
-
-export interface PageInterface {
-  title: string;
-  name: string;
-  component: any;
-  icon: string;
-  index?: number;
-  tabName?: string;
-  tabComponent?: any;
-}
-declare var window;
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any;
+  rootPage;
   user;
 
   @ViewChild(Nav) navCtrl: Nav;
@@ -59,24 +48,30 @@ export class MyApp {
 
       statusBar.styleDefault();
       splashScreen.hide();
-      this.verificaUsuarioLogado();
+      this.verificaUsuarioLogado()
       this.verificaRecursoBiometria();
     });
   }
   verificaUsuarioLogado() {
-    if (this.storageService.getUser()) {
-        this.rootPage = TabsPage;
-    } else {
-      this.rootPage = LoginPage;
+    if (!this.storageService.getUser()) {
+        this.rootPage = LoginPage;
+        return
     }
+    this.rootPage = TabsPage
   }
-  openPage(page) {
-    this.navCtrl.setRoot(TabsPage, { pagina: page });
-  }
-
   openPageInicio() {
     TabsPage.index = 0;
     this.navCtrl.setRoot(TabsPage);
+    return;
+  }
+
+  openPage(page) {
+    this.navCtrl.setRoot(TabsPage, { pagina: page, from: 'menu' });
+    return;
+  }
+  openPageParams(page, params) {
+    this.navCtrl.setRoot(TabsPage, { pagina: page, params: params, from: 'menu' });
+    return;
   }
 
   alertCertezaSair() {
@@ -110,7 +105,7 @@ export class MyApp {
     this.keychainService.has(userCpf)
     .then(res=>{
       this.hasFinger = true
-      console.log('this.hasFinger = false')
+
     })
     .catch(error=>{
       this.hasFinger = false;
