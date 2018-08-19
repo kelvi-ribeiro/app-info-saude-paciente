@@ -71,17 +71,17 @@ export class MapaLocalizacaoExamesPage {
 
 
   obterExames(){
-    this.exameService.findExamesByPacienteId()
-    .then(exames=>{
-      exames.forEach(exame => {
-        this.googleMapsService.findLocationByCep(exame.localExameCep.substr(0,5),exame.localExameCep.substr(5,8))
-        .then(location=>{
-         // this.criaObjetoMarksBaseadoExame(location[0].geometry.location.lat,location[0].geometry.location.lng,exame.nome)
-        })
-      });
+    // // this.exameService.findExamesByPacienteId()
+    // // .then(exames=>{
+    // //   exames.forEach(exame => {
+    // //     this.googleMapsService.findLocationByCep(exame.localExameCep.substr(0,5),exame.localExameCep.substr(5,8))
+    // //     .then(location=>{
+    // //      // this.criaObjetoMarksBaseadoExame(location[0].geometry.location.lat,location[0].geometry.location.lng,exame.nome)
+    // //     })
+    // //   });
 
 
-    })
+    // })
     this.findUserLocation();
   }
 

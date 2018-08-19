@@ -16,10 +16,10 @@ export class GoogleMapsService {
   ) {
   }
 
-  findLocationByCep(cepPreHifen, cepPosHifen) {
+  findLocationByCep(cep) {
         return this.handlerResponseService.handlerResponse(
           "get",
-          `${API_CONFIG.urlGeolocation}address=${cepPreHifen}-${cepPosHifen}&sensor=false&key=${API_CONFIG.apiKeyGeolocation}`,
+          `${API_CONFIG.urlGeolocation}address=${cep.substr(0,5)}-${cep.substr(5,8)}&sensor=false&key=${API_CONFIG.apiKeyGeolocation}`,
           null,
           null
         );
