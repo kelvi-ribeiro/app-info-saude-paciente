@@ -18,6 +18,7 @@ export class UsuarioService {
     public imageUtilService: ImageUtilService,
     public storageService: StorageService,
     public handlerResponseService:HandlerResponseProvider
+
     ) {
   }
 
@@ -83,8 +84,20 @@ export class UsuarioService {
     });
   }
   getImageFromBucket() {
-    let url = `${API_CONFIG.bucketBaseUrl}/${this.storageService.getUser().pessoa.urlFoto}`
-    return this.http.get(url, { responseType: 'blob' });
+    let paciente = this.storageService.getUser()
+    if(paciente.pessoa.urlFoto){
+      let url = `${API_CONFIG.bucketBaseUrl}/${paciente.pessoa.urlFoto}`
+      return this.http.get(url, { responseType: 'blob' });
+    }else{
+      this.findPacienteByPessoaCpf()
+      .then(paciente =>{
+        this.storageService.setUser(paciente)
+
+        let url = `${API_CONFIG.bucketBaseUrl}/${paciente.pessoa.urlFoto}`
+        return this.http.get(url, { responseType: 'blob' });
+      })
+    }
+
   }
   getImageFromBucketFromUsers(urlFoto) {
     let url = `${API_CONFIG.bucketBaseUrl}/${urlFoto}`
