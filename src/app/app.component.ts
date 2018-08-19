@@ -14,6 +14,8 @@ import { LoginPage } from '../pages/login/login';
 import { SecureStorageService } from '../services/secure-storage.service.';
 import { SecureStorage } from '../../node_modules/@ionic-native/secure-storage';
 
+declare var window;
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -49,7 +51,9 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
       this.verificaUsuarioLogado()
-      this.verificaRecursoBiometria();
+      if(window.cordova){
+        this.verificaRecursoBiometria();
+      }
     });
   }
   verificaUsuarioLogado() {
