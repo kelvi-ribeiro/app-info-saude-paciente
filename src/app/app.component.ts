@@ -48,6 +48,10 @@ export class MyApp {
         this.profileImage = profileImage;
       })
 
+      this.events.subscribe('biometria:removida', () => {
+        this.hasFinger = false;
+      });
+
       statusBar.styleDefault();
       splashScreen.hide();
       this.verificaUsuarioLogado()

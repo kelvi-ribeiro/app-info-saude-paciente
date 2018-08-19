@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 import { UsuarioService } from '../../services/domain/usuario.service';
+import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
+import { StorageService } from '../../services/storage.service';
 
 /**
  * Generated class for the FormAlterarSenhaPage page.
@@ -25,7 +27,10 @@ export class FormAlterarSenhaPage {
               public navParams: NavParams,
               public formBuilder:FormBuilder,
               public notificacoesService:NotificacoesService,
-              public usuarioService:UsuarioService
+              public usuarioService:UsuarioService,
+              public keychainService:KeychainTouchId,
+              public storageService:StorageService,
+              public events: Events
               ) {
 
     this.formGroup = this.formBuilder.group({
@@ -33,6 +38,16 @@ export class FormAlterarSenhaPage {
       novaSenha: ['', [Validators.required,Validators.minLength(6), Validators.maxLength(60)]],
       confirmacaoNovaSenha: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(60)]]
     });
+    this.keychainService.isAvailable()
+    .then(()=>{
+      this.keychainService.has((String(this.storageService.getUser().pessoa.cpf)))
+      .then(()=>{
+        this.notificacoesService.presentToast('Sua Biometria será removida, caso altere sua senha','toast-attention',3000,'top')
+      })
+      .catch(error=>error)
+    })
+    .catch(error=>error)
+
   }
   verificarSenhas(){
     if(this.formGroup.value.novaSenha != this.formGroup.value.confirmacaoNovaSenha){
@@ -51,6 +66,7 @@ export class FormAlterarSenhaPage {
     }
     this.usuarioService.alterarSenha(objNovaSenha)
     .then(()=>{
+      this.removerBiometria()
       this.notificacoesService.presentToast('Senha Alterada!','default',2000,'middle')
       this.navCtrl.pop()
     })
@@ -58,4 +74,19 @@ export class FormAlterarSenhaPage {
       this.notificacoesService.presentToast('Senhal atual é diferente da registrada no sitema','toast-error',2000,'middle')
     })
   }
+  removerBiometria(){
+  this.keychainService.isAvailable()
+  .then(()=>{
+    this.keychainService.has((String(this.storageService.getUser().pessoa.cpf)))
+    .then(()=>{
+      const userCpf = (String(this.storageService.getUser().pessoa.cpf))
+      return this.keychainService.delete(userCpf)
+      .then(() => {
+      this.events.publish('biometria:removida')
+      }, err => err);
+    })
+  .catch(error=>error)
+  })
+  .catch(error=>error)
+}
 }
