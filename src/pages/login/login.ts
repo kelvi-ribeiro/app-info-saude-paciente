@@ -6,8 +6,8 @@ import { CreadenciaisDTO } from '../../models/credenciais.dto';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { StorageService } from '../../services/storage.service';
 import { SecureStorageService } from '../../services/secure-storage.service.';
-import { KeychainTouchId } from '../../../node_modules/@ionic-native/keychain-touch-id';
-import { STORAGE_KEYS } from '../../config/storage_keys.config';
+import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
+
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
 /**
@@ -38,6 +38,7 @@ export class LoginPage {
   v: any;
   cpfValido;
   hasFingerprint;
+  typeSenha: any = 'password';
 
   constructor(
     public navCtrl: NavController,
@@ -72,7 +73,15 @@ export class LoginPage {
         this.hasFingerprint = true
       })
       .catch(err => this.hasFingerprint = false);
-
+  }
+  exibirSenhaInput(){
+    console.log(this.typeSenha)
+    if(this.typeSenha == 'password'){
+      this.typeSenha = 'text'
+      return;
+    }
+    this.typeSenha = 'password';
+    return;
   }
 
 

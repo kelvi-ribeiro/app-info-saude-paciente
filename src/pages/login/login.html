@@ -16,12 +16,13 @@
       </ion-item>
       <ion-item class="input-login">
         <ion-label>
-          <ion-icon name="key" class="icone-form"></ion-icon> 
-          <ion-icon id="icon-hide-show" name="eye" name="eye-off" class="icone-form"></ion-icon>         
+          <ion-icon name="key" class="icone-form"></ion-icon>
+
         </ion-label>
-        <ion-input round block (ionFocus)="focusPasswordInput()" name="senha" type="password" placeholder="Senha" required [(ngModel)]="creds.senha"></ion-input>
+        <ion-input round block (ionFocus)="focusPasswordInput()" name="senha" [type]="typeSenha" placeholder="Senha" required [(ngModel)]="creds.senha"></ion-input>
       </ion-item>
 
+      <ion-icon (click)="exibirSenhaInput()" id="icon-hide-show" [name]="typeSenha === 'password' ? 'eye-off':'eye'" name="eye-off" class="icone-form"></ion-icon>
       <ion-grid>
         <ion-row class="btn-row">
           <ion-col>
