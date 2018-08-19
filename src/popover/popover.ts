@@ -5,7 +5,7 @@ import { Component } from "@angular/core";
 import { UsuarioService } from "../services/domain/usuario.service";
 import { StorageService } from "../services/storage.service";
 import { NotificacoesService } from '../services/domain/notificacoes.service';
-import {Events, NavController} from 'ionic-angular';
+import {Events, NavController, NavParams} from 'ionic-angular';
 
 
 @Component({
@@ -13,8 +13,9 @@ import {Events, NavController} from 'ionic-angular';
 })
 export class PopoverPage {
   picture;
+  navCtrl;
   constructor(
-    public navCtrl:NavController,
+    public navParams:NavParams,
     public viewCtrl:ViewController,
     public usuarioService:UsuarioService,
     public storageService:StorageService,
@@ -23,6 +24,7 @@ export class PopoverPage {
     public events: Events,
     public notificacoesService:NotificacoesService
     ) {
+    this.navCtrl = this.navParams.get('navCtrl');
 
 
 }

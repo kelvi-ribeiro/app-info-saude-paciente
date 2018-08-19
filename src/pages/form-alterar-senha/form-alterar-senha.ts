@@ -71,7 +71,7 @@ export class FormAlterarSenhaPage {
       this.navCtrl.pop()
     })
     .catch(()=>{
-      this.notificacoesService.presentToast('Senhal atual é diferente da registrada no sitema','toast-error',2000,'middle')
+      this.notificacoesService.presentToast('Senhal atual é diferente da registrada no sistema','toast-error',2000,'middle')
     })
   }
   removerBiometria(){

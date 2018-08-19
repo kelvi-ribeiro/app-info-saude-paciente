@@ -111,7 +111,7 @@ export class MeuPerfilPage {
   }
 
   presentPopover(myEvent) {
-    let popover = this.popoverCtrl.create(PopoverPage);
+    let popover = this.popoverCtrl.create(PopoverPage,{navCtrl:this.navCtrl});
     popover.present({
       ev: myEvent
     });
