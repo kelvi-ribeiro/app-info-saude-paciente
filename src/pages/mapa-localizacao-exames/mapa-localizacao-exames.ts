@@ -44,9 +44,7 @@ export class MapaLocalizacaoExamesPage {
 
   ionViewDidLoad() {
     this.obterExames()
-    this.findUserLocation(
 
-    )
 
   }
 
@@ -61,8 +59,6 @@ export class MapaLocalizacaoExamesPage {
         latitude: position.coords.latitude,
         longitude: position.coords.longitude
       };
-
-
       this.mapsProvider.init(this.location, this.mapElement,this.markerOptions);
      }).catch((error) => {
        console.log('Error getting location', error);
@@ -71,31 +67,26 @@ export class MapaLocalizacaoExamesPage {
 
 
   obterExames(){
-    // // this.exameService.findExamesByPacienteId()
-    // // .then(exames=>{
-    // //   exames.forEach(exame => {
-    // //     this.googleMapsService.findLocationByCep(exame.localExameCep.substr(0,5),exame.localExameCep.substr(5,8))
-    // //     .then(location=>{
-    // //      // this.criaObjetoMarksBaseadoExame(location[0].geometry.location.lat,location[0].geometry.location.lng,exame.nome)
-    // //     })
-    // //   });
+    this.exameService.findExamesByPacienteId()
+    .then(exames=>{
+      this.criaObjetoMarksBaseadoExame(exames)
+    })
 
-
-    // })
-    this.findUserLocation();
   }
 
-  criaObjetoMarksBaseadoExame(latitude,longitude,exameNome){
-    let latLng;
-
-      latLng  = new LatLng(latitude, longitude);
-      let markerOption ={
-        title:`Exame ${exameNome}`,
+  criaObjetoMarksBaseadoExame(exames){
+    exames.forEach(exame => {
+      let latLng;
+      latLng  = new LatLng(exame.localExameLatitude, exame.localExameLongitude);
+      let markerOption =  {
+        title:`${exame.nome}`,
         position:latLng,
         icon: 'red',
         animation: 'DROP',
       }
-      this.markerOptions.push(markerOption)
 
-  }
+      this.markerOptions.push(markerOption)
+      });
+      this.findUserLocation();
+    }
 }
