@@ -75,13 +75,12 @@ export class LoginPage {
       .catch(err => this.hasFingerprint = false);
   }
   exibirSenhaInput(){
-    console.log(this.typeSenha)
     if(this.typeSenha == 'password'){
       this.typeSenha = 'text'
       return;
     }
     this.typeSenha = 'password';
-    return;
+
   }
 
 
