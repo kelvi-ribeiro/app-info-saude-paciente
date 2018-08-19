@@ -16,7 +16,6 @@ export class JsMapsProvider {
 
     let opts = {
       center: latLng,
-      zoom: 11,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 

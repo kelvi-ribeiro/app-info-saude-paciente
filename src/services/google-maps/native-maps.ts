@@ -18,7 +18,7 @@ export class NativeMapsProvider {
     let opts = {
       camera: {
         latLng: latLng,
-        zoom:70,
+        zoom:10,
         tilt: 30
       }
     };
