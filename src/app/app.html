@@ -44,10 +44,7 @@
                 <span ion-text color="primary">Início</span>
             </button>
 
-            <button ion-item menuClose class="text-1x"  (click)="openPage('MapaLocalizacaoExamesPage')">
-                <ion-icon item-left name="md-flask" color="primary"></ion-icon>
-                <span ion-text color="primary">Localização</span>
-            </button>
+
 
             <button ion-item menuClose class="text-1x"  (click)="openPage('HistoricoMedicamentosPage')">
                 <ion-icon item-left name="book" color="primary"></ion-icon>
@@ -55,9 +52,14 @@
             </button>
 
             <button ion-item menuClose class="text-1x"  (click)="openPage('LocaisExamePage')">
-                    <ion-icon item-left name="pin" color="primary"></ion-icon>
+                    <ion-icon item-left name="md-flask" color="primary"></ion-icon>
                     <span ion-text color="primary">Locais de Exame</span>
                 </button>
+
+                <button ion-item menuClose class="text-1x"  (click)="openPage('MapaLocalizacaoExamesPage')">
+                  <ion-icon item-left name="pin" color="primary"></ion-icon>
+                  <span ion-text color="primary">Localização de seus Exames</span>
+              </button>
 
                 <button ion-item menuClose class="text-1x"  (click)="openPage('MedicamentosPage')">
                     <ion-icon item-left name="md-flask" color="primary"></ion-icon>
