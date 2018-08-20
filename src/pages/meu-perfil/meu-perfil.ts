@@ -75,6 +75,36 @@ export class MeuPerfilPage {
   }
 
   getImageIfExists() {
+    if(!this.storageService.getUser().pessoa.url){
+     this.usuarioService.findPacienteByPessoaCpf()
+     .then(paciente => {
+       this.storageService.setUser(paciente)
+       this.usuarioService.getImageFromBucket(paciente.pessoa.urlFoto).subscribe(
+        response => {
+          this.blobToDataURL(response).then(dataUrl => {
+            let str: string = dataUrl as string;
+            this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(
+              str
+            );
+            this.paciente.imageDataUrl = str;
+            this.storageService.setUser(this.paciente);
+            this.events.publish("foto:atualizada", this.paciente.profileImage);
+            this.carregou = true;
+          });
+        },
+        error => {
+          this.carregou = true;
+          this.events.publish(
+            "foto:atualizada",
+            this.paciente.profileImage.changingThisBreaksApplicationSecurity
+              ? this.paciente.profileImage
+              : "assets/imgs/avatar-blank.png"
+          );
+        }
+      );
+     })
+     return;
+    }
     this.usuarioService.getImageFromBucket().subscribe(
       response => {
         this.blobToDataURL(response).then(dataUrl => {
