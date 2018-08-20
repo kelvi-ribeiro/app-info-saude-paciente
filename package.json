@@ -40,7 +40,7 @@
         "cordova-plugin-compat": "^1.2.0",
         "cordova-plugin-device": "^2.0.2",
         "cordova-plugin-geolocation": "^4.0.1",
-        "cordova-plugin-googlemaps": "^2.3.6",
+        "cordova-plugin-googlemaps": "^2.3.11",
         "cordova-plugin-ionic-keyboard": "^2.0.5",
         "cordova-plugin-ionic-webview": "^1.1.19",
         "cordova-plugin-keychain-touch-id": "^3.2.1",

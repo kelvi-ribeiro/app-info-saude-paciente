@@ -85,7 +85,10 @@ export class UsuarioService {
   }
   getImageFromBucket(urlFoto = this.storageService.getUser().pessoa.urlFoto ) {
       let headers = new HttpHeaders();
-      headers = headers.set("Cache-Control", "no-cache, no-store, must-revalidate").set("Pragma", "no-cache").set("Expires", "0");
+      headers = headers
+      .set("Cache-Control", "no-cache, no-store, must-revalidate")
+      .set("Pragma", "no-cache")
+      .set("Expires", "0");
       let url = `${API_CONFIG.bucketBaseUrl}/${urlFoto}`
       return this.http.get(url, {headers:headers,responseType:'blob'});
   }
