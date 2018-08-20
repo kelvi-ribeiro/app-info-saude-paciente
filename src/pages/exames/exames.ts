@@ -17,6 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ExamesPage {
   exames;
+  carregou = false;
 
   constructor(
               public navCtrl: NavController,
@@ -32,6 +33,10 @@ export class ExamesPage {
     this.exameService.findExamesByPacienteId()
     .then(res=>{
       this.exames = res;
+      this.carregou = true;
+    })
+    .catch(() =>{
+      this.carregou = true;
     })
   }
   atualizar(exame){

@@ -20,7 +20,11 @@
 
 
 <ion-content padding>
-  <ion-card *ngFor="let exame of exames" class="card-white">
+    <div text-center>
+        <ion-spinner *ngIf="!carregou" name="bubbles"></ion-spinner>
+      </div>
+     <div *ngIf="carregou">
+  <ion-card  *ngFor="let exame of exames" class="card-white">
     <ion-card-content>
       <ion-row class="row-buttons">
         <button (click)="atualizar(exame)" ion-button>Editar</button>
@@ -63,4 +67,5 @@
       </ion-row>
     </ion-card-content>
   </ion-card>
+</div>
 </ion-content>
