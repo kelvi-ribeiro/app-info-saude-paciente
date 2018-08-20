@@ -20,52 +20,57 @@
 
 
 <ion-content padding>
-    <div text-center>
-        <ion-spinner *ngIf="!carregou" name="bubbles"></ion-spinner>
-      </div>
-     <div *ngIf="carregou">
-  <ion-card  *ngFor="let exame of exames" class="card-white">
-    <ion-card-content>
-      <ion-row class="row-buttons">
-        <button (click)="atualizar(exame)" ion-button>Editar</button>
-        <button (click)="alertApagarExame(exame)" class="btn-end" color="danger" ion-button>Apagar</button>
-      </ion-row>
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Nome: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{exame?.nome}}</p>
-        </ion-col>
-      </ion-row>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
+  <div text-center>
+    <ion-spinner *ngIf="!carregou" name="bubbles"></ion-spinner>
+  </div>
 
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Data: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{exame?.data}}</p>
-        </ion-col>
-      </ion-row>
+  <div *ngIf="carregou">
 
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Descrição: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{exame?.descricao}}</p>
-        </ion-col>
-      </ion-row>
+    <ion-card *ngFor="let exame of exames" class="card-white">
+      <ion-card-content>
+        <ion-row class="row-buttons">
+          <button (click)="atualizar(exame)" ion-button>Editar</button>
+          <button (click)="alertApagarExame(exame)" class="btn-end" color="danger" ion-button>Apagar</button>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>
+            <h4 class="text-bolder">Nome: </h4>
+          </ion-col>
+          <ion-col class="padding-zero-col" col-6>
+            <p>{{exame?.nome}}</p>
+          </ion-col>
+        </ion-row>
 
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Local de Exame: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{exame?.localExameNome}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
-</div>
+        <ion-row>
+          <ion-col col-6>
+            <h4 class="text-bolder">Data: </h4>
+          </ion-col>
+          <ion-col class="padding-zero-col" col-6>
+            <p>{{exame?.data}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-6>
+            <h4 class="text-bolder">Descrição: </h4>
+          </ion-col>
+          <ion-col class="padding-zero-col" col-6>
+            <p>{{exame?.descricao}}</p>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col col-6>
+            <h4 class="text-bolder">Local de Exame: </h4>
+          </ion-col>
+          <ion-col class="padding-zero-col" col-6>
+            <p>{{exame?.localExameNome}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

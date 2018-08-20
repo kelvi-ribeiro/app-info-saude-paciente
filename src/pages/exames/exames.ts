@@ -30,13 +30,15 @@ export class ExamesPage {
     this.obterExames()
   }
   obterExames(){
-    this.exameService.findExamesByPacienteId()
+    return this.exameService.findExamesByPacienteId()
     .then(res=>{
       this.exames = res;
       this.carregou = true;
+
     })
     .catch(() =>{
       this.carregou = true;
+
     })
   }
   atualizar(exame){
@@ -66,5 +68,10 @@ export class ExamesPage {
     .then(res =>{
       this.obterExames()
     })
+  }
+   doRefresh(refresher){
+      this.obterExames().then(()=>{
+      refresher.complete();
+      });
   }
 }
