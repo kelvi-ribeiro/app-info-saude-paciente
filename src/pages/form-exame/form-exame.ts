@@ -73,7 +73,7 @@ export class FormExamePage {
     this.formGroup.removeControl('exameDia');
     this.formGroup.removeControl('exameHora');
     this.exameService.insert(this.formGroup.value).then(res=>{
-      this.notificacoesService.presentAlertDefault('Sucesso!','Exame Adicionado','ExamesPage',this.navCtrl)
+      this.notificacoesService.presentAlertDefault('Sucesso!','Exame Adicionado',null,this.navCtrl)
     })
   }
   atualizarExame(){
@@ -82,7 +82,7 @@ export class FormExamePage {
     this.formGroup.removeControl('exameDia');
     this.formGroup.removeControl('exameHora');
     this.exameService.update(this.formGroup.value,this.exame.id).then(res=>{
-      this.notificacoesService.presentAlertDefault('Sucesso!','Exame Atualizado','ExamesPage',this.navCtrl)
+      this.notificacoesService.presentAlertDefault('Sucesso!','Exame Atualizado',null,this.navCtrl)
     })
 
   }

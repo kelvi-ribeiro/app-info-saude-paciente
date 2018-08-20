@@ -73,7 +73,7 @@ export class FormMedicamentoPage {
         {
           text:'Ok',
           handler:() =>{
-            this.navCtrl.setRoot('MedicamentosPage')
+            this.navCtrl.pop()
           }
         }
       ]
