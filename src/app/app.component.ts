@@ -1,3 +1,5 @@
+import { DomSanitizer } from '@angular/platform-browser';
+import { UsuarioService } from './../services/domain/usuario.service';
 import { AuthService } from './../services/auth.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
@@ -21,7 +23,7 @@ declare var window;
 })
 export class MyApp {
   rootPage;
-  user;
+  paciente;
 
   @ViewChild(Nav) navCtrl: Nav;
   temRecursoBiometria: boolean = false;
@@ -29,16 +31,18 @@ export class MyApp {
   profileImage;
 
   constructor(
-             public platform: Platform,
-             public statusBar: StatusBar,
-             public splashScreen: SplashScreen,
-             public storageService:StorageService,
-             public alertCtrl:AlertController,
-             public authService:AuthService,
-             public keychainService:KeychainTouchId,
-             public secureStorageService:SecureStorageService,
-             public secureStorage:SecureStorage,
-             private events: Events
+             private platform: Platform,
+             private statusBar: StatusBar,
+             private splashScreen: SplashScreen,
+             private storageService:StorageService,
+             private alertCtrl:AlertController,
+             private authService:AuthService,
+             private keychainService:KeychainTouchId,
+             private secureStorageService:SecureStorageService,
+             private secureStorage:SecureStorage,
+             private events: Events,
+             private usuarioService:UsuarioService,
+             private sanitazer:DomSanitizer
               ) {
     platform.ready().then(() => {
       this.events.subscribe('assinatura:adicionada', () => {
@@ -50,6 +54,10 @@ export class MyApp {
 
       this.events.subscribe('biometria:removida', () => {
         this.hasFinger = false;
+      });
+
+      this.events.subscribe('buscar:foto', () => {
+        this.getImageIfExists()
       });
 
       statusBar.styleDefault();
@@ -134,7 +142,6 @@ export class MyApp {
             })
             .catch(error=>{
               this.hasFinger = false
-              this.storageService.setUser(this.user);
             });
           })
           .catch(res=>console.log(res))
@@ -167,5 +174,71 @@ export class MyApp {
       ]
     });
     alert.present();
+  }
+
+  getImageIfExists() {
+    if(!this.storageService.getUser().pessoa.url){
+     this.usuarioService.findPacienteByPessoaCpf()
+     .then(paciente => {
+       this.paciente = paciente
+       this.storageService.setUser(paciente)
+       this.usuarioService.getImageFromBucket(paciente.pessoa.urlFoto).subscribe(
+        response => {
+          this.blobToDataURL(response).then(dataUrl => {
+            let str: string = dataUrl as string;
+            this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(
+              str
+            );
+            this.paciente.imageDataUrl = str;
+            this.storageService.setUser(this.paciente);
+            this.events.publish("foto:atualizada", this.paciente.profileImage);
+          });
+        },
+        error => {
+          this.events.publish(
+            "foto:atualizada",
+            this.paciente.profileImage.changingThisBreaksApplicationSecurity
+              ? this.paciente.profileImage
+              : "assets/imgs/avatar-blank.png"
+          );
+        }
+      );
+     })
+     return;
+    }
+    this.usuarioService.getImageFromBucket().subscribe(
+      response => {
+        console.log(response)
+        this.blobToDataURL(response).then(dataUrl => {
+          let str: string = dataUrl as string;
+          this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(
+            str
+          );
+          this.paciente.imageDataUrl = str;
+          this.storageService.setUser(this.paciente);
+          this.events.publish("foto:atualizada", this.paciente.profileImage);
+
+        });
+      },
+      error => {
+
+        this.events.publish(
+          "foto:atualizada",
+          this.paciente.profileImage.changingThisBreaksApplicationSecurity
+            ? this.paciente.profileImage
+            : "assets/imgs/avatar-blank.png"
+        );
+      }
+    );
+  }
+
+  // https://gist.github.com/frumbert/3bf7a68ffa2ba59061bdcfc016add9ee
+  blobToDataURL(blob) {
+    return new Promise((fulfill, reject) => {
+      let reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = e => fulfill(reader.result);
+      reader.readAsDataURL(blob);
+    });
   }
  }

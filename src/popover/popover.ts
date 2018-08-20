@@ -78,7 +78,7 @@ export class PopoverPage {
     this.notificacoesService.presentToast('Fazendo upload, sua foto será alterada dentro de alguns segundos...','toast-attention',3000,'middle');
     this.usuarioService.uploadPicture(this.picture)
       .then(response => {
-      this.events.publish('foto:enviada')
+      this.events.publish('buscar:foto')
       this.notificacoesService.presentToast('Foto Alterada 😀',null,3000,'middle')
       },
       error => {

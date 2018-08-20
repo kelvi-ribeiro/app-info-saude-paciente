@@ -102,7 +102,13 @@ export class LoginPage {
         loading.dismiss()
         this.auth.successfulLogin(response.headers.get('Authorization'));
         this.secureStorageService.setSenha(this.creds.senha)
-        this.alertSalvarLogin(this.creds.cpf)
+        this.alertSalvarLogin(this.creds.cpf);
+        this.usuarioService
+        .findPacienteByPessoaCpf()
+        .then(() => {
+        this.events.publish('buscar:foto')
+
+      })
         this.navCtrl.setRoot(TabsPage);
       },
       error => {
