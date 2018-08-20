@@ -3,8 +3,8 @@ import { Injectable } from "@angular/core";
 import { API_CONFIG } from "../../config/api.config";
 import { StorageService } from "../storage.service";
 import { ImageUtilService } from "../image-util.service";
-import { Http, Headers } from '@angular/http';
-import { HttpClient } from '../../../node_modules/@angular/common/http';
+import { Headers} from '@angular/http';
+import { HttpClient, HttpHeaders } from '../../../node_modules/@angular/common/http';
 
 
 
@@ -84,8 +84,10 @@ export class UsuarioService {
     });
   }
   getImageFromBucket(urlFoto = this.storageService.getUser().pessoa.urlFoto ) {
+      let headers = new HttpHeaders();
+      headers = headers.set("Cache-Control", "no-cache, no-store, must-revalidate").set("Pragma", "no-cache").set("Expires", "0");
       let url = `${API_CONFIG.bucketBaseUrl}/${urlFoto}`
-      return this.http.get(url, { responseType: 'blob' });
+      return this.http.get(url, {headers:headers,responseType:'blob'});
   }
 
   getImageFromBucketFromUsers(urlFoto) {
