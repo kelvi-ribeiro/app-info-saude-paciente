@@ -89,9 +89,13 @@ export class MeuPerfilPage {
 
   }
   pegarFotoUser(){
-    this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(
-      this.storageService.getUser().imageDataUrl
-    );
+      if(this.storageService.getUser().imageDataUrl != undefined)
+  {
+      this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(
+        this.storageService.getUser().imageDataUrl)
+    }else{
+      this.paciente.profileImage = "assets/imgs/avatar-blank.png"
+    }
   }
   doRefresh(refresher){
     this.findPessoaByPessoaCpf().then(()=>{
