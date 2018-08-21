@@ -57,9 +57,7 @@ export class MeuPerfilPage {
       .findPacienteByPessoaCpf()
       .then(paciente => {
         this.paciente = paciente;
-        this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(
-          this.storageService.getUser().imageDataUrl
-        );
+        this.pegarFotoUser()
         this.carregou = true;
       })
       .catch(() => {
@@ -87,5 +85,10 @@ export class MeuPerfilPage {
         options
       );
     });
+  }
+  pegarFotoUser(){
+    this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(
+      this.storageService.getUser().imageDataUrl
+    );
   }
 }

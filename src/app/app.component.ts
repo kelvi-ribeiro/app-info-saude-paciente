@@ -73,6 +73,7 @@ export class MyApp {
         this.rootPage = LoginPage;
         return
     }
+    this.getImageIfExists()
     this.rootPage = TabsPage
   }
   openPageInicio() {
@@ -197,7 +198,7 @@ export class MyApp {
         error => {
           this.events.publish(
             "foto:atualizada",
-            this.paciente.profileImage.changingThisBreaksApplicationSecurity
+            this.paciente.profileImage
               ? this.paciente.profileImage
               : "assets/imgs/avatar-blank.png"
           );
@@ -224,7 +225,7 @@ export class MyApp {
 
         this.events.publish(
           "foto:atualizada",
-          this.paciente.profileImage.changingThisBreaksApplicationSecurity
+          this.paciente.profileImage
             ? this.paciente.profileImage
             : "assets/imgs/avatar-blank.png"
         );
