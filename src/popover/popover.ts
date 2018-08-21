@@ -75,11 +75,11 @@ export class PopoverPage {
     });
   }
   sendPicture() {
-    this.notificacoesService.presentToast('Fazendo upload, sua foto será alterada dentro de alguns segundos...','toast-attention',3000,'middle');
+    this.notificacoesService.presentToast('Fazendo upload, Aguarde...','toast-attention',1500,'middle');
     this.usuarioService.uploadPicture(this.picture)
       .then(response => {
       this.events.publish('buscar:foto')
-      this.notificacoesService.presentToast('Foto Alterada 😀',null,3000,'middle')
+      this.notificacoesService.presentToast('Foto Alterada, Caso não tenha alterado, atualize esta página',null,3000,'middle')
       },
       error => {
       this.notificacoesService
@@ -90,4 +90,5 @@ export class PopoverPage {
     this.close()
     this.navCtrl.push('FormAlterarSenhaPage')
   }
+
 }
