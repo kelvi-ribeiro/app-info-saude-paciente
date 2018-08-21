@@ -54,6 +54,7 @@ export class HandlerResponseProvider {
         else
           return this.handlerSuccess(null, res.json());
       })
+      .timeout(80000)
       .toPromise()
       .catch(err => {throw this.handlerError(err, method, url, payload, headers)})
   }

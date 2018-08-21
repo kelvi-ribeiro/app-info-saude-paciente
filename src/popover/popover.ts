@@ -81,7 +81,7 @@ export class PopoverPage {
       .then(response => {
       this.events.publish('buscar:foto')
       },
-      error => {
+     ).catch(()=>{
       this.notificacoesService
       .presentToast('Ocorreu Algum erro na tentiva de envio da foto, Desculpe, tente novamente','toast-error',3000,'middle');
       this.events.publish('foto:meu-perfil',"assets/imgs/avatar-blank.png")
