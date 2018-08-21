@@ -14,7 +14,11 @@
 
 <ion-content padding>
     <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
+        <ion-refresher-content
+        refreshingText="Atualizando..."
+        pullingIcon="arrow-dropdown"
+        pullingText="Puxe para atualizar"
+        refreshingSpinner="bubbles"></ion-refresher-content>
       </ion-refresher>
   <div text-center>
     <ion-spinner *ngIf="!carregou" name="bubbles"></ion-spinner>
