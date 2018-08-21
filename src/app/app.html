@@ -5,8 +5,8 @@
             <ion-grid>
                 <ion-row>
                     <ion-col col-4>
-                        <div class="user-avatar">
-                            <img [src]="profileImage">
+                        <div (click)="openPage('MeuPerfilPage')"   menuClose class="user-avatar">
+                            <img  [src]="profileImage">
                         </div>
                     </ion-col>
                     <ion-col padding-top col-8>

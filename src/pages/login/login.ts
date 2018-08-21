@@ -223,15 +223,6 @@ cpf_mask(v) {
         return val.replace(/\./g, '');
     }
   }
-  // focusPasswordInput() {
-  //   console.log('deu focus')
-  //       this.keychainService.has(this.creds.cpf)
-  //         .then(() => {
-  //           this.keychainService.verify(this.creds.cpf, "Coloque o dedo no leitor.")
-  //             .then(senha => {
-  //             })
-  //         });
-  //     }
 
      focusPasswordInput() {
     if(this.hasFingerprint){

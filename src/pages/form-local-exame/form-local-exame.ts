@@ -117,8 +117,6 @@ export class FormLocalExamePage {
   buscarLatLong(){
     this.googleMapsService.findLocationByCep(this.formGroup.value.enderecoCep)
     .then(location =>{
-      console.log(location.results[0].geometry.location.lat)
-      console.log(location.results[0].geometry.location.lng)
       this.formGroup.controls.enderecoLatitude.setValue(location.results[0].geometry.location.lat);
       this.formGroup.controls.enderecoLongitude.setValue(location.results[0].geometry.location.lng);
 

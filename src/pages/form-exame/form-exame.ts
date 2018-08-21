@@ -34,8 +34,7 @@ export class FormExamePage {
               public localExameService:LocalExameService,
               public utilsService:UtilsService
               ) {
-        this.exame = this.navParams.get('exame');
-        console.log(this.exame)
+        this.exame = this.navParams.get('exame');        
         this.pacienteId = this.storageService.getUser().id;
         this.formGroup = this.formBuilder.group({
           nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
