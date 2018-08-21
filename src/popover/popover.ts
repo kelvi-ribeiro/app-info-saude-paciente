@@ -47,6 +47,7 @@ export class PopoverPage {
 
     this.camera.getPicture(options).then((imageData) => {
      this.picture = 'data:image/png;base64,' + imageData;
+     this.events.publish('foto:meu-perfil',this.picture)
      this.sendPicture()
     }, (err) => {
 
@@ -70,20 +71,20 @@ export class PopoverPage {
     this.camera.getPicture(options).then((imageData) => {
 
      this.picture = 'data:image/png;base64,' + imageData;
+     this.events.publish('foto:meu-perfil',this.picture)
      this.sendPicture()
     }, (err) => {
     });
   }
   sendPicture() {
-    this.notificacoesService.presentToast('Fazendo upload, Aguarde...','toast-attention',1500,'middle');
     this.usuarioService.uploadPicture(this.picture)
       .then(response => {
       this.events.publish('buscar:foto')
-      this.notificacoesService.presentToast('Foto Alterada, Caso não tenha alterado, atualize esta página',null,3000,'middle')
       },
       error => {
       this.notificacoesService
-      .presentToast('Ocorreu Algum erro na tentiva de envio da foto, Desculpe, tente novamente','toast-error',3,'middle');
+      .presentToast('Ocorreu Algum erro na tentiva de envio da foto, Desculpe, tente novamente','toast-error',3000,'middle');
+      this.events.publish('foto:meu-perfil',"assets/imgs/avatar-blank.png")
      });
   }
   alterarSenha(){

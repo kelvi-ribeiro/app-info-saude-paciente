@@ -13,11 +13,14 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+      </ion-refresher>
   <div text-center>
     <ion-spinner *ngIf="!carregou" name="bubbles"></ion-spinner>
   </div>
   <ion-card *ngIf="carregou" class="card-white">
-    <img (click)="viewFoto()" class="img-salva"  [src]="paciente?.profileImage.changingThisBreaksApplicationSecurity !=undefined ? paciente?.profileImage : 'assets/imgs/avatar-blank.png'">
+    <img (click)="viewFoto()" class="img-salva"  [src]="paciente?.profileImage">
     <div text-center>
     </div>
 

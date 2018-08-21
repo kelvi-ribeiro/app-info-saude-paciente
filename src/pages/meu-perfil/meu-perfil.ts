@@ -43,8 +43,8 @@ export class MeuPerfilPage {
     private zone: NgZone
   ) {
     platform.ready().then(() => {
-      this.events.subscribe("buscar:foto", () => {
-      this.findPessoaByPessoaCpf()
+      this.events.subscribe("foto:meu-perfil", picture => {
+          this.paciente.profileImage = picture
       });
     });
   }
@@ -53,7 +53,7 @@ export class MeuPerfilPage {
 
   }
   findPessoaByPessoaCpf() {
-    this.usuarioService
+   return  this.usuarioService
       .findPacienteByPessoaCpf()
       .then(paciente => {
         this.paciente = paciente;
@@ -72,8 +72,8 @@ export class MeuPerfilPage {
     });
   }
   viewFoto() {
-    this.zone.run(() => {
-      const photoViewer = new PhotoViewer();
+      if(this.paciente.profileImage.changingThisBreaksApplicationSecurity !=undefined){
+        const photoViewer = new PhotoViewer();
       let options: PhotoViewerOptions = {
         share: true // default is false
       };
@@ -84,11 +84,18 @@ export class MeuPerfilPage {
         "Minha Foto de Perfil",
         options
       );
-    });
+
+      }
+
   }
   pegarFotoUser(){
     this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(
       this.storageService.getUser().imageDataUrl
     );
   }
+  doRefresh(refresher){
+    this.findPessoaByPessoaCpf().then(()=>{
+    refresher.complete();
+    });
+}
 }
