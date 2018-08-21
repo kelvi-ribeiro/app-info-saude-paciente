@@ -33,7 +33,6 @@ export class MedicamentosPage {
     this.medicamentoService.findMedicamentosAtivosByPacienteId()
     .then(res=>{
       this.medicamentos = res;
-      console.log(res)
     })
   }
   atualizar(medicamento){

@@ -62,7 +62,6 @@ export class AuthService {
     }
     setUser(res){
       let pessoa = res['pessoa']
-      console.log(pessoa.endereco)
       let user;
       user = {
         id:res['id'],
@@ -90,7 +89,6 @@ export class AuthService {
             }
           }
         }
-      console.log('chegou aqui',user)
       this.storage.setUser(user);
     }
 

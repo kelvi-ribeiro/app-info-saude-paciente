@@ -118,7 +118,6 @@ export class UsuarioService {
     });
   }
   alterarSenha(objNovaSenha) {
-    console.log(objNovaSenha)
     let headers = new Headers();
     return this.storage.getUserCredentials()
     .then(userCredentials=>{

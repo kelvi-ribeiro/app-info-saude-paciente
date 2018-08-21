@@ -42,7 +42,6 @@ export class NotificacoesService {
             if(page){
               navCtrl.setRoot(page)
             }else{
-              console.log('chegou aqu')
               navCtrl.pop()
             }
           }
