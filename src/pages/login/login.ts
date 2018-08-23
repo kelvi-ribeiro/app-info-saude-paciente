@@ -125,7 +125,7 @@ export class LoginPage {
     else if(error.status == 404 ||  error.status == 500){
     this.notificacoesService.presentAlertDefault('Servidor indisponível','Contate a equipe de suporte')
     }else if (error.status == 0){
-      this.notificacoesService.presentAlertDefault('Problema na conexão','Verifique sua conexão com a internet')
+      this.notificacoesService.presentAlertJustMessage('Problema na conexão','Verifique sua conexão com a internet')
     }
   }
 

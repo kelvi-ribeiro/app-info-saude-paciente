@@ -51,6 +51,20 @@ export class NotificacoesService {
     alert.present();
   }
 
+  presentAlertJustMessage(title,message){
+    let alert = this.alertCtrl.create({
+      title:title,
+      message:message,
+      enableBackdropDismiss:false,
+      buttons:[
+        {
+          text:'Ok',
+        }
+      ]
+    });
+    alert.present();
+  }
+
 
 
 }
