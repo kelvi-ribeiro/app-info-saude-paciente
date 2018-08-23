@@ -120,10 +120,10 @@ export class LoginPage {
   }
   tratarErro(error){
     if(error.status==401){
-      this.notificacoesService.presentAlertDefault('Login ou senha incorreto','Favor, Verifique suas credenciais')
+      this.notificacoesService.presentAlertJustMessage('Login ou senha incorreto','Favor, Verifique suas credenciais')
     }
     else if(error.status == 404 ||  error.status == 500){
-    this.notificacoesService.presentAlertDefault('Servidor indisponível','Contate a equipe de suporte')
+    this.notificacoesService.presentAlertJustMessage('Servidor indisponível','Contate a equipe de suporte')
     }else if (error.status == 0){
       this.notificacoesService.presentAlertJustMessage('Problema na conexão','Verifique sua conexão com a internet')
     }
