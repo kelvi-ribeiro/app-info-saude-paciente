@@ -1,7 +1,10 @@
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { ExameService } from './../../services/domain/exame.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { PopoverExamesPage } from '../../popovers/popover-exames/popover-exames';
+
+
 
 /**
  * Generated class for the ExamesPage page.
@@ -23,7 +26,8 @@ export class ExamesPage {
               public navCtrl: NavController,
               public navParams: NavParams,
               public exameService:ExameService,
-              public alertCtrl:AlertController) {
+              public alertCtrl:AlertController,
+              public popoverCtrl: PopoverController) {
   }
 
   ionViewDidLoad() {
@@ -73,5 +77,11 @@ export class ExamesPage {
       this.obterExames().then(()=>{
       refresher.complete();
       });
+  }
+  presentPopover(myEvent,exame) {
+    const popover = this.popoverCtrl.create(PopoverExamesPage,{examePage:this,exame:exame});
+    popover.present({
+      ev: myEvent
+    });
   }
 }

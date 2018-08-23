@@ -1,17 +1,17 @@
-import { DomSanitizer } from '@angular/platform-browser';
+
+import {Events, NavController, NavParams, ViewController} from 'ionic-angular';
+import { UsuarioService } from '../../services/domain/usuario.service';
+import { StorageService } from '../../services/storage.service';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { ViewController } from "../../node_modules/ionic-angular/navigation/view-controller";
-import { Component } from "@angular/core";
-import { UsuarioService } from "../services/domain/usuario.service";
-import { StorageService } from "../services/storage.service";
-import { NotificacoesService } from '../services/domain/notificacoes.service';
-import {Events, NavController, NavParams} from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
+import { NotificacoesService } from '../../services/domain/notificacoes.service';
+import { Component } from '@angular/core';
 
 
 @Component({
-  templateUrl: 'popover.html',
+  templateUrl: 'popover-meu-perfil.html',
 })
-export class PopoverPage {
+export class PopoverMeuPerfilPage {
   picture;
   navCtrl;
   constructor(

@@ -21,13 +21,12 @@ import { GoogleMapsService } from "../../services/google-maps/google.maps.servic
   templateUrl: 'mapa-localizacao-exames.html',
 })
 export class MapaLocalizacaoExamesPage {
-
+  exame;
   location: {
     latitude: number;
     longitude: number;
   };
-  exames = []
-  markerOptions = []
+  markerOptions ;
 
   @ViewChild("map") mapElement: ElementRef;
 
@@ -40,13 +39,12 @@ export class MapaLocalizacaoExamesPage {
     public storageService:StorageService,
     public googleMapsService:GoogleMapsService
    ) {
+    this.exame = this.navParams.get('exame')
+    console.log(this.exame)
+    this.criaObjetoMarksBaseadoExame()
   }
 
-  ionViewDidLoad() {
-    this.obterExames()
 
-
-  }
 
   findUserLocation() {
     let options = {
@@ -65,28 +63,15 @@ export class MapaLocalizacaoExamesPage {
      });
   }
 
-
-  obterExames(){
-    this.exameService.findExamesByPacienteId()
-    .then(exames=>{
-      this.criaObjetoMarksBaseadoExame(exames)
-    })
-
-  }
-
-  criaObjetoMarksBaseadoExame(exames){
-    exames.forEach(exame => {
+  criaObjetoMarksBaseadoExame(){
       let latLng;
-      latLng  = new LatLng(exame.localExameLatitude, exame.localExameLongitude);
-      let markerOption =  {
-        title:`${exame.nome}`,
+      latLng  = new LatLng(this.exame.localExameLatitude, this.exame.localExameLongitude);
+      this.markerOptions =  {
+        title:`${this.exame.nome}`,
         position:latLng,
         icon: 'red',
         animation: 'DROP',
       }
-
-      this.markerOptions.push(markerOption)
-      });
       this.findUserLocation();
     }
 }

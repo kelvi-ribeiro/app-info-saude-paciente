@@ -1,40 +1,36 @@
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { MedicamentoService } from '../../services/domain/medicamento.service';
+import { PopoverDefaultPage } from '../../popovers/popover-default/popover-default';
 
-/**
- * Generated class for the HistoricoMedicamentosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
   selector: 'page-historico-medicamentos',
-  templateUrl: 'historico-medicamentos.html',
+  templateUrl: 'historico-medicamento.html',
 })
-export class HistoricoMedicamentosPage {
+export class HistoricoMedicamentoPage {
   medicamentos;
   constructor(
               public navCtrl: NavController,
               public navParams: NavParams,
-              public medicamentoService:MedicamentoService,
-              public alertCtrl:AlertController) {
+              public service:MedicamentoService,
+              public alertCtrl:AlertController,
+              public popoverCtrl: PopoverController) {
   }
 
   ionViewDidLoad() {
     this.obterMedicamentosInativos()
   }
   obterMedicamentosInativos(){
-    this.medicamentoService.findMedicamentosInativosByPacienteId()
+    this.service.findMedicamentosInativosByPacienteId()
     .then(res=>{
       this.medicamentos = res;
     })
   }
 
-  alertApagarMedicamento(medicamento) {
+  alertApagar(medicamento) {
     let alert = this.alertCtrl.create({
       title: "Atenção!",
       message: "Esta ação irá apagar o medicamento, tem certeza disso ?",
@@ -43,7 +39,7 @@ export class HistoricoMedicamentosPage {
         {
           text: "Sim",
           handler: () => {
-            this.apagarMedicamento(medicamento)
+            this.apagar(medicamento)
           }
         },
         {
@@ -53,8 +49,8 @@ export class HistoricoMedicamentosPage {
     });
     alert.present();
   }
-  apagarMedicamento(medicamento){
-    this.medicamentoService.delete(medicamento.id)
+  apagar(medicamento){
+    this.service.delete(medicamento.id)
     .then(res =>{
       this.obterMedicamentosInativos()
     })
@@ -62,10 +58,15 @@ export class HistoricoMedicamentosPage {
 
   }
   setAtivo(medicamento){
-    this.medicamentoService.setAtivo(medicamento.id)
+    this.service.setAtivo(medicamento.id)
     .then(res=>{
       this.obterMedicamentosInativos();
     })
-
+  }
+  presentPopover(myEvent,item) {
+    const popover = this.popoverCtrl.create(PopoverDefaultPage,{page:this,item:item});
+    popover.present({
+      ev: myEvent
+    });
   }
 }

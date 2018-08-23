@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { LocaisExamePage } from './locais-exame';
+import { LocalExamePage } from './local-exame';
+
 
 
 @NgModule({
   declarations: [
-    LocaisExamePage,
+    LocalExamePage,
   ],
   imports: [
-    IonicPageModule.forChild(LocaisExamePage),
+    IonicPageModule.forChild(LocalExamePage),
   ],
   providers:[
 
   ]
 })
-export class LocaisExamePageModule {}
+export class LocalExamePageModule {}

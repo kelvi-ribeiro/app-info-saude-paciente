@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { LocalExameService } from '../../services/domain/localExame.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+import { PopoverDefaultPage } from '../../popovers/popover-default/popover-default';
 
 /**
  * Generated class for the LocaisExamePage page.
@@ -12,23 +13,24 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 
 @IonicPage()
 @Component({
-  selector: 'page-locais-exame',
-  templateUrl: 'locais-exame.html',
+  selector: 'page-local-exame',
+  templateUrl: 'local-exame.html',
 })
-export class LocaisExamePage {
+export class LocalExamePage {
   locaisExame;
   constructor(
               public navCtrl: NavController,
               public navParams: NavParams,
-              public localExameService:LocalExameService,
-              public alertCtrl:AlertController) {
+              public service:LocalExameService,
+              public alertCtrl:AlertController,
+              public popoverCtrl: PopoverController) {
   }
 
   ionViewDidLoad() {
   this.obterLocaisExame()
   }
   obterLocaisExame(){
-    this.localExameService.findAllLocaisExameByPacienteId()
+    this.service.findAllLocaisExameByPacienteId()
     .then(res=>{
       this.locaisExame = res
     })
@@ -37,7 +39,7 @@ export class LocaisExamePage {
     this.navCtrl.push('FormLocalExamePage',{localExame:localExame})
   }
 
-  alertApagarLocalExame(localExame) {
+  alertApagar(localExame) {
     let alert = this.alertCtrl.create({
       title: "Atenção!",
       message: "Esta ação irá apagar este local de exame e todos exames nele associados, tem certeza disso  ?",
@@ -46,7 +48,7 @@ export class LocaisExamePage {
         {
           text: "Sim",
           handler: () => {
-            this.apagarLocalExame(localExame)
+            this.apagar(localExame)
           }
         },
         {
@@ -56,11 +58,18 @@ export class LocaisExamePage {
     });
     alert.present();
   }
-  apagarLocalExame(localExame){
-    this.localExameService.delete(localExame.id)
+  apagar(localExame){
+    this.service.delete(localExame.id)
     .then(res => {
       this.obterLocaisExame();
     })
+  }
+
+  presentPopover(myEvent,item) {
+    const popover = this.popoverCtrl.create(PopoverDefaultPage,{page:this,item:item});
+    popover.present({
+      ev: myEvent
+    });
   }
 
 
