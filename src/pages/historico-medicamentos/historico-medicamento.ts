@@ -7,7 +7,7 @@ import { PopoverDefaultPage } from '../../popovers/popover-default/popover-defau
 
 @IonicPage()
 @Component({
-  selector: 'page-historico-medicamentos',
+  selector: 'page-historico-medicamento',
   templateUrl: 'historico-medicamento.html',
 })
 export class HistoricoMedicamentoPage {
