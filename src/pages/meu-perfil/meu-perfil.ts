@@ -13,11 +13,13 @@ import { UsuarioService } from "../../services/domain/usuario.service";
 import { CameraOptions, Camera } from "@ionic-native/camera";
 import { NotificacoesService } from "../../services/domain/notificacoes.service";
 import { DomSanitizer } from "@angular/platform-browser";
-import { PopoverPage } from "../../popover/popover";
 import {
   PhotoViewer,
   PhotoViewerOptions
 } from "../../../node_modules/@ionic-native/photo-viewer";
+import { PopoverMeuPerfilPage } from "../../popovers/popover-meu-perfil/popover-meu-perfil";
+
+
 
 @IonicPage()
 @Component({
@@ -66,7 +68,7 @@ export class MeuPerfilPage {
   }
 
   presentPopover(myEvent) {
-    let popover = this.popoverCtrl.create(PopoverPage,{navCtrl:this.navCtrl});
+    let popover = this.popoverCtrl.create(PopoverMeuPerfilPage,{navCtrl:this.navCtrl});
     popover.present({
       ev: myEvent
     });

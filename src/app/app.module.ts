@@ -1,4 +1,4 @@
-import { PopoverPage } from './../popover/popover';
+
 import { NotificacoesService } from './../services/domain/notificacoes.service';
 import { LocalExameService } from './../services/domain/localExame.service';
 import { LoginPage } from './../pages/login/login';
@@ -29,10 +29,8 @@ import { SecureStorage } from '@ionic-native/secure-storage';
  import { HandlerResponseProvider } from '../services/handler-response/handler-response';
 import { Camera } from '@ionic-native/camera';
 import { ExtractTwoWords } from '../pipes/extract-two-words';
-
-
-
-
+import { PopoverMeuPerfilPage } from '../popovers/popover-meu-perfil/popover-meu-perfil';
+import { PopoverExamesPage } from '../popovers/popover-exames/popover-exames';
 
 
 @NgModule({
@@ -40,8 +38,9 @@ import { ExtractTwoWords } from '../pipes/extract-two-words';
     MyApp,
     TabsPage,
     LoginPage,
-    PopoverPage,
-    ExtractTwoWords
+    ExtractTwoWords,
+    PopoverMeuPerfilPage,
+    PopoverExamesPage
   ],
   imports: [
     BrowserModule,
@@ -54,9 +53,8 @@ import { ExtractTwoWords } from '../pipes/extract-two-words';
     MyApp,
     TabsPage,
     LoginPage,
-    PopoverPage
-
-
+    PopoverMeuPerfilPage,
+    PopoverExamesPage
   ],
   providers: [
     StatusBar,

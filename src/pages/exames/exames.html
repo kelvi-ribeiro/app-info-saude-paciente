@@ -34,11 +34,7 @@
   <div *ngIf="carregou">
 
     <ion-card *ngFor="let exame of exames" class="card-white">
-      <ion-card-content>
-        <ion-row class="row-buttons">
-          <button (click)="atualizar(exame)" ion-button>Editar</button>
-          <button (click)="alertApagarExame(exame)" class="btn-end" color="danger" ion-button>Apagar</button>
-        </ion-row>
+      <ion-card-content (press)="presentPopover($event,exame)">
         <ion-row>
           <ion-col col-6>
             <h4 class="text-bolder">Nome: </h4>

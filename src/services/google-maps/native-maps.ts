@@ -26,11 +26,7 @@ export class NativeMapsProvider {
     this.map.one(GoogleMapsEvent.MAP_READY)
     .then(() => {
       this.map.setMyLocationEnabled(true);
-      markerOptions.forEach(element => {
-        this.map.addMarker(element)
-      });
-
-
+      this.map.addMarker(markerOptions);
     });
 
 
