@@ -1,5 +1,13 @@
-<ion-list>
-  <ion-list-header>Operações</ion-list-header>
-  <button ion-item (click)="editar()">Editar</button>
-  <button ion-item (click)="deletar()">Deletar</button>
+<ion-list >
+  <!-- Operações comuns -->
+  <div *ngIf="!nomePage.includes('Medicamento')">
+    <ion-list-header>Operações</ion-list-header>
+      <button ion-item (click)="editar()">Editar</button>
+      <button ion-item (click)="deletar()">Deletar</button>
+  </div>
+  <div *ngIf="nomePage.includes('Historico')">
+      <ion-list-header>Operações</ion-list-header>
+        <button ion-item (click)="ativarMedicamento()">Ativar</button>
+        <button ion-item (click)="deletarMedicamento()">Deletar</button>
+    </div>
 </ion-list>

@@ -9,14 +9,15 @@ export class PopoverDefaultPage {
   navCtrl;
   page; // Page Genérica a ser usada
   item: any; // Item genérico a ser usado
-
+  nomePage;
   constructor(
     public navParams: NavParams,
     public viewCtrl: ViewController,
   ) {
     this.page = this.navParams.get('page');
     this.item = this.navParams.get('item');
-
+    this.nomePage = this.page.constructor.name
+    console.log(this.nomePage)
   }
 
   close() {
@@ -25,9 +26,18 @@ export class PopoverDefaultPage {
 
   editar() {
     this.close()
-    this.page.navCtrl.push(`Form${this.page.constructor.name}`, { item: this.item })
+    this.page.navCtrl.push(`Form${this.nomePage}`, { item: this.item })
   }
   deletar() {
+    this.close()
+    this.page.alertApagar(this.item)
+  }
+
+  ativarMedicamento() {
+    this.close()
+    this.page.setAtivo(this.item)
+  }
+  deletarMedicamento() {
     this.close()
     this.page.alertApagar(this.item)
   }
