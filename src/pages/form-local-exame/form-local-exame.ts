@@ -38,7 +38,8 @@ export class FormLocalExamePage {
               public viaCepService:ViaCepService,
               public googleMapsService:GoogleMapsService)
                {
-        this.localExame = this.navParams.get('localExame')
+        this.localExame = this.navParams.get('item')
+        console.log(this.localExame)
         this.pacienteId = this.storageService.getUser().id;
         this.formGroup = this.formBuilder.group({
           nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
@@ -124,12 +125,13 @@ export class FormLocalExamePage {
   }
   verificaUpdate(){
     if(this.localExame){
+      console.log('localExame',this.localExame)
       this.formGroup.controls.nome.setValue(this.localExame.nome);
       this.formGroup.controls.enderecoNumero.setValue(this.localExame.enderecoNumero);
       this.formGroup.controls.enderecoLogradouro.setValue(this.localExame.enderecoLogradouro);
       this.formGroup.controls.enderecoCep.setValue(this.localExame.enderecoCep);
       this.formGroup.controls.enderecoLatitude.setValue(this.localExame.enderecoLatitude);
-      this.formGroup.controls.enderecoLongitute.setValue(this.localExame.enderecoLongitute);
+      this.formGroup.controls.enderecoLongitude.setValue(this.localExame.enderecoLongitude);
       this.formGroup.controls.enderecoBairro.setValue(this.localExame.enderecoBairro);
       this.formGroup.controls.cidadeId.setValue(this.localExame.cidadeId);
       this.formGroup.controls.pacienteId.setValue(this.localExame.pacienteId);

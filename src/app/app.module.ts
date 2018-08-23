@@ -31,6 +31,7 @@ import { Camera } from '@ionic-native/camera';
 import { ExtractTwoWords } from '../pipes/extract-two-words';
 import { PopoverMeuPerfilPage } from '../popovers/popover-meu-perfil/popover-meu-perfil';
 import { PopoverExamesPage } from '../popovers/popover-exames/popover-exames';
+import { PopoverDefaultPage } from '../popovers/popover-default/popover-default';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { PopoverExamesPage } from '../popovers/popover-exames/popover-exames';
     LoginPage,
     ExtractTwoWords,
     PopoverMeuPerfilPage,
-    PopoverExamesPage
+    PopoverExamesPage,
+    PopoverDefaultPage
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,8 @@ import { PopoverExamesPage } from '../popovers/popover-exames/popover-exames';
     TabsPage,
     LoginPage,
     PopoverMeuPerfilPage,
-    PopoverExamesPage
+    PopoverExamesPage,
+    PopoverDefaultPage
   ],
   providers: [
     StatusBar,

@@ -21,7 +21,7 @@
 
 
 <ion-content padding>
-  <ion-card *ngFor="let localExame of locaisExame" class="card-white">
+  <ion-card (press)="presentPopover($event,localExame)" *ngFor="let localExame of locaisExame" class="card-white">
     <ion-card-content>
       <ion-row class="row-buttons">
         <button (click)="atualizar(localExame)" ion-button>Editar</button>
