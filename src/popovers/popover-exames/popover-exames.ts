@@ -24,7 +24,7 @@ export class PopoverExamesPage {
 
   editarExame(){
     this.close()
-    this.navCtrl.push('FormExamePage',{exame:this.exame})
+    this.examePage.navCtrl.push('FormExamePage',{exame:this.exame})
   }
   deletarExame(){
     this.examePage.alertApagarExame(this.exame)
