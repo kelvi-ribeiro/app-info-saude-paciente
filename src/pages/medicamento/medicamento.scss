@@ -1,11 +1,11 @@
-page-medicamentos {
+page-medicamento {
 
   //toolbar title
   .toolbar-title-md{
     padding: 0 12px;
     font-size: 2rem;
     font-weight: 500;
-    color: rgb(255, 255, 255); 
+    color: rgb(255, 255, 255);
 }
 //icone menu
 .bar-button-default-md, .bar-button-clear-md-default, .bar-button-md-default{
@@ -14,11 +14,11 @@ page-medicamentos {
     background-color: transparent;
 }
 
-.card-title {        
+.card-title {
     position: absolute;
     margin-top: -37px;
     margin-left: 25px;
-    font-size: 2.0em;        
+    font-size: 2.0em;
     font-weight: bold;
     color: rgb(255, 255, 255);
     text-align: center;
@@ -34,22 +34,22 @@ page-medicamentos {
   background: linear-gradient(50deg, #0044ff, #008cff);
   background-attachment: fixed;
   font-family: Helvetica, Arial, sans-serif;
-  overflow-x: hidden;      
+  overflow-x: hidden;
 }
 
 #ion-card{
   margin-top: 70px;
-  position: relative;  
+  position: relative;
 }
 
 .ion-icon{
-  color: rgb(255, 255, 255);  
+  color: rgb(255, 255, 255);
 }
 
 .card-content-md, .card-white {
-  border: 1px solid linear-gradient(50deg, #0044ff, #008cff); 
-  border-radius: 30px; 
-} 
+  border: 1px solid linear-gradient(50deg, #0044ff, #008cff);
+  border-radius: 30px;
+}
 
 #btn-editar{
   margin-top: 1%;
@@ -60,7 +60,7 @@ page-medicamentos {
   background-color: transparent;
 }
 
-#btn-mc{    
+#btn-mc{
   margin-top: 1%;
   position: absolute;
   margin-left: 56%;
@@ -83,7 +83,7 @@ page-medicamentos {
 }
 
 .row-text{
-  margin-bottom: 2px;    
+  margin-bottom: 2px;
 }
 
 .text{
@@ -100,10 +100,10 @@ page-medicamentos {
   text-align: justify;
 }
 
-hr{  
+hr{
   width: 100%;
   border-bottom: 1px solid #ffffff;
-  
+
 }
 
 }

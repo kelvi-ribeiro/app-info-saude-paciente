@@ -30,7 +30,7 @@ export class FormMedicamentoPage {
     public alertCtrl:AlertController,
     public utilsService:UtilsService) {
 
-    this.medicamento =  this.navParams.get('medicamento');
+    this.medicamento =  this.navParams.get('item');
     this.pacienteId = this.storageService.getUser().id;
     this.formGroup = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],

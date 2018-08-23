@@ -1,6 +1,6 @@
 <div body class="conteudo">
     <img id="capa" src="assets/imgs/capa.jpg" alt="Capa">
-  
+
   <ion-header no-border>
     <ion-navbar transparent>
       <button ion-button menuToggle>
@@ -17,13 +17,8 @@
   </ion-header>
 
   <div id="ion-card">
-      <ion-card *ngFor="let medicamento of medicamentos" class="card-white">
+      <ion-card (press)="presentPopover($event,medicamento)" *ngFor="let medicamento of medicamentos" class="card-white">
         <ion-card-content>
-          <!--<ion-row>
-            <button id="btn-editar" (click)="atualizar(medicamento)" ion-button>Editar</button>
-            <button id="btn-mc" (click)="alertApagarMedicamento(medicamento)" ion-button>Concluir</button>
-          </ion-row>-->
-
           <ion-row class="row-text">
             <ion-col col-6>
               <h4 class="text">Nome: </h4>
@@ -73,7 +68,7 @@
             </ion-col>
           </ion-row>
           <hr/>
-          
+
           <ion-row class="row-text">
             <ion-col col-4>
               <h4 class="text">Descrição: </h4>

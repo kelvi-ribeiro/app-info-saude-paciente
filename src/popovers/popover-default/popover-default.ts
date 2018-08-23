@@ -41,4 +41,9 @@ export class PopoverDefaultPage {
     this.close()
     this.page.alertApagar(this.item)
   }
+
+  desativarMedicamento() {
+    this.close()
+    this.page.setInativo(this.item)
+  }
 }
