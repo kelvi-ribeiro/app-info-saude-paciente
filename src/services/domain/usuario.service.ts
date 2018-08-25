@@ -132,6 +132,17 @@ export class UsuarioService {
         headers
       );
     });
+
+
+  }
+
+  esqueceuSenha(objNovaSenha) {
+      return this.handlerResponseService.handlerResponse(
+        "post",
+        `${API_CONFIG.baseUrl}/esqueceuSenha`,
+        objNovaSenha,
+        null
+      );
   }
 
 

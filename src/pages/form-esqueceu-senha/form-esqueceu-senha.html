@@ -1,0 +1,42 @@
+<!--
+  Generated template for the FormEsqueceuSenhaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Esqueci a senha</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <form [formGroup]="formGroup" (ngSubmit)="enviarSenhaNova(); $event.preventDefault()">
+    <ion-item>
+      <ion-label floating>Seu Email</ion-label>
+      <ion-input formControlName="pessoaEmail" type="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Nova Senha</ion-label>
+      <ion-input type="password" formControlName="novaSenha"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Confirme Sua nova senha</ion-label>
+      <ion-input type="password" formControlName="confirmacaoNovaSenha"></ion-input>
+    </ion-item>
+
+
+
+    <ion-item>
+      <button ion-button round full color="secondary" type="submit" [disabled]="formGroup.invalid">Enviar Nova Senha</button>
+    </ion-item>
+  </form>
+
+
+</ion-content>
