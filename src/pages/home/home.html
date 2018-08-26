@@ -14,9 +14,8 @@
  -->
 
 
-<ion-header class="conteudo">
-  <img id="capa" src="assets/imgs/capa.jpg" alt="Capa">
-  <ion-navbar transparent>
+<ion-header>
+  <ion-navbar>
     <ion-title>Página Principal</ion-title>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
@@ -24,4 +23,33 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+  <ion-slides>
+    <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
+      <ion-card>
+        <ion-card-header>
+          <img class="align-horizontal" src="assets/imgs/icon-pill.png">
+          <ion-grid>
+            <ion-row>
+              <ion-col col-2>
+                <ion-icon name="ios-arrow-back" (click)="slides.slidePrev()" [hidden]="slides.isBeginning()"></ion-icon>
+              </ion-col>
+              <ion-col col-8>
+                <h1 text-center>
+                  {{medicamento.nome}}
+                </h1>
+              </ion-col>
+              <ion-col col-2>
+                  <ion-icon name="ios-arrow-forward" (click)="slides.slideNext()" [hidden]="slides.isEnd()"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-header>
+        <ion-card-content>
+            <p>Próxima dosagem ás {{medicamento.proximaHoraMedicamento | date:'shortTime'}}</p>
+          </ion-card-content>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+
 </ion-content>

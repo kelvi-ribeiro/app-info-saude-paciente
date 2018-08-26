@@ -52,7 +52,7 @@ export class FormEsqueceuSenhaPage {
 
     this.usuarioService.esqueceuSenha(objNovaSenha)
     .then(()=>{
-      this.notificacoesService.presentAlertJustMessage('Sucesso!!!','Verifique sua email para confirmar sua nova senha');
+      this.notificacoesService.presentAlertJustMessage('Sucesso!!!','Verifique seu email para confirmar sua nova senha');
       this.navCtrl.pop();
     })
     .catch((error)=>{
