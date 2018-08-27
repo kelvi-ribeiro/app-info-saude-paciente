@@ -48,7 +48,7 @@ export class AuthService {
             cpf: this.jwtHelper.decodeToken(tok).sub
         };
         this.storage.setUserCredentials(user)
-        this.obterDadosPerfil();
+        return this.obterDadosPerfil();
     }
 
     logout() {
@@ -56,7 +56,7 @@ export class AuthService {
 
     }
     obterDadosPerfil(){
-      this.usuarioService.findPacienteByPessoaCpf().then(res=>{
+      return this.usuarioService.findPacienteByPessoaCpf().then(res=>{
         this.setUser(res);
       })
     }

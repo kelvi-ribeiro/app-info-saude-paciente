@@ -1,8 +1,7 @@
-import { UsuarioService } from './../../services/domain/usuario.service';
 import { Component, ViewChild } from '@angular/core';
 import { NavController, IonicPage, Events, Slides } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
-import { DomSanitizer } from '@angular/platform-browser';
+
 import { MedicamentoService } from '../../services/domain/medicamento.service';
 
 @IonicPage()
@@ -25,9 +24,8 @@ export class HomePage {
   ) { }
 
   ionViewDidLoad() {
-    this.obterMedicamentosAtivos()
-
-  }
+      this.obterMedicamentosAtivos()
+    }
 
   handleSlide() {
     if (this.slides.isBeginning()) {
@@ -65,8 +63,8 @@ export class HomePage {
       const dataAtual = new Date()
 
       for (let i = 0; i < horasRemedio.length; i++) {
-        console.log('horasRemedio', horasRemedio[i].getTime())
-        console.log('dataAtual', dataAtual.getTime())
+
+
         if (horasRemedio[i].getTime() > dataAtual.getTime()) {
           medicamento.proximaHoraMedicamento = horasRemedio[i + 1]
           break;

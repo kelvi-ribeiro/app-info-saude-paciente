@@ -100,23 +100,24 @@ export class LoginPage {
     this.auth.authenticate(this.creds)
       .subscribe(response => {
         loading.dismiss()
-        this.auth.successfulLogin(response.headers.get('Authorization'));
-        this.secureStorageService.setSenha(this.creds.senha)
-        this.alertSalvarLogin(this.creds.cpf);
-        this.usuarioService
-        .findPacienteByPessoaCpf()
-        .then(() => {
-        this.events.publish('buscar:foto')
+        this.auth.successfulLogin(response.headers.get('Authorization'))
+        .then(()=>{
+          this.secureStorageService.setSenha(this.creds.senha)
+          this.alertSalvarLogin(this.creds.cpf);
+          this.usuarioService
+          .findPacienteByPessoaCpf()
+          .then(() => {
+          this.events.publish('buscar:foto')
 
+        })
+          this.navCtrl.setRoot(TabsPage);
+        },
+        error => {
+          this.creds.cpf = this.format(this.creds.cpf)
+          loading.dismiss();
+         this.tratarErro(error);
+        });
       })
-        this.navCtrl.setRoot(TabsPage);
-      },
-      error => {
-        this.creds.cpf = this.format(this.creds.cpf)
-        loading.dismiss();
-       this.tratarErro(error);
-
-      });
   }
   tratarErro(error){
     if(error.status==401){
