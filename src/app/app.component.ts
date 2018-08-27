@@ -38,13 +38,12 @@ export class MyApp {
              private alertCtrl:AlertController,
              private authService:AuthService,
              private keychainService:KeychainTouchId,
-             private secureStorageService:SecureStorageService,
-             private secureStorage:SecureStorage,
+             private secureStorageService:SecureStorageService,             
              private events: Events,
              private usuarioService:UsuarioService,
              private sanitazer:DomSanitizer
               ) {
-    platform.ready().then(() => {
+    this.platform.ready().then(() => {
       this.events.subscribe('assinatura:adicionada', () => {
         this.hasFinger = true;
       });
@@ -60,21 +59,21 @@ export class MyApp {
         this.getImageIfExists()
       });
 
-      statusBar.styleDefault();
-      splashScreen.hide();
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
       this.verificaUsuarioLogado()
       if(window.cordova){
         this.verificaRecursoBiometria();
       }
     });
   }
-  verificaUsuarioLogado() {
+  verificaUsuarioLogado() {    
     if (!this.storageService.getUser()) {
-        this.rootPage = LoginPage;
+        this.rootPage = LoginPage;        
         return
     }
     this.getImageIfExists()
-    this.rootPage = TabsPage
+    this.rootPage = TabsPage    
   }
   openPageInicio() {
     TabsPage.index = 0;
