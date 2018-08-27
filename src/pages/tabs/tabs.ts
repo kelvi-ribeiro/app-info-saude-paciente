@@ -12,6 +12,7 @@ export class TabsPage {
   @ViewChild('tabs') tabs: Tabs;
   child;
   pagina;
+  from;
   static index;
 
   constructor(
@@ -20,35 +21,32 @@ export class TabsPage {
     private events: Events,
     private splashScreen: SplashScreen,
     private platform: Platform
-    ) {
+  ) {
     this.events.subscribe('tabs:reset', () => this.resetTabs());
   }
 
   ngOnInit() {
     this.pagina = this.navParams.get('pagina');
+    this.from = this.navParams.get('from');
   }
 
   ionViewDidLoad() {
     this.platform.ready().then(() => {
       setTimeout(() => {
-        if(window.cordova){
-          this.splashScreen.hide();
-        }
+        this.splashScreen.hide();
       }, 1000)
     })
-  }
 
-
-  ionViewWillEnter() {
     if (this.pagina) {
       this.tabs.selectedIndex = TabsPage.index;
       this.child = this.tabs.getByIndex(TabsPage.index);
 
-      let params = this.navParams.get('params');
+      const params = this.navParams.get('params');
+      const from = this.from;
       if (params) {
-        this.child.push(this.pagina, params);
+        this.child.push(this.pagina, {from: from, params});
       } else {
-        this.child.push(this.pagina);
+        this.child.push(this.pagina, {from: from});
       }
       this.pagina = undefined;
     }
@@ -70,6 +68,6 @@ export class TabsPage {
 
   onTabsChange(index) {
     TabsPage.index = index;
-  }
+  }  
 
 }
