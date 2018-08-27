@@ -15,6 +15,7 @@ export class HomePage {
 
   carregou: boolean;
   medicamentos;
+  dataAtual = new Date()
 
   constructor(
     public navCtrl: NavController,
@@ -24,6 +25,7 @@ export class HomePage {
   ) { }
 
   ionViewDidLoad() {
+      console.log(this.dataAtual.getDate())
       this.obterMedicamentosAtivos()
     }
 
@@ -72,6 +74,27 @@ export class HomePage {
       }
     });
     this.medicamentos = medicamentos
+    this.calcularDiasRestantesMedicamento()
+  }
+
+  // new Date("dateString") is browser-dependent and discouraged, so we'll write
+// a simple parse function for U.S. date format (which does no error checking)
+parseDate(dataFim) {
+  dataFim = dataFim.substr(0,10)
+  const dataTratada = dataFim.split('/');
+  return new Date(dataTratada[2], dataTratada[1] - 1, dataTratada[0]);
+}
+
+calcularDiasRestantesMedicamento() {
+  // Take the difference between the dates and divide by milliseconds per day.
+  // Round to nearest whole number to deal with DST.
+  const oneDay = 24*60*60*1000
+  let diasRestantes
+  this.medicamentos.forEach(medicamento => {
+    diasRestantes = Math.round(Math.abs((this.dataAtual.getTime() - this.parseDate(medicamento.dataFim).getTime())/(oneDay)))
+    medicamento.diasRestantes = diasRestantes!= 0 ? `Medicamento acaba em ${diasRestantes} dias`:'Medicamento acaba hoje'
+  });
+
   }
 }
 
