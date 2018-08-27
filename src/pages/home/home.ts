@@ -60,17 +60,19 @@ export class HomePage {
       const comparadorMedicamentoHoraInicial = new Date()
       comparadorMedicamentoHoraInicial.setHours(medicamento.horaInicial.substr(0, 2), medicamento.horaInicial.substr(3, 5))
       do {
-        horasRemedio.push(new Date(data.setTime(data.getTime() + (medicamento.intervaloTempo * 60 * 60 * 1000))))
+        horasRemedio.push(new Date(data.setTime(data.getTime() + (medicamento.intervaloTempo * 60 * 60 * 1000)) - 86400000))
       } while ((data.getHours() !== comparadorMedicamentoHoraInicial.getHours()))
       const dataAtual = new Date()
-
+      console.log(horasRemedio)
       for (let i = 0; i < horasRemedio.length; i++) {
-
-
-        if (horasRemedio[i].getTime() > dataAtual.getTime()) {
+        if (horasRemedio[i + 1].getTime() > dataAtual.getTime()) {
           medicamento.proximaHoraMedicamento = horasRemedio[i + 1]
           break;
+        }else{
+          medicamento.proximaHoraMedicamento = horasRemedio[i]
+          break;
         }
+
       }
     });
     this.medicamentos = medicamentos
