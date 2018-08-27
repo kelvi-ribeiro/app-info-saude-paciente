@@ -1,4 +1,4 @@
-import { TabsPage } from './../tabs/tabs';
+
 import { Component } from '@angular/core';
 import { NavController, NavParams, MenuController, AlertController, LoadingController, Events } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
@@ -9,6 +9,7 @@ import { SecureStorageService } from '../../services/secure-storage.service.';
 import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
 
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LoginPage page.
@@ -110,7 +111,7 @@ export class LoginPage {
           this.events.publish('buscar:foto')
 
         })
-          this.navCtrl.setRoot(TabsPage);
+          this.navCtrl.setRoot(HomePage);
         });
       }, error => {
           console.log('Chegou aqui')

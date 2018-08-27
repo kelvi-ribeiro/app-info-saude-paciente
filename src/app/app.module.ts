@@ -10,7 +10,7 @@ import { MyApp } from './app.component';
 
 
 
-import { TabsPage } from '../pages/tabs/tabs';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -36,8 +36,7 @@ import { PopoverDefaultPage } from '../popovers/popover-default/popover-default'
 
 @NgModule({
   declarations: [
-    MyApp,
-    TabsPage,
+    MyApp,    
     LoginPage,
     ExtractTwoWords,
     PopoverMeuPerfilPage,
@@ -52,8 +51,7 @@ import { PopoverDefaultPage } from '../popovers/popover-default/popover-default'
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    MyApp,
-    TabsPage,
+    MyApp,    
     LoginPage,
     PopoverMeuPerfilPage,
     PopoverExamesPage,

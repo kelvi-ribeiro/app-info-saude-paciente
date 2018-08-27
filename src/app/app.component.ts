@@ -10,11 +10,12 @@ import { Platform, Nav, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { TabsPage } from '../pages/tabs/tabs';
+
 import { LoginPage } from '../pages/login/login';
 
 import { SecureStorageService } from '../services/secure-storage.service.';
-import { SecureStorage } from '../../node_modules/@ionic-native/secure-storage';
+
+
 
 declare var window;
 
@@ -73,23 +74,16 @@ export class MyApp {
         return
     }
     this.getImageIfExists()
-    this.rootPage = TabsPage    
-  }
-  openPageInicio() {
-    TabsPage.index = 0;
-    this.navCtrl.setRoot(TabsPage);
-    return;
+    this.rootPage = 'HomePage'    
+ 
+   
   }
 
   openPage(page) {
-    this.navCtrl.setRoot(TabsPage, { pagina: page, from: 'menu' });
+    this.navCtrl.setRoot(`${page}`);
     return;
   }
-  openPageParams(page, params) {
-    this.navCtrl.setRoot(TabsPage, { pagina: page, params: params, from: 'menu' });
-    return;
-  }
-
+  
   alertCertezaSair() {
     let alert = this.alertCtrl.create({
       title: "Logout!",
