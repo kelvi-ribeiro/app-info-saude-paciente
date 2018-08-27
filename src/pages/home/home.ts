@@ -81,9 +81,9 @@ export class HomePage {
 
   // new Date("dateString") is browser-dependent and discouraged, so we'll write
 // a simple parse function for U.S. date format (which does no error checking)
-parseDate(dataFim) {
-  dataFim = dataFim.substr(0,10)
-  const dataTratada = dataFim.split('/');
+parseDate(data) {
+  data = data.substr(0,10)
+  const dataTratada = data.split('/');
   return new Date(dataTratada[2], dataTratada[1] - 1, dataTratada[0]);
 }
 
@@ -93,8 +93,16 @@ calcularDiasRestantesMedicamento() {
   const oneDay = 24*60*60*1000
   let diasRestantes
   this.medicamentos.forEach(medicamento => {
+    if(this.parseDate(medicamento.dataFim).getDate() > this.dataAtual.getDate()){
+      medicamento.diasRestantes = 'Medicamento já acabou'
+      return  
+    }
+    if(this.parseDate(medicamento.dataInicio).getDate() === this.dataAtual.getDate()){
+      medicamento.diasRestantes = 'Medicamento acaba hoje'  
+      return
+    }
     diasRestantes = Math.round(Math.abs((this.dataAtual.getTime() - this.parseDate(medicamento.dataFim).getTime())/(oneDay)))
-    medicamento.diasRestantes = diasRestantes!= 0 ? `Medicamento acaba em ${diasRestantes} dias`:'Medicamento acaba hoje'
+    medicamento.diasRestantes = `Medicamento acaba em ${diasRestantes} dias`
   });
 
   }
