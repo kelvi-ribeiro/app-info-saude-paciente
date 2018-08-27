@@ -111,13 +111,13 @@ export class LoginPage {
 
         })
           this.navCtrl.setRoot(TabsPage);
-        },
-        error => {
+        });
+      }, error => {
+          console.log('Chegou aqui')
           this.creds.cpf = this.format(this.creds.cpf)
           loading.dismiss();
          this.tratarErro(error);
-        });
-      })
+        })
   }
   tratarErro(error){
     if(error.status==401){
