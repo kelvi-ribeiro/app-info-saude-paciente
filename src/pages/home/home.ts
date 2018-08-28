@@ -58,16 +58,14 @@ export class HomePage {
       const data = new Date()
       data.setHours(medicamento.horaInicial.substr(0, 2), medicamento.horaInicial.substr(3, 5))
       const comparadorMedicamentoHoraInicial = new Date()
-      comparadorMedicamentoHoraInicial.setHours(medicamento.horaInicial.substr(0, 2), medicamento.horaInicial.substr(3, 5))
-      do {
-        horasRemedio.push(new Date(data.setTime(data.getTime() + (medicamento.intervaloTempo * 60 * 60 * 1000) - this.umDia)))
-      } while ((data.getHours() !== comparadorMedicamentoHoraInicial.getHours()))
+      comparadorMedicamentoHoraInicial.setTime(data.getTime() - (medicamento.intervaloTempo * 60 * 60 * 1000))
+    while (data.getHours() !== comparadorMedicamentoHoraInicial.getHours()){
+      horasRemedio.push(new Date(data.setTime(data.getTime() + (medicamento.intervaloTempo * 60 * 60 * 1000))))
+    }
       const dataAtual = new Date()
-      const teste = []
-      console.log(horasRemedio)
-      teste.push(horasRemedio[0])
-      teste.push(horasRemedio[1])
-      horasRemedio = teste
+      if(medicamento.intervaloTempo > 4){
+        horasRemedio.reverse()
+      }
       for (let i = 0; i < horasRemedio.length; i++) {
         if (horasRemedio[i].getTime() > dataAtual.getTime()) {
           medicamento.proximaHoraMedicamento = horasRemedio[i]
