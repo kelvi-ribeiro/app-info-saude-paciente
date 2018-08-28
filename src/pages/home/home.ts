@@ -93,12 +93,12 @@ calcularDiasRestantesMedicamento() {
   const oneDay = 24*60*60*1000
   let diasRestantes
   this.medicamentos.forEach(medicamento => {
-    if(this.parseDate(medicamento.dataFim).getDate() > this.dataAtual.getDate()){
+    if(this.parseDate(medicamento.dataFim).getDate() < this.dataAtual.getDate()){
       medicamento.diasRestantes = 'Medicamento já acabou'
-      return  
+      return
     }
     if(this.parseDate(medicamento.dataInicio).getDate() === this.dataAtual.getDate()){
-      medicamento.diasRestantes = 'Medicamento acaba hoje'  
+      medicamento.diasRestantes = 'Medicamento acaba hoje'
       return
     }
     diasRestantes = Math.round(Math.abs((this.dataAtual.getTime() - this.parseDate(medicamento.dataFim).getTime())/(oneDay)))
