@@ -16,7 +16,8 @@ export class HomePage {
   umDia = 24*60*60*1000
   carregou: boolean;
   medicamentos;
-  dataAtual = new Date()
+  dataAtual = new Date();
+  segmentoAtivo = 'Medicamentos';
 
   constructor(
     public navCtrl: NavController,
@@ -49,6 +50,11 @@ export class HomePage {
         this.calcularHoraProximoMedicamento(medicamentos)
 
       })
+  }
+
+  onChangeSegment(event){
+    console.log('Chegou aqui',event);
+
   }
   // Método que calcula o horário da dosagem mais próximo
   calcularHoraProximoMedicamento(medicamentos) {

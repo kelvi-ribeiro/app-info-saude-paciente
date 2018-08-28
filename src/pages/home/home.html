@@ -23,10 +23,21 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-slides>
-    <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
-      <ion-card>
-        <ion-card-header>
+    <ion-segment  color="primary"  [(ngModel)]="segmentoAtivo">
+        <ion-segment-button value="Medicamentos">
+          Medicamentos
+        </ion-segment-button>
+        <ion-segment-button value="Exames">
+          Exames
+        </ion-segment-button>
+      </ion-segment>
+
+
+      <div [hidden]="segmentoAtivo === 'Exames'" >
+        <ion-slides>
+          <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
+            <ion-card>
+              <ion-card-header>
           <img class="align-horizontal" src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
           <ion-grid>
             <ion-row>
@@ -39,18 +50,21 @@
                 </h1>
               </ion-col>
               <ion-col col-2>
-                  <ion-icon name="ios-arrow-forward" (click)="slides.slideNext()" [hidden]="slides.isEnd()"></ion-icon>
+                <ion-icon name="ios-arrow-forward" (click)="slides.slideNext()" [hidden]="slides.isEnd()"></ion-icon>
               </ion-col>
             </ion-row>
           </ion-grid>
         </ion-card-header>
         <ion-card-content>
-            <p>Próxima dosagem ás {{medicamento.proximaHoraMedicamento | date:'shortTime'}}</p>
-            <p>{{medicamento.diasRestantes}}</p>
-          </ion-card-content>
+          <p>Próxima dosagem ás {{medicamento.proximaHoraMedicamento | date:'shortTime'}}</p>
+          <p>{{medicamento.diasRestantes}}</p>
+        </ion-card-content>
       </ion-card>
     </ion-slide>
   </ion-slides>
+</div>
+<div [hidden]="segmentoAtivo === 'Medicamentos'" >
+<p>Lista de seus exames</p>
 
-
+</div>
 </ion-content>
