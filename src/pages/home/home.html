@@ -27,7 +27,7 @@
     <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
       <ion-card>
         <ion-card-header>
-          <img class="align-horizontal" src="assets/imgs/icon-pill.png">
+          <img class="align-horizontal" src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
           <ion-grid>
             <ion-row>
               <ion-col col-2>
