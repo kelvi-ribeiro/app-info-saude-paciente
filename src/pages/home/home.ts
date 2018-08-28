@@ -13,6 +13,7 @@ export class HomePage {
 
   @ViewChild(Slides) slides: Slides;
 
+  umDia = 24*60*60*1000
   carregou: boolean;
   medicamentos;
   dataAtual = new Date()
@@ -25,7 +26,6 @@ export class HomePage {
   ) { }
 
   ionViewDidLoad() {
-      console.log(this.dataAtual.getDate())
       this.obterMedicamentosAtivos()
     }
 
@@ -54,22 +54,26 @@ export class HomePage {
   calcularHoraProximoMedicamento(medicamentos) {
     medicamentos.forEach(medicamento => {
 
-      const horasRemedio: Date[] = []
+      let horasRemedio: Date[] = []
       const data = new Date()
       data.setHours(medicamento.horaInicial.substr(0, 2), medicamento.horaInicial.substr(3, 5))
       const comparadorMedicamentoHoraInicial = new Date()
       comparadorMedicamentoHoraInicial.setHours(medicamento.horaInicial.substr(0, 2), medicamento.horaInicial.substr(3, 5))
       do {
-        horasRemedio.push(new Date(data.setTime(data.getTime() + (medicamento.intervaloTempo * 60 * 60 * 1000)) - 86400000))
+        horasRemedio.push(new Date(data.setTime(data.getTime() + (medicamento.intervaloTempo * 60 * 60 * 1000) - this.umDia)))
       } while ((data.getHours() !== comparadorMedicamentoHoraInicial.getHours()))
       const dataAtual = new Date()
+      const teste = []
       console.log(horasRemedio)
+      teste.push(horasRemedio[0])
+      teste.push(horasRemedio[1])
+      horasRemedio = teste
       for (let i = 0; i < horasRemedio.length; i++) {
-        if (horasRemedio[i + 1].getTime() > dataAtual.getTime()) {
-          medicamento.proximaHoraMedicamento = horasRemedio[i + 1]
+        if (horasRemedio[i].getTime() > dataAtual.getTime()) {
+          medicamento.proximaHoraMedicamento = horasRemedio[i]
           break;
         }else{
-          medicamento.proximaHoraMedicamento = horasRemedio[i]
+          medicamento.proximaHoraMedicamento = horasRemedio[i + 1]
           break;
         }
 
@@ -90,7 +94,7 @@ parseDate(data) {
 calcularDiasRestantesMedicamento() {
   // Take the difference between the dates and divide by milliseconds per day.
   // Round to nearest whole number to deal with DST.
-  const oneDay = 24*60*60*1000
+
   let diasRestantes
   this.medicamentos.forEach(medicamento => {
     if(this.parseDate(medicamento.dataFim).getDate() < this.dataAtual.getDate()){
@@ -101,7 +105,7 @@ calcularDiasRestantesMedicamento() {
       medicamento.diasRestantes = 'Medicamento acaba hoje'
       return
     }
-    diasRestantes = Math.round(Math.abs((this.dataAtual.getTime() - this.parseDate(medicamento.dataFim).getTime())/(oneDay)))
+    diasRestantes = Math.round(Math.abs((this.dataAtual.getTime() - this.parseDate(medicamento.dataFim).getTime())/(this.umDia)))
     medicamento.diasRestantes = `Medicamento acaba em ${diasRestantes} dias`
   });
 
