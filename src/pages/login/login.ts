@@ -9,7 +9,7 @@ import { SecureStorageService } from '../../services/secure-storage.service.';
 import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
 
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
-import { HomePage } from '../home/home';
+
 
 /**
  * Generated class for the LoginPage page.
@@ -111,7 +111,7 @@ export class LoginPage {
           this.events.publish('buscar:foto')
 
         })
-          this.navCtrl.setRoot(HomePage);
+          this.navCtrl.setRoot('HomePage');
         });
       }, error => {
           console.log('Chegou aqui')
