@@ -42,7 +42,7 @@
           <ion-grid>
             <ion-row>
               <ion-col col-2>
-                <ion-icon name="ios-arrow-back" (click)="slides.slidePrev()" [hidden]="slides.isBeginning()"></ion-icon>
+                <ion-icon class="arrow-slides" name="ios-arrow-back" (click)="slides.slidePrev()" [hidden]="slides.isBeginning()"></ion-icon>
               </ion-col>
               <ion-col col-8>
                 <h1 text-center>
@@ -50,7 +50,7 @@
                 </h1>
               </ion-col>
               <ion-col col-2>
-                <ion-icon name="ios-arrow-forward" (click)="slides.slideNext()" [hidden]="slides.isEnd()"></ion-icon>
+                <ion-icon class="arrow-slides" name="ios-arrow-forward" (click)="slides.slideNext()" [hidden]="slides.isEnd()"></ion-icon>
               </ion-col>
             </ion-row>
           </ion-grid>
