@@ -3,6 +3,7 @@ import { NavController, IonicPage, Events, Slides } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 
 import { MedicamentoService } from '../../services/domain/medicamento.service';
+import { ExameService } from '../../services/domain/exame.service';
 
 @IonicPage()
 @Component({
@@ -11,38 +12,59 @@ import { MedicamentoService } from '../../services/domain/medicamento.service';
 })
 export class HomePage {
 
-  @ViewChild(Slides) slides: Slides;
+  @ViewChild('slidesMedicamentos') slidesMedicamentos: Slides;
+
+  @ViewChild('slidesExames') slidesExames: Slides;
 
   umDia = 24*60*60*1000
   carregou: boolean;
   medicamentos;
   dataAtual = new Date();
   segmentoAtivo = 'Medicamentos';
+  exames: any;
 
   constructor(
     public navCtrl: NavController,
     public storageService: StorageService,
-    public medicamentoService: MedicamentoService
+    public medicamentoService: MedicamentoService,
+    public examesService:ExameService
 
   ) { }
 
   ionViewDidLoad() {
       this.obterMedicamentosAtivos()
+      this.obterExames()
     }
 
-  handleSlide() {
-    if (this.slides.isBeginning()) {
-      this.slides.lockSwipeToPrev(true);
-    } else {
-      this.slides.lockSwipeToPrev(false);
-    }
+    
 
-    if (this.slides.isEnd()) {
-      this.slides.lockSwipeToNext(true);
-    } else {
-      this.slides.lockSwipeToNext(false);
-    }
-  }
+  // handleSlideMedicamentos() {
+  //   if (this.slides.isBeginning()) {
+  //     this.slides.lockSwipeToPrev(true);
+  //   } else {
+  //     this.slides.lockSwipeToPrev(false);
+  //   }
+
+  //   if (this.slides.isEnd()) {
+  //     this.slides.lockSwipeToNext(true);
+  //   } else {
+  //     this.slides.lockSwipeToNext(false);
+  //   }
+  // }
+
+  // handleSlideExames() {
+  //   if (this.slides.isBeginning()) {
+  //     this.slides.lockSwipeToPrev(true);
+  //   } else {
+  //     this.slides.lockSwipeToPrev(false);
+  //   }
+
+  //   if (this.slides.isEnd()) {
+  //     this.slides.lockSwipeToNext(true);
+  //   } else {
+  //     this.slides.lockSwipeToNext(false);
+  //   }
+  // }
 
   obterMedicamentosAtivos() {
     this.medicamentoService.findMedicamentosAtivosByPacienteId()
@@ -52,10 +74,13 @@ export class HomePage {
       })
   }
 
-  onChangeSegment(event){
-    console.log('Chegou aqui',event);
-
+  obterExames() {
+    this.examesService.findExamesByPacienteId()
+      .then(exames => {
+        this.exames = exames
+      })
   }
+  
   // Método que calcula o horário da dosagem mais próximo
   calcularHoraProximoMedicamento(medicamentos) {
     medicamentos.forEach(medicamento => {
