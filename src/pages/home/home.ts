@@ -1,8 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, IonicPage, Events, Slides } from 'ionic-angular';
+import { NavController, IonicPage, Events, Slides, AlertController } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 
 import { MedicamentoService } from '../../services/domain/medicamento.service';
+import { ExameService } from '../../services/domain/exame.service';
 
 @IonicPage()
 @Component({
@@ -11,25 +12,30 @@ import { MedicamentoService } from '../../services/domain/medicamento.service';
 })
 export class HomePage {
 
-  @ViewChild(Slides) slides: Slides;
+  @ViewChild('SlidesMedicamentos') slidesMedicamentos: Slides;
+  @ViewChild('SlidesExames') slidesExames: Slides;
 
   umDia = 24*60*60*1000
   carregou: boolean;
   medicamentos;
   dataAtual = new Date();
   segmentoAtivo = 'Medicamentos';
+  exames: any;
 
   constructor(
     public navCtrl: NavController,
     public storageService: StorageService,
-    public medicamentoService: MedicamentoService
+    public medicamentoService: MedicamentoService,
+    public exameService:ExameService,
+    public alertCtrl:AlertController
 
   ) { }
 
   ionViewDidLoad() {
       this.obterMedicamentosAtivos()
+      this.obterExames()
     }
-
+/* 
   handleSlide() {
     if (this.slides.isBeginning()) {
       this.slides.lockSwipeToPrev(true);
@@ -42,7 +48,7 @@ export class HomePage {
     } else {
       this.slides.lockSwipeToNext(false);
     }
-  }
+  } */
 
   obterMedicamentosAtivos() {
     this.medicamentoService.findMedicamentosAtivosByPacienteId()
@@ -50,6 +56,45 @@ export class HomePage {
         this.calcularHoraProximoMedicamento(medicamentos)
 
       })
+  }
+  obterExames(){
+    this.exameService.findExamesByPacienteId()
+    .then(exames => {
+      this.exames = exames
+    })
+  }
+
+  atualizar(exame){
+    this.navCtrl.push('FormExamePage',{exame:exame})
+  }
+  alertApagarExame(exame) {
+    let alert = this.alertCtrl.create({
+      title: "Atenção!",
+      message: "Esta ação irá apagar esse exame, Tem certeza disso ?",
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: "Sim",
+          handler: () => {
+            this.apagarExame(exame)
+          }
+        },
+        {
+          text: "Não"
+        }
+      ]
+    });
+    alert.present();
+  }
+  apagarExame(exame){
+    this.exameService.delete(exame.id)
+    .then(res =>{
+      this.obterExames()
+    })
+  }
+
+  localizarExame(exame){    
+    this.navCtrl.push('MapaLocalizacaoExamesPage',{exame:exame})
   }
 
   onChangeSegment(event){
