@@ -71,7 +71,7 @@
             <ion-grid>
               <ion-row>
                 <ion-col offset-10 col-2>
-                    <ion-icon (click)="alertApagarExame()" color="danger" class="icon-close" name="close"></ion-icon>
+                    <ion-icon (click)="alertApagarExame(exame)" color="danger" class="icon-close" name="close"></ion-icon>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -97,7 +97,7 @@
                 <ion-col col-2>
                   <span>Local:</span>
                 </ion-col>
-                <ion-col offset-2 col-6>
+                <ion-col offset-2 col-4>
                   <span>{{exame.localExameNome}}</span>
                 </ion-col>
               </ion-row>
@@ -105,13 +105,24 @@
               <ion-grid>
                 <ion-row>
                   <ion-col col-2>
-                    <span>Data:</span>
+                    <span>Dia:</span>
                   </ion-col>
-                  <ion-col offset-2 text-center col-6>
-                    <span>{{exame.data}}</span>
+                  <ion-col offset-2 text-center col-4>
+                     <span>{{exame.data.substr(0,10) }}</span>                    
                   </ion-col>
                 </ion-row>
               </ion-grid>
+
+              <ion-grid>
+                  <ion-row>
+                    <ion-col col-2>
+                      <span>Hora:</span>
+                    </ion-col>
+                    <ion-col offset-2 text-center col-4>
+                       <span>{{exame.data.substr(11,16) }}</span>                    
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
 
               <ion-grid>
                 <ion-row>

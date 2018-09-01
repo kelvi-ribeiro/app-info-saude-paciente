@@ -95,12 +95,8 @@ export class HomePage {
 
   localizarExame(exame){    
     this.navCtrl.push('MapaLocalizacaoExamesPage',{exame:exame})
-  }
-
-  onChangeSegment(event){
-    console.log('Chegou aqui',event);
-
-  }
+  } 
+  
   // Método que calcula o horário da dosagem mais próximo
   calcularHoraProximoMedicamento(medicamentos) {
     medicamentos.forEach(medicamento => {
