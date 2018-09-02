@@ -149,11 +149,15 @@ calcularDiasRestantesMedicamento() {
 
   let diasRestantes
   this.medicamentos.forEach(medicamento => {
-    if(this.parseDate(medicamento.dataFim).getDate() < this.dataAtual.getDate()){
+    if(this.parseDate(medicamento.dataInicio).getTime() > this.dataAtual.getTime()){
+      medicamento.diasRestantes = 'Ainha não chegou o dia desse medicamento'
+      return
+    }
+    else if(this.parseDate(medicamento.dataFim).getTime() < this.dataAtual.getTime()){
       medicamento.diasRestantes = 'Medicamento já acabou'
       return
     }
-    if(this.parseDate(medicamento.dataInicio).getDate() === this.dataAtual.getDate()){
+    else if(this.parseDate(medicamento.dataInicio).getDate() === this.dataAtual.getDate()){
       medicamento.diasRestantes = 'Medicamento acaba hoje'
       return
     }

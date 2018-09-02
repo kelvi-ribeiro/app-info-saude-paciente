@@ -24,8 +24,8 @@
 </ion-header>
 
 <ion-content padding>
-  <div text-center>
-    <ion-spinner *ngIf="!carregou" name="bubbles"></ion-spinner>
+  <div *ngIf="!carregou" text-center>
+    <ion-spinner  name="bubbles"></ion-spinner>
   </div>
   <div *ngIf="carregou"> 
     <div [hidden]="segmentoAtivo === 'Exames'">
