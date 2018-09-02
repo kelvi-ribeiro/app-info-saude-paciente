@@ -145,9 +145,7 @@ parseDate(data) {
 
 calcularDiasRestantesMedicamento() {
   // Take the difference between the dates and divide by milliseconds per day.
-  // Round to nearest whole number to deal with DST.
-
-  let diasRestantes
+  // Round to nearest whole number to deal with DST.  
   this.medicamentos.forEach(medicamento => {
     if(this.parseDate(medicamento.dataInicio).getTime() > this.dataAtual.getTime()){
       medicamento.diasRestantes = 'Ainha não chegou o dia desse medicamento'
@@ -160,9 +158,8 @@ calcularDiasRestantesMedicamento() {
     else if(this.parseDate(medicamento.dataInicio).getDate() === this.dataAtual.getDate()){
       medicamento.diasRestantes = 'Medicamento acaba hoje'
       return
-    }
-    diasRestantes = Math.round(Math.abs((this.dataAtual.getTime() - this.parseDate(medicamento.dataFim).getTime())/(this.umDia)))
-    medicamento.diasRestantes = `Medicamento acaba em ${diasRestantes} dias`
+    }    
+    medicamento.diasRestantes = `Medicamento acaba em ${Math.round(Math.abs((this.dataAtual.getTime() - this.parseDate(medicamento.dataFim).getTime())/(this.umDia)))} dias`
   });
 
   }
