@@ -4,6 +4,7 @@ import { StorageService } from '../../services/storage.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MedicamentoService } from '../../services/domain/medicamento.service';
 import { UtilsService } from '../../services/domain/utils.service';
+import { TipoMedicamentoService } from '../../services/domain/tipo.medicamento.service';
 
 /**
  * Generated class for the FormMedicamentoPage page.
@@ -21,6 +22,7 @@ export class FormMedicamentoPage {
   pacienteId;
   formGroup: FormGroup;
   medicamento;
+  tiposMedicamentos: any;
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
@@ -28,7 +30,8 @@ export class FormMedicamentoPage {
     public formBuilder: FormBuilder,
     public medicamentoService:MedicamentoService,
     public alertCtrl:AlertController,
-    public utilsService:UtilsService) {
+    public utilsService:UtilsService,
+    public tipoMedicamentoService:TipoMedicamentoService) {
 
     this.medicamento =  this.navParams.get('item');
     this.pacienteId = this.storageService.getUser().id;
@@ -39,12 +42,21 @@ export class FormMedicamentoPage {
       dataInicio: ['', [Validators.required]],
       dataFim: ['', [Validators.required]],
       horaInicial: ['', [Validators.required]],
+      tipoMedicamentoId: ['', [Validators.required]],
       pacienteId: [this.pacienteId]
     });
   }
 
   ionViewDidLoad() {
-    this.verificaUpdate();
+    this.obterTiposMedicamentos();
+  }
+
+  obterTiposMedicamentos(){
+    this.tipoMedicamentoService.findAll()
+    .then(res=>{
+      this.tiposMedicamentos = res;      
+      this.verificaUpdate();
+    })
   }
 
   adicionarMedicamento(){
