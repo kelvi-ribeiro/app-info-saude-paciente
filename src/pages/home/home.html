@@ -22,122 +22,115 @@
     </button>
   </ion-navbar>
 </ion-header>
+
 <ion-content padding>
-  <ion-segment color="primary" [(ngModel)]="segmentoAtivo">
-    <ion-segment-button value="Medicamentos">
-      Medicamentos
-    </ion-segment-button>
-    <ion-segment-button value="Exames">
-      Exames
-    </ion-segment-button>
-  </ion-segment>
-
-
-  <div [hidden]="segmentoAtivo === 'Exames'">
-    <ion-slides #slidesMedicamentos>
-      <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
-        <ion-card>
-          <ion-card-header>
-            <img class="align-horizontal" src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
-            <ion-grid>
-              <ion-row>
-                <ion-col col-2>
-                  <ion-icon color="primary" name="ios-arrow-back" (click)="slidesMedicamentos.slidePrev()" [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
-                </ion-col>
-                <ion-col col-8>
-                  <h2 text-center>
-                    {{medicamento.nome | extractOneWord}}
-                  </h2>
-                </ion-col>
-                <ion-col col-2>
-                  <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesMedicamentos.slideNext()" [hidden]="slidesMedicamentos.isEnd()"></ion-icon>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card-header>
-          <ion-card-content>
-            <p>Próxima dosagem ás {{medicamento.proximaHoraMedicamento | date:'shortTime'}}</p>
-            <p>{{medicamento.diasRestantes}}</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
+  <div text-center>
+    <ion-spinner *ngIf="!carregou" name="bubbles"></ion-spinner>
   </div>
-  <div [hidden]="segmentoAtivo === 'Medicamentos'">
-    <ion-slides #slidesExames>
-      <ion-slide *ngFor="let exame of exames; let i = index">
-        <ion-card>
-          <ion-card-header>
-            <ion-grid>
-              <ion-row>
-                <ion-col offset-10 col-2>
-                    <ion-icon (click)="alertApagarExame(exame)" color="danger" class="icon-close" name="close"></ion-icon>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-            <ion-grid>
-              <ion-row>
-                <ion-col col-2>
-                  <ion-icon color="primary" name="ios-arrow-back" (click)="slidesExames.slidePrev()" [hidden]="slidesExames.isBeginning()"></ion-icon>
-                </ion-col>
-                <ion-col col-8>
-                  <h1 text-center>
-                    {{exame.nome | extractOneWord}}
-                  </h1>
-                </ion-col>
-                <ion-col col-2>
-                  <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesExames.slideNext()" [hidden]="slidesExames.isEnd()"></ion-icon>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-grid>
-              <ion-row>
-                <ion-col col-2>
-                  <span>Local:</span>
-                </ion-col>
-                <ion-col offset-2 col-4>
-                  <span>{{exame.localExameNome}}</span>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
+  <div *ngIf="carregou"> 
+    <div [hidden]="segmentoAtivo === 'Exames'">
+      <ion-slides #slidesMedicamentos>
+        <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
+          <ion-card>
+            <ion-card-header>
+              <img class="align-horizontal" src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
               <ion-grid>
                 <ion-row>
                   <ion-col col-2>
-                    <span>Dia:</span>
+                    <ion-icon color="primary" name="ios-arrow-back" (click)="slidesMedicamentos.slidePrev()" [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
                   </ion-col>
-                  <ion-col offset-2 text-center col-4>
-                     <span>{{exame.data.substr(0,10) }}</span>                    
+                  <ion-col col-8>
+                    <h2 text-center>
+                      {{medicamento.nome | extractOneWord}}
+                    </h2>
+                  </ion-col>
+                  <ion-col col-2>
+                    <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesMedicamentos.slideNext()" [hidden]="slidesMedicamentos.isEnd()"></ion-icon>
                   </ion-col>
                 </ion-row>
               </ion-grid>
-
-              <ion-grid>
+            </ion-card-header>
+            <ion-card-content>
+              <p>Próxima dosagem ás {{medicamento.proximaHoraMedicamento | date:'shortTime'}}</p>
+              <p>{{medicamento.diasRestantes}}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+      <ion-slides #slidesExames>
+          <ion-slide *ngFor="let exame of exames; let i = index">
+            <ion-card>
+              <ion-card-header>
+                <ion-grid>
                   <ion-row>
-                    <ion-col col-2>
-                      <span>Hora:</span>
-                    </ion-col>
-                    <ion-col offset-2 text-center col-4>
-                       <span>{{exame.data.substr(11,16) }}</span>                    
+                    <ion-col offset-10 col-2>
+                      <ion-icon (click)="alertApagarExame(exame)" color="danger" class="icon-close" name="close"></ion-icon>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
-
-              <ion-grid>
-                <ion-row>
-                  <ion-col offset-8 col-2>
-                      <ion-icon  (click)="localizarExame(exame)" color="danger" name="pin"></ion-icon>
-                  </ion-col>
-                  <ion-col col-2>
-                    <ion-icon (click)="atualizar()" color="primary" name="create"></ion-icon>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
-
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-2>
+                      <ion-icon color="primary" name="ios-arrow-back" (click)="slidesExames.slidePrev()" [hidden]="slidesExames.isBeginning()"></ion-icon>
+                    </ion-col>
+                    <ion-col col-8>
+                      <h1 text-center>
+                        {{exame.nome | extractOneWord}}
+                      </h1>
+                    </ion-col>
+                    <ion-col col-2>
+                      <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesExames.slideNext()" [hidden]="slidesExames.isEnd()"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-3>
+                      <span>Local:</span>
+                    </ion-col>
+                    <ion-col offset-1 col-4>
+                      <span>{{exame.localExameNome}}</span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-3>
+                      <span>Dia:</span>
+                    </ion-col>
+                    <ion-col offset-1 text-center col-4>
+                      <span>{{exame.data.substr(0,10) }}</span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+  
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-3>
+                      <span>Hora:</span>
+                    </ion-col>
+                    <ion-col offset-1 text-center col-4>
+                      <span>{{exame.data.substr(11,16) }}</span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+  
+                <ion-grid>
+                  <ion-row>
+                    <ion-col offset-8 col-2>
+                      <ion-icon (click)="localizarExame(exame)" color="danger" name="pin"></ion-icon>
+                    </ion-col>
+                    <ion-col col-2>
+                      <ion-icon (click)="atualizar(exame)" color="primary" name="create"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+    </div>   
   </div>
 </ion-content>

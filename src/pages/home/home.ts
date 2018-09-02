@@ -16,11 +16,11 @@ export class HomePage {
   @ViewChild('SlidesExames') slidesExames: Slides;
 
   umDia = 24*60*60*1000
-  carregou: boolean;
+  carregou: boolean = false;
   medicamentos;
   dataAtual = new Date();
   segmentoAtivo = 'Medicamentos';
-  exames: any;
+  exames: any;  
 
   constructor(
     public navCtrl: NavController,
@@ -33,7 +33,7 @@ export class HomePage {
 
   ionViewDidLoad() {
       this.obterMedicamentosAtivos()
-      this.obterExames()
+      
     }
 /* 
   handleSlide() {
@@ -54,13 +54,20 @@ export class HomePage {
     this.medicamentoService.findMedicamentosAtivosByPacienteId()
       .then(medicamentos => {
         this.calcularHoraProximoMedicamento(medicamentos)
-
+        this.obterExames()
+      })
+      .catch(()=>{
+        this.carregou = true;
       })
   }
   obterExames(){
     this.exameService.findExamesByPacienteId()
     .then(exames => {
       this.exames = exames
+      this.carregou = true;
+    })
+    .catch(()=>{
+      this.carregou = true;
     })
   }
 
