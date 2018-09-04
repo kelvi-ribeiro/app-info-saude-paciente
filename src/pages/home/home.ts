@@ -53,7 +53,15 @@ export class HomePage {
             handler: () => {
               this.navCtrl.push('FormMedicamentoPage')
             }
-          },{
+          },
+          {
+            text: 'Consultar Histórico De Medicamentos',
+            icon:'book',           
+            handler: () => {
+              this.navCtrl.push('HistoricoMedicamentoPage')
+            }
+          },
+          {
             text: 'Adicionar Exame',
             icon:'md-medkit',           
             handler: () => {
@@ -177,13 +185,10 @@ export class HomePage {
   }
   apagarExame(exame){
     this.exameService.delete(exame.id)
-    .then(res =>{
+    .then(() =>{
       this.obterExames()
     })
   }
-
-  
-
   localizarExame(exame){    
     this.navCtrl.push('MapaLocalizacaoExamesPage',{exame:exame})
   } 

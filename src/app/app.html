@@ -44,28 +44,12 @@
                 <span ion-text color="primary">Início</span>
             </button>
 
-
-
-            <button ion-item menuClose class="text-1x"  (click)="openPage('HistoricoMedicamentoPage')">
-                <ion-icon item-left name="book" color="primary"></ion-icon>
-                <span ion-text color="primary">Histórico</span>
-            </button>
-
             <button ion-item menuClose class="text-1x"  (click)="openPage('LocalExamePage')">
                     <ion-icon item-left name="pin" color="primary"></ion-icon>
                     <span ion-text color="primary">Locais de Exame</span>
-                </button>
+                </button>        
 
-                <button ion-item menuClose class="text-1x"  (click)="openPage('MedicamentoPage')">
-                    <ion-icon item-left name="md-flask" color="primary"></ion-icon>
-                    <span ion-text color="primary">Medicamentos</span>
-                </button>
-
-            <button ion-item menuClose class="text-1x"  (click)="openPage('ExamesPage')">
-                <ion-icon item-left name="md-medkit" color="primary"></ion-icon>
-                <span ion-text color="primary">Exames</span>
-            </button>
-
+            
             <button *ngIf="temRecursoBiometria && !hasFinger" (click)="salvaBiometria()" ion-item menuClose class="text-1x"  >
               <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="primary"></ion-icon>
               <span ion-text color="primary">Adicionar Biometeria</span>
