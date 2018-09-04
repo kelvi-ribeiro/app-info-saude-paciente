@@ -197,24 +197,19 @@ export class HomePage {
   calcularHoraProximoMedicamento(medicamentos) {
     medicamentos.forEach(medicamento => {
 
-      let horasRemedio: Date[] = []
+      const horasRemedio: Date[] = []
       const data = new Date()
       data.setHours(medicamento.horaInicial.substr(0, 2), medicamento.horaInicial.substr(3, 5))
       const comparadorMedicamentoHoraInicial = new Date()
-      comparadorMedicamentoHoraInicial.setTime(data.getTime() - (medicamento.intervaloTempo * 60 * 60 * 1000))
-    while (data.getHours() !== comparadorMedicamentoHoraInicial.getHours()){
-      horasRemedio.push(new Date(data.setTime(data.getTime() + (medicamento.intervaloTempo * 60 * 60 * 1000))))
-    }
+      comparadorMedicamentoHoraInicial.setHours(medicamento.horaInicial.substr(0, 2), medicamento.horaInicial.substr(3, 5))
+      do {
+        horasRemedio.push(new Date(data.setTime(data.getTime() + (medicamento.intervaloTempo * 60 * 60 * 1000)) - 86400000))
+      } while ((data.getHours() !== comparadorMedicamentoHoraInicial.getHours()))
       const dataAtual = new Date()
-      if(medicamento.intervaloTempo > 4){
-        horasRemedio.reverse()
-      }
+      console.log(horasRemedio)
       for (let i = 0; i < horasRemedio.length; i++) {
         if (horasRemedio[i].getTime() > dataAtual.getTime()) {
           medicamento.proximaHoraMedicamento = horasRemedio[i]
-          break;
-        }else{
-          medicamento.proximaHoraMedicamento = horasRemedio[i + 1]
           break;
         }
 
@@ -222,7 +217,6 @@ export class HomePage {
     });
     this.medicamentos = medicamentos
     this.calcularDiasRestantesMedicamento()
-    this.medicamentos.reverse()
   }
 
   // new Date("dateString") is browser-dependent and discouraged, so we'll write
