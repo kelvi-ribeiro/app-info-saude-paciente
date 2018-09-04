@@ -14,7 +14,7 @@
  -->
 
 
-<ion-header>
+ <ion-header>
   <ion-navbar>
     <ion-title>Página Principal</ion-title>
     <button ion-button menuToggle>
@@ -33,16 +33,22 @@
         <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
           <ion-card>
             <ion-card-header>
-              <img class="align-horizontal" src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
+              <ion-grid>
+                <ion-row>
+                  <ion-col offset-10 col-2>
+                    <ion-icon (click)="alertApagarMedicamento(medicamento)" color="danger" class="icon-close" name="close"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
               <ion-grid>
                 <ion-row>
                   <ion-col col-2>
                     <ion-icon color="primary" name="ios-arrow-back" (click)="slidesMedicamentos.slidePrev()" [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
                   </ion-col>
                   <ion-col col-8>
-                    <h2 text-center>
-                      {{medicamento.nome | extractOneWord}}
-                    </h2>
+                    <h1 text-center>
+                        {{medicamento.nome | extractOneWord}}
+                    </h1>
                   </ion-col>
                   <ion-col col-2>
                     <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesMedicamentos.slideNext()" [hidden]="slidesMedicamentos.isEnd()"></ion-icon>
@@ -51,8 +57,34 @@
               </ion-grid>
             </ion-card-header>
             <ion-card-content>
-              <p>Próxima dosagem ás {{medicamento.proximaHoraMedicamento | date:'shortTime'}}</p>
-              <p>{{medicamento.diasRestantes}}</p>
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-8>
+                    <span>Próxima Dosagem:</span>
+                  </ion-col>
+                  <ion-col  col-4 pull-1>
+                    <span>{{medicamento.proximaHoraMedicamento | date:'shortTime'}}</span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-7>
+                    <span>Dias Restantes:</span>
+                  </ion-col>
+                  <ion-col col-5 pull-1>
+                    <span >{{medicamento.diasRestantes}}</span>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>             
+
+              <ion-grid>
+                <ion-row>                 
+                  <ion-col offset-10 col-2>
+                    <ion-icon (click)="atualizarMedicamento(medicamento)" color="primary" name="create"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
             </ion-card-content>
           </ion-card>
         </ion-slide>
@@ -123,7 +155,7 @@
                       <ion-icon (click)="localizarExame(exame)" color="danger" name="pin"></ion-icon>
                     </ion-col>
                     <ion-col col-2>
-                      <ion-icon (click)="atualizar(exame)" color="primary" name="create"></ion-icon>
+                      <ion-icon (click)="atualizarExame(exame)" color="primary" name="create"></ion-icon>
                     </ion-col>
                   </ion-row>
                 </ion-grid>

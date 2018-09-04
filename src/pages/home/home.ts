@@ -35,20 +35,31 @@ export class HomePage {
       this.obterMedicamentosAtivos()
       
     }
-/* 
-  handleSlide() {
-    if (this.slides.isBeginning()) {
-      this.slides.lockSwipeToPrev(true);
-    } else {
-      this.slides.lockSwipeToPrev(false);
+    alertApagarMedicamento(medicamento) {
+      let alert = this.alertCtrl.create({
+        title: "Atenção!",
+        message: "Esta ação irá apagar esse medicamento, Tem certeza disso ?",
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: "Sim",
+            handler: () => {
+              this.apagarMedicamento(medicamento)
+            }
+          },
+          {
+            text: "Não"
+          }
+        ]
+      });
+      alert.present();
     }
-
-    if (this.slides.isEnd()) {
-      this.slides.lockSwipeToNext(true);
-    } else {
-      this.slides.lockSwipeToNext(false);
+    apagarMedicamento(medicamento){
+      this.medicamentoService.delete(medicamento.id)
+      .then(() =>{
+        this.obterMedicamentosAtivos()
+      })
     }
-  } */
 
   obterMedicamentosAtivos() {
     this.medicamentoService.findMedicamentosAtivosByPacienteId()
@@ -59,6 +70,9 @@ export class HomePage {
       .catch(()=>{
         this.carregou = true;
       })
+  }
+  atualizarMedicamento(medicamento){
+    this.navCtrl.push('FormMedicamentoPage',{item:medicamento})
   }
   obterExames(){
     this.exameService.findExamesByPacienteId()
@@ -71,8 +85,8 @@ export class HomePage {
     })
   }
 
-  atualizar(exame){
-    this.navCtrl.push('FormExamePage',{exame:exame})
+  atualizarExame(exame){
+    this.navCtrl.push('FormExamePage',{item:exame})
   }
   alertApagarExame(exame) {
     let alert = this.alertCtrl.create({
@@ -99,6 +113,8 @@ export class HomePage {
       this.obterExames()
     })
   }
+
+  
 
   localizarExame(exame){    
     this.navCtrl.push('MapaLocalizacaoExamesPage',{exame:exame})
@@ -152,14 +168,14 @@ calcularDiasRestantesMedicamento() {
       return
     }
     else if(this.parseDate(medicamento.dataFim).getTime() < this.dataAtual.getTime()){
-      medicamento.diasRestantes = 'Medicamento já acabou'
+      medicamento.diasRestantes = 'Finalizado'
       return
     }
     else if(this.parseDate(medicamento.dataInicio).getDate() === this.dataAtual.getDate()){
-      medicamento.diasRestantes = 'Medicamento acaba hoje'
+      medicamento.diasRestantes = 'Finaliza Hoje'
       return
     }    
-    medicamento.diasRestantes = `Medicamento acaba em ${Math.round(Math.abs((this.dataAtual.getTime() - this.parseDate(medicamento.dataFim).getTime())/(this.umDia)))} dias`
+    medicamento.diasRestantes = `${Math.round(Math.abs((this.dataAtual.getTime() - this.parseDate(medicamento.dataFim).getTime())/(this.umDia)))} para finalizar`
   });
 
   }
