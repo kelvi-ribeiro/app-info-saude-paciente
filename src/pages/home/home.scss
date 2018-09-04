@@ -8,10 +8,18 @@ page-home {
       color: #020202;
     }
     span{
-
+      font-size:18px;
     }
     .icon-close{
       font-size: 32px;
+    }
+    .ajuste-direita{
+      position: relative;
+      left:10px;
+    }
+    .ajuste-esquerda{
+      position: relative;
+       left: -10px;
     }
   }
 
