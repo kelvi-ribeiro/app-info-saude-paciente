@@ -2,7 +2,7 @@ import { UtilsService } from './../../services/domain/utils.service';
 import { NotificacoesService } from './../../services/domain/notificacoes.service';
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
 import { ExameService } from '../../services/domain/exame.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocalExameService } from '../../services/domain/localExame.service';
@@ -32,7 +32,8 @@ export class FormExamePage {
               public notificacoesService:NotificacoesService,
               public exameService:ExameService,
               public localExameService:LocalExameService,
-              public utilsService:UtilsService
+              public utilsService:UtilsService,
+              public events:Events
               ) {
         this.exame = this.navParams.get('item');        
         this.pacienteId = this.storageService.getUser().id;
@@ -73,6 +74,8 @@ export class FormExamePage {
     this.formGroup.removeControl('exameHora');
     this.exameService.insert(this.formGroup.value).then(res=>{
       this.notificacoesService.presentAlertDefault('Sucesso!','Exame Adicionado',null,this.navCtrl)
+      this.events.publish('exames:refresh')
+      
     })
   }
   atualizarExame(){
@@ -82,6 +85,8 @@ export class FormExamePage {
     this.formGroup.removeControl('exameHora');
     this.exameService.update(this.formGroup.value,this.exame.id).then(res=>{
       this.notificacoesService.presentAlertDefault('Sucesso!','Exame Atualizado',null,this.navCtrl)
+      this.events.publish('exames:refresh')
+      
     })
 
   }

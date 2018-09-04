@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MedicamentoService } from '../../services/domain/medicamento.service';
 import { UtilsService } from '../../services/domain/utils.service';
 import { TipoMedicamentoService } from '../../services/domain/tipo.medicamento.service';
+import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
 /**
  * Generated class for the FormMedicamentoPage page.
@@ -31,7 +32,9 @@ export class FormMedicamentoPage {
     public medicamentoService:MedicamentoService,
     public alertCtrl:AlertController,
     public utilsService:UtilsService,
-    public tipoMedicamentoService:TipoMedicamentoService) {
+    public tipoMedicamentoService:TipoMedicamentoService,
+    public events:Events,
+    public notificacoesService:NotificacoesService,) {
 
     this.medicamento =  this.navParams.get('item');
     this.pacienteId = this.storageService.getUser().id;
@@ -68,30 +71,17 @@ export class FormMedicamentoPage {
   }
   salvarMedicamento(){
     this.medicamentoService.insert(this.formGroup.value).then(res=>{
-      this.showAlertSucesso('Medicamento Adicionado a Lista');
+      this.notificacoesService.presentAlertDefault('Sucesso!','Medicamento Atualizado',null,this.navCtrl)
+      this.events.publish('medicamentos:refresh')
     })
   }
   atualizarMedicamento(){
     this.medicamentoService.update(this.formGroup.value,this.medicamento.id).then(res=>{
-      this.showAlertSucesso('Medicamento atualizado');
+      this.notificacoesService.presentAlertDefault('Sucesso!','Medicamento Atualizado',null,this.navCtrl)
+      this.events.publish('medicamentos:refresh')
     })
   }
-  showAlertSucesso(message){
-    let alert = this.alertCtrl.create({
-      title:'Sucesso!',
-      message:message,
-      enableBackdropDismiss:false,
-      buttons:[
-        {
-          text:'Ok',
-          handler:() =>{
-            this.navCtrl.pop()
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
+  
   verificaUpdate(){
     if(this.medicamento){
       this.formGroup.controls.nome.setValue(this.medicamento.nome);

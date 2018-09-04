@@ -28,11 +28,19 @@ export class HomePage {
     public medicamentoService: MedicamentoService,
     public exameService:ExameService,
     public alertCtrl:AlertController,
-    public actionSheetCtrl: ActionSheetController
+    public actionSheetCtrl: ActionSheetController,
+    public events:Events
 
   ) { }
 
   ionViewDidLoad() {
+      this.events.subscribe('medicamentos:refresh' ,()=>{
+        this.obterMedicamentosAtivos()
+      })
+
+      this.events.subscribe('exames:refresh' ,()=>{
+        this.obterExames()
+      })
       this.obterMedicamentosAtivos()
       
     }
@@ -136,6 +144,7 @@ export class HomePage {
   obterExames(){
     this.exameService.findExamesByPacienteId()
     .then(exames => {
+      exames.reverse()
       this.exames = exames
       this.carregou = true;
     })
