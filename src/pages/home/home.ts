@@ -196,7 +196,6 @@ export class HomePage {
   // Método que calcula o horário da dosagem mais próximo
   calcularHoraProximoMedicamento(medicamentos) {
     medicamentos.forEach(medicamento => {
-
       const horasRemedio: Date[] = []
       const data = new Date()
       data.setHours(medicamento.horaInicial.substr(0, 2), medicamento.horaInicial.substr(3, 5))
@@ -206,17 +205,19 @@ export class HomePage {
         horasRemedio.push(new Date(data.setTime(data.getTime() + (medicamento.intervaloTempo * 60 * 60 * 1000)) - 86400000))
       } while ((data.getHours() !== comparadorMedicamentoHoraInicial.getHours()))
       const dataAtual = new Date()
-      console.log(horasRemedio)
+      console.log(horasRemedio) 
       for (let i = 0; i < horasRemedio.length; i++) {
         if (horasRemedio[i].getTime() > dataAtual.getTime()) {
           medicamento.proximaHoraMedicamento = horasRemedio[i]
           break;
+        }else {
+          medicamento.proximaHoraMedicamento = horasRemedio[0]
         }
-
       }
     });
     this.medicamentos = medicamentos
     this.calcularDiasRestantesMedicamento()
+    this.medicamentos.reverse()
   }
 
   // new Date("dateString") is browser-dependent and discouraged, so we'll write
@@ -232,18 +233,18 @@ calcularDiasRestantesMedicamento() {
   // Round to nearest whole number to deal with DST.  
   return this.medicamentos.forEach(medicamento => {
     if(this.parseDate(medicamento.dataInicio).getTime() > this.dataAtual.getTime()){
-      medicamento.diasRestantes = 'Ainha não chegou o dia desse medicamento'
+      medicamento.diasRestantes = 'Data de Início Não Alcançada'
       return
     }
     else if(this.parseDate(medicamento.dataFim).getTime() < this.dataAtual.getTime()){
       medicamento.diasRestantes = 'Finalizado'
       return
     }
-    else if(this.parseDate(medicamento.dataInicio).getDate() === this.dataAtual.getDate()){
+    else if(this.parseDate(medicamento.dataFim).getDate() === this.dataAtual.getDate()){
       medicamento.diasRestantes = 'Finaliza Hoje'
       return
     }    
-    medicamento.diasRestantes = `${Math.round(Math.abs((this.dataAtual.getTime() - this.parseDate(medicamento.dataFim).getTime())/(this.umDia)))} para finalizar`
+    medicamento.diasRestantes = `${Math.round(Math.abs((this.dataAtual.getTime() - this.parseDate(medicamento.dataFim).getTime())/(this.umDia)))}`
   });
   
   

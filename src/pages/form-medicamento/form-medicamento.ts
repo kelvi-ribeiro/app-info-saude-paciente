@@ -71,7 +71,7 @@ export class FormMedicamentoPage {
   }
   salvarMedicamento(){
     this.medicamentoService.insert(this.formGroup.value).then(res=>{
-      this.notificacoesService.presentAlertDefault('Sucesso!','Medicamento Atualizado',null,this.navCtrl)
+      this.notificacoesService.presentAlertDefault('Sucesso!','Medicamento Adicionado',null,this.navCtrl)
       this.events.publish('medicamentos:refresh')
     })
   }
