@@ -103,6 +103,7 @@ export class FormMedicamentoPage {
       .setValue(this.utilsService.brazilianTimeToDate(this.medicamento.dataFim));
       this.formGroup.controls.horaInicial.setValue(this.medicamento.horaInicial);
       this.formGroup.controls.pacienteId.setValue(this.medicamento.pacienteId);
+      this.formGroup.controls.tipoMedicamentoId.setValue(this.medicamento.tipoMedicamentoId);
     }
   }
 }

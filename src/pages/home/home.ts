@@ -54,10 +54,32 @@ export class HomePage {
       });
       alert.present();
     }
-    apagarMedicamento(medicamento){
+
+    alertConcluirMedicamento(medicamento) {
+      let alert = this.alertCtrl.create({
+        title: "Atenção!",
+        message: "Concluiu o medicamento ?",
+        enableBackdropDismiss: false,
+        buttons: [
+          {
+            text: "Sim",
+            handler: () => {
+              this.setMedicamentoInativo(medicamento)
+            }
+          },
+          {
+            text: "Não"
+          }
+        ]
+      });
+      alert.present();
+    }
+
+    apagarMedicamento(medicamento){      
       this.medicamentoService.delete(medicamento.id)
-      .then(() =>{
-        this.obterMedicamentosAtivos()
+      .then(() =>{       
+        const indiceEliminado = this.medicamentos.findIndex(el => el.id === medicamento.id)
+        this.medicamentos.splice(indiceEliminado,1)       
       })
     }
 
@@ -65,7 +87,7 @@ export class HomePage {
     this.medicamentoService.findMedicamentosAtivosByPacienteId()
       .then(medicamentos => {
         this.calcularHoraProximoMedicamento(medicamentos)
-        this.obterExames()
+        this.obterExames()        
       })
       .catch(()=>{
         this.carregou = true;
@@ -73,6 +95,15 @@ export class HomePage {
   }
   atualizarMedicamento(medicamento){
     this.navCtrl.push('FormMedicamentoPage',{item:medicamento})
+  }
+
+  setMedicamentoInativo(medicamento){
+    this.medicamentoService.setInativo(medicamento.id)
+    .then(()=>{
+      const indiceEliminado = this.medicamentos.findIndex(el => el.id === medicamento.id)
+      this.medicamentos.splice(indiceEliminado,1)     
+      
+    })
   }
   obterExames(){
     this.exameService.findExamesByPacienteId()
@@ -149,6 +180,7 @@ export class HomePage {
     });
     this.medicamentos = medicamentos
     this.calcularDiasRestantesMedicamento()
+    this.medicamentos.reverse()
   }
 
   // new Date("dateString") is browser-dependent and discouraged, so we'll write
@@ -162,7 +194,7 @@ parseDate(data) {
 calcularDiasRestantesMedicamento() {
   // Take the difference between the dates and divide by milliseconds per day.
   // Round to nearest whole number to deal with DST.  
-  this.medicamentos.forEach(medicamento => {
+  return this.medicamentos.forEach(medicamento => {
     if(this.parseDate(medicamento.dataInicio).getTime() > this.dataAtual.getTime()){
       medicamento.diasRestantes = 'Ainha não chegou o dia desse medicamento'
       return
@@ -177,7 +209,8 @@ calcularDiasRestantesMedicamento() {
     }    
     medicamento.diasRestantes = `${Math.round(Math.abs((this.dataAtual.getTime() - this.parseDate(medicamento.dataFim).getTime())/(this.umDia)))} para finalizar`
   });
-
+  
+  
   }
 }
 

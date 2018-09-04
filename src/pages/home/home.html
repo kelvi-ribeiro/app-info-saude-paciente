@@ -33,10 +33,11 @@
         <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
           <ion-card>
             <ion-card-header>
+                <img class="align-horizontal" src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
               <ion-grid>
                 <ion-row>
                   <ion-col offset-10 col-2>
-                    <ion-icon (click)="alertApagarMedicamento(medicamento)" color="danger" class="icon-close" name="close"></ion-icon>
+                    <ion-icon *ngIf="medicamentos.length -1 !== i || medicamentos.length===1 " (click)="alertApagarMedicamento(medicamento)"  color="danger" class="icon-close" name="close"></ion-icon>
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -79,9 +80,12 @@
               </ion-grid>             
 
               <ion-grid>
-                <ion-row>                 
-                  <ion-col offset-10 col-2>
-                    <ion-icon (click)="atualizarMedicamento(medicamento)" color="primary" name="create"></ion-icon>
+                <ion-row> 
+                  <ion-col offset-8 col-2>
+                    <ion-icon *ngIf="medicamentos.length -1 !== i || medicamentos.length===1 " (click)="alertConcluirMedicamento(medicamento)" color="secondary" name="checkmark-circle-outline"></ion-icon>                
+                  </ion-col>
+                  <ion-col  col-2>
+                    <ion-icon  (click)="atualizarMedicamento(medicamento)" color="primary" name="create"></ion-icon>
                   </ion-col>
                 </ion-row>
               </ion-grid>
