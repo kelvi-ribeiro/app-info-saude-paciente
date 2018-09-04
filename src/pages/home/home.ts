@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, IonicPage, Events, Slides, AlertController } from 'ionic-angular';
+import { NavController, IonicPage, Events, Slides, AlertController, ActionSheetController } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 
 import { MedicamentoService } from '../../services/domain/medicamento.service';
@@ -27,7 +27,8 @@ export class HomePage {
     public storageService: StorageService,
     public medicamentoService: MedicamentoService,
     public exameService:ExameService,
-    public alertCtrl:AlertController
+    public alertCtrl:AlertController,
+    public actionSheetCtrl: ActionSheetController
 
   ) { }
 
@@ -35,6 +36,33 @@ export class HomePage {
       this.obterMedicamentosAtivos()
       
     }
+    presentActionSheet() {
+      const actionSheet = this.actionSheetCtrl.create({        
+        buttons: [
+          {
+            text: 'Adicionar Medicamento',             
+            icon:'flask',           
+            handler: () => {
+              this.navCtrl.push('FormMedicamentoPage')
+            }
+          },{
+            text: 'Adicionar Exame',
+            icon:'md-medkit',           
+            handler: () => {
+              this.navCtrl.push('FormExamePage')
+            }
+          },{
+            text: 'Cancelar',            
+            icon:'close',  
+            handler: () => {
+              
+            }
+          }
+        ]
+      });
+      actionSheet.present();
+    }
+
     alertApagarMedicamento(medicamento) {
       let alert = this.alertCtrl.create({
         title: "Atenção!",
