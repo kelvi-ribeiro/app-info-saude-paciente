@@ -27,11 +27,11 @@
                   </ion-col>
                 </ion-row>
               </ion-grid>
-              <img class="align-horizontal" src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
+              <img class="align-horizontal"  src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
               <ion-grid>
                 <ion-row>
                   <ion-col col-2>
-                    <ion-icon color="primary" name="ios-arrow-back" (click)="slidesMedicamentos.slidePrev()" [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
+                    <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesMedicamentos.slidePrev()" [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
                   </ion-col>
                   <ion-col col-8>
                     <h1 text-center>
@@ -95,7 +95,7 @@
               <ion-grid>
                 <ion-row>
                   <ion-col col-2>
-                    <ion-icon color="primary" name="ios-arrow-back" (click)="slidesExames.slidePrev()" [hidden]="slidesExames.isBeginning()"></ion-icon>
+                    <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesExames.slidePrev()" [hidden]="slidesExames.isBeginning()"></ion-icon>
                   </ion-col>
                   <ion-col col-8>
                     <h1 text-center>

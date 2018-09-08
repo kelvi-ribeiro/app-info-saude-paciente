@@ -10,9 +10,12 @@ page-meu-perfil {
   .text-bolder{
     font-weight: bolder;
   }
-  .card-white{
-    background: #E4E5E6;
-    border-radius: 10%;
+  .card-md h1,.card-ios h1,span{
+    color: #ffffff;
+  }
+  .card-md,.card-ios{
+    background:#352020;
+    border-radius:30px;
   }
   .padding-zero-col{
     padding:0;

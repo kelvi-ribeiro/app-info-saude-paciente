@@ -1,11 +1,15 @@
 page-home {
-
+    
     ion-icon{
       font-size: 30px;
       
     }
-    h1,span{
-      color: #020202;
+    .card-md h1,.card-ios h1,span{
+      color: #ffffff;
+    }
+    .card-md,.card-ios{
+      background:#352020;
+      border-radius:65px;
     }
     span{
       font-size:16px;
@@ -24,5 +28,9 @@ page-home {
     .position-fixed{
       position: fixed;
     }
+    .arrow-back-perfil{
+      color:#1b4da3;
+    }
+    
   }
 
