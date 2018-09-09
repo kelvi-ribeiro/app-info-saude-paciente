@@ -1,10 +1,8 @@
 <div class="conteudo content-login">
 
-  <img id="logoApp" src="assets/imgs/logoApp.png">
+  <img class="img-background" src="assets/imgs/background.png">
 
-  <div class="list-form">
-
-    <img id="capa" src="assets/imgs/capa.jpg" alt="Capa">
+  <div class="list-form">    
 
     <form #loginForm="ngForm" (ngSubmit)="login()" class="form-login">
 
@@ -12,7 +10,9 @@
         <ion-label>
           <ion-icon name="person" class="icone-form"></ion-icon>
         </ion-label>
-        <ion-input  (input)="creds.cpf = format(creds.cpf)"  round block name="cpf" type="text" placeholder="CPF" required [(ngModel)]="creds.cpf"></ion-input>
+        <ion-input  (input)="creds.cpf = format(creds.cpf)" 
+         round block name="cpf" type="text"
+          placeholder="EX:951.591.910-03" required [(ngModel)]="creds.cpf"></ion-input>
       </ion-item>
       <ion-item class="input-login">
         <ion-label>
@@ -23,15 +23,11 @@
       </ion-item>
 
       <ion-icon (click)="exibirSenhaInput()" id="icon-hide-show" [name]="typeSenha === 'password' ? 'eye-off':'eye'" name="eye-off" class="icone-form"></ion-icon>
-      <ion-grid>
-        <ion-row class="btn-row">
-          <ion-col>
-            <button ion-button round block [disabled]="!loginForm.form.valid" type="submit" class="btn-login">Entrar</button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <p [navPush]="'FormEsqueceuSenhaPage'">Esqueci minha senha</p>
+    
+      <button class="btn-logar" ion-button  full [disabled]="!loginForm.form.valid" type="submit" >Entrar</button>
+    
     </form>
-
+    
   </div>
+  <button class="btn-esquceu" color="danger" [navPush]="'FormEsqueceuSenhaPage'" ion-button  full  type="submit" >Esqueceu sua senha ?</button>      
 </div>
