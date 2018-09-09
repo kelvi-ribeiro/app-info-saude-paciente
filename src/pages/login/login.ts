@@ -54,10 +54,7 @@ export class LoginPage {
     public keychainService:KeychainTouchId,
     public notificacoesService:NotificacoesService) {
 
-      this.creds.cpf = storageService.getCpf();
-      this.creds.cpf = this.format(this.creds.cpf)
-
-
+      this.creds.cpf = this.format(storageService.getCpf());
   }
 
   ionViewWillEnter() {
@@ -83,42 +80,58 @@ export class LoginPage {
     this.typeSenha = 'password';
 
   }
+  validarCPF(strCPF) {
+    var Soma;
+    var Resto;
+    Soma = 0;
+    if (strCPF === "00000000000") return false;
 
+    for (let i = 1; i <= 9; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+    Resto = (Soma * 10) % 11;
 
+    if ((Resto == 10) || (Resto == 11)) Resto = 0;
+    if (Resto != parseInt(strCPF.substring(9, 10))) return false;
 
-  // ionViewDidEnter() {
-  //   this.auth.refreshToken()
-  //     .subscribe(response => {
-  //       this.auth.successfulLogin(response.headers.get('Authorization'));
-  //       this.navCtrl.setRoot(TabsPage);
-  //     },
-  //     error => {});
-  // }
+    Soma = 0;
+    for (let i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+    Resto = (Soma * 10) % 11;
 
+    if ((Resto == 10) || (Resto == 11)) Resto = 0;
+    if (Resto !== parseInt(strCPF.substring(10, 11), 10)) return false;
+    return true;
+}
   login() {
     const loading = this.presentLoadingDefault()
-    this.creds.cpf = this.retirarFormatacao(this.creds.cpf)
-    this.auth.authenticate(this.creds)
-      .subscribe(response => {
-        loading.dismiss()
-        this.auth.successfulLogin(response.headers.get('Authorization'))
-        .then(()=>{
-          this.secureStorageService.setSenha(this.creds.senha)
-          this.alertSalvarLogin(this.creds.cpf);
-          this.usuarioService
-          .findPacienteByPessoaCpf()
-          .then(() => {
-          this.events.publish('buscar:foto')
-
-        })
-          this.navCtrl.setRoot('HomePage');
-        });
-      }, error => {
-          console.log('Chegou aqui')
-          this.creds.cpf = this.format(this.creds.cpf)
-          loading.dismiss();
-         this.tratarErro(error);
-        })
+    const cpfSemFormatacao = this.retirarFormatacao(this.creds.cpf)
+    if(this.validarCPF(cpfSemFormatacao)){
+      const creds:CreadenciaisDTO = {
+        cpf:cpfSemFormatacao,
+        senha:this.creds.senha
+      }
+      this.auth.authenticate(creds)
+        .subscribe(response => {
+          loading.dismiss()
+          this.auth.successfulLogin(response.headers.get('Authorization'))
+          .then(()=>{
+            this.secureStorageService.setSenha(this.creds.senha)
+            this.alertSalvarLogin(this.creds.cpf);
+            this.usuarioService
+            .findPacienteByPessoaCpf()
+            .then(() => {
+            this.events.publish('buscar:foto')
+  
+          })
+            this.navCtrl.setRoot('HomePage');
+          });
+        }, error => {
+            console.log('Chegou aqui')            
+            loading.dismiss();
+           this.tratarErro(error);
+          })
+    }else{
+      loading.dismiss();
+      this.notificacoesService.presentAlertJustMessage('Falha!','CPF Inválido')
+    }
   }
   tratarErro(error){
     if(error.status==401){
