@@ -8,8 +8,9 @@ page-home {
       color: #ffffff;
     }
     .card-md,.card-ios{
-      background:#352020;
+      background:#39004c;
       border-radius:65px;
+      max-height:340px;
     }
     span{
       font-size:16px;
@@ -31,6 +32,10 @@ page-home {
     .arrow-back-perfil{
       color:#1b4da3;
     }
+    .swiper-slide img {      
+      height: 61px;
+      max-height: 50%;
+  }
     
   }
 
