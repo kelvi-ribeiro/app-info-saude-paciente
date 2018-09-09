@@ -8,13 +8,21 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-segment [(ngModel)]="segmentoAtivo" color="primary" >
+        <ion-segment-button value="medicamentos">
+          Medicamentos
+        </ion-segment-button>
+        <ion-segment-button value="exames">
+          exames
+        </ion-segment-button>
+      </ion-segment>
   <div *ngIf="!carregou" text-center>
     <ion-spinner name="bubbles"></ion-spinner>
   </div>
   <div *ngIf="carregou">
 
 
-    <div [hidden]="segmentoAtivo === 'Exames'">
+    <div *ngIf="segmentoAtivo === 'medicamentos'">
       <ion-slides #slidesMedicamentos>
         <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
           <ion-card>
@@ -81,6 +89,8 @@
           </ion-card>
         </ion-slide>
       </ion-slides>
+      </div>
+      <div *ngIf="segmentoAtivo === 'exames'">
       <ion-slides #slidesExames>
         <ion-slide *ngFor="let exame of exames; let i = index">
           <ion-card>
@@ -155,11 +165,11 @@
           </ion-card>
         </ion-slide>
       </ion-slides>
-      <ion-fab class="position-fixed" bottom left >
-        <button (click)="presentActionSheet()" ion-fab >
-          <ion-icon color="light" name="add"></ion-icon>
-        </button>
-      </ion-fab>
     </div>
+        <ion-fab class="position-fixed" bottom left >
+          <button (click)="presentActionSheet()" ion-fab >
+            <ion-icon color="light" name="add"></ion-icon>
+          </button>
+        </ion-fab>
   </div>
 </ion-content>

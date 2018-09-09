@@ -19,8 +19,9 @@ export class HomePage {
   carregou: boolean = false;
   medicamentos;
   dataAtual = new Date();
-  segmentoAtivo = 'Medicamentos';
+  segmentoAtivo = 'medicamentos';
   exames: any;  
+  
 
   constructor(
     public navCtrl: NavController,
