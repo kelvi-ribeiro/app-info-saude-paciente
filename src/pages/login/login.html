@@ -1,6 +1,7 @@
 <div class="conteudo content-login">
 
-  <img class="img-background" src="assets/imgs/background.png">
+  <!-- <img class="img-background" src="assets/imgs/background.png"> -->
+  <img id="logoApp" src="assets/imgs/newLogo.png">
 
   <div class="list-form">    
 
@@ -24,7 +25,7 @@
 
       <ion-icon (click)="exibirSenhaInput()" id="icon-hide-show" [name]="typeSenha === 'password' ? 'eye-off':'eye'" name="eye-off" class="icone-form"></ion-icon>
     
-      <button class="btn-logar" ion-button  full [disabled]="!loginForm.form.valid" type="submit" >Entrar</button>
+      <button color="secondary" class="btn-logar" ion-button  full [disabled]="!loginForm.form.valid" type="submit" >Entrar</button>
     
     </form>
     

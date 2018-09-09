@@ -6,22 +6,22 @@ page-login {
     box-shadow: inset 0 -1px 0 0 transparent;
   }
 
-  .item-md.item-block .item-inner {
+  /* .item-md.item-block .item-inner {
     padding-right: 8px;
     border-bottom: 1px solid transparent;
-  }
+  } */
 
-  page-login .input-login.item-input.input-has-focus .item-inner {
+ /*  page-login .input-login.item-input.input-has-focus .item-inner {
     border-bottom-color: #fff0;
     -webkit-box-shadow: inset 0 -1px 0 0 #fff0;
     box-shadow: inset 0 -1px 0 0 #fff0;
-  }
+  } */
 
   #logoApp {
     position: absolute;
     margin-top: 50px;
     align-self: center;
-    left: 29%;
+    left: 23%;
   }
   .img-finger {
     height: 100%;
@@ -33,6 +33,7 @@ page-login {
   .conteudo {
     height: 100%;
     width: 100%;    
+    background: linear-gradient(50deg, #0044ff, #008cff);
     background-attachment: fixed;
     font-family: Helvetica, Arial, sans-serif;
     overflow-x: hidden;
