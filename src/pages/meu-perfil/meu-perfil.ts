@@ -10,13 +10,9 @@ import {
   Platform
 } from "ionic-angular";
 import { UsuarioService } from "../../services/domain/usuario.service";
-import { CameraOptions, Camera } from "@ionic-native/camera";
+import {Camera } from "@ionic-native/camera";
 import { NotificacoesService } from "../../services/domain/notificacoes.service";
 import { DomSanitizer } from "@angular/platform-browser";
-import {
-  PhotoViewer,
-  PhotoViewerOptions
-} from "../../../node_modules/@ionic-native/photo-viewer";
 import { PopoverMeuPerfilPage } from "../../popovers/popover-meu-perfil/popover-meu-perfil";
 
 
@@ -74,21 +70,14 @@ export class MeuPerfilPage {
     });
   }
   viewFoto() {
-      if(this.paciente.profileImage.changingThisBreaksApplicationSecurity !=undefined){
-        const photoViewer = new PhotoViewer();
-      let options: PhotoViewerOptions = {
-        share: true // default is false
-      };
-      photoViewer.show(
-        `${API_CONFIG.bucketBaseUrl}/${
-          this.storageService.getUser().pessoa.urlFoto
-        }`,
-        "Minha Foto de Perfil",
-        options
-      );
-
-      }
-
+    if(this.paciente.profileImage.changingThisBreaksApplicationSecurity !=undefined){
+      window.open(`${API_CONFIG.bucketBaseUrl}/${
+        this.storageService.getUser().pessoa.urlFoto
+      }`)
+      return
+    }
+      window.open(`${API_CONFIG.bucketBaseUrl}/avatar-blank.png`)
+      
   }
   pegarFotoUser(){
       if(this.storageService.getUser().imageDataUrl != undefined)
