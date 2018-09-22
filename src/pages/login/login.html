@@ -24,10 +24,10 @@
         <ion-input round block (ionFocus)="focusPasswordInput()" name="senha" [type]="typeSenha" placeholder="Senha"
           required [(ngModel)]="creds.senha"></ion-input>
       </ion-item>
-      <ion-row>
+      <ion-row class="esqueci">
         <ion-grid>
-          <ion-col offset-4 col-5>
-            <a [navPush]="'FormEsqueceuSenhaPage'">Esqueci minha senha</a>
+          <ion-col offset-6 col-6>
+            <span   [navPush]="'FormEsqueceuSenhaPage'">Esqueci minha senha</span>            
           </ion-col>
         </ion-grid>
       </ion-row>
@@ -35,7 +35,7 @@
       <ion-icon (click)="exibirSenhaInput()" id="icon-hide-show" [name]="typeSenha === 'password' ? 'eye-off':'eye'"
         name="eye-off" class="icone-form"></ion-icon>
 
-      <ion-row>
+      <ion-row class="row-btn">
         <ion-grid>
           <ion-col offset-1 col-10>
             <button color="primary" ion-button full [disabled]="!loginForm.form.valid" type="submit">Entrar</button>
