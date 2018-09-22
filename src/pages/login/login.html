@@ -1,11 +1,11 @@
 <div class="conteudo content-login">
 
   <img class="img-background" src="assets/imgs/background.jpg">
-  
 
-  <div class="list-form">    
 
-      <!-- <img id="capa" src="assets/imgs/newLogo.png" alt="Capa"> -->
+  <div class="list-form">
+
+    <!-- <img id="capa" src="assets/imgs/newLogo.png" alt="Capa"> -->
 
     <form #loginForm="ngForm" (ngSubmit)="login()" class="form-login">
 
@@ -13,37 +13,36 @@
         <ion-label>
           <ion-icon name="person" class="icone-form"></ion-icon>
         </ion-label>
-        <ion-input placeholder="CPF"  (input)="creds.cpf = format(creds.cpf)" 
-         round block name="cpf" type="text"
-           required [(ngModel)]="creds.cpf"></ion-input>
+        <ion-input placeholder="CPF" (input)="creds.cpf = format(creds.cpf)" round block name="cpf" type="text"
+          required [(ngModel)]="creds.cpf"></ion-input>
       </ion-item>
       <ion-item class="input-login password">
         <ion-label>
           <ion-icon name="key" class="icone-form"></ion-icon>
 
         </ion-label>
-        <ion-input round block (ionFocus)="focusPasswordInput()" name="senha" [type]="typeSenha" placeholder="Senha" required [(ngModel)]="creds.senha"></ion-input>
+        <ion-input round block (ionFocus)="focusPasswordInput()" name="senha" [type]="typeSenha" placeholder="Senha"
+          required [(ngModel)]="creds.senha"></ion-input>
       </ion-item>
       <ion-row>
         <ion-grid>
           <ion-col offset-4 col-5>
-            <a>Esqueci minha senha</a>
+            <a [navPush]="'FormEsqueceuSenhaPage'">Esqueci minha senha</a>
           </ion-col>
         </ion-grid>
       </ion-row>
 
-      <ion-icon (click)="exibirSenhaInput()" id="icon-hide-show" [name]="typeSenha === 'password' ? 'eye-off':'eye'" name="eye-off" class="icone-form"></ion-icon>
-      
+      <ion-icon (click)="exibirSenhaInput()" id="icon-hide-show" [name]="typeSenha === 'password' ? 'eye-off':'eye'"
+        name="eye-off" class="icone-form"></ion-icon>
+
       <ion-row>
         <ion-grid>
           <ion-col offset-1 col-10>
-            <button color="primary"   ion-button full [disabled]="!loginForm.form.valid" type="submit" >Entrar</button>
+            <button color="primary" ion-button full [disabled]="!loginForm.form.valid" type="submit">Entrar</button>
           </ion-col>
         </ion-grid>
       </ion-row>
-    
+
     </form>
-    
   </div>
-  <!-- <button class="btn-esquceu" color="danger" [navPush]="'FormEsqueceuSenhaPage'" ion-button  full  type="submit" >Esqueceu sua senha ?</button>       -->
 </div>

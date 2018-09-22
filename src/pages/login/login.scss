@@ -6,7 +6,7 @@ page-login {
     width: 79%;
   }
   .input-wrapper{
-    border-bottom: 1px solid red;
+    border-bottom: 2px solid #4075DC;
   }
   .password{
     top:-16px;
@@ -140,6 +140,7 @@ page-login {
   }  
     a{
       color:$color-white;
+      text-decoration: none;
     }
 
   #icon-hide-show{
