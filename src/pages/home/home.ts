@@ -46,7 +46,7 @@ export class HomePage {
       
     }
     presentActionSheet() {
-      const actionSheet = this.actionSheetCtrl.create({        
+      const actionSheet = this.actionSheetCtrl.create({          
         buttons: [
           {
             text: 'Adicionar Medicamento',             
