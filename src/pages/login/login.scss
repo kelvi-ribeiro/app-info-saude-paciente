@@ -1,15 +1,21 @@
 page-login {
-  $color-white:#ffff;
+  $color-white:#ffffff;
   $font-size:30px;
   .item-md{
     padding:0;
     width: 79%;
   }
   .input-wrapper{
-    border-bottom: 2px solid #4075DC;
+    border-bottom: 1px solid #4075DC;
+    top:-1px;
   }
   .password{
-    top:-16px;
+    top:4px;
+  }
+  .row-btn{
+    position: relative;
+    top: 9px;
+    
   }
  
     .conteudo {
@@ -44,7 +50,7 @@ page-login {
     background:#005aff;
   }  
   .icone-form {
-    padding-left: 16px;
+    padding-left: 1px;
     font-size: $font-size;
   }   
   .input-login {
@@ -52,17 +58,13 @@ page-login {
     background: transparent;
     border: none;
     border-radius: none;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
     padding-left: 0px !important;
     .label {
       font-size: $font-size;
       color: $color-white;
     }
-    &.item-input.input-has-focus {      
-      .label {
-        color:$color-white;
-      }
-    }
+    
     .text-input,
     ::-webkit-input-placeholder {
       color: $color-white;
@@ -127,26 +129,23 @@ page-login {
     width: 100%;    
     padding-bottom: 20%;
    
-  }
-  .card-ios,
-  .card-md {
-    margin: 12px;
-    border-radius: 2px;
-    width: calc(100% - 24px);
-    font-size: $font-size;
-    background: #fff;
-    -webkit-box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.3);
-    box-shadow: 0 2px 20px 10px rgba(0, 0, 0, 0.3);
   }  
-    a{
+    .esqueci{      
       color:$color-white;
+      margin-bottom: 20px;
       text-decoration: none;
+      position: relative;
+      top: 15px;      
+      span{
+        position: relative;
+        left: -41%;        
+      }     
     }
 
   #icon-hide-show{
    position: absolute;
-   left: 77%;
-   top: 30%;
+   left: 82%;
+   top: 33%;
    font-size:$font-size;
    color: $color-white;
   }
