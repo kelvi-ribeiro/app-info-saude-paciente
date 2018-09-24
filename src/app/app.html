@@ -19,7 +19,8 @@
 
                 <ion-row no-padding class="other-data">
                     <ion-col no-padding class="column">
-                        <button (click)="openPage('MeuPerfilPage')" ion-button icon-left small full color="light" menuClose >
+                        <button color="light" (click)="openPage('MeuPerfilPage')" 
+                        ion-button icon-left small full color="light" menuClose >
                             <ion-icon name="contact"></ion-icon>
                             Meu Perfil
                         </button>
@@ -37,28 +38,38 @@
         </ion-toolbar>
     </ion-header>
 
-    <ion-content class="content-side-menu" color="primary">
-        <ion-list class="user-list">
+    <ion-content class="content-side-menu" color="light">
+        <ion-list no-lines class="user-list">
             <button ion-item menuClose class="text-1x"  (click)="openPage('HomePage')">
-                <ion-icon item-left name="home" color="primary"></ion-icon>
-                <span ion-text color="primary">Início</span>
+                <ion-icon item-left name="home" color="light"></ion-icon>
+                <span ion-text color="light">Início</span>
             </button>            
             <hr>
             <button ion-item menuClose class="text-1x"  (click)="openPage('LocalExamePage')">
-                    <ion-icon item-left name="pin" color="primary"></ion-icon>
-                    <span ion-text color="primary">Locais de Exame</span>
-                </button>        
-
-            
+                    <ion-icon item-left name="pin" color="light"></ion-icon>
+                    <span ion-text color="light">Locais de Exame</span>
+            </button>        
+                <hr>
+            <button ion-item menuClose class="text-1x"  (click)="openPage('FormExamePage')">
+                    <ion-icon item-left name="md-medkit" color="light"></ion-icon>
+                    <span ion-text color="light">Adicionar Exame</span>
+            </button>        
+                <hr>                            
+            <button ion-item menuClose class="text-1x"  (click)="openPage('FormMedicamentoPage')">
+                    <ion-icon item-left name="flask" color="light"></ion-icon>
+                    <span ion-text color="light">Adicionar Medicamento</span>
+            </button>        
+                <hr>
             <button *ngIf="temRecursoBiometria && !hasFinger" (click)="salvaBiometria()" ion-item menuClose class="text-1x"  >
-              <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="primary"></ion-icon>
-              <span ion-text color="primary">Adicionar Biometeria</span>
+              <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="light"></ion-icon>
+              <span ion-text color="light">Adicionar Biometeria</span>
           </button>
-
+          
           <button *ngIf="temRecursoBiometria && hasFinger" (click)="alertRemoverBiometria()" ion-item menuClose class="text-1x"  >
-            <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="primary"></ion-icon>
-            <span ion-text color="primary">Remover Biometria</span>
+            <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="light"></ion-icon>
+            <span ion-text color="light">Remover Biometria</span>
         </button>
+        <hr>
         </ion-list>
     </ion-content>
 
