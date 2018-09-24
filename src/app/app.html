@@ -58,18 +58,19 @@
             <button ion-item menuClose class="text-1x"  (click)="openPage('FormMedicamentoPage')">
                     <ion-icon item-left name="flask" color="light"></ion-icon>
                     <span ion-text color="light">Adicionar Medicamento</span>
-            </button>        
+            </button>      
+            <div *ngIf="temRecursoBiometria">
+                <button *ngIf="temRecursoBiometria && !hasFinger" (click)="salvaBiometria()" ion-item menuClose class="text-1x"  >
+                  <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="light"></ion-icon>
+                  <span ion-text color="light">Adicionar Biometeria</span>
+              </button>              
+              <button *ngIf="temRecursoBiometria && hasFinger" (click)="alertRemoverBiometria()" ion-item menuClose class="text-1x"  >
+                <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="light"></ion-icon>
+                <span ion-text color="light">Remover Biometria</span>
+            </button>
+            <hr>
+            </div>  
                 <hr>
-            <button *ngIf="temRecursoBiometria && !hasFinger" (click)="salvaBiometria()" ion-item menuClose class="text-1x"  >
-              <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="light"></ion-icon>
-              <span ion-text color="light">Adicionar Biometeria</span>
-          </button>
-          
-          <button *ngIf="temRecursoBiometria && hasFinger" (click)="alertRemoverBiometria()" ion-item menuClose class="text-1x"  >
-            <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="light"></ion-icon>
-            <span ion-text color="light">Remover Biometria</span>
-        </button>
-        <hr>
         </ion-list>
     </ion-content>
 

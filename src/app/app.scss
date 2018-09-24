@@ -66,7 +66,7 @@ ion-title {
     color:#ffffff;
 }
 .content-md,.content-ios {
-    background-color: #8fb5f9;
+    background-color: lighten(color($colors,primary),41%);
     
 }
 
