@@ -75,7 +75,7 @@
               </ion-grid>
 
               <ion-grid>
-                <ion-row>
+                <ion-row class="row-icones-inferiores">
                   <ion-col  col-2>
                     <ion-icon *ngIf="medicamentos.length -1 !== i || medicamentos.length===1 " (click)="alertConcluirMedicamento(medicamento)"
                       color="secondary" name="checkmark-circle-outline"></ion-icon>
@@ -121,38 +121,38 @@
             <ion-card-content>
               <ion-grid>
                 <ion-row>
-                  <ion-col col-4 pull-1>
+                  <ion-col offset-2 col-3 >
                     <span>Local:</span>
                   </ion-col>
-                  <ion-col col-8 pull-3>
+                  <ion-col col-7 pull-1 >
                     <span>{{exame.localExameNome}}</span>
                   </ion-col>
                 </ion-row>
               </ion-grid>
               <ion-grid>
                 <ion-row>
-                  <ion-col col-4 pull-1>
+                  <ion-col offset-2 col-3 >
                     <span>Data:</span>
                   </ion-col>
-                  <ion-col col-8 pull-3>
-                    <span class="ajuste-esquerda">{{exame.data.substr(0,10) }}</span>
+                  <ion-col col-7 pull-1>
+                    <span >{{exame.data.substr(0,10) }}</span>
                   </ion-col>
                 </ion-row>
               </ion-grid>
 
               <ion-grid>
                 <ion-row>
-                  <ion-col col-4 pull-1>
-                    <span class="ajuste-direita">Horário:</span>
+                  <ion-col col-3 offset-2>
+                    <span >Horário:</span>
                   </ion-col>
-                  <ion-col col-8 pull-3>
-                    <span class="ajuste-esquerda">{{exame.data.substr(11,16) }}</span>
+                  <ion-col col-7 pull-1>
+                    <span >{{exame.data.substr(11,16) }}</span>
                   </ion-col>
                 </ion-row>
               </ion-grid>
 
               <ion-grid>
-                <ion-row>
+                <ion-row class="row-icones-inferiores">
                   <ion-col  col-2>
                     <ion-icon (click)="localizarExame(exame)" color="danger" name="pin"></ion-icon>
                   </ion-col>

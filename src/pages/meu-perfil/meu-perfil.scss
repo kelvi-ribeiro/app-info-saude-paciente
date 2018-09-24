@@ -14,9 +14,8 @@ page-meu-perfil {
     color: #ffffff;
   }
   .card-md,.card-ios{
-    background:#39004c;
-    border-radius:30px;
-  }
+    background:color($colors,colorCard);    
+  }    
   .padding-zero-col{
     padding:0;
   }

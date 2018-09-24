@@ -10,7 +10,7 @@
     display: block;
 }
 .text-white{
-  color: map-get($colors, light);
+  color: color($colors, light);
 }
 .text-bold{
   font-weight: bold;

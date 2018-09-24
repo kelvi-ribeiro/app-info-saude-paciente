@@ -5,11 +5,13 @@ page-home {
       
     }
     .card-md h1,.card-ios h1,span{
-      color: #1b4da3;
+      color: color($colors, primary);
     }
     .card-md,.card-ios{
-      background:#dcddb1;
-      height: 380px;
+      background:color($colors,colorCard);
+      height: 352px;
+      min-height: 352px;
+      max-height: 352px;
     }    
   
     //Segmentos
@@ -19,8 +21,8 @@ page-home {
   }
 
   .segment-md-primary .segment-button.activated, .segment-md-primary .segment-button.segment-activated {
-    border-color: #ffffff;
-    color: #ffffff;
+    border-color: color($colors, light);
+    color: color($colors, light);
     opacity: 1;
 }
     
@@ -40,7 +42,7 @@ page-home {
       position: fixed;
     }
     .arrow-back-perfil{
-      color:#1b4da3;
+      color:color($colors, primary);
     }
     .swiper-slide img {      
       height: 61px;
@@ -50,13 +52,18 @@ page-home {
     padding: 10px 12px 0 12px;
     margin-bottom: 22px;
   }
+
+  .row-icones-inferiores{
+    position: relative;
+    bottom: 10px;
+    }
     
   }
 
   .action-sheet-md .action-sheet-group {
      background: #8BA2FB;  
      & > button > span{
-       color:white;
+       color:color($colors, light);
      }
 
 }
