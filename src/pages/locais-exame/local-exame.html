@@ -18,68 +18,112 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-
-
 </ion-header>
 
 
-<ion-content padding>
-  <ion-card (press)="presentPopover($event,localExame)" *ngFor="let localExame of locaisExame" class="card-white">
-    <ion-card-content>
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Nome: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{localExame?.nome}}</p>
-        </ion-col>
-      </ion-row>
+<ion-content>
+    <ion-slides #slidesLocaisExame>
+      <ion-slide *ngFor="let localExame of locaisExame; let i = index">
+        <ion-card class="card-locaisExame">
+          <ion-card-header>              
+            <ion-grid>
+              <ion-row>
+                <ion-col offset-10 col-2>
+                  <!-- <ion-icon *ngIf="locaisExame.length -1 !== i || locaisExame.length ===1 "
+                    color="danger" class="icon-close" name="close"></ion-icon> -->
+                </ion-col>
+              </ion-row>
+            </ion-grid>            
+            <ion-grid>
+              <ion-row>
+                <ion-col col-2>
+                  <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" 
+                  (click)="slidesLocaisExame.slidePrev()" [hidden]="slidesLocaisExame.isBeginning()"></ion-icon>
+                </ion-col>
+                <ion-col col-7>
+                  <h1 text-center>
+                    {{localExame?.nome}}
+                  </h1>
+                </ion-col>
+                <ion-col offset-1 col-2>
+                  <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesLocaisExame.slideNext()" [hidden]="slidesLocaisExame.isEnd()"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-8>
+                  <span>Número:</span>
+                </ion-col>
+                <ion-col col-4 pull-1>
+                  <span>{{localExame?.enderecoNumero}}</span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-7>
+                  <span>Rua:</span>
+                </ion-col>
+                <ion-col col-5 pull-1>
+                  <span>{{localExame?.enderecoLogradouro}}</span>
+                </ion-col>
+              </ion-row>
 
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Número: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{localExame?.enderecoNumero}}</p>
-        </ion-col>
-      </ion-row>
+              <ion-row>
+                <ion-col col-7>
+                  <span>Bairro:</span>
+                </ion-col>
+                <ion-col col-5 pull-1>
+                  <span>{{localExame?.enderecoBairro}}</span>
+                </ion-col>
+              </ion-row>
 
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Logradouro: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{localExame?.enderecoLogradouro}}</p>
-        </ion-col>
-      </ion-row>
+              <ion-row>
+                <ion-col col-7>
+                  <span>CEP:</span>
+                </ion-col>
+                <ion-col col-5 pull-1>
+                  <span>{{localExame?.enderecoCep}}</span>
+                </ion-col>
+              </ion-row>
 
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Bairro: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{localExame?.enderecoBairro}}</p>
-        </ion-col>
-      </ion-row>
+              <ion-row>
+                <ion-col col-7>
+                  <span>Cidade:</span>
+                </ion-col>
+                <ion-col col-5 pull-1>
+                  <span>{{localExame?.cidadeNome}}</span>
+                </ion-col>
+              </ion-row>
 
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">CEP: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{localExame?.enderecoCep}}</p>
-        </ion-col>
-      </ion-row>
 
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Cidade: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{localExame?.cidadeNome}}</p>
-        </ion-col>
-      </ion-row>
+            </ion-grid>
 
-    </ion-card-content>
-  </ion-card>
+            <ion-grid>
+              <ion-row class="row-icones-inferiores">
+                <ion-col  col-2>
+                  <ion-icon *ngIf="locaisExame.length -1 !== i || locaisExame.length===1 " (click)="alertConcluirMedicamento(medicamento)"
+                    color="secondary" name="checkmark-circle-outline"></ion-icon>
+                </ion-col>
+                <ion-col offset-8 col-2>
+                  <ion-icon (click)="atualizarMedicamento(medicamento)" color="primary" name="create"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>    
+    
+    
+  
+      <ion-fab class="position-fixed" bottom left >
+        <button (click)="presentActionSheet()" ion-fab >
+          <ion-icon color="light" name="add"></ion-icon>
+        </button>
+      </ion-fab>
+
 </ion-content>

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, PopoverController, Slides } from 'ionic-angular';
 import { LocalExameService } from '../../services/domain/localExame.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { PopoverDefaultPage } from '../../popovers/popover-default/popover-default';
@@ -17,7 +17,8 @@ import { PopoverDefaultPage } from '../../popovers/popover-default/popover-defau
   templateUrl: 'local-exame.html',
 })
 export class LocalExamePage {
-  locaisExame;
+  locaisExame = [];
+  @ViewChild('slidesLocaisExames') slidesLocaisExames: Slides;
   constructor(
               public navCtrl: NavController,
               public navParams: NavParams,
