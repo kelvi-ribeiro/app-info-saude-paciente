@@ -8,10 +8,11 @@ page-home {
       color: color($colors, primary);
     }
     .card-md,.card-ios{
+
       background:color($colors,colorCard);
-      height: 352px;
-      min-height: 352px;
-      max-height: 352px;
+      height: $height-card;
+      min-height: $height-card;
+      max-height: $height-card;
     }    
   
     //Segmentos
