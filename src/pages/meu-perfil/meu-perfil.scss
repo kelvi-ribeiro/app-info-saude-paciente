@@ -11,7 +11,7 @@ page-meu-perfil {
     font-weight: bolder;
   }
   .card-md h1,.card-ios h1,span{
-    color: #ffffff;
+    color: color($colors,primary);
   }
   .card-md,.card-ios{
     background:color($colors,colorCard);    
