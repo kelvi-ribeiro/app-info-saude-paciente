@@ -56,19 +56,7 @@ page-local-exame {
 .row-icones-inferiores{
   position: relative;
   bottom: 10px;
-  }
-  
+  }  
 }
 
-.action-sheet-md .action-sheet-group {
-   background: #8BA2FB;  
-   & > button > span{
-     color:color($colors, light);
-   }
-
-}
-
-.action-sheet-button-default-md-activated{
-background: red;
-}
 
