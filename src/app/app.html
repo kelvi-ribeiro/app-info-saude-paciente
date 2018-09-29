@@ -59,6 +59,7 @@
                     <ion-icon item-left name="flask" color="light"></ion-icon>
                     <span ion-text color="light">Adicionar Medicamento</span>
             </button>      
+            <hr>
             <div *ngIf="temRecursoBiometria">
                 <button *ngIf="temRecursoBiometria && !hasFinger" (click)="salvaBiometria()" ion-item menuClose class="text-1x"  >
                   <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="light"></ion-icon>
@@ -68,9 +69,8 @@
                 <ion-icon item-left ios="ios-finger-print" md="md-finger-print" color="light"></ion-icon>
                 <span ion-text color="light">Remover Biometria</span>
             </button>
-            <hr>
+            <hr>            
             </div>  
-                <hr>
         </ion-list>
     </ion-content>
 
