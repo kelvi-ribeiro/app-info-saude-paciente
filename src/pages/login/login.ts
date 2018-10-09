@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { NavController, NavParams, MenuController, AlertController, LoadingController, Events } from 'ionic-angular';
+import { NavController, MenuController, AlertController, Events } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import { CreadenciaisDTO } from '../../models/credenciais.dto';
 import { UsuarioService } from '../../services/domain/usuario.service';
@@ -47,8 +47,7 @@ export class LoginPage {
     public auth: AuthService,
     public usuarioService:UsuarioService,
     public storageService:StorageService,
-    public alertCtrl:AlertController,
-    public loadingCtrl:LoadingController,
+    public alertCtrl:AlertController,    
     public events: Events,
     public secureStorageService:SecureStorageService,
     public keychainService:KeychainTouchId,
@@ -101,7 +100,7 @@ export class LoginPage {
     return true;
 }
   login() {
-    const loading = this.presentLoadingDefault()
+    const loading = this.notificacoesService.presentLoadingDefault('Autenticando...')
     const cpfSemFormatacao = this.retirarFormatacao(this.creds.cpf)
     if(this.validarCPF(cpfSemFormatacao)){
       const creds:CreadenciaisDTO = {
@@ -123,9 +122,8 @@ export class LoginPage {
           })
             this.navCtrl.setRoot('HomePage');
           });
-        }, error => {
-            console.log('Chegou aqui')            
-            loading.dismiss();
+        }, error => {                
+           loading.dismiss();
            this.tratarErro(error);
           })
     }else{
@@ -188,15 +186,7 @@ export class LoginPage {
       ]
     });
     alert.present();
-   }
-   presentLoadingDefault() {
-    let loading = this.loadingCtrl.create({
-      content: 'Autenticando...'
-    });
-
-    loading.present();
-    return loading;
-  }
+   } 
 
   retirarFormatacao(cpfFormatado) {
      return  cpfFormatado.replace(/(\.|\/|\-)/g,"");

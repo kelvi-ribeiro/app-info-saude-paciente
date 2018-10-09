@@ -4,7 +4,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { API_CONFIG } from "../../config/api.config";
 import { StorageService } from "../storage.service";
 import { Observable } from "rxjs/Observable";
-import { ToastController,NavController } from "ionic-angular";
+import { ToastController,NavController, LoadingController } from "ionic-angular";
 
 
 
@@ -16,7 +16,8 @@ export class NotificacoesService {
     public http: HttpClient,
     public storage: StorageService,
     public alertCtrl:AlertController,
-    public toastCtrl:ToastController
+    public toastCtrl:ToastController,
+    public loadingCtrl:LoadingController
 
     ) {
   }
@@ -64,8 +65,13 @@ export class NotificacoesService {
     });
     alert.present();
   }
-
-
+  presentLoadingDefault(message) {
+    let loading = this.loadingCtrl.create({
+      content: message
+    });
+    loading.present();
+    return loading;
+  }
 
 }
 

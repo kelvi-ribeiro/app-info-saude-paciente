@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams} from 'ionic-angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
@@ -24,7 +24,8 @@ export class FormEsqueceuSenhaPage {
               public navParams: NavParams,
               public formBuilder:FormBuilder,
               public usuarioService:UsuarioService,
-              public notificacoesService:NotificacoesService) {
+              public notificacoesService:NotificacoesService,
+              ) {
 
     this.formGroup = this.formBuilder.group({
       pessoaEmail: ['', [Validators.required, Validators.email,]],
@@ -49,18 +50,19 @@ export class FormEsqueceuSenhaPage {
       pessoaEmail:this.formGroup.value.pessoaEmail,
       novaSenha:this.formGroup.value.novaSenha
     }
-
+    const loading = this.notificacoesService.presentLoadingDefault('Aguarde...')
     this.usuarioService.esqueceuSenha(objNovaSenha)
     .then(()=>{
       this.notificacoesService.presentAlertJustMessage('Sucesso!!!','Verifique seu email para confirmar sua nova senha');
+      loading.dismiss()
       this.navCtrl.pop();
     })
-    .catch((error)=>{
+    .catch(() => {
+        loading.dismiss()
         this.notificacoesService.presentAlertJustMessage('Falha!!!','Não foi possível encontrar alguém com esse email')
 
     })
   }
-
-
+ 
 
 }
