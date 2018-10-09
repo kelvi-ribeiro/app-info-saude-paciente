@@ -4,6 +4,7 @@ import { StorageService } from '../../services/storage.service';
 
 import { MedicamentoService } from '../../services/domain/medicamento.service';
 import { ExameService } from '../../services/domain/exame.service';
+import { NavParams } from 'ionic-angular/navigation/nav-params';
 
 @IonicPage()
 @Component({
@@ -19,12 +20,13 @@ export class HomePage {
   carregou: boolean = false;
   medicamentos;
   dataAtual = new Date();
-  segmentoAtivo = 'medicamentos';
+  segmentoAtivo = this.navParams.get('segmentoExame') !== undefined ? 'exames':'medicamentos';  
   exames: any;  
   
 
   constructor(
     public navCtrl: NavController,
+    public navParams:NavParams,
     public storageService: StorageService,
     public medicamentoService: MedicamentoService,
     public exameService:ExameService,
@@ -32,7 +34,9 @@ export class HomePage {
     public actionSheetCtrl: ActionSheetController,
     public events:Events
 
-  ) { }
+  ) { 
+    
+  }
 
   ionViewDidLoad() {
       this.events.subscribe('medicamentos:refresh' ,()=>{
@@ -123,8 +127,7 @@ export class HomePage {
     apagarMedicamento(medicamento){      
       this.medicamentoService.delete(medicamento.id)
       .then(() =>{       
-        const indiceEliminado = this.medicamentos.findIndex(el => el.id === medicamento.id)
-        this.medicamentos.splice(indiceEliminado,1)       
+        this.navCtrl.setRoot(this.navCtrl.getActive().component);
       })
     }
 
@@ -186,8 +189,8 @@ export class HomePage {
   }
   apagarExame(exame){
     this.exameService.delete(exame.id)
-    .then(() =>{
-      this.obterExames()
+    .then(() =>{      
+      this.navCtrl.setRoot(this.navCtrl.getActive().component,{segmentoExame:'segmentoExame'});
     })
   }
   localizarExame(exame){    

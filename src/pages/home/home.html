@@ -30,7 +30,7 @@
               <ion-grid>
                 <ion-row>
                   <ion-col offset-10 col-2>
-                    <ion-icon *ngIf="medicamentos.length -1 !== i || medicamentos.length===1 " (click)="alertApagarMedicamento(medicamento)"
+                    <ion-icon  (click)="alertApagarMedicamento(medicamento)"
                       color="danger" class="icon-close" name="close"></ion-icon>
                   </ion-col>
                 </ion-row>
@@ -77,7 +77,7 @@
               <ion-grid>
                 <ion-row class="row-icones-inferiores">
                   <ion-col  col-2>
-                    <ion-icon *ngIf="medicamentos.length -1 !== i || medicamentos.length===1 " (click)="alertConcluirMedicamento(medicamento)"
+                    <ion-icon  (click)="alertConcluirMedicamento(medicamento)"
                       color="secondary" name="checkmark-circle-outline"></ion-icon>
                   </ion-col>
                   <ion-col offset-8 col-2>
