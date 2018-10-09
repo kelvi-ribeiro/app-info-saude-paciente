@@ -49,6 +49,10 @@ export class HomePage {
       this.obterMedicamentosAtivos()
       
     }
+
+    refreshPage(){
+      this.navCtrl.setRoot(this.navCtrl.getActive().component);
+    }
     presentActionSheet() {
       const actionSheet = this.actionSheetCtrl.create({          
         buttons: [
@@ -127,7 +131,7 @@ export class HomePage {
     apagarMedicamento(medicamento){      
       this.medicamentoService.delete(medicamento.id)
       .then(() =>{       
-        this.navCtrl.setRoot(this.navCtrl.getActive().component);
+        this.refreshPage()
       })
     }
 
@@ -148,9 +152,7 @@ export class HomePage {
   setMedicamentoInativo(medicamento){
     this.medicamentoService.setInativo(medicamento.id)
     .then(()=>{
-      const indiceEliminado = this.medicamentos.findIndex(el => el.id === medicamento.id)
-      this.medicamentos.splice(indiceEliminado,1)     
-      
+      this.refreshPage()      
     })
   }
   obterExames(){
