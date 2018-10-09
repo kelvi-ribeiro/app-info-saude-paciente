@@ -25,15 +25,7 @@
     <ion-slides #slidesLocaisExame>
       <ion-slide *ngFor="let localExame of locaisExame; let i = index">
         <ion-card class="card-locaisExame">
-          <ion-card-header>              
-            <ion-grid>
-              <ion-row>
-                <ion-col offset-10 col-2>
-                  <!-- <ion-icon *ngIf="locaisExame.length -1 !== i || locaisExame.length ===1 "
-                    color="danger" class="icon-close" name="close"></ion-icon> -->
-                </ion-col>
-              </ion-row>
-            </ion-grid>            
+          <ion-card-header>                          
             <ion-grid>
               <ion-row>
                 <ion-col col-2>
@@ -51,50 +43,49 @@
               </ion-row>
             </ion-grid>
           </ion-card-header>
-          <ion-card-content>
+          <ion-card-content>            
+            
             <ion-grid>
               <ion-row>
-                <ion-col col-8>
+                <ion-col col-4  >
                   <span>Número:</span>
                 </ion-col>
-                <ion-col col-4 pull-1>
+                <ion-col class="ajuste-esquerda" col-2 pull-6 >
                   <span>{{localExame?.enderecoNumero}}</span>
                 </ion-col>
               </ion-row>
-            </ion-grid>
-            <ion-grid>
               <ion-row>
-                <ion-col col-7>
+                <ion-col col-3 >
                   <span>Rua:</span>
                 </ion-col>
-                <ion-col col-5 pull-1>
+                <ion-col col-8 pull-2 >
                   <span>{{localExame?.enderecoLogradouro}}</span>
                 </ion-col>
               </ion-row>
 
               <ion-row>
-                <ion-col col-7>
-                  <span>Bairro:</span>
+                <ion-col col-4>
+                  <span class="ajuste-direita">Bairro:</span>
                 </ion-col>
-                <ion-col col-5 pull-1>
+                <ion-col col-6 pull-2>
                   <span>{{localExame?.enderecoBairro}}</span>
                 </ion-col>
               </ion-row>
 
               <ion-row>
-                <ion-col col-7>
+                <ion-col col-3>
                   <span>CEP:</span>
                 </ion-col>
-                <ion-col col-5 pull-1>
+                <ion-col col-7 pull-2>
                   <span>{{localExame?.enderecoCep}}</span>
                 </ion-col>
               </ion-row>
 
               <ion-row>
-                <ion-col col-7>
+                <ion-col col-4>
                   <span>Cidade:</span>
                 </ion-col>
-                <ion-col col-5 pull-1>
+                <ion-col col-6 pull-1>
                   <span>{{localExame?.cidadeNome}}</span>
                 </ion-col>
               </ion-row>
@@ -103,13 +94,9 @@
             </ion-grid>
 
             <ion-grid>
-              <ion-row class="row-icones-inferiores">
-                <ion-col  col-2>
-                  <ion-icon *ngIf="locaisExame.length -1 !== i || locaisExame.length===1 " (click)="alertConcluirMedicamento(medicamento)"
-                    color="secondary" name="checkmark-circle-outline"></ion-icon>
-                </ion-col>
-                <ion-col offset-8 col-2>
-                  <ion-icon (click)="atualizarMedicamento(medicamento)" color="primary" name="create"></ion-icon>
+              <ion-row class="row-icones-inferiores">               
+                <ion-col offset-10 col-2>
+                  <ion-icon (click)="atualizar(localExame)" color="primary" name="create"></ion-icon>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -117,13 +104,4 @@
         </ion-card>
       </ion-slide>
     </ion-slides>    
-    
-    
-  
-      <ion-fab class="position-fixed" bottom left >
-        <button (click)="presentActionSheet()" ion-fab >
-          <ion-icon color="light" name="add"></ion-icon>
-        </button>
-      </ion-fab>
-
 </ion-content>

@@ -38,8 +38,7 @@ export class FormLocalExamePage {
               public viaCepService:ViaCepService,
               public googleMapsService:GoogleMapsService)
                {
-        this.localExame = this.navParams.get('item')
-        console.log(this.localExame)
+        this.localExame = this.navParams.get('localExame')        
         this.pacienteId = this.storageService.getUser().id;
         this.formGroup = this.formBuilder.group({
           nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],

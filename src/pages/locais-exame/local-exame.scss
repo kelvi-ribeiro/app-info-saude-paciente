@@ -28,16 +28,8 @@ page-local-exame {
   
   span{
     font-size:18px;
-  }
-     
-  .ajuste-direita{
-    position: relative;
-    left:10px;
-  }
-  .ajuste-esquerda{
-    position: relative;
-     left: -10px;
-  }
+  }     
+
   .position-fixed{
     position: fixed;
   }
@@ -57,6 +49,17 @@ page-local-exame {
   position: relative;
   bottom: 10px;
   }  
+  
+.ajuste-direita{
+  right: 5px; 
+  position: relative;  
+  }
+
+.ajuste-esquerda{
+  position: relative;
+  left: 3px;
+  }
+
 }
 
 
