@@ -6,6 +6,7 @@ import { MedicamentoService } from '../../services/domain/medicamento.service';
 import { ExameService } from '../../services/domain/exame.service';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
 
+
 @IonicPage()
 @Component({
   selector: 'page-home',

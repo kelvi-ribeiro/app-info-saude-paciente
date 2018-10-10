@@ -4,9 +4,11 @@ import { HistoricoMedicamentoPage } from './historico-medicamento';
 
 
 
+
 @NgModule({
   declarations: [
     HistoricoMedicamentoPage,
+    
   ],
   imports: [
     IonicPageModule.forChild(HistoricoMedicamentoPage),

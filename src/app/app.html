@@ -58,7 +58,12 @@
             <button ion-item menuClose class="text-1x"  (click)="openPage('FormMedicamentoPage')">
                     <ion-icon item-left name="flask" color="light"></ion-icon>
                     <span ion-text color="light">Adicionar Medicamento</span>
-            </button>      
+            </button>   
+            <hr>
+            <button ion-item menuClose class="text-1x"  (click)="openPage('HistoricoMedicamentoPage')">
+                <ion-icon item-left name="book" color="light"></ion-icon>
+                <span ion-text color="light">Histórico de Medicamentos</span>
+         </button>   
             <hr>
             <div *ngIf="temRecursoBiometria">
                 <button *ngIf="temRecursoBiometria && !hasFinger" (click)="salvaBiometria()" ion-item menuClose class="text-1x"  >

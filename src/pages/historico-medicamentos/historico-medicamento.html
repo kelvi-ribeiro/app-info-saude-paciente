@@ -12,53 +12,72 @@
 
 <ion-content padding>
 
-  <ion-card (press)="presentPopover($event,medicamento)" *ngFor="let medicamento of medicamentos" class="card-white">
-    <ion-card-content >
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Nome: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{medicamento?.nome}}</p>
-        </ion-col>
-      </ion-row>
+  <div >
+    <ion-slides #slidesMedicamentos>
+      <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
+        <ion-card class="card-medicamentos">
+          <ion-card-header>              
+            <ion-grid>
+              <ion-row>
+                <ion-col offset-10 col-2>
+                  <ion-icon  (click)="alertApagar(medicamento)"
+                    color="danger" class="icon-close" name="close"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <img class="align-horizontal"  src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
+            <ion-grid>
+              <ion-row>
+                <ion-col col-2>
+                  <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesMedicamentos.slidePrev()" [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
+                </ion-col>
+                <ion-col col-7>
+                  <h1 text-center>
+                    <!-- {{medicamento.nome | extractOneWord}} -->
+                    {{medicamento.nome}}
+                  </h1>
+                </ion-col>
+                <ion-col offset-1 col-2>
+                  <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesMedicamentos.slideNext()" [hidden]="slidesMedicamentos.isEnd()"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-6>
+                  <span>Data de início:</span>
+                </ion-col>
+                <ion-col col-6 >
+                  <span>{{medicamento.dataInicio | slice:0:10}}</span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
 
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Data de Início: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{medicamento?.dataInicio}}</p>
-        </ion-col>
-      </ion-row>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-6>
+                  <span>Data Final:</span>
+                </ion-col>
+                <ion-col col-6 >
+                  <span>{{medicamento.dataFim  | slice:0:10}}</span>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+           
 
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Hora Inicial: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{medicamento?.horaInicial}}</p>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Intervalo de Tempo: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{medicamento?.intervaloTempo}}</p>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col col-6>
-          <h4 class="text-bolder">Data final: </h4>
-        </ion-col>
-        <ion-col class="padding-zero-col" col-6>
-          <p>{{medicamento?.dataFim}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-card-content>
-  </ion-card>
+            <ion-grid>
+              <ion-row class="row-icones-inferiores">                
+                <ion-col offset-10 col-2>
+                  <ion-icon (click)="setAtivo(medicamento)" color="secondary" name="ios-refresh"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+    </div>
 
 </ion-content>

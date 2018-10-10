@@ -2,7 +2,7 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 import { MedicamentoService } from '../../services/domain/medicamento.service';
-import { PopoverDefaultPage } from '../../popovers/popover-default/popover-default';
+import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
 
 @IonicPage()
@@ -17,7 +17,7 @@ export class HistoricoMedicamentoPage {
               public navParams: NavParams,
               public service:MedicamentoService,
               public alertCtrl:AlertController,
-              public popoverCtrl: PopoverController) {
+              public notificacoesService:NotificacoesService) {
   }
 
   ionViewDidLoad() {
@@ -51,7 +51,7 @@ export class HistoricoMedicamentoPage {
   }
   apagar(medicamento){
     this.service.delete(medicamento.id)
-    .then(res =>{
+    .then(() =>{
       this.obterMedicamentosInativos()
     })
 
@@ -59,14 +59,9 @@ export class HistoricoMedicamentoPage {
   }
   setAtivo(medicamento){
     this.service.setAtivo(medicamento.id)
-    .then(res=>{
+    .then(()=>{
+      this.notificacoesService.presentToast('Medicamento enviado para a lista de medicamentos atuais',null,2000,'bottom')
       this.obterMedicamentosInativos();
     })
-  }
-  presentPopover(myEvent,item) {
-    const popover = this.popoverCtrl.create(PopoverDefaultPage,{page:this,item:item});
-    popover.present({
-      ev: myEvent
-    });
-  }
+  }  
 }

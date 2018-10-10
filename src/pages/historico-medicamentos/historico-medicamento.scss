@@ -1,22 +1,93 @@
 page-historico-medicamento {
-  .text-bolder{
-    font-weight: bolder;
+    
+  ion-icon{
+    font-size: 40px;
+    
   }
-  .card-white{
-    background: #E4E5E6;
+  .card-md h1,.card-ios h1,span{
+    color: color($colors, primary);
   }
-  .content-md hr {
-  background-color:  rgb(255, 38, 0);
-}
-  .padding-zero-col{
-    padding:0;
-  }
-  .btn-end{
-    margin-left:34%;
-  }
-  .row-buttons{
-    width:294px;
-    margin-bottom: 8%;
-  }
+  .card-md,.card-ios{
 
+    background:color($colors,colorCard);
+    height: $height-card;
+    min-height: $height-card;
+    max-height: $height-card;
+  }    
+
+  //Segmentos
+
+.segment-md-primary .segment-button {
+    color: #d1e2ff;
+}
+
+.segment-md-primary .segment-button.activated, .segment-md-primary .segment-button.segment-activated {
+  border-color: color($colors, light);
+  color: color($colors, light);
+  opacity: 1;
+}
+  
+  span{
+    font-size:18px;
+  }
+     
+  .ajuste-direita{
+    position: relative;
+    left:10px;
+  }
+  .ajuste-esquerda{
+    position: relative;
+     left: -10px;
+  }
+  .position-fixed{
+    position: fixed;
+  }
+  .arrow-back-perfil{
+    color:color($colors, primary);
+  }
+  .swiper-slide img {      
+    height: 61px;
+    max-height: 50%;
+}
+.semegment{
+  padding: 10px 12px 0 12px;
+  margin-bottom: 22px;
+}
+
+.row-icones-inferiores{
+  position: relative;
+  bottom: 10px;
+  }
+  
+}
+
+.action-sheet-md .action-sheet-group,
+.action-sheet-ios .action-sheet-group {
+   background: color($colors,primary);      
+   padding-top: 5%;
+   & > button > span{
+     color:color($colors, light);
+   }     
+}
+.action-sheet-md .action-sheet-group:first-child,
+.action-sheet-ios .action-sheet-group:first-child{
+padding-top:2%;  
+}
+.action-sheet-md .action-sheet-button.activated,
+.action-sheet-ios .action-sheet-button.activated, {
+background: transparent;
+}
+
+/* .action-sheet-button:after{
+content: '';
+display: block;
+height: 1px;
+border: 0;
+border-top: 1px solid #ccc;
+margin: 1em 0;
+padding: 0;
+} */
+
+.action-sheet-button-default-md-activated{
+background: red;
 }
