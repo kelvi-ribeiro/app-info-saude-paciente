@@ -72,8 +72,9 @@ page-home {
 
       }                
     }
-    .img-hand-point{
+    .swiper-slide .img-hand-point{
       animation: anima_handpoint .9s ease-out infinite alternate-reverse;
+      height: 16%;
     }
   }
 
