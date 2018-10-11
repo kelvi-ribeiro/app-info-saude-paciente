@@ -13,7 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { LoginPage } from '../pages/login/login';
 
-import { SecureStorageService } from '../services/secure-storage.service.';
+import { SecureStorageService } from '../services/secure-storage.service';
 import { NativeTransitionOptions, NativePageTransitions } from '@ionic-native/native-page-transitions';
 
 
@@ -210,8 +210,7 @@ export class MyApp {
      return;
     }
     this.usuarioService.getImageFromBucket().subscribe(
-      response => {
-        console.log(response)
+      response => {        
         this.blobToDataURL(response).then(dataUrl => {
           let str: string = dataUrl as string;
           this.paciente.profileImage = this.sanitazer.bypassSecurityTrustUrl(

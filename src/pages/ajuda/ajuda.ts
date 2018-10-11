@@ -48,10 +48,8 @@ helpers = []
   
 
 
-expandItem(item){
-  console.log(this.helpers)
+expandItem(item){  
 item.expanded = item.expanded ? false:true
-console.log(this.helpers)
 } 
   
 

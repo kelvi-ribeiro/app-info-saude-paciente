@@ -1,4 +1,4 @@
-import { LocalUser } from './../models/local_user';
+
 import { Injectable } from '@angular/core';
 import { STORAGE_KEYS } from '../config/storage_keys.config';
 import { SecureStorage, SecureStorageObject } from '../../node_modules/@ionic-native/secure-storage';

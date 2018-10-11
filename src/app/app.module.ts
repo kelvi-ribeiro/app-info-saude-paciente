@@ -19,14 +19,13 @@ import { MedicamentoService } from '../services/domain/medicamento.service';
 import { ExameService } from '../services/domain/exame.service';
 import { UtilsService } from '../services/domain/utils.service';
 import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
-import { SecureStorageService } from '../services/secure-storage.service.';
+import { SecureStorageService } from '../services/secure-storage.service';
 import { SecureStorage } from '@ionic-native/secure-storage';
  import { HandlerResponseProvider } from '../services/handler-response/handler-response';
 import { Camera } from '@ionic-native/camera';
 import { ExtractTwoWords } from '../pipes/extract-two-words';
 import { PopoverMeuPerfilPage } from '../popovers/popover-meu-perfil/popover-meu-perfil';
 import { PopoverExamesPage } from '../popovers/popover-exames/popover-exames';
-import { PopoverDefaultPage } from '../popovers/popover-default/popover-default';
 import {NativePageTransitions} from '@ionic-native/native-page-transitions'
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 
@@ -36,8 +35,7 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
     LoginPage,
     ExtractTwoWords,
     PopoverMeuPerfilPage,
-    PopoverExamesPage,
-    PopoverDefaultPage
+    PopoverExamesPage,    
   ],
   imports: [
     BrowserModule,
@@ -50,8 +48,7 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
     MyApp,    
     LoginPage,
     PopoverMeuPerfilPage,
-    PopoverExamesPage,
-    PopoverDefaultPage
+    PopoverExamesPage,    
   ],
   providers: [
     StatusBar,

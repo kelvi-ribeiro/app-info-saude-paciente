@@ -1,5 +1,5 @@
 
-import {Events, NavController, NavParams, ViewController} from 'ionic-angular';
+import {Events, NavParams, ViewController} from 'ionic-angular';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { StorageService } from '../../services/storage.service';
 import { Camera, CameraOptions } from '@ionic-native/camera';

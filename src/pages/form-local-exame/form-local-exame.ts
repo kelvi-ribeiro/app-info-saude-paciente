@@ -3,7 +3,6 @@ import { StorageService } from './../../services/storage.service';
 import { CidadeService } from './../../services/domain/cidade.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
-import { CidadeDTO } from '../../models/cidade.dto';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LocalExameService } from '../../services/domain/localExame.service';
 import { GoogleMapsService } from '../../services/google-maps/google.maps.service';

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, IonicPage, Events, Slides, AlertController, ActionSheetController, Platform } from 'ionic-angular';
+import { NavController, IonicPage, Events, Slides, AlertController, ActionSheetController} from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 
 import { MedicamentoService } from '../../services/domain/medicamento.service';
@@ -236,7 +236,7 @@ export class HomePage {
     });
     this.medicamentos = medicamentos
     this.calcularDiasRestantesMedicamento()
-    console.log(this.medicamentos)
+    //console.log(this.medicamentos)
     this.medicamentos.reverse()
   }
 

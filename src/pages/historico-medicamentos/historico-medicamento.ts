@@ -1,6 +1,6 @@
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MedicamentoService } from '../../services/domain/medicamento.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 

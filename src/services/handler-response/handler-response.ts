@@ -9,9 +9,6 @@ import 'rxjs/add/operator/timeout'
 import { Observable } from 'rxjs/Observable';
 import { TimeoutError } from 'rxjs/util/TimeoutError'
 
-
-import { Token } from '../../models/token';
-import { STORAGE_KEYS } from '../../config/storage_keys.config';
 import { LocalUser } from '../../models/local_user';
 
 @Injectable()
@@ -71,7 +68,7 @@ export class HandlerResponseProvider {
         const newHeaders: Headers = new Headers();
         const reqHeaders: Headers = new Headers();
         let newToken;
-        const token =  this.storage.getUserCredentials()
+        this.storage.getUserCredentials()
         .then(token=>{
           if(!token){
             return;

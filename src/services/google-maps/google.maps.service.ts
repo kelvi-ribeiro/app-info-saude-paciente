@@ -2,7 +2,7 @@ import { HandlerResponseProvider } from './../handler-response/handler-response'
 import { Injectable } from "@angular/core";
 import { API_CONFIG } from "../../config/api.config";
 import { StorageService } from "../storage.service";
-import { Http, Headers } from '@angular/http';
+import { Http, } from '@angular/http';
 
 
 @Injectable()

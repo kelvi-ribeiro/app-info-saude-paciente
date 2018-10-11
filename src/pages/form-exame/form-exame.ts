@@ -2,7 +2,7 @@ import { UtilsService } from './../../services/domain/utils.service';
 import { NotificacoesService } from './../../services/domain/notificacoes.service';
 import { StorageService } from './../../services/storage.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, Events } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { ExameService } from '../../services/domain/exame.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocalExameService } from '../../services/domain/localExame.service';

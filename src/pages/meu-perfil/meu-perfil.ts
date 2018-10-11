@@ -1,10 +1,9 @@
 import { API_CONFIG } from "./../../config/api.config";
 import { StorageService } from "./../../services/storage.service";
-import { Component, NgZone } from "@angular/core";
+import { Component} from "@angular/core";
 import {
   IonicPage,
-  NavController,
-  NavParams,
+  NavController,  
   Events,
   PopoverController,
   Platform
@@ -37,8 +36,7 @@ export class MeuPerfilPage {
     public events: Events,
     public notificacoesService: NotificacoesService,
     public popoverCtrl: PopoverController,
-    public platform: Platform,
-    private zone: NgZone
+    public platform: Platform    
   ) {
     platform.ready().then(() => {
       this.events.subscribe("foto:meu-perfil", picture => {

@@ -39,8 +39,7 @@ export class MapaLocalizacaoExamesPage {
     public storageService:StorageService,
     public googleMapsService:GoogleMapsService
    ) {
-    this.exame = this.navParams.get('exame')
-    console.log(this.exame)
+    this.exame = this.navParams.get('exame')    
     this.criaObjetoMarksBaseadoExame()
   }
 

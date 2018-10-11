@@ -2,8 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, Slides } from 'ionic-angular';
 import { LocalExameService } from '../../services/domain/localExame.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-import { PopoverDefaultPage } from '../../popovers/popover-default/popover-default';
-
 /**
  * Generated class for the LocaisExamePage page.
  *
@@ -67,13 +65,4 @@ export class LocalExamePage {
       this.obterLocaisExame();
     })
   }
-
-  presentPopover(myEvent,item) {
-    const popover = this.popoverCtrl.create(PopoverDefaultPage,{page:this,item:item});
-    popover.present({
-      ev: myEvent
-    });
-  }
-
-
 }

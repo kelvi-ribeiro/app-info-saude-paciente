@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { CreadenciaisDTO } from '../../models/credenciais.dto';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { StorageService } from '../../services/storage.service';
-import { SecureStorageService } from '../../services/secure-storage.service.';
+import { SecureStorageService } from '../../services/secure-storage.service';
 import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
 
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
