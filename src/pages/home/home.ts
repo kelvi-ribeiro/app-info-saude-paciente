@@ -6,7 +6,7 @@ import { MedicamentoService } from '../../services/domain/medicamento.service';
 import { ExameService } from '../../services/domain/exame.service';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
 import { NativeTransitionOptions, NativePageTransitions } from '@ionic-native/native-page-transitions';
-import { TextToSpeech, TTSOptions } from '@ionic-native/text-to-speech';
+
 
 
 
@@ -37,23 +37,13 @@ export class HomePage {
     public alertCtrl:AlertController,
     public actionSheetCtrl: ActionSheetController,
     public events:Events,
-    public nativePageTransitions:NativePageTransitions,
-    private tts: TextToSpeech,
-    private platform:Platform
-
+    public nativePageTransitions:NativePageTransitions
   ) { 
     
   }
 
   ionViewDidLoad() {
-     /*  this.platform.ready()
-      .then(()=>{
-        const options:TTSOptions = {
-          text:'Bem vindo ao nosso app',
-          locale:'pt-BR'
-        }
-        this.tts.speak(options)
-      }) */
+    
       this.events.subscribe('medicamentos:refresh' ,()=>{
         this.obterMedicamentosAtivos()
       })
