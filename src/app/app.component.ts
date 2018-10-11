@@ -47,7 +47,7 @@ export class MyApp {
              private nativePageTransitions:NativePageTransitions
               ) {
     this.platform.ready().then(() => {
-      this.statusBar.backgroundColorByHexString('#1b4da3');
+      this.statusBar.backgroundColorByHexString('#8299EC');
       this.events.subscribe('assinatura:adicionada', () => {
         this.hasFinger = true;
       });
