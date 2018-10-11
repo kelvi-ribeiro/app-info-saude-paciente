@@ -1,0 +1,71 @@
+<!--
+  Generated template for the AjudaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+      <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+    <ion-title>Ajuda</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+  <ion-card>
+    <ion-card-header>
+    <h1 class="title-help">Como cadastrar um medicamento ?</h1>
+      </ion-card-header>      
+      <ion-card-content>
+        <p>{{helpSoundTextMedicamento}}</p>
+        <ion-col col-3 offset-10>
+            <button (click)="helpSound(this.helpSoundTextMedicamento)"   icon-only>
+                <ion-icon color="primary" name="musical-notes"></ion-icon>
+              </button>
+        </ion-col>
+        <ion-item item-end>
+          
+        </ion-item>
+
+      </ion-card-content>
+    
+    </ion-card>
+
+    <ion-card>
+        <ion-card-header>
+            Como cadastrar um medicamento ?
+          </ion-card-header>
+        
+          <ion-card-content>
+            <!-- Add card content here! -->
+          </ion-card-content>
+        
+        </ion-card>
+
+        <ion-card>
+            <ion-card-header>
+                Como cadastrar um exame ?                
+              </ion-card-header>
+            
+              <ion-card-content>
+                <!-- Add card content here! -->
+              </ion-card-content>
+            
+            </ion-card>
+
+            <ion-card>
+                <ion-card-header>
+                    Como cadastrar um local de exame ?
+                  </ion-card-header>
+                
+                  <ion-card-content>
+                    <!-- Add card content here! -->
+                  </ion-card-content>
+                
+                </ion-card>
+
+</ion-content>
