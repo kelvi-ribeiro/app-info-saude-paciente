@@ -122,8 +122,7 @@ export class FormLocalExamePage {
     })
   }
   verificaUpdate(){
-    if(this.localExame){
-      console.log('localExame',this.localExame)
+    if(this.localExame){      
       this.formGroup.controls.nome.setValue(this.localExame.nome);
       this.formGroup.controls.enderecoNumero.setValue(this.localExame.enderecoNumero);
       this.formGroup.controls.enderecoLogradouro.setValue(this.localExame.enderecoLogradouro);
