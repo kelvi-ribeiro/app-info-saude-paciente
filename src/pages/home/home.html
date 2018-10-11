@@ -23,8 +23,8 @@
 
 
     <div *ngIf="segmentoAtivo === 'medicamentos'">
-      <ion-slides #slidesMedicamentos>
-        <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
+      <ion-slides #slidesMedicamentos  effect="coverflow" pager loop   >
+        <ion-slide *ngFor="let medicamento of medicamentos;">
           <ion-card class="card-medicamentos">
             <ion-card-header>              
               <ion-grid>
@@ -91,7 +91,7 @@
       </ion-slides>
       </div>
       <div *ngIf="segmentoAtivo === 'exames'">
-      <ion-slides #slidesExames>
+      <ion-slides #slidesExames effect="coverflow" pager loop>
         <ion-slide *ngFor="let exame of exames; let i = index">
           <ion-card>
             <ion-card-header>
