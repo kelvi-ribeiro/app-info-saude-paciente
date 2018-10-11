@@ -25,7 +25,7 @@
     <div *ngIf="!carregou" text-center>
         <ion-spinner name="bubbles"></ion-spinner>
       </div>
-    <ion-slides  #slidesLocaisExame effect="coverflow" pager loop>
+    <ion-slides  #slidesLocaisExame effect="coverflow" pager >
       <ion-slide *ngFor="let localExame of locaisExame; let i = index">
         <ion-card class="card-locaisExame">
           <ion-card-header>                          
