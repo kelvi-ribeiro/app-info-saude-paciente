@@ -51,6 +51,15 @@ $text-input-md-show-invalid-highlight: transparent;
 $text-input-md-highlight-color: transparent;
 $text-input-md-show-valid-highlight: transparent;
 
+
+$action-sheet-ios-background:color($colors,primary);
+$action-sheet-md-background:color($colors,primary);
+
+$action-sheet-md-button-text-color:color($colors,light);
+$action-sheet-ios-button-text-color:color($colors,light);
+
+$action-sheet-md-button-background-activated:transparent;
+
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here

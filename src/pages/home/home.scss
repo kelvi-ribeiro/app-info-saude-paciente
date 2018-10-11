@@ -61,33 +61,4 @@ page-home {
     
   }
 
-  .action-sheet-md .action-sheet-group,
-  .action-sheet-ios .action-sheet-group {
-     background: color($colors,primary);      
-     padding-top: 5%;
-     & > button > span{
-       color:color($colors, light);
-     }     
-}
-.action-sheet-md .action-sheet-group:first-child,
-.action-sheet-ios .action-sheet-group:first-child{
-  padding-top:2%;  
-}
-.action-sheet-md .action-sheet-button.activated,
-.action-sheet-ios .action-sheet-button.activated, {
-  background: transparent;
-}
-
-/* .action-sheet-button:after{
-  content: '';
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
-  padding: 0;
-} */
-
-.action-sheet-button-default-md-activated{
-  background: red;
-}
+  
