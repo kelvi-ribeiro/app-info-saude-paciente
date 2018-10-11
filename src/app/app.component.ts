@@ -14,6 +14,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
 
 import { SecureStorageService } from '../services/secure-storage.service.';
+import { NativeTransitionOptions, NativePageTransitions } from '@ionic-native/native-page-transitions';
 
 
 
@@ -42,7 +43,8 @@ export class MyApp {
              private secureStorageService:SecureStorageService,             
              private events: Events,
              private usuarioService:UsuarioService,
-             private sanitazer:DomSanitizer
+             private sanitazer:DomSanitizer,
+             private nativePageTransitions:NativePageTransitions
               ) {
     this.platform.ready().then(() => {
       this.events.subscribe('assinatura:adicionada', () => {
@@ -80,6 +82,12 @@ export class MyApp {
   }
 
   openPage(page) {
+    const options: NativeTransitionOptions = {
+    direction: 'up',
+    duration: 500,    
+    androiddelay: 500,    
+    }
+    this.nativePageTransitions.fade(options)
     this.navCtrl.setRoot(`${page}`);
     return;
   }

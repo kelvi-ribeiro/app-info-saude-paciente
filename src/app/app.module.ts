@@ -7,11 +7,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 
-
-
-
-
-
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UsuarioService } from '../services/domain/usuario.service';
@@ -32,7 +27,7 @@ import { ExtractTwoWords } from '../pipes/extract-two-words';
 import { PopoverMeuPerfilPage } from '../popovers/popover-meu-perfil/popover-meu-perfil';
 import { PopoverExamesPage } from '../popovers/popover-exames/popover-exames';
 import { PopoverDefaultPage } from '../popovers/popover-default/popover-default';
-
+import {NativePageTransitions} from '@ionic-native/native-page-transitions'
 
 @NgModule({
   declarations: [
@@ -61,7 +56,7 @@ import { PopoverDefaultPage } from '../popovers/popover-default/popover-default'
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-
+    NativePageTransitions,
     AuthService,
     StorageService,
     UsuarioService,

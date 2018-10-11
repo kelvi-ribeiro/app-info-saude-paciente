@@ -5,6 +5,7 @@ import { StorageService } from '../../services/storage.service';
 import { MedicamentoService } from '../../services/domain/medicamento.service';
 import { ExameService } from '../../services/domain/exame.service';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
+import { NativeTransitionOptions, NativePageTransitions } from '@ionic-native/native-page-transitions';
 
 
 @IonicPage()
@@ -33,7 +34,8 @@ export class HomePage {
     public exameService:ExameService,
     public alertCtrl:AlertController,
     public actionSheetCtrl: ActionSheetController,
-    public events:Events
+    public events:Events,
+    public nativePageTransitions:NativePageTransitions
 
   ) { 
     
@@ -49,6 +51,14 @@ export class HomePage {
       })
       this.obterMedicamentosAtivos()
       
+    }
+    ionViewWillLeave(){
+      const options: NativeTransitionOptions = {
+        direction: 'up',
+        duration: 500,
+     
+      }
+      this.nativePageTransitions.fade(options)
     }
 
     refreshPage(){
