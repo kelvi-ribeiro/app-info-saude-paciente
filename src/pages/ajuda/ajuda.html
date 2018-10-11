@@ -16,56 +16,37 @@
 
 
 <ion-content >
-  <ion-card>
-    <ion-card-header>
-    <h1 class="title-help">Como cadastrar um medicamento ?</h1>
+  <ion-card  *ngFor="let helper of helpers;">
+    <ion-card-header (click)="expandItem(helper)">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-8>
+            <h1 class="title-help">{{helper.title}}</h1>
+          </ion-col>
+          <ion-col offset-1 col-2>
+            <button  icon-only>
+                <ion-icon color="secondary" name="add-circle"></ion-icon>
+            </button>
+
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
       </ion-card-header>      
       <ion-card-content>
-        <p>{{helpSoundTextMedicamento}}</p>
-        <ion-col col-3 offset-10>
-            <button (click)="helpSound(this.helpSoundTextMedicamento)"   icon-only>
-                <ion-icon color="primary" name="musical-notes"></ion-icon>
-              </button>
-        </ion-col>
-        <ion-item item-end>
-          
-        </ion-item>
-
-      </ion-card-content>
-    
+            <expandable [expandHeight]="helper.heightText" [expanded]="helper.expanded">
+              
+              <p (click)="expandItem(helper)">{{helper.text}}</p>
+              <ion-col col-3 offset-10>
+                  <button (click)="helpSound(helper.text)"   icon-only>
+                      <ion-icon color="primary" name="musical-notes"></ion-icon>
+                    </button>
+              </ion-col>
+            </expandable>            
+        
+      </ion-card-content>    
     </ion-card>
 
-    <ion-card>
-        <ion-card-header>
-            Como cadastrar um medicamento ?
-          </ion-card-header>
-        
-          <ion-card-content>
-            <!-- Add card content here! -->
-          </ion-card-content>
-        
-        </ion-card>
 
-        <ion-card>
-            <ion-card-header>
-                Como cadastrar um exame ?                
-              </ion-card-header>
-            
-              <ion-card-content>
-                <!-- Add card content here! -->
-              </ion-card-content>
-            
-            </ion-card>
-
-            <ion-card>
-                <ion-card-header>
-                    Como cadastrar um local de exame ?
-                  </ion-card-header>
-                
-                  <ion-card-content>
-                    <!-- Add card content here! -->
-                  </ion-card-content>
-                
-                </ion-card>
 
 </ion-content>

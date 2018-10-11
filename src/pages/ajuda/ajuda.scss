@@ -1,10 +1,12 @@
 page-ajuda {
+  
     ion-card{
+        
         text-align: center;
     }
     .title-help{
-        font-size: 15px;        
-        font-weight: bold;
+        font-size: 15.5px;        
+        font-weight: bolder;
     }
     button{
         background: transparent;
@@ -12,5 +14,12 @@ page-ajuda {
     [icon-only] ion-icon {        
         font-size: 2.8em;
         
+    }
+    button {
+        align-items: baseline;
+    }
+    .card-header-md,
+    .card-header-ios {
+        padding: 0;
     }
 }
