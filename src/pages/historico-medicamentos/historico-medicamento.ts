@@ -12,6 +12,7 @@ import { NotificacoesService } from '../../services/domain/notificacoes.service'
 })
 export class HistoricoMedicamentoPage {
   medicamentos;
+  carregou:boolean = false
   constructor(
               public navCtrl: NavController,
               public navParams: NavParams,
@@ -27,6 +28,7 @@ export class HistoricoMedicamentoPage {
     this.service.findMedicamentosInativosByPacienteId()
     .then(res=>{
       this.medicamentos = res;
+      this.carregou = true;
     })
   }
 
@@ -52,15 +54,19 @@ export class HistoricoMedicamentoPage {
   apagar(medicamento){
     this.service.delete(medicamento.id)
     .then(() =>{
-      this.obterMedicamentosInativos()
+      this.refreshPage()
     })
 
-
+  }
+  
+  refreshPage(){
+    this.navCtrl.setRoot(this.navCtrl.getActive().component);    
   }
   setAtivo(medicamento){
     this.service.setAtivo(medicamento.id)
     .then(()=>{
       this.notificacoesService.presentToast('Medicamento enviado para a lista de medicamentos atuais',null,2000,'bottom')
+      this.refreshPage()
       this.obterMedicamentosInativos();
     })
   }  

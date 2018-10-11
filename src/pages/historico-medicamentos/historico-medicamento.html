@@ -10,8 +10,10 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content >
+    <div *ngIf="!carregou" text-center>
+        <ion-spinner name="bubbles"></ion-spinner>
+      </div>
   <div >
     <ion-slides #slidesMedicamentos>
       <ion-slide *ngFor="let medicamento of medicamentos; let i = index">

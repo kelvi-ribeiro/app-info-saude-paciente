@@ -18,6 +18,7 @@ import { PopoverDefaultPage } from '../../popovers/popover-default/popover-defau
 })
 export class LocalExamePage {
   locaisExame = [];
+  carregou: boolean = false;
   @ViewChild('slidesLocaisExames') slidesLocaisExames: Slides;
   constructor(
               public navCtrl: NavController,
@@ -33,7 +34,8 @@ export class LocalExamePage {
   obterLocaisExame(){
     this.service.findAllLocaisExameByPacienteId()
     .then(res=>{
-      this.locaisExame = res
+      this.locaisExame = res;
+      this.carregou = true;
     })
   }
   atualizar(localExame){

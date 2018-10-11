@@ -22,6 +22,9 @@
 
 
 <ion-content>
+    <div *ngIf="!carregou" text-center>
+        <ion-spinner name="bubbles"></ion-spinner>
+      </div>
     <ion-slides #slidesLocaisExame>
       <ion-slide *ngFor="let localExame of locaisExame; let i = index">
         <ion-card class="card-locaisExame">
