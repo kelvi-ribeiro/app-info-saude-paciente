@@ -53,26 +53,41 @@
               </ion-grid>
             </ion-card-header>
             <ion-card-content>
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-8>
-                    <span>Próxima Dosagem:</span>
-                  </ion-col>
-                  <ion-col col-4 pull-1>
-                    <span>{{medicamento.proximaHoraMedicamento | date:'shortTime'}}</span>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-7>
-                    <span>Dias Restantes:</span>
-                  </ion-col>
-                  <ion-col col-5 pull-1>
-                    <span>{{medicamento.diasRestantes}}</span>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
+              <div *ngIf="!medicamento.dataInicioAlcancada && !medicamento.finalizado ;">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-8>
+                      <span>Próxima Dosagem:</span>
+                    </ion-col>
+                    <ion-col col-4 pull-1>
+                      <span>{{medicamento.proximaHoraMedicamento | date:'shortTime'}}</span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-7>
+                      <span>Dias Restantes:</span>
+                    </ion-col>
+                    <ion-col col-5 pull-1>
+                      <span>{{medicamento.diasRestantes}}</span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+              <div class="padding-bottom" *ngIf="medicamento.dataInicioAlcancada">
+                  <h1 text-center>
+                      Medicamento começa em
+                      {{medicamento.dataInicio | slice:0:10}}
+                    </h1>
+              </div>
+
+              <div class="padding-bottom" *ngIf="medicamento.finalizado">
+                  <h1  text-center>
+                      Medicamento finalizado em
+                      {{medicamento.dataFim | slice:0:10}}
+                    </h1>
+              </div>
 
               <ion-grid>
                 <ion-row class="row-icones-inferiores">
@@ -80,7 +95,10 @@
                     <ion-icon  (click)="alertConcluirMedicamento(medicamento)"
                       color="secondary" name="checkmark-circle-outline"></ion-icon>
                   </ion-col>
-                  <ion-col offset-8 col-2>
+                  <ion-col  col-2>
+                      <img *ngIf="medicamento.finalizado" class="img-hand-point" src="assets/imgs/clipart-finger-pointing-left-10.jpg" alt="">
+                    </ion-col>
+                  <ion-col offset-6 col-2>
                     <ion-icon (click)="atualizarMedicamento(medicamento)" color="primary" name="create"></ion-icon>
                   </ion-col>
                 </ion-row>
@@ -90,6 +108,8 @@
         </ion-slide>
       </ion-slides>
       </div>
+     
+
       <div *ngIf="segmentoAtivo === 'exames'">
       <ion-slides #slidesExames effect="coverflow" pager >
         <ion-slide *ngFor="let exame of exames; let i = index">

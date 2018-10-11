@@ -234,7 +234,7 @@ export class HomePage {
         horasRemedio.push(new Date(data.setTime(data.getTime() + (medicamento.intervaloTempo * 60 * 60 * 1000)) - 86400000))
       } while ((data.getHours() !== comparadorMedicamentoHoraInicial.getHours()))
       const dataAtual = new Date()
-      console.log(horasRemedio) 
+      //console.log(horasRemedio) 
       for (let i = 0; i < horasRemedio.length; i++) {
         if (horasRemedio[i].getTime() > dataAtual.getTime()) {
           medicamento.proximaHoraMedicamento = horasRemedio[i]
@@ -246,6 +246,7 @@ export class HomePage {
     });
     this.medicamentos = medicamentos
     this.calcularDiasRestantesMedicamento()
+    console.log(this.medicamentos)
     this.medicamentos.reverse()
   }
 
@@ -262,11 +263,11 @@ calcularDiasRestantesMedicamento() {
   // Round to nearest whole number to deal with DST.  
   return this.medicamentos.forEach(medicamento => {
     if(this.parseDate(medicamento.dataInicio).getTime() > this.dataAtual.getTime()){
-      medicamento.diasRestantes = 'Data de Início Não Alcançada'
+      medicamento.dataInicioAlcancada = true
       return
     }
     else if(this.parseDate(medicamento.dataFim).getTime() < this.dataAtual.getTime()){
-      medicamento.diasRestantes = 'Finalizado'
+      medicamento.finalizado = true;
       return
     }
     else if(this.parseDate(medicamento.dataFim).getDate() === this.dataAtual.getDate()){

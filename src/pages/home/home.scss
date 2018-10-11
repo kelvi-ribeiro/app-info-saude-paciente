@@ -58,6 +58,23 @@ page-home {
     position: relative;
     bottom: 10px;
     }
+    .padding-bottom{
+      padding-bottom: 33px;
+    }
+    @keyframes anima_handpoint {
+      from{
+          transform: translateX(-30%) 
+          translateZ(0);
+      }
+      to{
+          transform: translateX(0%)
+           translateZ(0);
+
+      }                
+    }
+    .img-hand-point{
+      animation: anima_handpoint .9s ease-out infinite alternate-reverse;
+    }
   }
 
   
