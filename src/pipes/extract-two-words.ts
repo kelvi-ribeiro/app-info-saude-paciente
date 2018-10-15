@@ -12,7 +12,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ExtractTwoWords implements PipeTransform {
   transform(value: string, args: any[]): string | boolean
   {
-    if (value === null) {return false;}
+    if (value === null) {return false;}    
+    if(value.split(' ').length === 1){return value;}
     return `${value.split(' ')[0]} ${value.split(' ')[1]}`;
   }
 }
