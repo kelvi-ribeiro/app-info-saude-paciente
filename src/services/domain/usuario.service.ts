@@ -21,18 +21,23 @@ export class UsuarioService {
 
     ) {
   }
-
-//   findPacienteByPessoaEmail(email: string) {
-//     let headers = new Headers();
-//     headers.append("Authorization", `Bearer ${this.storage.getUserCredentials().token}`);
-//     return this.handlerResponseService.handlerResponse(
-//       "get",
-//       `${API_CONFIG.baseUrl}/pacientes/pessoaEmail=${email}`,
-//       null,
-//       headers
-//     );
-// }
-
+  setUserOnline(pessoaId){    
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "put",
+        `${API_CONFIG.baseUrl}/pessoas/setUserOnline?pessoaId=${pessoaId}`,
+        null,
+        headers
+      );
+    })
+  
+  }
   findPacienteByPessoaCpf() {
     let headers = new Headers();
     return this.storage.getUserCredentials()

@@ -77,9 +77,13 @@ export class MyApp {
         return
     }
     this.getImageIfExists()
-    this.rootPage = 'HomePage'    
- 
-   
+    this.rootPage = 'HomePage'       
+  }
+  setUserOnline(pessoaId){
+    this.usuarioService.setUserOnline(pessoaId);
+    setTimeout(() => {
+      this.setUserOnline(this.storageService.getUser().pessoa.id)
+    }, 30000);
   }
 
   openPage(page) {
@@ -185,6 +189,7 @@ export class MyApp {
      .then(paciente => {
        this.paciente = paciente
        this.storageService.setUser(paciente)
+       this.setUserOnline(paciente.pessoa.id);
        this.usuarioService.getImageFromBucket(paciente.pessoa.urlFoto).subscribe(
         response => {
           this.blobToDataURL(response).then(dataUrl => {
