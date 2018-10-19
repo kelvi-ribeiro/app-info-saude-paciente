@@ -119,9 +119,12 @@ export class LoginPage {
             .then(() => {
             this.events.publish('buscar:foto')
   
-          })
+          })          
             this.navCtrl.setRoot('HomePage');
-          });
+          })
+          .catch(()=>{
+            this.notificacoesService.presentAlertJustMessage('Acesso negado','Você não tem permissão para acessar esse aplicativo')
+          })  
         }, error => {                
            loading.dismiss();
            this.tratarErro(error);
