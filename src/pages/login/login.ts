@@ -102,7 +102,7 @@ export class LoginPage {
   login() {
     const loading = this.notificacoesService.presentLoadingDefault('Autenticando...')
     const cpfSemFormatacao = this.retirarFormatacao(this.creds.cpf)
-    if(!this.validarCPF(cpfSemFormatacao)){
+    if(this.validarCPF(cpfSemFormatacao)){
       const creds:CreadenciaisDTO = {
         cpf:cpfSemFormatacao,
         senha:this.creds.senha
