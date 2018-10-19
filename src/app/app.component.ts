@@ -82,7 +82,9 @@ export class MyApp {
   setUserOnline(pessoaId){
     this.usuarioService.setUserOnline(pessoaId);
     setTimeout(() => {
-      this.setUserOnline(this.storageService.getUser().pessoa.id)
+      if(this.storageService.getUser()){
+        this.setUserOnline(this.storageService.getUser().pessoa.id)
+      }
     }, 30000);
   }
 
