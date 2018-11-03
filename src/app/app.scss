@@ -38,6 +38,9 @@
 .align-vertical {
     @include align-vertical-center()
 }
+.text-center{
+    text-align: center;
+}
 
 ion-title {
     position: absolute;
