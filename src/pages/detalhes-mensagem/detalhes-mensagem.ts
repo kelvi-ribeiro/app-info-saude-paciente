@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { InteracaoService } from '../../services/domain/interacao.service';
 
 /**
  * Generated class for the DetalhesMensagemPage page.
@@ -18,7 +19,9 @@ export class DetalhesMensagemPage {
 
   constructor(
     public navCtrl: NavController, 
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    private interacaoService:InteracaoService,
+    ) {
 
   }
 
@@ -28,6 +31,7 @@ export class DetalhesMensagemPage {
       this.navCtrl.setRoot('HomePage')
       return;
     }    
+    this.setMensagemVisto()
     //this.mensagem.conteudoMensagem = this.mensagem.conteudoMensagem.replace(/width/g, "'width'");
   }
   exibirTipoMensagem(){
@@ -39,5 +43,10 @@ export class DetalhesMensagemPage {
       return 'Global'
       }
     }
-
+    setMensagemVisto(){
+      this.interacaoService.findByPacienteIdAndMensagemId(this.mensagem.id)
+      .catch(() =>{        
+          this.interacaoService.insert(this.mensagem.id)        
+      })
+    }
 }

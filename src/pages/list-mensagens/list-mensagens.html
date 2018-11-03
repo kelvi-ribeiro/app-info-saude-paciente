@@ -20,6 +20,13 @@
       (click)="goToDetalhes(mensagem)" 
       class="item divisoria"
       >
+      <ion-grid>
+          <ion-row>
+              <ion-col offset-8 col-4>
+                <span color="danger" *ngIf="mensagem.visto">Não Visto</span>
+              </ion-col>
+          </ion-row>
+      </ion-grid>
           <h2 class="assunto">{{mensagem.assunto}}</h2>
           <p>Tipo mensagem: {{exibirTipoMensagem(mensagem)}}</p>
           <ion-grid>
