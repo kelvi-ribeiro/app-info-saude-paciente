@@ -1,0 +1,23 @@
+<ion-header>
+
+    <ion-navbar color="header">
+        <ion-title>Mensagem</ion-title>
+    </ion-navbar>
+    
+
+</ion-header>
+
+<ion-content *ngIf="mensagem" padding class="detalhes-mensagem">
+    <h4 class="assunto-mensagem">{{mensagem?.assunto}}</h4>
+    <ion-card>
+        <ion-card-content class="card-mensagem">
+            <ion-item class="remetente">
+              <h2>{{mensagem?.profissionalSaude.pessoa.nome}}</h2>
+                <p>Tipo mensagem: {{exibirTipoMensagem()}}</p>
+                <p>{{mensagem?.mensagem}}</p>
+                <p>{{mensagem?.dataEnvio | date:'dd/MM/yyyy hh:mm:ss'}}</p>
+            </ion-item>
+            <!-- <div [innerHTML]="mensagem?.conteudoMensagem" class="conteudo-mensagem"></div> -->
+        </ion-card-content>
+    </ion-card>
+</ion-content>

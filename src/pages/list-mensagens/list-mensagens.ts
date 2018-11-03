@@ -34,12 +34,15 @@ export class ListMensagensPage {
   }
   exibirTipoMensagem(mensagem){
     if(mensagem.linhaCuidado){
-      return `Linha de cuiado: ${mensagem.linhaCuidado.nome}`
+      return `Linha de cuiado de ${mensagem.linhaCuidado.nome}`
     }else if(mensagem.paciente){
       return 'Individual'
     }else{
       return 'Global'
       }
+    }
+    goToDetalhes(mensagem) {
+      this.navCtrl.push('DetalhesMensagemPage', { mensagem: mensagem });
     }
   }
 

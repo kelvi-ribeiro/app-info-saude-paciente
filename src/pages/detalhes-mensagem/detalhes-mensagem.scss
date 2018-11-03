@@ -1,0 +1,25 @@
+page-detalhes-mensagem {
+    .detalhes-mensagem,
+    .header {
+        background: #EEE;
+    }
+    .assunto-mensagem {
+        padding: 20px;
+        box-shadow: 0 1px #8f8f8f;
+        white-space: normal;
+    }
+    .card-mensagem {
+        box-shadow: none;
+        border: none;
+    }
+    .remetente {
+        padding: 20px;
+
+        ion-label{
+            white-space: inherit;
+        }
+    }
+    .conteudo-mensagem {
+        max-width: 100% !important;
+    }
+}
