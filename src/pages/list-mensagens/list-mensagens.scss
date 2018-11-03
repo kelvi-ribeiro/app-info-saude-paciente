@@ -1,0 +1,26 @@
+page-list-mensagens {
+    .conteudo-mensagem {
+        max-height: 35px;
+        display: block;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis
+    }
+    .favorito {
+        top: -20px !important;
+        color: #26c6da;
+    }
+    .sem-mensagens {
+        padding: 10px;
+        font-size: large;
+        text-align: center;
+    }
+    .divisoria {
+        border-bottom: 1px solid #376c97;
+    }
+
+    .assunto{
+        white-space: initial;
+    }
+}
