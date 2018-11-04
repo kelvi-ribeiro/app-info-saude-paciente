@@ -14,6 +14,31 @@ page-home {
       min-height: $height-card;
       max-height: $height-card;
     }    
+
+  //START BUTTON NOTIFICATION
+  .esconder{
+      display: none;
+  }
+  
+
+  .mostrar{
+      display: initial !important;
+  }
+  #notification-button {            
+    position: relative;
+    width: 1px;
+    top:1px;
+    right: 1px;
+    z-index: 9999;
+}
+#notifications-badge {
+  background-color: red;
+  position: absolute;
+  bottom:18px;
+  left: 25px;
+  border-radius: 100%;
+}
+  //END  BUTTON NOTIFICATION
   
     //Segmentos
 

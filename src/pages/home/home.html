@@ -4,7 +4,13 @@
     <button ion-button menuToggle>
         <ion-icon name="menu"></ion-icon>
       </button>
-    <ion-buttons right>       
+    <ion-buttons right>     
+        <button id="notification-button" class="mostrar"         
+          ion-button icon-only navPush="MensagensPage" >
+            <ion-icon name="notifications">
+                <ion-badge id="notifications-badge" color="danger">3</ion-badge>
+            </ion-icon>
+          </button>  
         <button  ion-button icon-only navPush="ListMensagensPage">
           <ion-icon color="light" name="mail"></ion-icon>
         </button>
