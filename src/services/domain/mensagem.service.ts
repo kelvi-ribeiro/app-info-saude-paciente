@@ -31,4 +31,20 @@ export class MensagemService {
       );
     });
   }
+  showNumberNotReadMessageByPaciente(page?:number) {
+    let headers = new Headers();
+    return this.storage.getUserCredentials()
+    .then(userCredentials=>{
+      if(!userCredentials){
+        return;
+      }
+      headers.append('Authorization', `Bearer ${userCredentials['token']}`)
+      return this.handlerResponseService.handlerResponse(
+        "get",
+        `${API_CONFIG.baseUrl}/mensagens/show-numbers-not-read-message?idPaciente=${this.storage.getUser().id}`,
+        null,
+        headers
+      );
+    });
+  }
 }

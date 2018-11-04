@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { HomePage } from './home';
 import { PipeModule } from '../../pipes/pipe.module';
+import { MensagemService } from '../../services/domain/mensagem.service';
 
 @NgModule({
   declarations: [
@@ -12,5 +13,8 @@ import { PipeModule } from '../../pipes/pipe.module';
     IonicPageModule.forChild(HomePage),
     PipeModule
   ],
+  providers:[
+    MensagemService
+  ]
 })
 export class HomePageModule {}

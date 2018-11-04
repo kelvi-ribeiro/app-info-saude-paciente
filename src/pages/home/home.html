@@ -5,10 +5,10 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     <ion-buttons right>     
-        <button id="notification-button" class="mostrar"         
+        <button id="notification-button" class="esconder" [ngClass]="numberNotMessageByPaciente > 0 ? 'mostrar' : 'esconder'"  
           ion-button icon-only navPush="ListMensagensPage" >
             <ion-icon name="notifications">
-                <ion-badge id="notifications-badge" color="danger">3</ion-badge>
+                <ion-badge id="notifications-badge" color="danger">{{numberNotMessageByPaciente}}</ion-badge>
             </ion-icon>
           </button>  
         <button  ion-button icon-only navPush="ListMensagensPage">

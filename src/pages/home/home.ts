@@ -6,6 +6,7 @@ import { MedicamentoService } from '../../services/domain/medicamento.service';
 import { ExameService } from '../../services/domain/exame.service';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
 import { NativeTransitionOptions, NativePageTransitions } from '@ionic-native/native-page-transitions';
+import { MensagemService } from '../../services/domain/mensagem.service';
 
 
 
@@ -26,6 +27,7 @@ export class HomePage {
   dataAtual = new Date();
   segmentoAtivo = this.navParams.get('segmentoExame') !== undefined ? 'exames':'medicamentos';  
   exames: any;  
+  numberNotMessageByPaciente: any;
   
 
   constructor(
@@ -37,13 +39,14 @@ export class HomePage {
     public alertCtrl:AlertController,
     public actionSheetCtrl: ActionSheetController,
     public events:Events,
-    public nativePageTransitions:NativePageTransitions
+    public nativePageTransitions:NativePageTransitions,
+    public mensagemService:MensagemService
   ) { 
     
   }
 
-  ionViewDidLoad() {
-    
+  ionViewDidEnter() {
+      this.takeNumberNotReadMessages();
       this.events.subscribe('medicamentos:refresh' ,()=>{
         this.obterMedicamentosAtivos()
       })
@@ -53,6 +56,15 @@ export class HomePage {
       })
       this.obterMedicamentosAtivos()
       
+    }
+    takeNumberNotReadMessages(){
+      this.mensagemService.showNumberNotReadMessageByPaciente()
+      .then(res => {
+        this.numberNotMessageByPaciente = res;
+        setTimeout(() => {
+          this.takeNumberNotReadMessages()
+        }, 30000);
+      })
     }
     ionViewWillLeave(){
       const options: NativeTransitionOptions = {
