@@ -51,6 +51,25 @@ export class HistoricoMedicamentoPage {
     });
     alert.present();
   }
+  alertRestaurarMedicamento(medicamento) {
+    let alert = this.alertCtrl.create({
+      title: "Atenção!",
+      message: "Esta ação irá restaurar o medicamento, deseja mesmo fazer isso ?",
+      enableBackdropDismiss: false,
+      buttons: [
+        {
+          text: "Sim",
+          handler: () => {
+            this.setAtivo(medicamento)
+          }
+        },
+        {
+          text: "Não"
+        }
+      ]
+    });
+    alert.present();
+  }
   apagar(medicamento){
     this.service.delete(medicamento.id)
     .then(() =>{
