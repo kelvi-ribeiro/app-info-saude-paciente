@@ -13,6 +13,7 @@ import {Camera } from "@ionic-native/camera";
 import { NotificacoesService } from "../../services/domain/notificacoes.service";
 import { DomSanitizer } from "@angular/platform-browser";
 import { PopoverMeuPerfilPage } from "../../popovers/popover-meu-perfil/popover-meu-perfil";
+import { PacienteLinhaCuidadoService } from "../../services/domain/paciente.linha.cuidado.service";
 
 
 
@@ -27,9 +28,11 @@ export class MeuPerfilPage {
   apertouOpcaoFoto = false;
   tocouFoto = false;
   carregou = false;
+  pacienteLinhasCuidado: any;
   constructor(
     public navCtrl: NavController,
     public usuarioService: UsuarioService,
+    public pacienteLinhaCuidadoService:PacienteLinhaCuidadoService,
     public storageService: StorageService,
     public camera: Camera,
     public sanitazer: DomSanitizer,
@@ -46,6 +49,7 @@ export class MeuPerfilPage {
   }
   ionViewDidLoad() {
     this.findPessoaByPessoaCpf();
+    this.findLinhasCuidadoPaciente();
 
   }
   findPessoaByPessoaCpf() {
@@ -59,6 +63,13 @@ export class MeuPerfilPage {
       .catch(() => {
         this.carregou = true;
       });
+  }
+
+  findLinhasCuidadoPaciente(){
+    this.pacienteLinhaCuidadoService.findAllByPacienteId()
+    .then(res =>{
+      this.pacienteLinhasCuidado = res;
+    })
   }
 
   presentPopover(myEvent) {
