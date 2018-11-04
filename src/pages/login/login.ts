@@ -28,7 +28,7 @@ export class LoginPage {
   perfis = [];
   creds : CreadenciaisDTO = {
     cpf: "",
-    senha: "kelvi123"
+    senha: ""
   };
 
   DECIMAL_SEPARATOR=".";
@@ -53,7 +53,7 @@ export class LoginPage {
     public keychainService:KeychainTouchId,
     public notificacoesService:NotificacoesService) {
 
-      this.creds.cpf = this.format('95159191003')
+      this.creds.cpf = this.format(this.storageService.getCpf())
   }
 
   ionViewWillEnter() {
