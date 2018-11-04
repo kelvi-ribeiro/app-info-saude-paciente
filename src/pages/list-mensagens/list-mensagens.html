@@ -23,7 +23,7 @@
       <ion-grid>
           <ion-row>
               <ion-col offset-8 col-4>
-                <span color="danger" *ngIf="mensagem.visto">Não Visto</span>
+                <span color="danger" *ngIf="!mensagem.mensagemLida">Não Visto</span>
               </ion-col>
           </ion-row>
       </ion-grid>
@@ -32,14 +32,14 @@
           <ion-grid>
               <ion-row>
                   <ion-col offset-4 col-8>
-                      <p>Enviada por {{mensagem.profissionalSaude.pessoa.nome}}</p>
+                      <p>Enviada por {{mensagem.nomeProfissionalSaude}}</p>
                   </ion-col>
               </ion-row>
           </ion-grid>
           <ion-grid>
                 <ion-row>
                     <ion-col offset-4 col-8>
-                        <p>Enviada ás {{mensagem.dataEnvio | date:'dd/MM/yyyy hh:mm:ss'}}</p>
+                        <p>Enviada ás {{mensagem.dataEnvio}}</p>
                     </ion-col>
                 </ion-row>
             </ion-grid>

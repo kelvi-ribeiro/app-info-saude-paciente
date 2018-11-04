@@ -12,10 +12,10 @@
     <ion-card>
         <ion-card-content class="card-mensagem">
             <ion-item class="remetente">
-              <h2>{{mensagem?.profissionalSaude.pessoa.nome}}</h2>
+              <h2>{{mensagem?.nomeProfissionalSaude}}</h2>
                 <p>Tipo mensagem: {{exibirTipoMensagem()}}</p>
                 <p>{{mensagem?.mensagem}}</p>
-                <p>{{mensagem?.dataEnvio | date:'dd/MM/yyyy hh:mm:ss'}}</p>
+                <p>{{mensagem?.dataEnvio}}</p>
             </ion-item>
             <!-- <div [innerHTML]="mensagem?.conteudoMensagem" class="conteudo-mensagem"></div> -->
         </ion-card-content>

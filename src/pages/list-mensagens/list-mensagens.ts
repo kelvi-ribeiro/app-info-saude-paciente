@@ -31,19 +31,13 @@ export class ListMensagensPage {
   findAll(){
     this.mensagemService.findAllPageableByPaciente(0)
     .then(res =>{
-      this.mensagens = res.content
-      this.mensagens.forEach(element => {
-        this.intercaoService.findByPacienteIdAndMensagemId(element.id)
-        .catch(() =>{
-         element.visto = true
-        })
-      });
+      this.mensagens = res.content;     
     })
   }
   exibirTipoMensagem(mensagem){
-    if(mensagem.linhaCuidado){
-      return `Linha de cuiado de ${mensagem.linhaCuidado.nome}`
-    }else if(mensagem.paciente){
+    if(mensagem.linhaCuidadoId){
+      return `Linha de cuiado de ${mensagem.nomeLinhaCuidado}`
+    }else if(mensagem.pacienteId){
       return 'Individual'
     }else{
       return 'Global'

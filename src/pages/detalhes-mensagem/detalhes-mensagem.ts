@@ -35,18 +35,18 @@ export class DetalhesMensagemPage {
     //this.mensagem.conteudoMensagem = this.mensagem.conteudoMensagem.replace(/width/g, "'width'");
   }
   exibirTipoMensagem(){
-    if(this.mensagem.linhaCuidado){
-      return `Linha de cuiado de ${this.mensagem.linhaCuidado.nome}`
-    }else if(this.mensagem.paciente){
+    if(this.mensagem.linhaCuidadoId){
+      return `Linha de cuiado de ${this.mensagem.nomeLinhaCuidado}`
+    }else if(this.mensagem.pacienteId){
       return 'Individual'
     }else{
       return 'Global'
       }
     }
     setMensagemVisto(){
-      this.interacaoService.findByPacienteIdAndMensagemId(this.mensagem.id)
-      .catch(() =>{        
-          this.interacaoService.insert(this.mensagem.id)        
-      })
+      if(!this.mensagem.mensagemLida){
+        this.interacaoService.insert(this.mensagem.id)        
+      }
+     
     }
 }
