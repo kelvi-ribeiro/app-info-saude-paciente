@@ -101,5 +101,5 @@ export class MeuPerfilPage {
     this.findPessoaByPessoaCpf().then(()=>{
     refresher.complete();
     });
-}
+  }
 }
