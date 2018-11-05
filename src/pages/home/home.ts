@@ -28,7 +28,7 @@ export class HomePage {
   dataAtual = new Date();
   segmentoAtivo = this.navParams.get('segmentoExame') !== undefined ? 'exames':'medicamentos';  
   exames: any;  
-  numberNotMessageByPaciente: any;
+  numberNotMessageByPaciente = 0;
 
   constructor(
     public navCtrl: NavController,
@@ -63,8 +63,8 @@ export class HomePage {
       .then(res => {                
         if(res > this.numberNotMessageByPaciente){                
           this.playSound()
+          this.numberNotMessageByPaciente = res;        
         }
-        this.numberNotMessageByPaciente = res;        
       })
       setTimeout(() => {
         this.takeNumberNotReadMessages()
