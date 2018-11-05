@@ -28,6 +28,7 @@ import { PopoverMeuPerfilPage } from '../popovers/popover-meu-perfil/popover-meu
 import { PopoverExamesPage } from '../popovers/popover-exames/popover-exames';
 import {NativePageTransitions} from '@ionic-native/native-page-transitions'
 import { TextToSpeech } from '@ionic-native/text-to-speech';
+import { NativeRingtones } from '@ionic-native/native-ringtones';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
     SecureStorage,
     HandlerResponseProvider,
     Camera,
-    TextToSpeech
+    TextToSpeech,
+    NativeRingtones
 
 
 

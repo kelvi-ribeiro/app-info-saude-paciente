@@ -7,6 +7,7 @@ import { ExameService } from '../../services/domain/exame.service';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
 import { NativeTransitionOptions, NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { MensagemService } from '../../services/domain/mensagem.service';
+import { NativeRingtones } from '@ionic-native/native-ringtones';
 
 
 
@@ -28,7 +29,6 @@ export class HomePage {
   segmentoAtivo = this.navParams.get('segmentoExame') !== undefined ? 'exames':'medicamentos';  
   exames: any;  
   numberNotMessageByPaciente: any;
-  
 
   constructor(
     public navCtrl: NavController,
@@ -40,7 +40,8 @@ export class HomePage {
     public actionSheetCtrl: ActionSheetController,
     public events:Events,
     public nativePageTransitions:NativePageTransitions,
-    public mensagemService:MensagemService
+    public mensagemService:MensagemService,
+    private ringtones: NativeRingtones
   ) { 
     
   }
@@ -57,14 +58,23 @@ export class HomePage {
       this.obterMedicamentosAtivos()
       
     }
-    takeNumberNotReadMessages(){
+    takeNumberNotReadMessages(){      
       this.mensagemService.showNumberNotReadMessageByPaciente()
-      .then(res => {
-        this.numberNotMessageByPaciente = res;
-        setTimeout(() => {
-          this.takeNumberNotReadMessages()
-        }, 30000);
+      .then(res => {                
+        if(res > this.numberNotMessageByPaciente){                
+          this.playSound()
+        }
+        this.numberNotMessageByPaciente = res;        
       })
+      setTimeout(() => {
+        this.takeNumberNotReadMessages()
+      }, 15000);
+    }
+    playSound(){              
+        this.ringtones.getRingtone()
+            .then((ringtones) => { 
+            this.ringtones.playRingtone(ringtones[ringtones.length -1].Url)             
+           });   
     }
     ionViewWillLeave(){
       const options: NativeTransitionOptions = {
