@@ -17,6 +17,7 @@ import { InteracaoService } from '../../services/domain/interacao.service';
 })
 export class ListMensagensPage {
   mensagens = [];
+  carregou = false
 
   constructor(
               public navCtrl: NavController,
@@ -29,9 +30,12 @@ export class ListMensagensPage {
     this.findAll()
   }
   findAll(){
-    this.mensagemService.findAllPageableByPaciente(0)
+    return this.mensagemService.findAllPageableByPaciente(0)
     .then(res =>{
-      this.mensagens = res.content;     
+      this.mensagens = res.content;
+      this.carregou = true
+    }).catch(() => {
+      this.carregou = true
     })
   }
   exibirTipoMensagem(mensagem){
@@ -45,6 +49,11 @@ export class ListMensagensPage {
     }
     goToDetalhes(mensagem) {
       this.navCtrl.push('DetalhesMensagemPage', { mensagem: mensagem });
+    }
+    doRefresh(refresher){
+      this.findAll().then(()=>{
+        refresher.complete();
+      });
     }
   }
 

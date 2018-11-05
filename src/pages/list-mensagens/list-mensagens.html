@@ -10,40 +10,50 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-refresher (ionRefresh)="refresh($event)">
-      <ion-refresher-content></ion-refresher-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+    refreshingText="Atualizando..."
+    pullingIcon="arrow-dropdown"
+    pullingText="Puxe para atualizar"
+    refreshingSpinner="bubbles">
+</ion-refresher-content>
   </ion-refresher>
-  <ion-spinner [hidden]="!carregando" class="loading"></ion-spinner> -->
-  <ion-list>
-      <ion-item 
-      *ngFor="let mensagem of mensagens" 
-      (click)="goToDetalhes(mensagem)" 
-      class="item divisoria"
-      >
-      <ion-grid>
-          <ion-row>
-              <ion-col offset-8 col-4>
-                <span color="danger" *ngIf="!mensagem.mensagemLida">Não Visto</span>
-              </ion-col>
-          </ion-row>
-      </ion-grid>
-          <h2 class="assunto">{{mensagem.assunto}}</h2>
-          <p>Tipo mensagem: {{exibirTipoMensagem(mensagem)}}</p>
-          <ion-grid>
-              <ion-row>
-                  <ion-col offset-4 col-8>
-                      <p>Enviada por {{mensagem.nomeProfissionalSaude}}</p>
-                  </ion-col>
-              </ion-row>
-          </ion-grid>
-          <ion-grid>
+<div text-center>
+<ion-spinner *ngIf="!carregou" name="bubbles"></ion-spinner>
+</div>
+    <div *ngIf="carregou">
+
+        <ion-list>
+            <ion-item 
+            *ngFor="let mensagem of mensagens" 
+            (click)="goToDetalhes(mensagem)" 
+            class="item divisoria"
+            >
+            <ion-grid>
                 <ion-row>
-                    <ion-col offset-4 col-8>
-                        <p>Enviada ás {{mensagem.dataEnvio}}</p>
+                    <ion-col offset-8 col-4>
+                      <span color="danger" *ngIf="!mensagem.mensagemLida">Não Visto</span>
                     </ion-col>
                 </ion-row>
             </ion-grid>
-      </ion-item>
-  </ion-list>
-  <p [hidden]="mensagens?.length > 0 || carregando" class="msg-erro">Nenhuma mensagem encontrada</p>
+                <h2 class="assunto">{{mensagem.assunto}}</h2>
+                <p>Tipo mensagem: {{exibirTipoMensagem(mensagem)}}</p>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col offset-4 col-8>
+                            <p>Enviada por {{mensagem.nomeProfissionalSaude}}</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <ion-grid>
+                      <ion-row>
+                          <ion-col offset-4 col-8>
+                              <p>Enviada ás {{mensagem.dataEnvio}}</p>
+                          </ion-col>
+                      </ion-row>
+                  </ion-grid>
+            </ion-item>
+        </ion-list>
+        <p [hidden]="mensagens?.length > 0 || carregando" class="msg-erro">Nenhuma mensagem encontrada</p>
+    </div>
 </ion-content>
