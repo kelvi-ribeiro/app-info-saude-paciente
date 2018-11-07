@@ -17,7 +17,8 @@ import { InteracaoService } from '../../services/domain/interacao.service';
 })
 export class ListMensagensPage {
   mensagens = [];
-  carregou = false
+  carregou = false;
+  page = 0;
 
   constructor(
               public navCtrl: NavController,
@@ -30,9 +31,9 @@ export class ListMensagensPage {
     this.findAll()
   }
   findAll(){
-    return this.mensagemService.findAllPageableByPaciente(0)
+    return this.mensagemService.findAllPageableByPaciente(this.page)
     .then(res =>{
-      this.mensagens = res.content;
+      this.mensagens.push(...res.content);
       this.carregou = true
     }).catch(() => {
       this.carregou = true
@@ -54,6 +55,13 @@ export class ListMensagensPage {
       this.findAll().then(()=>{
         refresher.complete();
       });
+    }
+    doInfinite(infiniteScroll){
+      this.page++;
+      this.findAll()
+      .then(()=>{
+        infiniteScroll.complete();
+      })      
     }
   }
 
