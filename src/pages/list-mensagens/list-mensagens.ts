@@ -40,7 +40,7 @@ export class ListMensagensPage {
   }
   exibirTipoMensagem(mensagem){
     if(mensagem.linhaCuidadoId){
-      return `Linha de cuiado de ${mensagem.nomeLinhaCuidado}`
+      return `Linha de Cuidado`
     }else if(mensagem.pacienteId){
       return 'Individual'
     }else{
