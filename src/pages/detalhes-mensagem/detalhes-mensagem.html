@@ -11,12 +11,14 @@
     <h4 class="assunto-mensagem">{{mensagem?.assunto}}</h4>
     <ion-card>
         <ion-card-content class="card-mensagem">
-            <ion-item class="remetente">
-              <h2>{{mensagem?.nomeProfissionalSaude}}</h2>
-                <p>Tipo mensagem: {{exibirTipoMensagem()}}</p>
+            <ion-item class="mensagem">             
                 <p>{{mensagem?.mensagem}}</p>
-                <p>{{mensagem?.dataEnvio}}</p>
             </ion-item>
+            
+            <div class="footer" item-end>
+                <p >{{mensagem.nomeProfissionalSaude | extractWords:2}} ás {{mensagem.dataEnvio}}</p>    
+                <p>Tipo mensagem: {{exibirTipoMensagem()}}</p>
+            </div>
             <!-- <div [innerHTML]="mensagem?.conteudoMensagem" class="conteudo-mensagem"></div> -->
         </ion-card-content>
     </ion-card>
