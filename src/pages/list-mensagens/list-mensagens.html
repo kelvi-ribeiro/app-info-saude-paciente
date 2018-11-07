@@ -23,7 +23,7 @@
         <ion-list>
             <ion-item *ngFor="let mensagem of mensagens" (click)="goToDetalhes(mensagem)" class="item divisoria">
 
-                <ion-icon style="position: relative;bottom:25px;" item-end *ngIf="!mensagem.mensagemLida" color="danger" name="ios-cog-outline">
+                <ion-icon class="icon-not-read" item-end *ngIf="!mensagem.mensagemLida" color="danger" name="ios-cog-outline">
                     <ion-badge>{{numberNotMessageByPaciente}}</ion-badge>
                 </ion-icon>
 
