@@ -1,103 +1,106 @@
-<!--
-  Generated template for the LocaisExamePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Locais de Exame</ion-title>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-buttons end>
-      <button [navPush]="'FormLocalExamePage'" ion-button icon-only>
-        <ion-icon color="secondary" name="add"></ion-icon>
-        <ion-icon color="secondary" name="pin"></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-title>Local de Exame</ion-title>
   </ion-navbar>
+
 </ion-header>
 
 
-<ion-content>
+<ion-content >
     <div *ngIf="!carregou" text-center>
         <ion-spinner name="bubbles"></ion-spinner>
       </div>
-    <ion-slides  #slidesLocaisExame effect="coverflow"  >
+  <div >
+    <ion-slides effect="coverflow" pager  #slidesLocaisExames>
       <ion-slide *ngFor="let localExame of locaisExame; let i = index">
-        <ion-card class="card-locaisExame">
-          <ion-card-header>                          
+        <ion-card class="card-medicamentos">
+          <ion-card-header>              
+            <ion-grid>
+              <ion-row>
+                <ion-col offset-10 col-2>
+                  <ion-icon  (click)="alertApagar(localExame)"
+                    color="danger" class="icon-close" name="close"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </ion-grid>            
             <ion-grid>
               <ion-row>
                 <ion-col col-2>
-                  <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" 
-                  (click)="slidesLocaisExame.slidePrev()" [hidden]="slidesLocaisExame.isBeginning()"></ion-icon>
+                  <ion-icon color="primary"
+                   name="ios-arrow-back" 
+                   class="arrow-back-perfil" 
+                   (click)="slidesLocaisExames.slidePrev()"
+                    [hidden]="slidesLocaisExames.isBeginning()"></ion-icon>
                 </ion-col>
-                <ion-col col-7>
-                  <h1 text-center>
-                    {{localExame?.nome}}
+                <ion-col col-8>
+                  <h1 text-center>                    
+                    {{localExame.nome}}
                   </h1>
                 </ion-col>
                 <ion-col offset-1 col-2>
-                  <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesLocaisExame.slideNext()" [hidden]="slidesLocaisExame.isEnd()"></ion-icon>
+                  <ion-icon color="primary"
+                   name="ios-arrow-forward" 
+                   (click)="slidesLocaisExames.slideNext()" 
+                   [hidden]="slidesLocaisExames.isEnd()"></ion-icon>
                 </ion-col>
               </ion-row>
             </ion-grid>
           </ion-card-header>
-          <ion-card-content>            
             
+          <ion-grid>
+            <ion-row>
+              <ion-col col-4  >
+                <span>Número</span>
+              </ion-col>
+              <ion-col  col-8  >
+                <span>{{localExame.enderecoNumero}}</span>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-4 >
+                <span>Rua</span>
+              </ion-col>
+              <ion-col col-8  >
+                <span>{{localExame?.enderecoRua}}</span>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col col-4>
+                <span >Bairro</span>
+              </ion-col>
+              <ion-col col-8 >
+                <span>{{localExame?.enderecoBairro}}</span>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col col-4>
+                <span>CEP</span>
+              </ion-col>
+              <ion-col col-8>
+                <span>{{localExame?.enderecoCep}}</span>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col col-4>
+                <span>Cidade</span>
+              </ion-col>
+              <ion-col col-8 >
+                <span>{{localExame?.cidadeNome}}</span>
+              </ion-col>
+            </ion-row>
+
+
+          </ion-grid>
+          <ion-card-content>         
             <ion-grid>
-              <ion-row>
-                <ion-col col-4  >
-                  <span>Número:</span>
-                </ion-col>
-                <ion-col class="ajuste-esquerda" col-2 pull-6 >
-                  <span>{{localExame?.enderecoNumero}}</span>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-3 >
-                  <span>Rua:</span>
-                </ion-col>
-                <ion-col col-8 pull-2 >
-                  <span>{{localExame?.enderecoLogradouro}}</span>
-                </ion-col>
-              </ion-row>
-
-              <ion-row>
-                <ion-col col-4>
-                  <span class="ajuste-direita">Bairro:</span>
-                </ion-col>
-                <ion-col col-6 pull-2>
-                  <span>{{localExame?.enderecoBairro}}</span>
-                </ion-col>
-              </ion-row>
-
-              <ion-row>
-                <ion-col col-3>
-                  <span>CEP:</span>
-                </ion-col>
-                <ion-col col-7 pull-2>
-                  <span>{{localExame?.enderecoCep}}</span>
-                </ion-col>
-              </ion-row>
-
-              <ion-row>
-                <ion-col col-4>
-                  <span>Cidade:</span>
-                </ion-col>
-                <ion-col col-6 pull-1>
-                  <span>{{localExame?.cidadeNome}}</span>
-                </ion-col>
-              </ion-row>
-
-
-            </ion-grid>
-
-            <ion-grid>
-              <ion-row class="row-icones-inferiores">               
+              <ion-row class="row-icones-inferiores">                
                 <ion-col offset-10 col-2>
                   <ion-icon (click)="atualizar(localExame)" color="primary" name="create"></ion-icon>
                 </ion-col>
@@ -106,5 +109,7 @@
           </ion-card-content>
         </ion-card>
       </ion-slide>
-    </ion-slides>    
+    </ion-slides>
+    </div>
+
 </ion-content>

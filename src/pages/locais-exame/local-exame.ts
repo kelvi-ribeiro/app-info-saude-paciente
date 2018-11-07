@@ -2,12 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, Slides } from 'ionic-angular';
 import { LocalExameService } from '../../services/domain/localExame.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
-/**
- * Generated class for the LocaisExamePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -26,7 +21,7 @@ export class LocalExamePage {
               public popoverCtrl: PopoverController) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
   this.obterLocaisExame()
   }
   obterLocaisExame(){

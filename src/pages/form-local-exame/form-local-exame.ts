@@ -42,7 +42,7 @@ export class FormLocalExamePage {
         this.formGroup = this.formBuilder.group({
           nome: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
           enderecoNumero: ['', [Validators.required]],
-          enderecoLogradouro: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
+          enderecoRua: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
           enderecoBairro: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(60)]],
           enderecoLatitude: [null],
           enderecoLongitude: [null],
@@ -105,7 +105,7 @@ export class FormLocalExamePage {
     .subscribe(res=>{
       this.exibirToastEnderecoEncontrado();
       this.formGroup.controls.enderecoBairro.setValue(res['bairro']);
-      this.formGroup.controls.enderecoLogradouro.setValue(res['logradouro']);
+      this.formGroup.controls.enderecoRua.setValue(res['logradouro']);
      this.cidadeEncontrada = this.cidades.find(el=>el.nome === res['localidade']);
      this.buscarLatLong()
      if(this.cidadeEncontrada){
@@ -125,7 +125,7 @@ export class FormLocalExamePage {
     if(this.localExame){      
       this.formGroup.controls.nome.setValue(this.localExame.nome);
       this.formGroup.controls.enderecoNumero.setValue(this.localExame.enderecoNumero);
-      this.formGroup.controls.enderecoLogradouro.setValue(this.localExame.enderecoLogradouro);
+      this.formGroup.controls.enderecoRua.setValue(this.localExame.enderecoRua);
       this.formGroup.controls.enderecoCep.setValue(this.localExame.enderecoCep);
       this.formGroup.controls.enderecoLatitude.setValue(this.localExame.enderecoLatitude);
       this.formGroup.controls.enderecoLongitude.setValue(this.localExame.enderecoLongitude);
