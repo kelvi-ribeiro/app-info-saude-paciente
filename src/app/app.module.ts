@@ -23,26 +23,30 @@ import { SecureStorageService } from '../services/secure-storage.service';
 import { SecureStorage } from '@ionic-native/secure-storage';
  import { HandlerResponseProvider } from '../services/handler-response/handler-response';
 import { Camera } from '@ionic-native/camera';
-import { ExtractTwoWords } from '../pipes/extract-two-words';
+
 import { PopoverMeuPerfilPage } from '../popovers/popover-meu-perfil/popover-meu-perfil';
 import { PopoverExamesPage } from '../popovers/popover-exames/popover-exames';
 import {NativePageTransitions} from '@ionic-native/native-page-transitions'
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { NativeRingtones } from '@ionic-native/native-ringtones';
+import { PipeModule } from '../pipes/pipe.module';
+
 
 @NgModule({
   declarations: [
     MyApp,    
-    LoginPage,
-    ExtractTwoWords,
+    LoginPage,    
     PopoverMeuPerfilPage,
     PopoverExamesPage,    
+    
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    PipeModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -72,10 +76,6 @@ import { NativeRingtones } from '@ionic-native/native-ringtones';
     Camera,
     TextToSpeech,
     NativeRingtones
-
-
-
-
   ]
 })
 export class AppModule {}
