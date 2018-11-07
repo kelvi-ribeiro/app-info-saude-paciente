@@ -8,6 +8,7 @@ export const STORAGE_KEYS = {
   pacienteId:"pacienteId",
   password:"password",
   cpf:"cpf",
-  user:"user"
+  user:"user",
+  numberNotMessageByPaciente:"numberNotMessageByPaciente"
 
 }

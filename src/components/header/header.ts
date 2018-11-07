@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Events } from 'ionic-angular';
+import { StorageService } from '../../services/storage.service';
 
 /**
  * Generated class for the HeaderComponent component.
@@ -14,9 +15,12 @@ import { Events } from 'ionic-angular';
 export class HeaderComponent {
 
   @Input()textTitle: string;
-  numberNotMessageByPaciente:number;
+  numberNotMessageByPaciente = this.storageService.getNumberNotMessageByPaciente();
 
-  constructor(private events:Events) {
+  constructor(
+    private events:Events,
+    private storageService:StorageService
+    ) {
     this.events.subscribe('number-not-read-message:refresh',numberNotMessageByPaciente =>{
       this.numberNotMessageByPaciente = numberNotMessageByPaciente;
     })

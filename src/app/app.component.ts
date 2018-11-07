@@ -51,7 +51,7 @@ export class MyApp {
              private mensagemService:MensagemService,
              private ringtones:NativeRingtones
               ) {
-    this.platform.ready().then(() => {
+    this.platform.ready().then(() => {      
       this.takeNumberNotReadMessages()
       this.statusBar.backgroundColorByHexString('#8299EC');
       this.events.subscribe('assinatura:adicionada', () => {
@@ -100,7 +100,8 @@ export class MyApp {
       if(res > this.numberNotMessageByPaciente){                
         this.playSound()
       }
-      this.numberNotMessageByPaciente = res; 
+      this.numberNotMessageByPaciente = res;
+      this.storageService.setNumberNotMessageByPaciente(this.numberNotMessageByPaciente) 
       this.events.publish('number-not-read-message:refresh',this.numberNotMessageByPaciente)       
     })
     setTimeout(() => {

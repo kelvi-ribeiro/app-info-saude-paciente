@@ -161,6 +161,23 @@ export class StorageService {
       return JSON.parse(cpf);
     }
   }
+  setNumberNotMessageByPaciente(numberNotMessageByPaciente){   
+    console.log(STORAGE_KEYS.numberNotMessageByPaciente);
+     
+    if(numberNotMessageByPaciente == null){
+      localStorage.removeItem(STORAGE_KEYS.numberNotMessageByPaciente);
+    }else{
+      localStorage.setItem(STORAGE_KEYS.numberNotMessageByPaciente,JSON.stringify(numberNotMessageByPaciente))
+    }
+  }
+  getNumberNotMessageByPaciente() {
+    let numberNotMessageByPaciente = localStorage.getItem(STORAGE_KEYS.numberNotMessageByPaciente);
+    if (numberNotMessageByPaciente == null) {
+      return "";
+    } else {
+      return JSON.parse(numberNotMessageByPaciente);
+    }
+  }
   limparStorage(){
     const cpf = this.getCpf()
     localStorage.clear();
