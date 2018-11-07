@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { HistoricoMedicamentoPage } from './historico-medicamento';
+import { PipeModule } from '../../pipes/pipe.module';
 
 
 
@@ -12,7 +13,8 @@ import { HistoricoMedicamentoPage } from './historico-medicamento';
     
   ],
   imports: [
-    IonicPageModule.forChild(HistoricoMedicamentoPage)
+    IonicPageModule.forChild(HistoricoMedicamentoPage),
+    PipeModule
   ],
 
 })
