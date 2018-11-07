@@ -23,12 +23,13 @@
         <ion-list>
             <ion-item *ngFor="let mensagem of mensagens" (click)="goToDetalhes(mensagem)" class="item divisoria">
 
-                <ion-icon item-end *ngIf="!mensagem.mensagemLida" color="danger" name="ios-cog-outline">
+                <ion-icon style="position: relative;bottom:25px;" item-end *ngIf="!mensagem.mensagemLida" color="danger" name="ios-cog-outline">
                     <ion-badge>{{numberNotMessageByPaciente}}</ion-badge>
                 </ion-icon>
 
                 <ion-avatar item-left>
-                    <img [src]="mensagem.caminhoImagemLinhaCuidado ? mensagem.caminhoImagemLinhaCuidado : mensagem.geral ? 'assets/imgs/todas.png' :'assets/imgs/individual.png'">
+                    <img 
+                    [src]="mensagem.caminhoImagemLinhaCuidado ? mensagem.caminhoImagemLinhaCuidado : mensagem.geral ? 'assets/imgs/todas.png' :'assets/imgs/individual.png'">
                 </ion-avatar>
                 <h2 class="assunto">{{mensagem.assunto}}</h2>
                 <p>Tipo mensagem: {{exibirTipoMensagem(mensagem)}}</p>
