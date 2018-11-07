@@ -6,14 +6,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { LatLng } from "@ionic-native/google-maps";
 import { ExameService } from "../../services/domain/exame.service";
 import { StorageService } from "../../services/storage.service";
-import { GoogleMapsService } from "../../services/google-maps/google.maps.service";
 
-/**
- * Generated class for the MapaLocalizacaoExamesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -36,8 +29,7 @@ export class MapaLocalizacaoExamesPage {
     public geolocation: Geolocation,
     public mapsProvider: MapsProvider,
     public exameService:ExameService,
-    public storageService:StorageService,
-    public googleMapsService:GoogleMapsService
+    public storageService:StorageService    
    ) {
     this.exame = this.navParams.get('exame')    
     this.criaObjetoMarksBaseadoExame()
