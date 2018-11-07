@@ -53,7 +53,7 @@
                   <ion-col col-2>
                     <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesMedicamentos.slidePrev()" [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
                   </ion-col>
-                  <ion-col col-7>
+                  <ion-col col-8>
                     <h1 text-center>
                       {{medicamento.nome | extractOneWord}}
                     </h1>
@@ -69,19 +69,19 @@
                 <ion-grid>
                   <ion-row>
                     <ion-col col-8>
-                      <span>Próxima Dosagem:</span>
+                      <span>Próxima Dosagem</span>
                     </ion-col>
-                    <ion-col col-4 pull-1>
+                    <ion-col col-4 >
                       <span>{{medicamento.proximaHoraMedicamento | date:'shortTime'}}</span>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
                 <ion-grid>
                   <ion-row>
-                    <ion-col col-7>
-                      <span>Dias Restantes:</span>
+                    <ion-col col-8>
+                      <span>Dias Restantes</span>
                     </ion-col>
-                    <ion-col col-5 pull-1>
+                    <ion-col col-4>
                       <span>{{medicamento.diasRestantes}}</span>
                     </ion-col>
                   </ion-row>
