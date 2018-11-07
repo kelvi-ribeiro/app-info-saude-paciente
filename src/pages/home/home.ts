@@ -6,10 +6,6 @@ import { MedicamentoService } from '../../services/domain/medicamento.service';
 import { ExameService } from '../../services/domain/exame.service';
 import { NavParams } from 'ionic-angular/navigation/nav-params';
 import { NativeTransitionOptions, NativePageTransitions } from '@ionic-native/native-page-transitions';
-import { MensagemService } from '../../services/domain/mensagem.service';
-import { NativeRingtones } from '@ionic-native/native-ringtones';
-
-
 
 
 @IonicPage()
@@ -40,14 +36,11 @@ export class HomePage {
     public actionSheetCtrl: ActionSheetController,
     public events:Events,
     public nativePageTransitions:NativePageTransitions,
-    public mensagemService:MensagemService,
-    private ringtones: NativeRingtones
   ) { 
     
   }
 
-  ionViewDidEnter() {
-      this.takeNumberNotReadMessages();
+  ionViewDidEnter() {      
       this.events.subscribe('medicamentos:refresh' ,()=>{
         this.obterMedicamentosAtivos()
       })
@@ -58,24 +51,7 @@ export class HomePage {
       this.obterMedicamentosAtivos()
       
     }
-    takeNumberNotReadMessages(){      
-      this.mensagemService.showNumberNotReadMessageByPaciente()
-      .then(res => {                
-        if(res > this.numberNotMessageByPaciente){                
-          this.playSound()
-        }
-        this.numberNotMessageByPaciente = res;        
-      })
-      setTimeout(() => {
-        this.takeNumberNotReadMessages()
-      }, 15000);
-    }
-    playSound(){              
-        this.ringtones.getRingtone()
-            .then((ringtones) => { 
-            this.ringtones.playRingtone(ringtones[ringtones.length -1].Url)             
-           });   
-    }
+    
     ionViewWillLeave(){
       const options: NativeTransitionOptions = {
         direction: 'up',

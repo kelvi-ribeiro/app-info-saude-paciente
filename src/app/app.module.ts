@@ -30,7 +30,7 @@ import {NativePageTransitions} from '@ionic-native/native-page-transitions'
 import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { NativeRingtones } from '@ionic-native/native-ringtones';
 import { PipeModule } from '../pipes/pipe.module';
-
+import { MensagemService } from '../services/domain/mensagem.service';
 
 @NgModule({
   declarations: [
@@ -48,6 +48,7 @@ import { PipeModule } from '../pipes/pipe.module';
     PipeModule
     
   ],
+
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,    
@@ -75,7 +76,8 @@ import { PipeModule } from '../pipes/pipe.module';
     HandlerResponseProvider,
     Camera,
     TextToSpeech,
-    NativeRingtones
+    NativeRingtones,
+    MensagemService
   ]
 })
 export class AppModule {}

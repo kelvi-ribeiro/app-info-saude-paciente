@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ListMensagensPage } from './list-mensagens';
-import { MensagemService } from '../../services/domain/mensagem.service';
 import { InteracaoService } from '../../services/domain/interacao.service';
 import { PipeModule } from '../../pipes/pipe.module';
 
@@ -13,8 +12,7 @@ import { PipeModule } from '../../pipes/pipe.module';
     IonicPageModule.forChild(ListMensagensPage),
     PipeModule
   ],
-  providers:[
-    MensagemService,
+  providers:[    
     InteracaoService
   ]
 })

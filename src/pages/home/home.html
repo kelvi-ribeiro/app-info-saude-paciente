@@ -1,33 +1,13 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Página Principal</ion-title>
-    <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    <ion-buttons right>     
-        <button id="notification-button" class="esconder" [ngClass]="numberNotMessageByPaciente > 0 ? 'mostrar' : 'esconder'"  
-          ion-button icon-only navPush="ListMensagensPage" >
-            <ion-icon name="notifications">
-                <ion-badge id="notifications-badge" color="danger">{{numberNotMessageByPaciente}}</ion-badge>
-            </ion-icon>
-          </button>  
-        <button  ion-button icon-only navPush="ListMensagensPage">
-          <ion-icon color="light" name="mail"></ion-icon>
-        </button>
-      </ion-buttons>
-    
-  </ion-navbar>
-</ion-header>
-
+<header textTitle="Página Principal"></header>I
 <ion-content>
-    <ion-segment class="semegment" [hidden]="!carregou" [(ngModel)]="segmentoAtivo" color="primary" >
-        <ion-segment-button value="medicamentos">
-          Medicamentos
-        </ion-segment-button>
-        <ion-segment-button value="exames">
-          exames
-        </ion-segment-button>
-      </ion-segment>
+  <ion-segment class="semegment" [hidden]="!carregou" [(ngModel)]="segmentoAtivo" color="primary">
+    <ion-segment-button value="medicamentos">
+      Medicamentos
+    </ion-segment-button>
+    <ion-segment-button value="exames">
+      exames
+    </ion-segment-button>
+  </ion-segment>
   <div *ngIf="!carregou" text-center>
     <ion-spinner name="bubbles"></ion-spinner>
   </div>
@@ -35,31 +15,32 @@
 
 
     <div *ngIf="segmentoAtivo === 'medicamentos'">
-      <ion-slides #slidesMedicamentos  effect="coverflow" pager    >
+      <ion-slides #slidesMedicamentos effect="coverflow" pager>
         <ion-slide *ngFor="let medicamento of medicamentos;">
           <ion-card class="card-medicamentos">
-            <ion-card-header>              
+            <ion-card-header>
               <ion-grid>
                 <ion-row>
                   <ion-col offset-10 col-2>
-                    <ion-icon  (click)="alertApagarMedicamento(medicamento)"
-                      color="danger" class="icon-close" name="close"></ion-icon>
+                    <ion-icon (click)="alertApagarMedicamento(medicamento)" color="danger" class="icon-close" name="close"></ion-icon>
                   </ion-col>
                 </ion-row>
               </ion-grid>
-              <img class="align-horizontal"  src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
+              <img class="align-horizontal" src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
               <ion-grid>
                 <ion-row>
                   <ion-col col-1>
-                    <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesMedicamentos.slidePrev()" [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
+                    <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesMedicamentos.slidePrev()"
+                      [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
                   </ion-col>
                   <ion-col col-10>
                     <h1 text-center>
                       {{medicamento.nome | extractWords:2}}
                     </h1>
                   </ion-col>
-                  <ion-col  col-1>
-                    <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesMedicamentos.slideNext()" [hidden]="slidesMedicamentos.isEnd()"></ion-icon>
+                  <ion-col col-1>
+                    <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesMedicamentos.slideNext()"
+                      [hidden]="slidesMedicamentos.isEnd()"></ion-icon>
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -71,7 +52,7 @@
                     <ion-col col-8>
                       <span>Próxima Dosagem</span>
                     </ion-col>
-                    <ion-col col-4 >
+                    <ion-col col-4>
                       <span>{{medicamento.proximaHoraMedicamento | date:'shortTime'}}</span>
                     </ion-col>
                   </ion-row>
@@ -88,28 +69,28 @@
                 </ion-grid>
               </div>
               <div class="padding-bottom" *ngIf="medicamento.dataInicioAlcancada">
-                  <h1 text-center>
-                      Medicamento começa em
-                      {{medicamento.dataInicio | slice:0:10}}
-                    </h1>
+                <h1 text-center>
+                  Medicamento começa em
+                  {{medicamento.dataInicio | slice:0:10}}
+                </h1>
               </div>
 
               <div class="padding-bottom" *ngIf="medicamento.finalizado">
-                  <h1  text-center>
-                      Medicamento finalizado em
-                      {{medicamento.dataFim | slice:0:10}}
-                    </h1>
+                <h1 text-center>
+                  Medicamento finalizado em
+                  {{medicamento.dataFim | slice:0:10}}
+                </h1>
               </div>
 
               <ion-grid>
-                <ion-row >
-                  <ion-col  col-2>
-                    <ion-icon  (click)="alertConcluirMedicamento(medicamento)"
-                      color="secondary" name="checkmark-circle-outline"></ion-icon>
+                <ion-row>
+                  <ion-col col-2>
+                    <ion-icon (click)="alertConcluirMedicamento(medicamento)" color="secondary" name="checkmark-circle-outline"></ion-icon>
                   </ion-col>
-                  <ion-col  col-2>
-                      <img *ngIf="medicamento.finalizado" class="img-hand-point" src="assets/imgs/clipart-finger-pointing-left-10.jpg" alt="">
-                    </ion-col>
+                  <ion-col col-2>
+                    <img *ngIf="medicamento.finalizado" class="img-hand-point" src="assets/imgs/clipart-finger-pointing-left-10.jpg"
+                      alt="">
+                  </ion-col>
                   <ion-col offset-6 col-2>
                     <ion-icon (click)="atualizarMedicamento(medicamento)" color="primary" name="create"></ion-icon>
                   </ion-col>
@@ -119,11 +100,11 @@
           </ion-card>
         </ion-slide>
       </ion-slides>
-      </div>
-     
+    </div>
 
-      <div *ngIf="segmentoAtivo === 'exames'">
-      <ion-slides #slidesExames effect="coverflow" pager >
+
+    <div *ngIf="segmentoAtivo === 'exames'">
+      <ion-slides #slidesExames effect="coverflow" pager>
         <ion-slide *ngFor="let exame of exames; let i = index">
           <ion-card>
             <ion-card-header>
@@ -137,7 +118,8 @@
               <ion-grid>
                 <ion-row>
                   <ion-col col-1>
-                    <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesExames.slidePrev()" [hidden]="slidesExames.isBeginning()"></ion-icon>
+                    <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesExames.slidePrev()"
+                      [hidden]="slidesExames.isBeginning()"></ion-icon>
                   </ion-col>
                   <ion-col col-10>
                     <h1 text-center>
@@ -153,7 +135,7 @@
             <ion-card-content>
               <ion-grid>
                 <ion-row>
-                  <ion-col col-4 >
+                  <ion-col col-4>
                     <span>Local</span>
                   </ion-col>
                   <ion-col col-8>
@@ -167,7 +149,7 @@
                     <span>Data</span>
                   </ion-col>
                   <ion-col col-8>
-                    <span >{{exame.data.substr(0,10) }}</span>
+                    <span>{{exame.data.substr(0,10) }}</span>
                   </ion-col>
                 </ion-row>
               </ion-grid>
@@ -175,33 +157,33 @@
               <ion-grid>
                 <ion-row>
                   <ion-col col-4>
-                    <span >Horário</span>
+                    <span>Horário</span>
                   </ion-col>
                   <ion-col col-8>
-                    <span >{{exame.data.substr(11,16) }}</span>
+                    <span>{{exame.data.substr(11,16) }}</span>
                   </ion-col>
                 </ion-row>
               </ion-grid>
 
               <ion-grid>
                 <ion-row class="row-icones-inferiores">
-                  <ion-col  col-2>
+                  <ion-col col-2>
                     <ion-icon (click)="localizarExame(exame)" color="danger" name="pin"></ion-icon>
-                  </ion-col>                 
+                  </ion-col>
                   <ion-col offset-8 col-2>
                     <ion-icon (click)="atualizarExame(exame)" color="primary" name="create"></ion-icon>
                   </ion-col>
                 </ion-row>
-              </ion-grid>             
+              </ion-grid>
             </ion-card-content>
           </ion-card>
         </ion-slide>
       </ion-slides>
     </div>
-        <ion-fab class="position-fixed" bottom left >
-          <button (click)="presentActionSheet()" ion-fab >
-            <ion-icon color="light" name="add"></ion-icon>
-          </button>
-        </ion-fab>
+    <ion-fab class="position-fixed" bottom left>
+      <button (click)="presentActionSheet()" ion-fab>
+        <ion-icon color="light" name="add"></ion-icon>
+      </button>
+    </ion-fab>
   </div>
 </ion-content>

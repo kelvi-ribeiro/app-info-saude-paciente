@@ -15,6 +15,8 @@ import { LoginPage } from '../pages/login/login';
 
 import { SecureStorageService } from '../services/secure-storage.service';
 import { NativeTransitionOptions, NativePageTransitions } from '@ionic-native/native-page-transitions';
+import { MensagemService } from '../services/domain/mensagem.service';
+import { NativeRingtones } from '@ionic-native/native-ringtones';
 
 
 
@@ -31,6 +33,7 @@ export class MyApp {
   temRecursoBiometria: boolean = false;
   hasFinger: boolean = false;
   profileImage;
+  numberNotMessageByPaciente: any;
 
   constructor(
              private platform: Platform,
@@ -44,9 +47,12 @@ export class MyApp {
              private events: Events,
              private usuarioService:UsuarioService,
              private sanitazer:DomSanitizer,
-             private nativePageTransitions:NativePageTransitions
+             private nativePageTransitions:NativePageTransitions,
+             private mensagemService:MensagemService,
+             private ringtones:NativeRingtones
               ) {
     this.platform.ready().then(() => {
+      this.takeNumberNotReadMessages()
       this.statusBar.backgroundColorByHexString('#8299EC');
       this.events.subscribe('assinatura:adicionada', () => {
         this.hasFinger = true;
@@ -86,6 +92,26 @@ export class MyApp {
         this.setUserOnline(this.storageService.getUser().pessoa.id)
       }
     }, 30000);
+  }
+
+  takeNumberNotReadMessages(){      
+    this.mensagemService.showNumberNotReadMessageByPaciente()
+    .then(res => {                
+      if(res > this.numberNotMessageByPaciente){                
+        this.playSound()
+      }
+      this.numberNotMessageByPaciente = res; 
+      this.events.publish('number-not-read-message:refresh',this.numberNotMessageByPaciente)       
+    })
+    setTimeout(() => {
+      this.takeNumberNotReadMessages()
+    }, 15000);
+  }
+  playSound(){              
+      this.ringtones.getRingtone()
+          .then((ringtones) => { 
+          this.ringtones.playRingtone(ringtones[ringtones.length -1].Url)             
+         });   
   }
 
   openPage(page) {
