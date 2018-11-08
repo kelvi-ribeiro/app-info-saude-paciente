@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController, Slides } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, ActionSheetController } from 'ionic-angular';
 import { LocalExameService } from '../../services/domain/localExame.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 
@@ -17,8 +17,8 @@ export class LocalExamePage {
               public navCtrl: NavController,
               public navParams: NavParams,
               public service:LocalExameService,
-              public alertCtrl:AlertController,
-              public popoverCtrl: PopoverController) {
+              public alertCtrl:AlertController,              
+              public actionSheetCtrl: ActionSheetController) {
   }
 
   ionViewDidEnter() {
@@ -59,5 +59,27 @@ export class LocalExamePage {
     .then(res => {
       this.obterLocaisExame();
     })
+  }
+  presentActionSheet() {
+    const actionSheet = this.actionSheetCtrl.create({          
+      buttons: [
+        {
+          text: 'Adicionar Local de exame',
+          icon:'pin',           
+          handler: () => {
+            this.navCtrl.push('FormLocalExamePage')
+          }
+        },        
+                      
+        {
+          text: 'Cancelar',            
+          icon:'close',  
+          handler: () => {
+            
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 }
