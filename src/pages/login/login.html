@@ -20,14 +20,37 @@ opacity: .3;"></div>
         <ion-input placeholder="CPF" (input)="creds.cpf = format(creds.cpf)" round block name="cpf" type="text"
           required [(ngModel)]="creds.cpf"></ion-input>
       </ion-item>
-      <ion-item class="input-login password">
+      <!-- <ion-item class="input-login password">
+
         <ion-label>
           <ion-icon name="key" class="icone-form"></ion-icon>
 
         </ion-label>
         <ion-input round block (ionFocus)="focusPasswordInput()" name="senha" [type]="typeSenha" placeholder="Senha"
-          required [(ngModel)]="creds.senha"></ion-input>
-      </ion-item>
+          required [(ngModel)]="creds.senha">
+
+          <ion-icon name="ios-eye-outline" item-right></ion-icon>
+        </ion-input>
+      </ion-item> -->
+      <ion-item class="input-login password">
+          <ion-label>
+              <ion-icon name="key" class="icone-form"></ion-icon>    
+            </ion-label>
+            <ion-input round block 
+            (ionFocus)="focusPasswordInput()"
+             name="senha"
+              [type]="typeSenha"
+              placeholder="Senha"
+              required [(ngModel)]="creds.senha">
+            </ion-input>
+             <button ion-button clear
+           color="dark" type="button" item-right (click)="exibirSenhaInput()"> 
+           <ion-icon  class="icone-form" color="light"
+             [name]="typeSenha === 'password' ? 'eye-off':'eye'">
+        </ion-icon>
+           </button>
+           </ion-item> 
+
       <ion-grid>
         <ion-row class="row-esqueci" >
           <ion-col offset-5 col-7>
@@ -36,8 +59,6 @@ opacity: .3;"></div>
         </ion-row>
         </ion-grid>
 
-      <ion-icon (click)="exibirSenhaInput()" id="icon-hide-show" [name]="typeSenha === 'password' ? 'eye-off':'eye'"
-         class="icone-form"></ion-icon>
 
       <ion-row class="row-btn">
         <ion-grid>

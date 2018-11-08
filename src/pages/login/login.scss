@@ -119,9 +119,6 @@ page-login {
     border-radius: 25px;
     height: 48px;
   }  
- /*  input {
-    background: transparent;
-  } */
   .form-login {
     position: absolute;
     bottom: 0;
@@ -135,13 +132,7 @@ page-login {
       text-decoration: none;
     }
 
-  #icon-hide-show{
-   position: absolute;
-   left: 82%;
-   top: 33%;
-   font-size:$font-size;
-   color: $color-white;
-  }
+
   .img-background{
     position: fixed;
 			right: 0;
