@@ -87,21 +87,8 @@ export class HomePage {
             handler: () => {
               this.navCtrl.push('FormExamePage')
             }
-          },
-          {
-            text: 'Locais de exame',
-            icon:'pin',           
-            handler: () => {
-              this.navCtrl.push('LocalExamePage')
-          }
-          },
-          {
-            text: 'Ajuda',
-            icon:'help',           
-            handler: () => {
-              this.navCtrl.push('AjudaPage')
-          }
-          },                    
+          },         
+                        
           {
             text: 'Cancelar',            
             icon:'close',  
