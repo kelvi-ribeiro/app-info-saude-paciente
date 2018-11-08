@@ -55,6 +55,18 @@ export class FormExamePage {
   obterLocaisExame(){
     this.localExameService.findAllLocaisExameByPacienteId()
     .then(res=>{
+      if(res.length === 0){
+        this.notificacoesService
+        .presentToast(
+          'Você deve ter pelo menos um local de exame, cadastre um local de exame. redirecionando....',
+          'toast-attention',
+          5000,
+          'bottom')
+          setTimeout(() => {
+            this.navCtrl.setRoot('FormLocalExamePage')            
+          }, 3000);
+          return;
+      }
       this.locaisExame = res;
       this.verificaUpdate();
     })
