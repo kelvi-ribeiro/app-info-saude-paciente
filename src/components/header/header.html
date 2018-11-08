@@ -1,15 +1,12 @@
-<ion-header>
-    <ion-navbar>
+   <ion-navbar>
       <ion-title>{{textTitle}}</ion-title>
       <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
       <ion-buttons class="ion-buttons-header" right>     
           <button id="notification-button" class="esconder" [ngClass]="numberNotMessageByPaciente > 0 ? 'mostrar' : 'esconder'"  
-            ion-button icon-only navPush="ListMensagensPage" >
-              <ion-icon name="notifications">
-                  <ion-badge id="notifications-badge" color="danger">{{numberNotMessageByPaciente}}</ion-badge>
-              </ion-icon>
+            ion-button icon-only navPush="ListMensagensPage" >   
+                  <ion-badge id="notifications-badge" color="danger">{{numberNotMessageByPaciente}}</ion-badge>              
             </button>  
           <button  ion-button icon-only navPush="ListMensagensPage">
             <ion-icon color="light" name="mail"></ion-icon>
@@ -17,5 +14,5 @@
         </ion-buttons>
       
     </ion-navbar>
-  </ion-header>
+  
   

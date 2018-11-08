@@ -25,31 +25,26 @@ page-home {
     border-color: color($colors, light);
     color: color($colors, light);
     opacity: 1;
-}
-    
-    span{
-      font-size:18px;
-    }
-       
-    .ajuste-direita{
-      position: relative;
-      left:10px;
-    }
-    .ajuste-esquerda{
-      position: relative;
-       left: -10px;
-    }
-    .position-fixed{
-      position: fixed;
-    }
-    .arrow-back-perfil{
-      color:color($colors, primary);
-    }
-    .swiper-slide img {      
-      height: 61px;
-      max-height: 50%;
+}   
+  .ajuste-direita{
+    position: relative;
+    left:10px;
   }
-  .segment{
+  .ajuste-esquerda{
+    position: relative;
+      left: -10px;
+  }
+  .position-fixed{
+    position: fixed;
+  }
+  .arrow-back-perfil{
+    color:color($colors, primary);
+  }
+  .swiper-slide img {      
+    height: 61px;
+    max-height: 50%;
+}
+.segment{
     padding: 10px 12px 0 12px;
     margin-bottom: 22px;
   }

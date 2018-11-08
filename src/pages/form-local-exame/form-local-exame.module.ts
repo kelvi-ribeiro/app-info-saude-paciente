@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { FormLocalExamePage } from './form-local-exame';
 import { GoogleMapsService } from '../../services/google-maps/google.maps.service';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { GoogleMapsService } from '../../services/google-maps/google.maps.servic
   providers:[
     CidadeService,
     ViaCepService,
-    GoogleMapsService
+    GoogleMapsService,
+    ComponentsModule
   ]
 })
 export class FormLocalExamePageModule {}
