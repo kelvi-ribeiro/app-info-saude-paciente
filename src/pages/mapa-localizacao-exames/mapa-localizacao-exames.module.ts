@@ -4,6 +4,7 @@ import { MapaLocalizacaoExamesPage } from './mapa-localizacao-exames';
 import { MapsProvider } from '../../services/google-maps/maps';
 import { Geolocation } from '@ionic-native/geolocation';
 import { GoogleMapsService } from '../../services/google-maps/google.maps.service';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { GoogleMapsService } from '../../services/google-maps/google.maps.servic
   ],
   imports: [
     IonicPageModule.forChild(MapaLocalizacaoExamesPage),
+    ComponentsModule
   ],
   providers:[
     Geolocation,
