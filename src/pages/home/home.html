@@ -1,19 +1,24 @@
+<ion-header>
+  <ion-navbar>    
+  </ion-navbar>
+</ion-header>
+Não Me Pergunte o por que, mas parece que o segment só aparece se eu colocar o trecho acima
 <header textTitle="Página Principal"></header>I
+  
 <ion-content>
-  <ion-segment class="semegment" [hidden]="!carregou" [(ngModel)]="segmentoAtivo" color="primary">
-    <ion-segment-button value="medicamentos">
-      Medicamentos
-    </ion-segment-button>
-    <ion-segment-button value="exames">
-      exames
-    </ion-segment-button>
-  </ion-segment>
+    <ion-segment class="segment"    [(ngModel)]="segmentoAtivo" color="primary">
+        <ion-segment-button value="medicamentos">
+          Medicamentos
+        </ion-segment-button>
+        <ion-segment-button value="exames">
+          exames
+        </ion-segment-button>
+      </ion-segment>  
   <div *ngIf="!carregou" text-center>
     <ion-spinner name="bubbles"></ion-spinner>
   </div>
   <div *ngIf="carregou">
-
-
+    
     <div *ngIf="segmentoAtivo === 'medicamentos'">
       <ion-slides #slidesMedicamentos effect="coverflow" pager>
         <ion-slide *ngFor="let medicamento of medicamentos;">
@@ -185,5 +190,5 @@
         <ion-icon color="light" name="add"></ion-icon>
       </button>
     </ion-fab>
-  </div>
+  </div> 
 </ion-content>
