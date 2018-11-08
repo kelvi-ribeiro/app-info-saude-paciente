@@ -7,6 +7,9 @@ page-home {
     .card-md h1,.card-ios h1,span{
       color: color($colors, primary);
     }
+    span{
+      font-size: 20px;
+    }
     .card-md,.card-ios{
 
       background:color($colors,colorCard);
