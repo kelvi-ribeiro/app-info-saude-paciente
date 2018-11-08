@@ -19,7 +19,7 @@
           </ion-col>
           <ion-col offset-1 col-2>
             <button  icon-only>
-                <ion-icon color="secondary" name="add-circle"></ion-icon>
+                <ion-icon color="secondary" [name]="helper.expanded ? 'remove-circle' : 'add-circle' "></ion-icon>
             </button>
 
           </ion-col>
