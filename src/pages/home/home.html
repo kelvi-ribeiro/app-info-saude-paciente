@@ -16,170 +16,184 @@
   <div *ngIf="carregou">
     
     <div *ngIf="segmentoAtivo === 'medicamentos'">
-      <ion-slides #slidesMedicamentos effect="coverflow" pager>
-        <ion-slide *ngFor="let medicamento of medicamentos;">
-          <ion-card class="card-medicamentos">
-            <ion-card-header>
-              <ion-grid>
-                <ion-row>
-                  <ion-col offset-10 col-2>
-                    <ion-icon (click)="alertApagarMedicamento(medicamento)" color="danger" class="icon-close" name="close"></ion-icon>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-              <img class="align-horizontal" src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-1>
-                    <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesMedicamentos.slidePrev()"
-                      [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
-                  </ion-col>
-                  <ion-col col-10>
-                    <h1 text-center>
-                      {{medicamento.nome | extractWords:2}}
-                    </h1>
-                  </ion-col>
-                  <ion-col col-1>
-                    <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesMedicamentos.slideNext()"
-                      [hidden]="slidesMedicamentos.isEnd()"></ion-icon>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </ion-card-header>
-            <ion-card-content>
-              <div *ngIf="!medicamento.dataInicioAlcancada && !medicamento.finalizado ;">
+      <div *ngIf="medicamentos.length !== 0;else semMedicamentos;">
+
+        <ion-slides #slidesMedicamentos effect="coverflow" pager>
+          <ion-slide *ngFor="let medicamento of medicamentos;">
+            <ion-card class="card-medicamentos">
+              <ion-card-header>
                 <ion-grid>
                   <ion-row>
-                    <ion-col col-8>
-                      <span>Próxima Dosagem</span>
-                    </ion-col>
-                    <ion-col col-4>
-                      <span>{{medicamento.proximaHoraMedicamento | date:'shortTime'}}</span>
+                    <ion-col offset-10 col-2>
+                      <ion-icon (click)="alertApagarMedicamento(medicamento)" color="danger" class="icon-close" name="close"></ion-icon>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
+                <img class="align-horizontal" src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
                 <ion-grid>
                   <ion-row>
-                    <ion-col col-8>
-                      <span>Dias Restantes</span>
+                    <ion-col col-1>
+                      <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesMedicamentos.slidePrev()"
+                        [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
                     </ion-col>
-                    <ion-col col-4>
-                      <span>{{medicamento.diasRestantes}}</span>
+                    <ion-col col-10>
+                      <h1 text-center>
+                        {{medicamento.nome | extractWords:2}}
+                      </h1>
+                    </ion-col>
+                    <ion-col col-1>
+                      <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesMedicamentos.slideNext()"
+                        [hidden]="slidesMedicamentos.isEnd()"></ion-icon>
                     </ion-col>
                   </ion-row>
                 </ion-grid>
-              </div>
-              <div class="padding-bottom" *ngIf="medicamento.dataInicioAlcancada">
-                <h1 text-center>
-                  Medicamento começa em
-                  {{medicamento.dataInicio | slice:0:10}}
-                </h1>
-              </div>
-
-              <div class="padding-bottom" *ngIf="medicamento.finalizado">
-                <h1 text-center>
-                  Medicamento finalizado em
-                  {{medicamento.dataFim | slice:0:10}}
-                </h1>
-              </div>
-
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-2>
-                    <ion-icon (click)="alertConcluirMedicamento(medicamento)" color="secondary" name="checkmark-circle-outline"></ion-icon>
-                  </ion-col>
-                  <ion-col col-2>
-                    <img *ngIf="medicamento.finalizado" class="img-hand-point" src="assets/imgs/clipart-finger-pointing-left-10.jpg"
-                      alt="">
-                  </ion-col>
-                  <ion-col offset-6 col-2>
-                    <ion-icon (click)="atualizarMedicamento(medicamento)" color="primary" name="create"></ion-icon>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </ion-card-content>
-          </ion-card>
-        </ion-slide>
-      </ion-slides>
+              </ion-card-header>
+              <ion-card-content>
+                <div *ngIf="!medicamento.dataInicioAlcancada && !medicamento.finalizado ;">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-8>
+                        <span>Próxima Dosagem</span>
+                      </ion-col>
+                      <ion-col col-4>
+                        <span>{{medicamento.proximaHoraMedicamento | date:'shortTime'}}</span>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-8>
+                        <span>Dias Restantes</span>
+                      </ion-col>
+                      <ion-col col-4>
+                        <span>{{medicamento.diasRestantes}}</span>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </div>
+                <div class="padding-bottom" *ngIf="medicamento.dataInicioAlcancada">
+                  <h1 text-center>
+                    Medicamento começa em
+                    {{medicamento.dataInicio | slice:0:10}}
+                  </h1>
+                </div>
+  
+                <div class="padding-bottom" *ngIf="medicamento.finalizado">
+                  <h1 text-center>
+                    Medicamento finalizado em
+                    {{medicamento.dataFim | slice:0:10}}
+                  </h1>
+                </div>
+  
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-2>
+                      <ion-icon (click)="alertConcluirMedicamento(medicamento)" color="secondary" name="checkmark-circle-outline"></ion-icon>
+                    </ion-col>
+                    <ion-col col-2>
+                      <img *ngIf="medicamento.finalizado" class="img-hand-point" src="assets/imgs/clipart-finger-pointing-left-10.jpg"
+                        alt="">
+                    </ion-col>
+                    <ion-col offset-6 col-2>
+                      <ion-icon (click)="atualizarMedicamento(medicamento)" color="primary" name="create"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+      </div>
+          <ng-template #semMedicamentos>
+              <p class="descricao-sem-objetos" >Você ainda não possui medicamentos ativos</p>
+          </ng-template>
     </div>
 
 
     <div *ngIf="segmentoAtivo === 'exames'">
-      <ion-slides #slidesExames effect="coverflow" pager>
-        <ion-slide *ngFor="let exame of exames; let i = index">
-          <ion-card>
-            <ion-card-header>
-              <ion-grid>
-                <ion-row>
-                  <ion-col offset-10 col-2>
-                    <ion-icon (click)="alertApagarExame(exame)" color="danger" class="icon-close" name="close"></ion-icon>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-1>
-                    <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesExames.slidePrev()"
-                      [hidden]="slidesExames.isBeginning()"></ion-icon>
-                  </ion-col>
-                  <ion-col col-10>
-                    <h1 text-center>
-                      {{exame.nome | extractWords:2}}
-                    </h1>
-                  </ion-col>
-                  <ion-col col-1>
-                    <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesExames.slideNext()" [hidden]="slidesExames.isEnd()"></ion-icon>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </ion-card-header>
-            <ion-card-content>
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-4>
-                    <span>Local</span>
-                  </ion-col>
-                  <ion-col col-8>
-                    <span>{{exame.localExameNome}}</span>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-4>
-                    <span>Data</span>
-                  </ion-col>
-                  <ion-col col-8>
-                    <span>{{exame.data.substr(0,10) }}</span>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
+      <div *ngIf="exames.length !== 0 ;else semExames;">
 
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-4>
-                    <span>Horário</span>
-                  </ion-col>
-                  <ion-col col-8>
-                    <span>{{exame.data.substr(11,16) }}</span>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-
-              <ion-grid>
-                <ion-row class="row-icones-inferiores">
-                  <ion-col col-2>
-                    <ion-icon (click)="localizarExame(exame)" color="danger" name="pin"></ion-icon>
-                  </ion-col>
-                  <ion-col offset-8 col-2>
-                    <ion-icon (click)="atualizarExame(exame)" color="primary" name="create"></ion-icon>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-            </ion-card-content>
-          </ion-card>
-        </ion-slide>
-      </ion-slides>
+        <ion-slides #slidesExames effect="coverflow" pager>
+          <ion-slide *ngFor="let exame of exames; let i = index">
+            <ion-card>
+              <ion-card-header>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col offset-10 col-2>
+                      <ion-icon (click)="alertApagarExame(exame)" color="danger" class="icon-close" name="close"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-1>
+                      <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesExames.slidePrev()"
+                        [hidden]="slidesExames.isBeginning()"></ion-icon>
+                    </ion-col>
+                    <ion-col col-10>
+                      <h1 text-center>
+                        {{exame.nome | extractWords:2}}
+                      </h1>
+                    </ion-col>
+                    <ion-col col-1>
+                      <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesExames.slideNext()" [hidden]="slidesExames.isEnd()"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-header>
+              <ion-card-content>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-4>
+                      <span>Local</span>
+                    </ion-col>
+                    <ion-col col-8>
+                      <span>{{exame.localExameNome}}</span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-4>
+                      <span>Data</span>
+                    </ion-col>
+                    <ion-col col-8>
+                      <span>{{exame.data.substr(0,10) }}</span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+  
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-4>
+                      <span>Horário</span>
+                    </ion-col>
+                    <ion-col col-8>
+                      <span>{{exame.data.substr(11,16) }}</span>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+  
+                <ion-grid>
+                  <ion-row class="row-icones-inferiores">
+                    <ion-col col-2>
+                      <ion-icon (click)="localizarExame(exame)" color="danger" name="pin"></ion-icon>
+                    </ion-col>
+                    <ion-col offset-8 col-2>
+                      <ion-icon (click)="atualizarExame(exame)" color="primary" name="create"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card-content>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+      </div>
+      <ng-template  #semExames>
+        <div text-center>
+          <p class="descricao-sem-objetos" >Você ainda não possui exames cadastrados</p>
+        </div>
+      </ng-template>
     </div>
     <ion-fab class="position-fixed" bottom left>
       <button (click)="presentActionSheet()" ion-fab>
