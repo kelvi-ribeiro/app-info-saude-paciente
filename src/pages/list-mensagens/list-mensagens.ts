@@ -3,13 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MensagemService } from '../../services/domain/mensagem.service';
 import { InteracaoService } from '../../services/domain/interacao.service';
 
-/**
- * Generated class for the ListMensagensPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-list-mensagens',
@@ -17,7 +10,7 @@ import { InteracaoService } from '../../services/domain/interacao.service';
 })
 export class ListMensagensPage {
   mensagens = [];
-  carregou = false;
+  carregou;
   page = 0;
 
   constructor(
@@ -28,6 +21,8 @@ export class ListMensagensPage {
   }
 
   ionViewDidEnter() {
+    this.mensagens = []
+    this.carregou = false;
     this.findAll()
   }
   findAll(){
