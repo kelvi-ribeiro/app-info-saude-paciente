@@ -162,8 +162,6 @@ export class StorageService {
     }
   }
   setNumberNotMessageByPaciente(numberNotMessageByPaciente){   
-    console.log(STORAGE_KEYS.numberNotMessageByPaciente);
-     
     if(numberNotMessageByPaciente == null){
       localStorage.removeItem(STORAGE_KEYS.numberNotMessageByPaciente);
     }else{
