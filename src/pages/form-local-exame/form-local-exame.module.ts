@@ -12,12 +12,13 @@ import { ComponentsModule } from '../../components/components.module';
   ],
   imports: [
     IonicPageModule.forChild(FormLocalExamePage),
+    ComponentsModule
   ],
   providers:[
     CidadeService,
     ViaCepService,
     GoogleMapsService,
-    ComponentsModule
+    
   ]
 })
 export class FormLocalExamePageModule {}
