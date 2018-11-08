@@ -75,7 +75,7 @@ export class FormLocalExamePage {
         {
           text:'Ok',
           handler:() =>{
-            this.navCtrl.pop()
+            this.navCtrl.setRoot('LocalExamePage')
           }
         }
       ]
