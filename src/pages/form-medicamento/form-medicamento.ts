@@ -7,12 +7,6 @@ import { UtilsService } from '../../services/domain/utils.service';
 import { TipoMedicamentoService } from '../../services/domain/tipo.medicamento.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
-/**
- * Generated class for the FormMedicamentoPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
