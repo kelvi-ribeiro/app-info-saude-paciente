@@ -6,12 +6,6 @@ import { UsuarioService } from '../../services/domain/usuario.service';
 import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
 import { StorageService } from '../../services/storage.service';
 
-/**
- * Generated class for the FormAlterarSenhaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

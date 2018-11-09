@@ -7,12 +7,6 @@ import { ExameService } from '../../services/domain/exame.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocalExameService } from '../../services/domain/localExame.service';
 
-/**
- * Generated class for the FormExamePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({

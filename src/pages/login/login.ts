@@ -10,15 +10,6 @@ import { KeychainTouchId } from '@ionic-native/keychain-touch-id';
 
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
-
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
@@ -27,8 +18,8 @@ export class LoginPage {
   email;
   perfis = [];
   creds : CreadenciaisDTO = {
-    cpf: "",
-    senha: ""
+    cpf: "98380386019",
+    senha: "123"
   };
 
   DECIMAL_SEPARATOR=".";
@@ -53,7 +44,7 @@ export class LoginPage {
     public keychainService:KeychainTouchId,
     public notificacoesService:NotificacoesService) {
 
-      this.creds.cpf = this.format(this.storageService.getCpf())
+      this.creds.cpf = "98380386019";
   }
 
   ionViewWillEnter() {

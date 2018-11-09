@@ -4,13 +4,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsuarioService } from '../../services/domain/usuario.service';
 import { NotificacoesService } from '../../services/domain/notificacoes.service';
 
-/**
- * Generated class for the FormEsqueceuSenhaPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-form-esqueceu-senha',
