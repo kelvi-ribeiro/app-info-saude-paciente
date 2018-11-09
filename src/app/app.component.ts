@@ -100,7 +100,7 @@ export class MyApp {
     .then(res => {                
       if(res > this.numberNotMessageByPaciente){                
         this.playSound()
-        this.vibration.vibrate([3000,500,3000]);
+        this.vibration.vibrate(3000);
       }
       this.numberNotMessageByPaciente = res;
       this.storageService.setNumberNotMessageByPaciente(this.numberNotMessageByPaciente) 
