@@ -26,7 +26,7 @@ export class DetalhesMensagemPage {
       return;
     }    
     this.setMensagemVisto()
-    //this.mensagem.conteudoMensagem = this.mensagem.conteudoMensagem.replace(/width/g, "'width'");
+    
   }
   exibirTipoMensagem(){
     if(this.mensagem.linhaCuidadoId){
@@ -39,7 +39,8 @@ export class DetalhesMensagemPage {
     }
     setMensagemVisto(){
       if(!this.mensagem.mensagemLida){
-        this.interacaoService.insert(this.mensagem.id)        
+        this.interacaoService.insert(this.mensagem.id)  
+        this.mensagem.mensagemLida = true      
       }
      
     }

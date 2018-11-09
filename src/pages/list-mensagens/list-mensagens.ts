@@ -20,8 +20,7 @@ export class ListMensagensPage {
               public intercaoService:InteracaoService) {
   }
 
-  ionViewDidEnter() {
-    this.mensagens = []
+  ionViewDidLoad() {    
     this.carregou = false;
     this.findAll()
   }
@@ -43,7 +42,7 @@ export class ListMensagensPage {
       return 'Global'
       }
     }
-    goToDetalhes(mensagem) {
+    goToDetalhes(mensagem) {      
       this.navCtrl.push('DetalhesMensagemPage', { mensagem: mensagem });
     }
     doRefresh(refresher){
