@@ -17,7 +17,7 @@ import { SecureStorageService } from '../services/secure-storage.service';
 import { NativeTransitionOptions, NativePageTransitions } from '@ionic-native/native-page-transitions';
 import { MensagemService } from '../services/domain/mensagem.service';
 import { NativeRingtones } from '@ionic-native/native-ringtones';
-
+import { Vibration } from '@ionic-native/vibration';
 
 
 declare var window;
@@ -49,7 +49,8 @@ export class MyApp {
              private sanitazer:DomSanitizer,
              private nativePageTransitions:NativePageTransitions,
              private mensagemService:MensagemService,
-             private ringtones:NativeRingtones
+             private ringtones:NativeRingtones,
+             private vibration: Vibration,
               ) {
     this.platform.ready().then(() => {      
       this.takeNumberNotReadMessages()
@@ -99,6 +100,7 @@ export class MyApp {
     .then(res => {                
       if(res > this.numberNotMessageByPaciente){                
         this.playSound()
+        this.vibration.vibrate([3000,500,3000]);
       }
       this.numberNotMessageByPaciente = res;
       this.storageService.setNumberNotMessageByPaciente(this.numberNotMessageByPaciente) 

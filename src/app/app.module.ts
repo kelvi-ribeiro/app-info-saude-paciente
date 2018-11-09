@@ -31,6 +31,7 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
 import { NativeRingtones } from '@ionic-native/native-ringtones';
 import { PipeModule } from '../pipes/pipe.module';
 import { MensagemService } from '../services/domain/mensagem.service';
+import { Vibration } from '@ionic-native/vibration';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { MensagemService } from '../services/domain/mensagem.service';
     Camera,
     TextToSpeech,
     NativeRingtones,
-    MensagemService
+    MensagemService,
+    Vibration
   ]
 })
 export class AppModule {}
