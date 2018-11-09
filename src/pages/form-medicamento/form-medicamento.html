@@ -21,17 +21,17 @@
 
     <ion-item>
         <ion-label stacked>Data de Início para o Medicamento</ion-label>
-      <ion-input type="date" formControlName="dataInicio"></ion-input>
+        <ion-datetime displayFormat="DD/MM/YYYY" formControlName="dataInicio"></ion-datetime>
     </ion-item>
 
-    <ion-item>
+    <ion-item tappable>
         <ion-label stacked>Data final para o Medicamento</ion-label>
-      <ion-input type="date" formControlName="dataFim"></ion-input>
+        <ion-datetime displayFormat="DD/MM/YYYY" formControlName="dataFim"></ion-datetime>      
     </ion-item>
 
     <ion-item>
         <ion-label stacked>Hora inicial para o Medicamento</ion-label>
-      <ion-input type="time" formControlName="horaInicial"></ion-input>
+        <ion-datetime displayFormat="HH:mm" formControlName="horaInicial"></ion-datetime>
     </ion-item>
 
     <ion-item >
