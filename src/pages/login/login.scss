@@ -64,11 +64,6 @@ page-login {
       font-size: $font-size;
       color: $color-white;
     }
-    
-    .text-input,
-    ::-webkit-input-placeholder {
-      color: $color-white;
-    }
   }
   ion-list.content-login.list {
     background: transparent;
@@ -154,4 +149,26 @@ page-login {
     top:-28px;
     height: 53px;
   }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+  }
+  input, select, textarea{
+    color: $color-white;
+  }
+  .text-input::-moz-placeholder {
+    color: white;
+  }
+  
+  .text-input:-ms-input-placeholder {
+    color: white;
+  }
+  
+  .text-input::-webkit-input-placeholder {
+    text-indent: 0;
+    color: white;
+  }  
+  
 }
