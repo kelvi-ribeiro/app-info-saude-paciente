@@ -53,7 +53,11 @@ export class MyApp {
              private vibration: Vibration,
               ) {
     this.platform.ready().then(() => {      
-      this.takeNumberNotReadMessages()
+      this.events.subscribe('take-number-not-read-messages',() =>{
+        this.takeNumberNotReadMessages(false)  
+      })
+
+      this.takeNumberNotReadMessages(true)
       this.statusBar.backgroundColorByHexString('#8299EC');
       this.events.subscribe('assinatura:adicionada', () => {
         this.hasFinger = true;
@@ -95,26 +99,43 @@ export class MyApp {
     }, 30000);
   }
 
-  takeNumberNotReadMessages(){      
+  takeNumberNotReadMessages(callRecursive){          
     this.mensagemService.showNumberNotReadMessageByPaciente()
     .then(res => {                
       if(res > this.numberNotMessageByPaciente){                
         this.playSound()
-        this.vibration.vibrate(3000);
+        this.playVibration()        
       }
       this.numberNotMessageByPaciente = res;
       this.storageService.setNumberNotMessageByPaciente(this.numberNotMessageByPaciente) 
       this.events.publish('number-not-read-message:refresh',this.numberNotMessageByPaciente)       
     })
-    setTimeout(() => {
-      this.takeNumberNotReadMessages()
-    }, 15000);
+    if(callRecursive){
+      setTimeout(() => {
+        this.takeNumberNotReadMessages(true)
+      }, 15000);
+    }
   }
-  playSound(){              
-      this.ringtones.getRingtone()
-          .then((ringtones) => { 
-          this.ringtones.playRingtone(ringtones[ringtones.length -1].Url)             
-         });   
+  playSound(){ 
+      if(this.checkPlatformIsMobile()){
+        this.ringtones.getRingtone()
+            .then((ringtones) => { 
+            this.ringtones.playRingtone(ringtones[ringtones.length -1].Url)             
+           });   
+      }             
+  }
+
+  playVibration(){
+    if(this.checkPlatformIsMobile()){
+      this.vibration.vibrate(3000);
+    }
+  }
+
+  checkPlatformIsMobile(){
+    if( this.platform.is('cordova') && (this.platform.is('android') || this.platform.is('android'))){
+      return true
+    }
+    return false
   }
 
   openPage(page) {

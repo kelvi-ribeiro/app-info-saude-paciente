@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 import { InteracaoService } from '../../services/domain/interacao.service';
 
 
@@ -15,6 +15,7 @@ export class DetalhesMensagemPage {
     public navCtrl: NavController, 
     public navParams: NavParams,
     private interacaoService:InteracaoService,
+    private events:Events
     ) {
 
   }
@@ -40,7 +41,11 @@ export class DetalhesMensagemPage {
     setMensagemVisto(){
       if(!this.mensagem.mensagemLida){
         this.interacaoService.insert(this.mensagem.id)  
-        this.mensagem.mensagemLida = true      
+        .then(()=>{
+          this.mensagem.mensagemLida = true
+          this.events.publish('take-number-not-read-messages')
+        })
+              
       }
      
     }
