@@ -103,7 +103,7 @@ export class UsuarioService {
     return this.http.get(url, { responseType: 'blob' });
   }
 
-  uploadPicture(picture) {
+  uploadPicture(picture,idPessoa) {
     return this.storage.getUserCredentials()
     .then(userCredentials =>{
       if(!userCredentials){
@@ -116,7 +116,7 @@ export class UsuarioService {
     formData.set('file', pictureBlob, 'file.png');
     return this.handlerResponseService.handlerResponseFoto(
       "post",
-      `${API_CONFIG.baseUrl}/pessoas/picture`,
+      `${API_CONFIG.baseUrl}/pessoas/picture?idPessoa=${idPessoa}`,
       formData,
       headers
     );

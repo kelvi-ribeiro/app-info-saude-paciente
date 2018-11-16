@@ -77,7 +77,7 @@ export class PopoverMeuPerfilPage {
     });
   }
   sendPicture() {
-    this.usuarioService.uploadPicture(this.picture)
+    this.usuarioService.uploadPicture(this.picture,this.storageService.getUser().pessoa.id)
       .then(response => {
       this.events.publish('buscar:foto')
       },
