@@ -38,6 +38,9 @@ export class NotificacoesService {
         {
           text:'Ok',
           handler:() =>{
+            if(!navCtrl){
+              return
+            }            
             if(page){
               navCtrl.setRoot(page)
             }else{
