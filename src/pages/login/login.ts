@@ -102,16 +102,20 @@ export class LoginPage {
         .subscribe(response => {
           loading.dismiss()
           this.auth.successfulLogin(response.headers.get('Authorization'))
-          .then(()=>{
-            this.secureStorageService.setSenha(this.creds.senha)
-            this.alertSalvarLogin(this.creds.cpf);
+          .then(()=>{           
             this.usuarioService
             .findPacienteByPessoaCpf()
-            .then(() => {
-            this.events.publish('buscar:foto')
-  
-          })          
+            .then((paciente) => {
+            if(paciente.pessoa.perfis.length === 0){
+              this.notificacoesService
+              .presentAlertDefault('Alerta','Seu Perfil Foi Inativado')
+              return
+            }
+            this.secureStorageService.setSenha(this.creds.senha)
+            this.alertSalvarLogin(this.creds.cpf);
+            this.events.publish('buscar:foto');
             this.navCtrl.setRoot('HomePage');
+          })          
           })
           .catch(()=>{
             this.notificacoesService.presentAlertJustMessage('Acesso negado','Você não tem permissão para acessar esse aplicativo')
