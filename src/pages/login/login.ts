@@ -109,6 +109,7 @@ export class LoginPage {
             if(paciente.pessoa.perfis.length === 0){
               this.notificacoesService
               .presentAlertDefault('Alerta','Seu Perfil Foi Inativado')
+              this.storageService.limparStorage()
               return
             }
             this.secureStorageService.setSenha(this.creds.senha)
