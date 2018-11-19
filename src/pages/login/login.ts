@@ -44,7 +44,7 @@ export class LoginPage {
     public keychainService:KeychainTouchId,
     public notificacoesService:NotificacoesService) {
 
-      this.creds.cpf = "98380386019";
+      this.creds.cpf = "983.803.860-19";
   }
 
   ionViewWillEnter() {
