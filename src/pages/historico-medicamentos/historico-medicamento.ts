@@ -100,7 +100,7 @@ export class HistoricoMedicamentoPage {
           }
         },
         {
-          text: 'Excluir todos medicamentos',
+          text: 'Excluir todos os medicamentos',
           icon:'trash',           
           handler: () => {
             this.alertApagarTodosMedicamentos()
