@@ -1,60 +1,72 @@
 <ion-header>
   <header textTitle="Histórico"></header>
 </ion-header>
-<ion-content >
-    <div *ngIf="!carregou" text-center>
-        <ion-spinner name="bubbles"></ion-spinner>
-      </div>
-  <div >
-    <ion-slides effect="coverflow" pager  #slidesMedicamentos>
-      <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
-        <ion-card class="card-medicamentos">
-          <ion-card-header>              
-            <ion-grid>
-              <ion-row>
-                <ion-col offset-10 col-2>
-                  <ion-icon  (click)="alertApagar(medicamento)"
-                    color="danger" class="icon-close" name="close"></ion-icon>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-            <img class="align-horizontal"  src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
-            <ion-grid>
-              <ion-row>
-                <ion-col col-2>
-                  <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesMedicamentos.slidePrev()" [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
-                </ion-col>
-                <ion-col col-7>
-                  <h1 text-center>                    
-                    {{medicamento.nome | extractWords:2 }}
-                  </h1>
-                </ion-col>
-                <ion-col offset-1 col-2>
-                  <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesMedicamentos.slideNext()" [hidden]="slidesMedicamentos.isEnd()"></ion-icon>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card-header>
-          <ion-card-content>
-            
-
-              <div class="padding-bottom" >
-                  <h1 text-center>
-                      Medicamento finalizado  em
-                      {{medicamento.dataFim | slice:0:10}}
+<ion-content>
+  <div *ngIf="!carregou" text-center>
+    <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+  <div *ngIf="carregou">
+    <div *ngIf="medicamentos.length !== 0;else semMedicamentos;">
+      <ion-slides effect="coverflow" pager #slidesMedicamentos>
+        <ion-slide *ngFor="let medicamento of medicamentos; let i = index">
+          <ion-card class="card-medicamentos">
+            <ion-card-header>
+              <ion-grid>
+                <ion-row>
+                  <ion-col offset-10 col-2>
+                    <ion-icon (click)="alertApagar(medicamento)" color="danger" class="icon-close" name="close"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <img class="align-horizontal" src="assets/imgs/{{medicamento.tipoMedicamentoCaminhoImagem}}">
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-2>
+                    <ion-icon color="primary" name="ios-arrow-back" class="arrow-back-perfil" (click)="slidesMedicamentos.slidePrev()"
+                      [hidden]="slidesMedicamentos.isBeginning()"></ion-icon>
+                  </ion-col>
+                  <ion-col col-7>
+                    <h1 text-center>
+                      {{medicamento.nome | extractWords:2 }}
                     </h1>
-              </div>
-            <ion-grid>
-              <ion-row class="row-icones-inferiores">                
-                <ion-col offset-10 col-2>
-                  <ion-icon (click)="alertRestaurarMedicamento(medicamento)" color="primary" name="refresh-circle"></ion-icon>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
-    </div>
+                  </ion-col>
+                  <ion-col offset-1 col-2>
+                    <ion-icon color="primary" name="ios-arrow-forward" (click)="slidesMedicamentos.slideNext()"
+                      [hidden]="slidesMedicamentos.isEnd()"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-header>
+            <ion-card-content>
 
+
+              <div class="padding-bottom">
+                <h1 text-center>
+                  Medicamento finalizado em
+                  {{medicamento.dataFim | slice:0:10}}
+                </h1>
+              </div>
+              <ion-grid>
+                <ion-row class="row-icones-inferiores">
+                  <ion-col offset-10 col-2>
+                    <ion-icon (click)="alertRestaurarMedicamento(medicamento)" color="primary" name="refresh-circle"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+    <ng-template #semMedicamentos>
+      <div text-center>
+        <p class="descricao-sem-objetos">Sem Medicamentos na lista de Histórico</p>
+      </div>
+    </ng-template>
+    <ion-fab class="position-fixed" bottom left>
+      <button (click)="presentActionSheet()" ion-fab>
+        <ion-icon color="light" name="add"></ion-icon>
+      </button>
+    </ion-fab>
+  </div>
 </ion-content>
