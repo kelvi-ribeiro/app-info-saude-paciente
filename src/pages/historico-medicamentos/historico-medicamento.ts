@@ -83,8 +83,7 @@ export class HistoricoMedicamentoPage {
   }
   setAtivo(medicamento){
     this.service.setAtivo(medicamento.id)
-    .then(()=>{
-      this.notificacoesService.presentToast('Medicamento enviado para a lista de medicamentos atuais',null,2000,'bottom')
+    .then(()=>{      
       this.refreshPage()
       this.obterMedicamentosInativos();
     })
