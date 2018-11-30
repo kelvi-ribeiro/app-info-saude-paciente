@@ -22,12 +22,16 @@ export class ListMensagensPage {
 
   ionViewDidLoad() {    
     this.carregou = false;
-    this.findAll()
+    this.findAll('onlyRefresh')
   }
-  findAll(){
+  findAll(typeRefresh){
     return this.mensagemService.findAllPageableByPaciente(this.page)
     .then(res =>{
-      this.mensagens.push(...res.content);
+      if(typeRefresh == 'onlyRefresh'){
+        this.mensagens = res.content
+      }else{
+        this.mensagens.push(...res.content);
+      }
       this.carregou = true
     }).catch(() => {
       this.carregou = true
@@ -46,13 +50,13 @@ export class ListMensagensPage {
       this.navCtrl.push('DetalhesMensagemPage', { mensagem: mensagem });
     }
     doRefresh(refresher){
-      this.findAll().then(()=>{
+      this.findAll('onlyRefresh').then(()=>{
         refresher.complete();
       });
     }
     doInfinite(infiniteScroll){
       this.page++;
-      this.findAll()
+      this.findAll('infiniteScroll')
       .then(()=>{
         infiniteScroll.complete();
       })      
